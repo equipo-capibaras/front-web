@@ -43,3 +43,8 @@ Thumbs.db
 
 # JUnit test reports
 junit/
+
+# Cypress
+cypress/videos/
+cypress/screenshots/
+cypress/reports/
