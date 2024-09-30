@@ -76,7 +76,7 @@ jobs:
       - sonarcloud-scan
       - run:
           name: Build
-          command: ng build --deploy-url "static/"
+          command: ng build -c production --deploy-url "static/"
       - run:
           name: Organize outputs for GCP
           command: |
@@ -87,6 +87,39 @@ jobs:
           root: dist/abcall
           paths:
             - browser
+
+  e2e-test:
+    executor:
+      name: node/default
+      tag: lts-browsers
+      resource_class: large
+    steps:
+      - browser-tools/install-chrome
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Setup Environment Variables
+          command: echo 'export PATH="$PWD/node_modules/.bin":"$PATH"' >> "$BASH_ENV"
+      - run:
+          name: Start angular server
+          background: true
+          command: ng serve -c production --no-watch
+      - run:
+          name: Wait for the server to start
+          command: wait-on -t 30s http://localhost:4200
+      - run:
+          name: Run cypress tests
+          command: cypress run --browser chrome
+      - store_test_results:
+          path: ./cypress/reports
+          when: always
+      - store_artifacts:
+          path: ./cypress/screenshots
+          when: always
+      - store_artifacts:
+          path: ./cypress/videos
+          when: always
 
   deploy-dev:
     executor: gcp-cli/google
@@ -132,9 +165,13 @@ workflows:
   cicd:
     jobs:
       - build-test
+      - e2e-test:
+          requires:
+            - build-test
       - deploy-dev:
           requires:
             - build-test
+            - e2e-test
           filters:
             branches:
               only:
@@ -142,6 +179,7 @@ workflows:
       - deploy-prod:
           requires:
             - build-test
+            - e2e-test
           filters:
             branches:
               only:
