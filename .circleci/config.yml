@@ -56,6 +56,9 @@ jobs:
       tag: lts-browsers
       resource_class: medium
     steps:
+      - run:
+          name: Test
+          command: echo $CIRCLE_PULL_REQUEST
       - browser-tools/install-chrome
       - checkout
       - node/install-packages:
