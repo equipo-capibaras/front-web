@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './user-login.component.css',
 })
 export class UserLoginComponent {
-  showPassword: boolean = false;
+  showPassword = false;
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
