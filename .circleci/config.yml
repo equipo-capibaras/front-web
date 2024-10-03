@@ -169,6 +169,7 @@ workflows:
           requires:
             - build-test
       - deploy-dev:
+          context: gcp
           requires:
             - build-test
             - e2e-test
@@ -177,6 +178,7 @@ workflows:
               only:
                 - develop
       - deploy-prod:
+          context: gcp
           requires:
             - build-test
             - e2e-test
