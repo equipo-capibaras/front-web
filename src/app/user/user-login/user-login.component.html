@@ -1,0 +1,33 @@
+<div class="row py-4">
+  <div class="col d-flex justify-content-center">
+    <img src="././assets/images/logo.png" alt="Logo" />
+  </div>
+</div>
+
+<div class="row">
+  <div class="col d-flex justify-content-center">
+    <form id="form-login">
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo</label>
+        <input type="email" class="form-control" id="email" placeholder="Ingresa tu correo" />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <div class="input-group">
+          <input
+            type="{{ showPassword ? 'text' : 'password' }}"
+            class="form-control"
+            id="password"
+            placeholder="Ingresa tu contraseña" />
+        </div>
+      </div>
+      <div class="pb-3"></div>
+      <button type="submit" routerLink="/alarms" class="btn btn-primary">Ingresar</button>
+      <div class="d-flex justify-content-center pt-4">
+        <a id="register" routerLink="/register"
+          >¿Todavía no tienes cuenta? <span style="font-weight: 500">Registrate</span></a
+        >
+      </div>
+    </form>
+  </div>
+</div>

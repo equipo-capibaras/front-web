@@ -1,4 +1,112 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.min.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* fira-sans-300 - latin */
+@font-face {
+  font-display: block;
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('assets/fonts/fira-sans-v17-latin-300.woff2') format('woff2');
+}
+
+/* fira-sans-regular - latin */
+@font-face {
+  font-display: block;
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/fira-sans-v17-latin-regular.woff2') format('woff2');
+}
+
+/* fira-sans-500 - latin */
+@font-face {
+  font-display: block;
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url('assets/fonts/fira-sans-v17-latin-500.woff2') format('woff2');
+}
+
+/* fira-sans-600 - latin */
+@font-face {
+  font-display: block;
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: url('assets/fonts/fira-sans-v17-latin-600.woff2') format('woff2');
+}
+
+:root {
+  --bs-font-sans-serif: 'Fira Sans', sans-serif;
+  --bs-body-bg: #f0f4fb; /* 50 from the new palette */
+  --bs-body-color: #1c2b4a;
+  --bs-link-color-rgb: 66, 103, 178; /* Primary 500 RGB */
+  --bs-link-color: #4267b2; /* Primary 500 */
+  --bs-link-hover-color: #365da3; /* Hover with a darker shade */
+  --bs-link-hover-color-rgb: 54, 93, 163;
+  --bs-border-color: #365da3; /* Border with 400/600 shade */
+}
+
+.form-control:focus {
+  border-color: #365da3; /* Focus state using a darker blue */
+  box-shadow: 0 0 0 0.25rem rgba(54, 93, 163, 0.25);
+}
+
+.table {
+  --bs-table-color: #4f648f;
+  --bs-table-striped-color: #4f648f;
+  --bs-table-striped-bg: #dce4f0; /* Light blue background (100) */
+  --bs-table-border-color: #dee2e6;
+}
+
+.btn {
+  --bs-btn-border-color: #365da3;
+  --bs-btn-hover-border-color: #4f648f;
+  --bs-btn-active-border-color: #4f648f;
+  --bs-btn-font-weight: 300;
+}
+
+.btn-primary {
+  --bs-btn-color: #dce4f0;
+  --bs-btn-bg: #4267b2; /* Primary 500 */
+  --bs-btn-hover-color: #dce4f0;
+  --bs-btn-hover-bg: #365da3; /* Primary hover color (400/600) */
+  --bs-btn-active-color: #dce4f0;
+  --bs-btn-active-bg: #304a8b; /* Darker active color */
+}
+
+.btn-outline-primary {
+  --bs-btn-color: #4267b2;
+  --bs-btn-font-weight: 400;
+  --bs-btn-hover-color: #fdce4f04f8f2;
+  --bs-btn-hover-bg: #365da3;
+  --bs-btn-active-color: #dce4f0;
+  --bs-btn-active-bg: #304a8b;
+}
+
+.btn-close {
+  --bs-btn-close-focus-shadow: 0 0 0 0.25rem rgba(54, 93, 163, 0.25);
+}
+
+.btn-link {
+  --bs-btn-border-width: 0;
+}
+
+.btn-link {
+  text-decoration: none;
+  --bs-btn-font-weight: 400;
+}
+
+h1 {
+  font-size: 32px;
+  color: #4267b2; /* Heading color with primary color */
+}
+
+h4 {
+  font-weight: 400;
+}
+
+.input-password {
+  margin-right: -40px;
+}

@@ -1,0 +1,63 @@
+.navbar {
+  --bs-navbar-color: #1c2b4a;
+  --bs-navbar-active-color: #1c2b4a;
+  --bs-navbar-hover-color: #1c2b4a;
+  --bs-navbar-brand-color: #1c2b4a;
+  --bs-navbar-brand-hover-color: #465b86;
+  --bs-navbar-brand-padding-y: 3px;
+  --bs-navbar-padding-y: 0;
+  --bs-navbar-toggler-focus-width: 0.1rem;
+  background-color: #ffffff;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-nav {
+    --bs-nav-link-padding-x: 0.5rem;
+  }
+}
+
+.navbar > .container-fluid {
+  padding: 0;
+}
+
+.navbar-nav {
+  --bs-nav-link-padding-y: 0;
+  --bs-nav-link-font-weight: 600;
+}
+
+.navbar-nav .nav-link {
+  display: inline-flex;
+  justify-content: center;
+  line-height: 56px;
+  width: 100%;
+}
+
+.navbar-nav i.bi {
+  font-size: 24px;
+  padding-right: 16px;
+}
+
+.navbar-nav .nav-item.active {
+  background-color: #ffffff;
+}
+
+.navbar-brand {
+  margin-left: calc(var(--bs-gutter-x) * 0.5);
+  font-weight: 600;
+  line-height: 50px;
+}
+
+.navbar-toggler {
+  margin-right: calc(var(--bs-gutter-x) * 0.5);
+}
+
+@media only screen and (min-width: 992px) {
+  .navbar .navbar-nav .nav-item:not(:last-child) {
+    border-right: 1px solid #4267b2;
+  }
+
+  .nav-item {
+    width: 230px;
+    text-align: center;
+  }
+}
