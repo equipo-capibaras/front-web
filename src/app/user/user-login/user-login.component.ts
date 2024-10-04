@@ -9,7 +9,7 @@ import { UserServiceService } from '../user-service.service';
   standalone: true,
   imports: [RouterLink, NgClass],
   templateUrl: './user-login.component.html',
-  styleUrl: './user-login.component.css',
+  styleUrls: ['./user-login.component.css'],
 })
 export class UserLoginComponent implements OnInit {
   showPassword = false;
@@ -36,7 +36,7 @@ export class UserLoginComponent implements OnInit {
         this.router.navigate(['/alarms']);
       },
       (error) => {
-        this.error = 'Username or Password is incorrect';
+        this.error = error.message;
       }
     );
   }
