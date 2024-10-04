@@ -9,5 +9,19 @@ export default defineConfig({
     baseUrl: 'http://localhost:4200',
     video: true,
     videoCompression: true,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setupNodeEvents(on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions) {
+      on('task', {
+        log(message: string) {
+          console.log('  ' + message + '\n');
+          return null;
+        },
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        table(tableData: any) {
+          console.table(tableData);
+          return null;
+        },
+      });
+    },
   },
 });
