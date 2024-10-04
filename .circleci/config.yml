@@ -80,9 +80,15 @@ jobs:
       - run:
           name: Organize outputs for GCP
           command: |
-            mkdir dist/abcall/browser/static
-            mv dist/abcall/browser/*.css dist/abcall/browser/static
-            mv dist/abcall/browser/*.js dist/abcall/browser/static
+            cp public/favicon.ico dist/abcall/browser
+            rm dist/abcall/browser/es-CO/favicon.ico
+            rm dist/abcall/browser/pt-BR/favicon.ico
+            mkdir dist/abcall/browser/es-CO/static
+            mv dist/abcall/browser/es-CO/*.css dist/abcall/browser/es-CO/static
+            mv dist/abcall/browser/es-CO/*.js dist/abcall/browser/es-CO/static
+            mkdir dist/abcall/browser/pt-BR/static
+            mv dist/abcall/browser/pt-BR/*.css dist/abcall/browser/pt-BR/static
+            mv dist/abcall/browser/pt-BR/*.js dist/abcall/browser/pt-BR/static
       - persist_to_workspace:
           root: dist/abcall
           paths:

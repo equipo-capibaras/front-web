@@ -1,6 +1,6 @@
 describe('My Second Test', () => {
   it('Should contain ABCall', () => {
     cy.visit('/');
-    cy.contains('abcall');
+    cy.contains('ABCall');
   });
 });
