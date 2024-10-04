@@ -11,7 +11,7 @@ describe('Service: UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [UserServiceService]
+      providers: [UserServiceService],
     });
     service = TestBed.inject(UserServiceService);
     httpTestingController = TestBed.inject(HttpTestingController);
@@ -25,38 +25,38 @@ describe('Service: UserService', () => {
     expect(service).toBeTruthy();
   }));
 
-   /**
+  /**
    * Prueba unitaria para verificar si el método `login` hace la solicitud HTTP POST correctamente.
    */
-   it('should log in a user via POST', () => {
-    const mockResponse = { token: '12345' };  // Respuesta simulada
+  it('should log in a user via POST', () => {
+    const mockResponse = { token: '12345' }; // Respuesta simulada
     const username = 'testuser';
     const password = 'password123';
 
-    service.login(username, password).subscribe((response) => {
-      expect(response).toEqual(mockResponse);  // Verifica que la respuesta sea la esperada
+    service.login(username, password).subscribe(response => {
+      expect(response).toEqual(mockResponse); // Verifica que la respuesta sea la esperada
     });
 
     const req = httpTestingController.expectOne(`${apiUrl}/auth/employee`);
-    expect(req.request.method).toBe('POST');  // Verifica que el método HTTP sea POST
-    expect(req.request.body).toEqual({ username, password });  // Verifica el cuerpo de la solicitud
+    expect(req.request.method).toBe('POST'); // Verifica que el método HTTP sea POST
+    expect(req.request.body).toEqual({ username, password }); // Verifica el cuerpo de la solicitud
 
     // Simula una respuesta exitosa del servidor
     req.flush(mockResponse);
   });
 
-   /**
+  /**
    * Prueba unitaria para manejar el caso de error en la solicitud de login con error 401.
    */
-   it('should handle 401 login error', () => {
+  it('should handle 401 login error', () => {
     const username = 'wronguser';
     const password = 'wrongpassword';
 
     service.login(username, password).subscribe(
       () => fail('Debería haber fallado con un error 401'),
-      (error) => {
-        expect(error.message).toBe('Username or password is incorrect.');  // Verifica el mensaje de error
-      }
+      error => {
+        expect(error.message).toBe('Username or password is incorrect.'); // Verifica el mensaje de error
+      },
     );
 
     const req = httpTestingController.expectOne(`${apiUrl}/auth/employee`);
@@ -75,9 +75,9 @@ describe('Service: UserService', () => {
 
     service.login(username, password).subscribe(
       () => fail('Debería haber fallado con un error 500'),
-      (error) => {
-        expect(error.message).toBe('Internal server error. Please try again later.');  // Verifica el mensaje de error
-      }
+      error => {
+        expect(error.message).toBe('Internal server error. Please try again later.'); // Verifica el mensaje de error
+      },
     );
 
     const req = httpTestingController.expectOne(`${apiUrl}/auth/employee`);
@@ -96,9 +96,9 @@ describe('Service: UserService', () => {
 
     service.login(username, password).subscribe(
       () => fail('Debería haber fallado con un error 403'),
-      (error) => {
-        expect(error.message).toBe('You do not have the necessary permissions.');  // Verifica el mensaje de error
-      }
+      error => {
+        expect(error.message).toBe('You do not have the necessary permissions.'); // Verifica el mensaje de error
+      },
     );
 
     const req = httpTestingController.expectOne(`${apiUrl}/auth/employee`);

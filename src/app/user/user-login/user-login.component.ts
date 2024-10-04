@@ -16,7 +16,10 @@ export class UserLoginComponent implements OnInit {
   error: string = '';
   helper = new JwtHelperService();
 
-  constructor(private userService: UserServiceService, private router: Router) {}
+  constructor(
+    private userService: UserServiceService,
+    private router: Router,
+  ) {}
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
@@ -29,15 +32,15 @@ export class UserLoginComponent implements OnInit {
 
   loginUser(username: string, password: string): void {
     this.userService.login(username, password).subscribe(
-      (response) => {
+      response => {
         sessionStorage.setItem('token', response.token);
         const decodedToken = this.helper.decodeToken(response.token);
         sessionStorage.setItem('userId', decodedToken.id);
         this.router.navigate(['/alarms']);
       },
-      (error) => {
+      error => {
         this.error = error.message;
-      }
+      },
     );
   }
 }

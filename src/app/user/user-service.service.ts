@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserServiceService {
   private apiUrl = '/api/v1';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * Método para autenticar un usuario.
@@ -18,7 +18,7 @@ export class UserServiceService {
    */
   login(username: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/auth/employee`, { username, password }).pipe(
-      catchError(this.handleError) // Maneja errores del servidor
+      catchError(this.handleError), // Maneja errores del servidor
     );
   }
 
@@ -58,4 +58,3 @@ export class UserServiceService {
     return throwError(() => new Error(errorMessage));
   }
 }
-
