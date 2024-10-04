@@ -2,12 +2,11 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
 import { UserServiceService } from './user-service.service';
-import { environment } from '../../environments/environment';
 
 describe('Service: UserService', () => {
   let service: UserServiceService;
   let httpTestingController: HttpTestingController;
-  const apiUrl = environment.apiUrl;
+  const apiUrl = '/api/v1';
 
   beforeEach(() => {
     TestBed.configureTestingModule({

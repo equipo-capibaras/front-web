@@ -9,7 +9,7 @@ import { UserServiceService } from '../user-service.service';
   standalone: true,
   imports: [RouterLink, NgClass],
   templateUrl: './user-login.component.html',
-  styleUrls: ['./user-login.component.css'],
+  styleUrls: ['./user-login.component.scss'],
 })
 export class UserLoginComponent implements OnInit {
   showPassword = false;

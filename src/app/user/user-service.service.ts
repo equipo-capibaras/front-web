@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core'
-import { environment } from '../../environments/environment'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 
@@ -7,7 +6,7 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class UserServiceService {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = '/api/v1';
 
   constructor(private http: HttpClient) { }
 
