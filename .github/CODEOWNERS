@@ -1,2 +1,3 @@
 /.circleci @tpambor
 /.github @tpambor
+/sonar-project.properties @tpambor
