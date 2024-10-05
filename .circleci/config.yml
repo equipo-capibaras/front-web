@@ -26,11 +26,9 @@ commands:
           command: mkdir -p /tmp/cache/scanner
       - run:
           name: SonarCloud Scan
-          environment:
-            SONARQUBE_SCANNER_PARAMS: '{"sonar.nodejs.executable":"/usr/local/bin/node"}'
           command: |
             set -e
-            VERSION=6.2.0.4584
+            VERSION=6.2.1.4610
             SONAR_TOKEN=$<<parameters.sonar_token_variable_name>>
             SCANNER_DIRECTORY=/tmp/cache/scanner
             export SONAR_USER_HOME=$SCANNER_DIRECTORY/.sonar
@@ -41,10 +39,30 @@ commands:
             if [[ ! -x "$SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS-$ARCH/bin/sonar-scanner" ]]; then
               curl -Ol https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$VERSION-$OS-$ARCH.zip
               unzip -qq -o sonar-scanner-cli-$VERSION-$OS-$ARCH.zip -d $SCANNER_DIRECTORY
+              rm sonar-scanner-cli-$VERSION-$OS-$ARCH.zip
 
               chmod +x $SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS-$ARCH/bin/sonar-scanner
               chmod +x $SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS-$ARCH/jre/bin/java
             fi
+
+            API_URL="https://api.github.com/repos/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/pulls?head=${CIRCLE_PROJECT_USERNAME}:${CIRCLE_BRANCH}"
+
+            RESPONSE=$(curl -s -H "Accept: application/vnd.github+json" "${API_URL}")
+
+            PR_COUNT=$(echo "${RESPONSE}" | jq '. | length')
+
+            if [[ "${PR_COUNT}" -eq 0 ]]; then
+              echo "No pull requests found for branch '${CIRCLE_BRANCH}'. Skipping pull request analysis."
+            elif [[ "${PR_COUNT}" -eq 1 ]]; then
+              PR_NUMBER=$(echo "${RESPONSE}" | jq -r '.[0].number')
+              PR_BASE_BRANCH=$(echo "${RESPONSE}" | jq -r '.[0].base.ref')
+              echo "Pull request number for branch '${CIRCLE_BRANCH}': ${PR_NUMBER}"
+              export SONARQUBE_SCANNER_PARAMS="{\"sonar.pullrequest.key\":\"${PR_NUMBER}\",\"sonar.pullrequest.branch\":\"${CIRCLE_BRANCH}\",\"sonar.pullrequest.base\":\"${PR_BASE_BRANCH}\"}"
+            else
+              echo "Warning: ${PR_COUNT} pull requests found for branch '${CIRCLE_BRANCH}'. Skipping pull request analysis."
+            fi
+
+            echo "sonar.nodejs.executable=/usr/local/bin/node" >> $SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS-$ARCH/conf/sonar-scanner.properties
 
             cd <<parameters.project_root>>
             $SCANNER_DIRECTORY/sonar-scanner-$VERSION-$OS-$ARCH/bin/sonar-scanner
@@ -58,6 +76,11 @@ jobs:
     steps:
       - browser-tools/install-chrome
       - checkout
+      - run:
+          name: Log versions
+          command: |
+            node --version
+            npm --version
       - node/install-packages:
           pkg-manager: npm
       - run:
@@ -80,9 +103,15 @@ jobs:
       - run:
           name: Organize outputs for GCP
           command: |
-            mkdir dist/abcall/browser/static
-            mv dist/abcall/browser/*.css dist/abcall/browser/static
-            mv dist/abcall/browser/*.js dist/abcall/browser/static
+            cp public/favicon.ico dist/abcall/browser
+            rm dist/abcall/browser/es-CO/favicon.ico
+            rm dist/abcall/browser/pt-BR/favicon.ico
+            mkdir dist/abcall/browser/es-CO/static
+            mv dist/abcall/browser/es-CO/*.css dist/abcall/browser/es-CO/static
+            mv dist/abcall/browser/es-CO/*.js dist/abcall/browser/es-CO/static
+            mkdir dist/abcall/browser/pt-BR/static
+            mv dist/abcall/browser/pt-BR/*.css dist/abcall/browser/pt-BR/static
+            mv dist/abcall/browser/pt-BR/*.js dist/abcall/browser/pt-BR/static
       - persist_to_workspace:
           root: dist/abcall
           paths:
@@ -127,11 +156,11 @@ jobs:
     steps:
       - gcp-cli/setup:
           use_oidc: true
-          google_project_id: DEV_GCP_PROJECT_ID
-          google_project_number: DEV_GCP_PROJECT_NUMBER
-          workload_identity_pool_id: DEV_GCP_WIP_ID
-          workload_identity_pool_provider_id: DEV_GCP_WIP_PROVIDER_ID
-          service_account_email: DEV_GCP_SERVICE_ACCOUNT_EMAIL
+          google_project_id: GCP_PROJECT_ID
+          google_project_number: GCP_PROJECT_NUMBER
+          workload_identity_pool_id: GCP_WIP_ID
+          workload_identity_pool_provider_id: GCP_WIP_PROVIDER_ID
+          service_account_email: GCP_SERVICE_ACCOUNT_EMAIL
       - attach_workspace:
           at: workspace
       - run:
@@ -147,11 +176,11 @@ jobs:
     steps:
       - gcp-cli/setup:
           use_oidc: true
-          google_project_id: PROD_GCP_PROJECT_ID
-          google_project_number: PROD_GCP_PROJECT_NUMBER
-          workload_identity_pool_id: PROD_GCP_WIP_ID
-          workload_identity_pool_provider_id: PROD_GCP_WIP_PROVIDER_ID
-          service_account_email: PROD_GCP_SERVICE_ACCOUNT_EMAIL
+          google_project_id: GCP_PROJECT_ID
+          google_project_number: GCP_PROJECT_NUMBER
+          workload_identity_pool_id: GCP_WIP_ID
+          workload_identity_pool_provider_id: GCP_WIP_PROVIDER_ID
+          service_account_email: GCP_SERVICE_ACCOUNT_EMAIL
       - attach_workspace:
           at: workspace
       - run:
@@ -169,7 +198,7 @@ workflows:
           requires:
             - build-test
       - deploy-dev:
-          context: gcp
+          context: gcp-dev
           requires:
             - build-test
             - e2e-test
@@ -178,7 +207,7 @@ workflows:
               only:
                 - develop
       - deploy-prod:
-          context: gcp
+          context: gcp-prod
           requires:
             - build-test
             - e2e-test
