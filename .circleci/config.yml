@@ -104,8 +104,10 @@ jobs:
           name: Organize outputs for GCP
           command: |
             cp public/favicon.ico dist/abcall/browser
-            rm dist/abcall/browser/es-CO/favicon.ico
-            rm dist/abcall/browser/pt-BR/favicon.ico
+            cp src/redirect-i18n.html dist/abcall/browser/index.html
+            mkdir dist/abcall/browser/es-AR/static
+            mv dist/abcall/browser/es-AR/*.css dist/abcall/browser/es-AR/static
+            mv dist/abcall/browser/es-AR/*.js dist/abcall/browser/es-AR/static
             mkdir dist/abcall/browser/es-CO/static
             mv dist/abcall/browser/es-CO/*.css dist/abcall/browser/es-CO/static
             mv dist/abcall/browser/es-CO/*.js dist/abcall/browser/es-CO/static

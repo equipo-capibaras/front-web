@@ -1,0 +1,37 @@
+<!-- eslint-disable @angular-eslint/template/i18n -->
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ABCall</title>
+  </head>
+  <body>
+    <script>
+      function getRedirectUrl() {
+        const languages =
+          navigator.languages && navigator.languages.length
+            ? navigator.languages
+            : [navigator.language || navigator.userLanguage];
+
+        // Check each preferred language
+        for (const lang of languages) {
+          if (lang.startsWith('pt')) {
+            return '/pt-BR';
+          } else if (lang.startsWith('es-AR')) {
+            return '/es-AR';
+          } else if (lang.startsWith('es')) {
+            return '/es-CO';
+          }
+        }
+
+        // Default fallback if no match found
+        return '/es-CO';
+      }
+
+      // Redirect immediately
+      window.location.href =
+        getRedirectUrl() + window.location.pathname + window.location.search + window.location.hash;
+    </script>
+  </body>
+</html>
