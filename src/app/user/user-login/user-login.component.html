@@ -1,26 +1,25 @@
-<div class="row">
-  <div class="col d-flex justify-content-center">
+<div class="login-container">
+  <div class="login-card">
+    <img src="./assets/images/LogoABCall.png" alt="Logo ABCall" class="logo" />
+    <h2>Ingresa a tu cuenta</h2>
     <form id="form-login">
-      <div class="mb-3">
-        <label for="username" class="form-label">Usuario</label>
-        <input #username type="username" class="form-control" id="username" placeholder="Ingresa tu Usuario" />
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Contraseña</label>
-        <div class="input-group">
-          <input
-            #password
-            type="{{ showPassword ? 'text' : 'password' }}"
-            class="form-control"
-            id="password"
-            placeholder="Ingresa tu contraseña" />
-        </div>
-      </div>
-      <div class="pb-3"></div>
-      <button type="submit" routerLink="/alarms" class="btn btn-primary" (click)="loginUser(username.value, password.value)">Ingresar</button>
-      <div class="d-flex justify-content-center pt-4">
-        <a id="register" routerLink="/register"
-          >¿Todavía no tienes cuenta? <span style="font-weight: 500">Registrate</span></a
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Correo</mat-label>
+        <input matInput #username type="email" placeholder="Ingresa tu correo" />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" #password placeholder="Ingresa tu contraseña" />
+      </mat-form-field>
+      <button
+        mat-raised-button
+        class="login-button"
+        (click)="loginUser(username.value, password.value)">
+        Ingresar
+      </button>
+      <div class="register-link">
+        <a class="register-link" routerLink="/register"
+          >¿Todavía no tienes cuenta? <strong>Registrate</strong></a
         >
       </div>
     </form>

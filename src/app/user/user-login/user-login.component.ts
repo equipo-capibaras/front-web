@@ -3,16 +3,26 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserServiceService } from '../user-service.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, NgClass],
+  imports: [
+    RouterLink,
+    NgClass,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+  ],
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.scss'],
 })
 export class UserLoginComponent implements OnInit {
-  showPassword = false;
   error: string = '';
   helper = new JwtHelperService();
 
@@ -20,10 +30,6 @@ export class UserLoginComponent implements OnInit {
     private userService: UserServiceService,
     private router: Router,
   ) {}
-
-  togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword;
-  }
 
   ngOnInit(): void {
     sessionStorage.setItem('token', '');
