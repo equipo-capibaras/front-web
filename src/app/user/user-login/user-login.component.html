@@ -2,6 +2,10 @@
   <div class="login-card">
     <img src="./assets/images/LogoABCall.png" alt="Logo ABCall" class="logo" />
     <h2 i18n="Titulo login">Ingresa a tu cuenta</h2>
+
+    <!-- Mostrar el mensaje de error si existe -->
+    <div *ngIf="error" class="error-message">{{ error }}</div>
+
     <form id="form-login">
       <mat-form-field appearance="outline" class="full-width">
         <mat-label i18n="Correo label|Etiqueta para el campo correo">Correo</mat-label>

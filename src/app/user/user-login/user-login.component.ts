@@ -1,4 +1,4 @@
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+    NgIf,
   ],
   templateUrl: './user-login.component.html',
   styleUrls: ['./user-login.component.scss'],
@@ -37,6 +38,12 @@ export class UserLoginComponent implements OnInit {
   }
 
   loginUser(username: string, password: string): void {
+    // Validar que los campos no estén vacíos
+    if (!username || !password) {
+      this.error = 'Ambos campos son obligatorios.'; // Mostrar mensaje de error
+      return;
+    }
+
     this.userService.login(username, password).subscribe(
       response => {
         sessionStorage.setItem('token', response.token);
