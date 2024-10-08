@@ -24,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./user-login.component.scss'],
 })
 export class UserLoginComponent implements OnInit {
-  error: string = '';
+  errorUsername: string = '';
+  errorPassword: string = '';
   helper = new JwtHelperService();
 
   constructor(
@@ -38,22 +39,21 @@ export class UserLoginComponent implements OnInit {
   }
 
   loginUser(username: string, password: string): void {
-    // Validar que los campos no estén vacíos
+    // Validar que los campos no estén vacíos y mostrar mensajes de error correspondientes
+    this.errorUsername = !username ? $localize`:@@campo-obligatorio:Este campo es obligatorio` : '';
+    this.errorPassword = !password ? $localize`:@@campo-obligatorio:Este campo es obligatorio` : '';
+
+    // Si hay algún error, detener la ejecución
     if (!username || !password) {
-      this.error = 'Ambos campos son obligatorios.'; // Mostrar mensaje de error
       return;
     }
 
-    this.userService.login(username, password).subscribe(
-      response => {
-        sessionStorage.setItem('token', response.token);
-        const decodedToken = this.helper.decodeToken(response.token);
-        sessionStorage.setItem('userId', decodedToken.id);
-        this.router.navigate(['/alarms']);
-      },
-      error => {
-        this.error = error.message;
-      },
-    );
+    // Proceder con el login si no hay errores
+    this.userService.login(username, password).subscribe(response => {
+      sessionStorage.setItem('token', response.token);
+      const decodedToken = this.helper.decodeToken(response.token);
+      sessionStorage.setItem('userId', decodedToken.id);
+      this.router.navigate(['/alarms']);
+    });
   }
 }

@@ -13,7 +13,7 @@
         <source>Ingresa a tu cuenta</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="linenumber">4,6</context>
         </context-group>
         <note priority="1" from="description">Titulo login</note>
       </trans-unit>
@@ -21,7 +21,7 @@
         <source>Correo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">7,10</context>
+          <context context-type="linenumber">8,11</context>
         </context-group>
         <note priority="1" from="description">Etiqueta para el campo correo</note>
         <note priority="1" from="meaning">Correo label</note>
@@ -30,7 +30,7 @@
         <source>Ingresa tu correo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">12,13</context>
+          <context context-type="linenumber">13,14</context>
         </context-group>
         <note priority="1" from="description">Texto para el campo de correo</note>
         <note priority="1" from="meaning">Correo placeholder</note>
@@ -39,7 +39,7 @@
         <source>Contraseña</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">17,21</context>
+          <context context-type="linenumber">19,23</context>
         </context-group>
         <note priority="1" from="description">Etiqueta para el campo de contraseña</note>
         <note priority="1" from="meaning">Contraseña label</note>
@@ -48,7 +48,7 @@
         <source>Ingresa tu contraseña</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">23,24</context>
+          <context context-type="linenumber">25,26</context>
         </context-group>
         <note priority="1" from="description">Texto para el campo de contraseña</note>
         <note priority="1" from="meaning">Contraseña placeholder</note>
@@ -57,7 +57,7 @@
         <source> Ingresar </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">31,33</context>
+          <context context-type="linenumber">34,36</context>
         </context-group>
         <note priority="1" from="description">Botón Ingresar</note>
       </trans-unit>
@@ -65,9 +65,20 @@
         <source>¿Todavía no tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Regístrate<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">35,37</context>
+          <context context-type="linenumber">38,40</context>
         </context-group>
         <note priority="1" from="description">Link registro</note>
+      </trans-unit>
+      <trans-unit id="campo-obligatorio" datatype="html">
+        <source>Este campo es obligatorio</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user/user-login/user-login.component.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user/user-login/user-login.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
       </trans-unit>
     </body>
   </file>

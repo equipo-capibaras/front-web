@@ -59,3 +59,9 @@ mat-form-field {
   font-size: 0.875rem;
   color: $blue-800;
 }
+
+mat-error {
+  color: $red-warn;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}

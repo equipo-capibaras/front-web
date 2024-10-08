@@ -68,7 +68,7 @@
         </context-group>
         <note priority="1" from="description">Botón Ingresar</note>
       </trans-unit>
-      trans-unit id="2825057944243482053" datatype="html">
+      <trans-unit id="2825057944243482053" datatype="html">
         <source>¿Todavía no tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Regístrate<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>¿Todavía no tenés cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Registrate<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
         <context-group purpose="location">
@@ -76,6 +76,18 @@
           <context context-type="linenumber">35,37</context>
         </context-group>
         <note priority="1" from="description">Link registro</note>
+      </trans-unit>
+      <trans-unit id="campo-obligatorio" datatype="html">
+        <source>Este campo es obligatorio</source>
+        <target>Este campo es obligatorio</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user/user-login/user-login.component.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/user/user-login/user-login.component.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
       </trans-unit>
     </body>
   </file>
