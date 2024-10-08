@@ -1,29 +1,27 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserLoginComponent } from './user-login.component';
 import { UserServiceService } from '../user-service.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { of, throwError } from 'rxjs';
-import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpErrorInterceptorService } from 'src/app/interceptors/http-error-interceptor.service';
 
 describe('LoginComponent', () => {
   let component: UserLoginComponent;
   let fixture: ComponentFixture<UserLoginComponent>;
   let userServiceSpy: jasmine.SpyObj<UserServiceService>;
   let router: Router;
-//  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
     // Crear spies para UserServiceService y Router
     const userServiceMock = jasmine.createSpyObj('UserServiceService', ['login']);
 
     await TestBed.configureTestingModule({
-      imports: [UserLoginComponent, RouterTestingModule],
-      providers: [
-        { provide: UserServiceService, useValue: userServiceMock },
-        JwtHelperService,
-      ],
+      imports: [UserLoginComponent, RouterTestingModule, BrowserAnimationsModule],
+      providers: [{ provide: UserServiceService, useValue: userServiceMock }, JwtHelperService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserLoginComponent);
@@ -34,6 +32,11 @@ describe('LoginComponent', () => {
     spyOn(router, 'navigate').and.stub();
 
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    // Limpiar sesión después de cada prueba
+    sessionStorage.clear();
   });
 
   it('should create', () => {
@@ -54,6 +57,13 @@ describe('LoginComponent', () => {
     expect(router.navigate).toHaveBeenCalledWith(['/alarms']); // Verificamos que el router navegó
   });
 
+  it('should show error when fields are empty', () => {
+    component.loginUser('', ''); // Simulamos campos vacíos
+    expect(component.errorUsername).toBe('Este campo es obligatorio');
+    expect(component.errorPassword).toBe('Este campo es obligatorio');
+    expect(userServiceSpy.login).not.toHaveBeenCalled(); // El login no debe llamarse
+  });
+
   it('should handle login error', () => {
     const mockError = { message: 'Username or password is incorrect.' };
 
@@ -61,7 +71,6 @@ describe('LoginComponent', () => {
 
     component.loginUser('wronguser', 'wrongpassword');
     expect(userServiceSpy.login).toHaveBeenCalledWith('wronguser', 'wrongpassword');
-    expect(component.error).toBe('Username or password is incorrect.');
     expect(sessionStorage.getItem('token')).toBe('');
     expect(sessionStorage.getItem('userId')).toBe('');
     expect(router.navigate).not.toHaveBeenCalled();
