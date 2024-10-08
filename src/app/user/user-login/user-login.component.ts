@@ -24,8 +24,9 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./user-login.component.scss'],
 })
 export class UserLoginComponent implements OnInit {
-  errorUsername: string = '';
-  errorPassword: string = '';
+  logoPath = 'assets/images/LogoABCall.png';
+  errorUsername = '';
+  errorPassword = '';
   helper = new JwtHelperService();
 
   constructor(

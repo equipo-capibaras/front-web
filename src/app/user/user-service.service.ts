@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+interface LoginResponse {
+  token: string;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +20,7 @@ export class UserServiceService {
    * @param password La contraseña del usuario.
    * @returns Un observable con la respuesta del servidor.
    */
-  login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth/employee`, { username, password });
+  login(username: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/employee`, { username, password });
   }
 }

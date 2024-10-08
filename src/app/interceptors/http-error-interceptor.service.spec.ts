@@ -1,13 +1,6 @@
-/* tslint:disable:no-unused-variable */
-
 import { inject, TestBed } from '@angular/core/testing';
 import { HttpErrorInterceptorService } from './http-error-interceptor.service';
-import {
-  HttpRequest,
-  HttpErrorResponse,
-  HttpHandler,
-  HTTP_INTERCEPTORS,
-} from '@angular/common/http';
+import { HttpRequest, HttpErrorResponse, HttpHandler } from '@angular/common/http';
 import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { throwError } from 'rxjs';
 
@@ -115,7 +108,7 @@ describe('Service: HttpErrorInterceptor', () => {
     (next.handle as jasmine.Spy).and.returnValue(throwError(() => httpErrorResponse));
 
     interceptor.intercept(request, next).subscribe({
-      error: error => {
+      error: () => {
         expect(toastrServiceSpy.error).not.toHaveBeenCalled();
       },
     });

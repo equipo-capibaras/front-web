@@ -1,39 +1,39 @@
 <div class="login-container">
   <div class="login-card">
-    <img src="assets/images/LogoABCall.png" alt="Logo" />
-    <h2 i18n="Titulo login">Ingresa a tu cuenta</h2>
+    <img [src]="logoPath" alt="Logo" i18n-alt="Logo image description" />
+    <h2 i18n="@@tituloLogin">Ingresa a tu cuenta</h2>
 
     <form id="form-login">
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label i18n="Correo label|Etiqueta para el campo correo">Correo</mat-label>
+      <mat-form-field appearance="outline" class="full-width" i18n-ignore>
+        <mat-label i18n="@@correoLabel">Correo</mat-label>
         <input
-          matInput
           #username
+          matInput
           type="email"
           placeholder="Ingresa tu correo"
-          i18n-placeholder="Correo placeholder|Texto para el campo de correo" />
-        <mat-error *ngIf="errorUsername">{{ errorUsername }}</mat-error>
+          i18n-placeholder="@@correoPlaceholder:Texto para el campo de correo" />
+        <mat-error *ngIf="errorUsername" i18n-ignore>{{ errorUsername }}</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label i18n="Contraseña label|Etiqueta para el campo de contraseña"
-          >Contraseña</mat-label
-        >
+      <mat-form-field appearance="outline" class="full-width" i18n-ignore>
+        <mat-label i18n="@@contrasenaLabel">Contraseña</mat-label>
         <input
+          #password
           matInput
           type="password"
-          #password
           placeholder="Ingresa tu contraseña"
-          i18n-placeholder="Contraseña placeholder|Texto para el campo de contraseña" />
-        <mat-error *ngIf="errorPassword">{{ errorPassword }}</mat-error>
+          i18n-placeholder="@@contrasenaPlaceholder:Texto para el campo de contraseña" />
+        <mat-error *ngIf="errorPassword" i18n-ignore>{{ errorPassword }}</mat-error>
       </mat-form-field>
       <button
+        type="button"
         mat-raised-button
         class="login-button"
-        (click)="loginUser(username.value, password.value)">
+        (click)="loginUser(username.value, password.value)"
+        i18n="@@botonIngresar">
         Ingresar
       </button>
       <div class="register-link">
-        <a class="register-link" routerLink="/register" i18n="Link registro"
+        <a class="register-link" routerLink="/register" i18n="@@linkRegistro"
           >¿Todavía no tienes cuenta? <strong>Regístrate</strong></a
         >
       </div>

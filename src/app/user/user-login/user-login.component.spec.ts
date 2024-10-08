@@ -4,10 +4,9 @@ import { Router } from '@angular/router';
 import { UserLoginComponent } from './user-login.component';
 import { UserServiceService } from '../user-service.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpErrorInterceptorService } from 'src/app/interceptors/http-error-interceptor.service';
 import { MockHttpErrorResponseService } from 'src/app/interceptors/mock-http-error-response.service';
 
 describe('LoginComponent', () => {
