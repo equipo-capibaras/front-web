@@ -1,0 +1,42 @@
+<div class="login-container">
+  <div class="login-card">
+    <img src="assets/images/LogoABCall.png" alt="Logo" />
+    <h2 i18n="Titulo login">Ingresa a tu cuenta</h2>
+
+    <form id="form-login">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="Correo label|Etiqueta para el campo correo">Correo</mat-label>
+        <input
+          matInput
+          #username
+          type="email"
+          placeholder="Ingresa tu correo"
+          i18n-placeholder="Correo placeholder|Texto para el campo de correo" />
+        <mat-error *ngIf="errorUsername">{{ errorUsername }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="Contraseña label|Etiqueta para el campo de contraseña"
+          >Contraseña</mat-label
+        >
+        <input
+          matInput
+          type="password"
+          #password
+          placeholder="Ingresa tu contraseña"
+          i18n-placeholder="Contraseña placeholder|Texto para el campo de contraseña" />
+        <mat-error *ngIf="errorPassword">{{ errorPassword }}</mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        class="login-button"
+        (click)="loginUser(username.value, password.value)">
+        Ingresar
+      </button>
+      <div class="register-link">
+        <a class="register-link" routerLink="/register" i18n="Link registro"
+          >¿Todavía no tienes cuenta? <strong>Regístrate</strong></a
+        >
+      </div>
+    </form>
+  </div>
+</div>

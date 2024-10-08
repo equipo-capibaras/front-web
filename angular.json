@@ -34,13 +34,8 @@
             "polyfills": ["zone.js", "@angular/localize/init"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": ["src/styles.scss"],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.scss", "node_modules/ngx-toastr/toastr.css"],
             "scripts": [],
             "localize": true,
             "i18nMissingTranslation": "error"
@@ -93,12 +88,7 @@
             "polyfills": ["zone.js", "zone.js/testing", "@angular/localize/init"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": [],
             "karmaConfig": "karma.conf.js"
