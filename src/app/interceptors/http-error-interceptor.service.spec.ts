@@ -39,10 +39,6 @@ describe('Service: HttpErrorInterceptor', () => {
 
   it('should handle 401 Unauthorized error and show Toastr message', () => {
     const request = new HttpRequest('GET', '/api/data');
-    const httpErrorResponse = new HttpErrorResponse({
-      status: 401,
-      statusText: 'Unauthorized',
-    });
 
     interceptor.intercept(request, next).subscribe({
       error: error => {
