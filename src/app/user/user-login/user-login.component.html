@@ -1,6 +1,6 @@
 <div class="login-container">
   <div class="login-card">
-    <img src="./assets/images/LogoABCall.png" alt="Logo ABCall" class="logo" />
+    <img src="assets/images/LogoABCall.png" alt="Logo" />
     <h2 i18n="Titulo login">Ingresa a tu cuenta</h2>
 
     <form id="form-login">
@@ -29,8 +29,7 @@
       <button
         mat-raised-button
         class="login-button"
-        (click)="loginUser(username.value, password.value)"
-        i18n="Botón Ingresar">
+        (click)="loginUser(username.value, password.value)">
         Ingresar
       </button>
       <div class="register-link">

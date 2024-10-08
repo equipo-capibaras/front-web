@@ -35,15 +35,15 @@ mat-form-field {
   margin-bottom: 1rem;
 
   .mat-form-field-appearance-outline .mat-form-field-outline {
-    stroke: $blue-500; // Color del borde cuando no hay foco o texto
+    stroke: $blue-500;
   }
 
   .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-    stroke: $blue-500; // Borde grueso azul cuando tiene foco o texto
+    stroke: $blue-500;
   }
 
   .mat-form-field-label {
-    color: $blue-500; // Color de la etiqueta cuando está vacía
+    color: $blue-500;
   }
 }
 
@@ -51,17 +51,37 @@ mat-form-field {
   width: 100%;
   padding: 0.75rem;
   margin-top: 1rem;
-  background-color: $blue-500;
+  background-color: $blue-500 !important;
+  color: white !important;
 }
-
+.login-button:hover {
+  background-color: $blue-300 !important;
+}
 .register-link {
   margin-top: 1rem;
   font-size: 0.875rem;
   color: $blue-800;
 }
 
-mat-error {
-  color: $red-warn;
-  font-size: 0.875rem;
-  margin-top: 0.5rem;
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+.login-card {
+  position: relative;
+  padding-top: 100px;
+  text-align: center;
+}
+
+.login-card img {
+  position: absolute;
+  top: -63px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: auto;
 }

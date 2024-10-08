@@ -33,6 +33,9 @@ $red-warn: #f44336;
 .background-primary {
   background-color: $blue-50;
 }
+body {
+  font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+}
 
 // Define the theme object.
 $abcall-theme: mat.define-theme(
@@ -68,7 +71,20 @@ html,
 body {
   height: 100%;
 }
-body {
-  margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+
+h2 {
+  font-size: 20px;
+}
+a {
+  font-size: 16px;
+  text-decoration: none;
+}
+.button {
+  background-color: $blue-500;
+  color: white;
+}
+
+.button:hover {
+  background-color: $blue-200 !important;
+  color: white;
 }
