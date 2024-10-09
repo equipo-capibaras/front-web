@@ -1,41 +1,8 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
-// Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
+@import 'src/colors.scss';
+
 @include mat.core();
-
-// Definir los colores como variables
-$blue-50: #ecf0f8;
-$blue-100: #dae2f1;
-$blue-200: #b5c4e3;
-$blue-300: #8fa7d6;
-$blue-400: #6a89c8;
-$blue-500: #4267b2;
-$blue-600: #375695;
-$blue-700: #294170;
-$blue-800: #1c2b4a;
-$blue-900: #0e1625;
-$blue-950: #070b13;
-
-// Otros colores
-$amber-accent: #ffc107;
-$red-warn: #f44336;
-
-// Usar los colores definidos en componentes o estilos específicos
-.primary-color {
-  color: $blue-500;
-}
-
-.background-primary {
-  background-color: $blue-50;
-}
-body {
-  font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
-}
 
 // Define the theme object.
 $abcall-theme: mat.define-theme(
@@ -45,15 +12,16 @@ $abcall-theme: mat.define-theme(
       primary: mat.$azure-palette,
       tertiary: mat.$blue-palette,
     ),
+    typography: (
+      brand-family: 'Fira Sans',
+      bold-weight: 900,
+    ),
     density: (
       scale: 0,
     ),
   )
 );
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
 :root {
   @include mat.all-component-themes($abcall-theme);
 }
@@ -62,23 +30,26 @@ $abcall-theme: mat.define-theme(
 // For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
 // @include mat.typography-hierarchy($abcall-theme);
 
-// Comment out the line below if you want to use the deprecated color inputs.
-// @include mat.color-variants-backwards-compatibility($abcall-theme);
-
-/* You can add global styles to this file, and also import other style files */
-
 html,
 body {
   height: 100%;
+  font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+  background-color: $blue-50;
+  margin: 0;
 }
 
 h2 {
-  font-size: 20px;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: $blue-800;
 }
+
 a {
   font-size: 16px;
   text-decoration: none;
 }
+
 .button {
   background-color: $blue-500;
   color: white;

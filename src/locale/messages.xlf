@@ -2,82 +2,72 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="es-CO" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="demoText" datatype="html">
-        <source>Hola ABCall</source>
+      <trans-unit id="4550958265168690830" datatype="html">
+        <source>Logo</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">2,3</context>
+          <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
+          <context context-type="linenumber">3</context>
         </context-group>
+        <note priority="1" from="description">Logo image description</note>
       </trans-unit>
-      <trans-unit id="5687115774023274717" datatype="html">
+      <trans-unit id="tituloLogin" datatype="html">
         <source>Ingresa a tu cuenta</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
           <context context-type="linenumber">4,6</context>
         </context-group>
-        <note priority="1" from="description">Titulo login</note>
       </trans-unit>
-      <trans-unit id="2009163028962091396" datatype="html">
+      <trans-unit id="correoLabel" datatype="html">
         <source>Correo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">8,11</context>
+          <context context-type="linenumber">8,9</context>
         </context-group>
-        <note priority="1" from="description">Etiqueta para el campo correo</note>
-        <note priority="1" from="meaning">Correo label</note>
       </trans-unit>
-      <trans-unit id="2802701905052308190" datatype="html">
+      <trans-unit id="correoPlaceholder:Texto para el campo de correo" datatype="html">
         <source>Ingresa tu correo</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
           <context context-type="linenumber">13,14</context>
         </context-group>
-        <note priority="1" from="description">Texto para el campo de correo</note>
-        <note priority="1" from="meaning">Correo placeholder</note>
       </trans-unit>
-      <trans-unit id="1964225269149161676" datatype="html">
+      <trans-unit id="contrasenaLabel" datatype="html">
         <source>Contraseña</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">19,23</context>
+          <context context-type="linenumber">18,20</context>
         </context-group>
-        <note priority="1" from="description">Etiqueta para el campo de contraseña</note>
-        <note priority="1" from="meaning">Contraseña label</note>
       </trans-unit>
-      <trans-unit id="2992712574065550019" datatype="html">
+      <trans-unit id="contrasenaPlaceholder:Texto para el campo de contraseña" datatype="html">
         <source>Ingresa tu contraseña</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">25,26</context>
+          <context context-type="linenumber">23,24</context>
         </context-group>
-        <note priority="1" from="description">Texto para el campo de contraseña</note>
-        <note priority="1" from="meaning">Contraseña placeholder</note>
       </trans-unit>
-      <trans-unit id="7904313455104046575" datatype="html">
+      <trans-unit id="botonIngresar" datatype="html">
         <source> Ingresar </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">34,36</context>
+          <context context-type="linenumber">33,35</context>
         </context-group>
-        <note priority="1" from="description">Botón Ingresar</note>
       </trans-unit>
-      <trans-unit id="2825057944243482053" datatype="html">
+      <trans-unit id="linkRegistro" datatype="html">
         <source>¿Todavía no tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Regístrate<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.html</context>
-          <context context-type="linenumber">38,40</context>
+          <context context-type="linenumber">37,39</context>
         </context-group>
-        <note priority="1" from="description">Link registro</note>
       </trans-unit>
       <trans-unit id="campo-obligatorio" datatype="html">
         <source>Este campo es obligatorio</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.ts</context>
-          <context context-type="linenumber">43</context>
+          <context context-type="linenumber">44</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/user/user-login/user-login.component.ts</context>
-          <context context-type="linenumber">44</context>
+          <context context-type="linenumber">45</context>
         </context-group>
       </trans-unit>
     </body>

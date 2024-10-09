@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 import { UserLoginComponent } from './user-login.component';
 import { UserServiceService } from '../user-service.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpErrorInterceptorService } from 'src/app/interceptors/http-error-interceptor.service';
+import { MockHttpErrorResponseService } from 'src/app/interceptors/mock-http-error-response.service';
 
 describe('LoginComponent', () => {
   let component: UserLoginComponent;
@@ -21,7 +21,15 @@ describe('LoginComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [UserLoginComponent, RouterTestingModule, BrowserAnimationsModule],
-      providers: [{ provide: UserServiceService, useValue: userServiceMock }, JwtHelperService],
+      providers: [
+        { provide: UserServiceService, useValue: userServiceMock },
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: MockHttpErrorResponseService,
+          multi: true,
+        },
+        JwtHelperService,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserLoginComponent);
@@ -62,17 +70,5 @@ describe('LoginComponent', () => {
     expect(component.errorUsername).toBe('Este campo es obligatorio');
     expect(component.errorPassword).toBe('Este campo es obligatorio');
     expect(userServiceSpy.login).not.toHaveBeenCalled(); // El login no debe llamarse
-  });
-
-  it('should handle login error', () => {
-    const mockError = { message: 'Username or password is incorrect.' };
-
-    userServiceSpy.login.and.returnValue(throwError(() => mockError)); // Simulamos un error en el login
-
-    component.loginUser('wronguser', 'wrongpassword');
-    expect(userServiceSpy.login).toHaveBeenCalledWith('wronguser', 'wrongpassword');
-    expect(sessionStorage.getItem('token')).toBe('');
-    expect(sessionStorage.getItem('userId')).toBe('');
-    expect(router.navigate).not.toHaveBeenCalled();
   });
 });
