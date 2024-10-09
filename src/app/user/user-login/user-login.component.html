@@ -26,6 +26,7 @@
           i18n-placeholder="@@contrasenaPlaceholder:Texto para el campo de contraseña" />
         <mat-error *ngIf="errorPassword" i18n-ignore>{{ errorPassword }}</mat-error>
       </mat-form-field>
+
       <button
         type="button"
         mat-raised-button
@@ -35,7 +36,8 @@
         Ingresar
       </button>
       <div class="register-link">
-        <a class="register-link" routerLink="/register" i18n="@@linkRegistro"
+
+        <a class="register-link" routerLink="/employee-register" i18n="Link registro"
           >¿Todavía no tienes cuenta? <strong>Regístrate</strong></a
         >
       </div>

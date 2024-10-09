@@ -1,0 +1,79 @@
+<div class="register-container">
+  <div class="register-card">
+    <img src="assets/images/LogoABCall.png" alt="Logo" />
+    <h2 i18n="TitleAccount">Crea tu cuenta</h2>
+
+    <form id="form-register">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="Nombre label|Etiqueta para el campo nombre">Nombre</mat-label>
+        <input
+          matInput
+          #name
+          type="text"
+          placeholder="Ingresa el nombre"
+          i18n-placeholder="Nombre placeholder|Texto para el campo de nombre" />
+
+        <mat-error *ngIf="errorName">{{ errorName }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="Correo label|Etiqueta para el campo correo">Correo</mat-label>
+        <input
+          matInput
+          #email
+          type="email"
+          placeholder="Ingresa tu correo"
+          i18n-placeholder="Correo placeholder|Texto para el campo de correo" />
+        <mat-error *ngIf="errorEmail">{{ errorEmail }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="Correo label|Etiqueta rol">¿Qué rol desempeña?</mat-label>
+        <mat-select #rol>
+          <mat-option value="admin" i18n="Admin option|Opción para admin">Administrador</mat-option>
+          <mat-option value="Agente" i18n="Agente option|Opción para Agente">Agente</mat-option>
+          <mat-option value="Analítica" i18n="Analítica option|Opción para Analítica"
+            >Analítica</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="Contraseña label|Etiqueta para el campo de contraseña"
+          >Contraseña</mat-label
+        >
+        <input
+          matInput
+          type="password"
+          #password
+          placeholder="Ingresa tu contraseña"
+          i18n-placeholder="Contraseña placeholder|Texto para el campo de contraseña" />
+        <mat-error *ngIf="errorPassword">{{ errorPassword }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="Contraseña label|Etiqueta para el campo de contraseña"
+          >Contraseña</mat-label
+        >
+        <input
+          matInput
+          type="ConfirmPassword"
+          #ConfirmPassword
+          placeholder="Confirma tu contraseña"
+          i18n-placeholder="Contraseña placeholder|Texto para el campo de contraseña" />
+        <mat-error *ngIf="errorConfirmPassword">{{ errorConfirmPassword }}</mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        class="register-button"
+        (click)="CreateAccount(name.value, email.value, password.value, ConfirmPassword.value)">
+        Crear Cuenta
+      </button>
+      <div class="register-link">
+        <a class="register-link" routerLink="/" i18n="Link login"
+          >Ya tienes cuenta? <strong>Ingresa</strong></a
+        >
+      </div>
+    </form>
+  </div>
+</div>
