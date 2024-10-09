@@ -13,23 +13,23 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       // Identificar el tipo de error según el código de estado
       switch (error.status) {
         case 401:
-          errorMessage = 'Usuario o contraseña incorrectos.';
+          errorMessage = $localize`:@@error-401:Usuario o contraseña incorrectos.`;
           break;
         case 403:
-          errorMessage = 'No tienes los permisos necesarios para realizar esta acción.';
+          errorMessage = $localize`:@@error-403:No tienes permiso para acceder a este recurso.`;
           break;
         case 404:
-          errorMessage = 'El recurso solicitado no fue encontrado.';
+          errorMessage = $localize`:@@error-404:El recurso solicitado no fue encontrado.`;
           break;
         case 500:
-          errorMessage = 'Error interno del servidor. Por favor, intenta nuevamente más tarde.';
+          errorMessage = $localize`:@@error-500:El servidor está teniendo problemas. Por favor, inténtalo más tarde.`;
           break;
         default:
           errorMessage = `Error ${error.status}: ${error.statusText}`;
       }
 
       // Mostrar el SnackBar con el mensaje de error y duración de 5 segundos
-      snackBar.open(errorMessage, 'Cerrar', {
+      snackBar.open(errorMessage, $localize`:@@opt-cerrar:Cerrar`, {
         duration: 10000,
       });
 
