@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -26,8 +26,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrls: ['./user-login.component.scss'],
 })
 export class UserLoginComponent implements OnInit {
-  errorUsername = '';
-  errorPassword = '';
+  errorUsername = $localize`:@@campo-obligatorio:Este campo es obligatorio`;
+  errorUsernameType = $localize`:@@usuario-invalido:Debe ser un correo electrónico válido`;
+  errorPassword = $localize`:@@campo-obligatorio:Este campo es obligatorio`;
   helper = new JwtHelperService();
   loginForm!: FormGroup;
 
@@ -35,18 +36,23 @@ export class UserLoginComponent implements OnInit {
     private userService: UserServiceService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private toastr: ToastrService,
+    //private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
     sessionStorage.setItem('token', '');
     sessionStorage.setItem('userId', '');
+
+    this.loginForm = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
   }
 
   loginUser(username: string, password: string): void {
     // Validar que los campos no estén vacíos y mostrar mensajes de error correspondientes
-    this.errorUsername = !username ? $localize`:@@campo-obligatorio:Este campo es obligatorio` : '';
-    this.errorPassword = !password ? $localize`:@@campo-obligatorio:Este campo es obligatorio` : '';
+    //this.errorUsername = !username ? $localize`:@@campo-obligatorio:Este campo es obligatorio` : '';
+    //this.errorPassword = !password ? $localize`:@@campo-obligatorio:Este campo es obligatorio` : '';
 
     // Si hay algún error, detener la ejecución
     if (!username || !password) {

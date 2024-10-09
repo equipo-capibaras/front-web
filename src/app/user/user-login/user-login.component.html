@@ -5,30 +5,45 @@
     </div>
     <h1 class="mat-title-large" i18n="@@tituloLogin">Ingresa a tu cuenta</h1>
 
-    <form id="form-login">
+    <form id="form-login" [formGroup]="loginForm" (ngSubmit)="(!loginForm.invalid)">
       <mat-form-field appearance="outline" class="full-width" i18n-ignore>
         <mat-label i18n="@@correoLabel">Correo</mat-label>
         <input
           #username
+          id="username"
           matInput
+          formControlName="username"
           type="email"
           placeholder="Ingresa tu correo"
           i18n-placeholder="@@correoPlaceholder:Texto para el campo de correo" />
-        @if (errorUsername) {
-          <mat-error>{{ errorUsername }}</mat-error>
-        }
+        <mat-error
+          *ngIf="
+            loginForm.get('username')!.hasError('required') && loginForm.get('username')!.touched
+          "
+          >{{ errorUsername }}</mat-error
+        >
+        <mat-error
+          *ngIf="loginForm.get('username')!.hasError('email') && loginForm.get('username')!.touched"
+          >{{ errorUsernameType }}</mat-error
+        >
       </mat-form-field>
       <mat-form-field appearance="outline" class="full-width" i18n-ignore>
         <mat-label i18n="@@contrasenaLabel">Contraseña</mat-label>
         <input
           #password
+          id="password"
+          formControlName="password"
           matInput
           type="password"
           placeholder="Ingresa tu contraseña"
           i18n-placeholder="@@contrasenaPlaceholder:Texto para el campo de contraseña" />
-        @if (errorPassword) {
-          <mat-error>{{ errorPassword }}</mat-error>
-        }
+
+        <mat-error
+          *ngIf="
+            loginForm.get('password')!.hasError('required') && loginForm.get('password')!.touched
+          "
+          >{{ errorPassword }}</mat-error
+        >
       </mat-form-field>
       <button
         type="button"
