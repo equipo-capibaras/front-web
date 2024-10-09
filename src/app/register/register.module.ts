@@ -8,9 +8,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 
 import { ChoosePlanComponent } from './choose-plan/choose-plan.component';
+import { PricingPlansComponent } from './pricing-plans/pricing-plans.component';
 
 @NgModule({
-  declarations: [EmployeeRegisterComponent, ChoosePlanComponent],
+  declarations: [ChoosePlanComponent, PricingPlansComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
