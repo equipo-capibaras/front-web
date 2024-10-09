@@ -1,0 +1,91 @@
+@import 'src/styles.scss';
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.register-card {
+  position: relative;
+  background-color: white;
+  padding: 80px 2rem 2rem 2rem;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+h2 {
+  margin-bottom: 2rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: $blue-800;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    stroke: $blue-500;
+  }
+
+  .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+    stroke: $blue-500;
+  }
+
+  .mat-form-field-label {
+    color: $blue-500;
+  }
+  .mdc-text-field {
+    border: 1px solid $blue-500;
+    border-radius: 10px;
+  }
+}
+
+.mat-mdc-text-field-wrapper {
+  border: 1px solid $blue-500;
+  border-radius: 10px;
+}
+
+.register-button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  background-color: $blue-500 !important;
+  color: white !important;
+  width: 50%;
+}
+.register-button:hover {
+  background-color: $blue-300 !important;
+}
+.register-link {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: $blue-800;
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+}
+
+.register-card {
+  position: relative;
+  padding-top: 100px;
+  text-align: center;
+}
+
+.register-card img {
+  position: absolute;
+  top: -63px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: auto;
+}

@@ -1,29 +1,27 @@
-
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
-// Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
+@import 'src/colors.scss';
+
 @include mat.core();
 
 // Define the theme object.
-$abcall-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$blue-palette,
-  ),
-  density: (
-    scale: 0,
+$abcall-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: (
+      brand-family: 'Fira Sans',
+      bold-weight: 900,
+    ),
+    density: (
+      scale: 0,
+    ),
   )
-));
+);
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
 :root {
   @include mat.all-component-themes($abcall-theme);
 }
@@ -32,10 +30,63 @@ $abcall-theme: mat.define-theme((
 // For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
 // @include mat.typography-hierarchy($abcall-theme);
 
-// Comment out the line below if you want to use the deprecated `color` inputs.
-// @include mat.color-variants-backwards-compatibility($abcall-theme);
+html,
+body {
+  height: 100%;
+  font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+  background-color: $blue-50;
+  margin: 0;
+}
 
-/* You can add global styles to this file, and also import other style files */
+h2 {
+  margin-bottom: 2rem;
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: $blue-800;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+a {
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.button {
+  background-color: $blue-500;
+  color: white;
+}
+
+.button:hover {
+  background-color: $blue-200 !important;
+  color: white;
+}
+
+.logo {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 185px;
+  height: 160px;
+  background-image: url('/assets/images/LogoABCall.png');
+}
+
+.logo-container {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 185px;
+  height: 160px;
+}
+
+.logo-background {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 160px;
+  background: white;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.25));
+}

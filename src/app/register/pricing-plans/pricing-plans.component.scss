@@ -1,0 +1,60 @@
+@import 'src/styles.scss';
+.pricing-container {
+  display: flex;
+  justify-content: space-around; /* Space between pricing cards */
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for the container */
+}
+
+.pricing-card {
+  background-color: #ffffff; /* White background for the card */
+  border: 1px solid #d3d3d3; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  padding: 20px;
+  text-align: center;
+  width: 250px; /* Set a fixed width for each card */
+}
+
+.pricing-card h2 {
+  background-color: #0056b3; /* Header background color */
+  color: white; /* White text for the header */
+  padding: 10px 0;
+  border-radius: 8px 8px 0 0; /* Rounded corners on the top */
+  margin: 0; /* Remove margin for better alignment */
+}
+
+.price {
+  font-size: 24px; /* Larger font size for price */
+  color: #0056b3; /* Blue color for the price */
+  margin: 15px 0; /* Margin above and below the price */
+}
+
+button {
+  background-color: #0056b3; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners for the button */
+  padding: 10px 15px; /* Padding inside the button */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+button:hover {
+  background-color: #004494; /* Darker blue on hover */
+}
+
+ul {
+  list-style: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+  text-align: left; /* Align text to the left */
+}
+
+li {
+  margin: 10px 0; /* Space between list items */
+}
+@media (max-width: 768px) {
+  .pricing-container {
+    flex-direction: column; /* Stack cards vertically on small screens */
+    align-items: center; /* Center align the cards */
+  }
+}
