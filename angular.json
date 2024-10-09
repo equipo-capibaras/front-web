@@ -40,7 +40,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.scss", "node_modules/ngx-toastr/toastr.css"],
+            "styles": ["src/styles.scss"],
             "scripts": [],
             "localize": true,
             "i18nMissingTranslation": "error"

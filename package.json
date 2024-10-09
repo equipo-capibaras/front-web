@@ -25,7 +25,6 @@
     "@angular/platform-browser-dynamic": "^18.2.7",
     "@angular/router": "^18.2.7",
     "@auth0/angular-jwt": "^5.2.0",
-    "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.7.0",
     "zone.js": "~0.14.10"
