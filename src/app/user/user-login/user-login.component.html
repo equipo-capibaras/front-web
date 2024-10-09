@@ -3,7 +3,7 @@
     <div class="logo-container">
       <span class="logo-background"></span><span class="logo"></span>
     </div>
-    <h2 class="mat-headline-medium" i18n="@@tituloLogin">Ingresa a tu cuenta</h2>
+    <h1 class="mat-title-large" i18n="@@tituloLogin">Ingresa a tu cuenta</h1>
 
     <form id="form-login">
       <mat-form-field appearance="outline" class="full-width" i18n-ignore>
@@ -33,16 +33,20 @@
       <button
         type="button"
         mat-flat-button
-        class="login-button"
+        class="login-button mat-body-large"
         (click)="loginUser(username.value, password.value)"
         i18n="@@botonIngresar">
         Ingresar
       </button>
-      <div class="register-link">
-        <a mat-button class="register-link" routerLink="/register" i18n="@@linkRegistro"
-          >¿Todavía no tienes cuenta? <strong>Regístrate</strong></a
-        >
-      </div>
     </form>
+    <div class="register-link">
+      <a
+        mat-button
+        class="register-link mat-body-medium"
+        routerLink="/register"
+        i18n="@@linkRegistro"
+        >¿Todavía no tienes cuenta? <strong>Regístrate</strong></a
+      >
+    </div>
   </div>
 </div>
