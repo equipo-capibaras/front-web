@@ -3,7 +3,7 @@
     <div class="logo-container">
       <span class="logo-background"></span><span class="logo"></span>
     </div>
-    <h2 i18n="@@tituloLogin">Ingresa a tu cuenta</h2>
+    <h2 class="mat-headline-medium" i18n="@@tituloLogin">Ingresa a tu cuenta</h2>
 
     <form id="form-login">
       <mat-form-field appearance="outline" class="full-width" i18n-ignore>
@@ -14,7 +14,9 @@
           type="email"
           placeholder="Ingresa tu correo"
           i18n-placeholder="@@correoPlaceholder:Texto para el campo de correo" />
-        <mat-error *ngIf="errorUsername" i18n-ignore>{{ errorUsername }}</mat-error>
+        @if (errorUsername) {
+          <mat-error>{{ errorUsername }}</mat-error>
+        }
       </mat-form-field>
       <mat-form-field appearance="outline" class="full-width" i18n-ignore>
         <mat-label i18n="@@contrasenaLabel">Contraseña</mat-label>
@@ -24,7 +26,9 @@
           type="password"
           placeholder="Ingresa tu contraseña"
           i18n-placeholder="@@contrasenaPlaceholder:Texto para el campo de contraseña" />
-        <mat-error *ngIf="errorPassword" i18n-ignore>{{ errorPassword }}</mat-error>
+        @if (errorPassword) {
+          <mat-error>{{ errorPassword }}</mat-error>
+        }
       </mat-form-field>
       <button
         type="button"
@@ -35,7 +39,7 @@
         Ingresar
       </button>
       <div class="register-link">
-        <a class="register-link" routerLink="/register" i18n="@@linkRegistro"
+        <a mat-button class="register-link" routerLink="/register" i18n="@@linkRegistro"
           >¿Todavía no tienes cuenta? <strong>Regístrate</strong></a
         >
       </div>

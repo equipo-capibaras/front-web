@@ -9,12 +9,12 @@ $abcall-theme: mat.define-theme(
   (
     color: (
       theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
+      primary: mat.$violet-palette,
+      tertiary: mat.$violet-palette,
     ),
     typography: (
+      plain-family: 'Fira Sans',
       brand-family: 'Fira Sans',
-      bold-weight: 900,
     ),
     density: (
       scale: 0,
@@ -24,38 +24,48 @@ $abcall-theme: mat.define-theme(
 
 :root {
   @include mat.all-component-themes($abcall-theme);
+  @include mat.typography-hierarchy($abcall-theme);
 }
 
-// Comment out the line below if you want to use the pre-defined typography utility classes.
-// For more information: https://material.angular.io/guide/typography#using-typography-styles-in-your-application.
-// @include mat.typography-hierarchy($abcall-theme);
+/* fira-sans-300 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 300;
+  src: url('/assets/fonts/fira-sans-v17-latin-300.woff2') format('woff2');
+}
+/* fira-sans-regular - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/assets/fonts/fira-sans-v17-latin-regular.woff2') format('woff2');
+}
+/* fira-sans-500 - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 500;
+  src: url('/assets/fonts/fira-sans-v17-latin-500.woff2') format('woff2');
+}
 
 html,
 body {
   height: 100%;
-  font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
-  background-color: $blue-50;
   margin: 0;
-}
-
-h2 {
-  margin-bottom: 2rem;
-  font-weight: 500;
-  font-size: 1.5rem;
+  background-color: $blue-50;
   color: $blue-800;
+  font-family: 'Fira Sans';
 }
 
-a {
-  font-size: 16px;
-  text-decoration: none;
-}
-
-.button {
-  background-color: $blue-500;
-  color: white;
-}
-
-.button:hover {
-  background-color: $blue-200 !important;
-  color: white;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500 !important;
 }

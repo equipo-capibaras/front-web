@@ -1,5 +1,3 @@
-@import 'src/styles.scss';
-
 .login-container {
   display: flex;
   justify-content: center;
@@ -10,8 +8,8 @@
 .login-card {
   position: relative;
   background-color: white;
-  padding: 80px 2rem 2rem 2rem;
-  border-radius: 8px;
+  padding: 100px 2rem 2rem 2rem;
+  border-radius: 20px;
   text-align: center;
   max-width: 400px;
   width: 100%;
@@ -51,34 +49,14 @@
 mat-form-field {
   width: 100%;
   margin-bottom: 1rem;
-
-  .mat-form-field-appearance-outline .mat-form-field-outline {
-    stroke: $blue-500;
-  }
-
-  .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-    stroke: $blue-500;
-  }
-
-  .mat-form-field-label {
-    color: $blue-500;
-  }
 }
 
 .login-button {
   width: 100%;
   padding: 0.75rem;
   margin-top: 1rem;
-  background-color: $blue-500 !important;
-  color: white !important;
-}
-
-.login-button:hover {
-  background-color: $blue-300 !important;
 }
 
 .register-link {
   margin-top: 1rem;
-  font-size: 0.875rem;
-  color: $blue-800;
 }
