@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 interface LoginResponse {
   token: string;
@@ -10,7 +11,7 @@ interface LoginResponse {
   providedIn: 'root',
 })
 export class UserServiceService {
-  private apiUrl = '/api/v1';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -21,6 +22,14 @@ export class UserServiceService {
    * @returns Un observable con la respuesta del servidor.
    */
   login(username: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/employee`, { username, password });
+    return this.http
+      .post<LoginResponse>(`${this.apiUrl}/auth/employee`, { username, password })
+      .pipe(
+        catchError(error => {
+          // Log the error or perform any other error handling
+          console.error('An error occurred during login:', error);
+          return throwError(() => new Error('Login failed. Please try again.'));
+        }),
+      );
   }
 }
