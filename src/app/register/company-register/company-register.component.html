@@ -1,36 +1,36 @@
 <div class="register-container">
   <div class="register-card">
-    <img src="assets/images/LogoABCall.png" alt="Logo" />
+    <img src="assets/images/LogoABCall.png" alt="Logo" i18n-alt />
     <h2 i18n="TitleAccount">Ingresa los datos de la empresa</h2>
 
     <form id="form-register">
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" i18n-appearance class="full-width">
         <mat-label i18n="Nombre label|Etiqueta para el campo nombre"
           >Nombre de la empresa</mat-label
         >
         <input
-          matInput
           #name
+          matInput
           type="text"
           placeholder="Ingresa el nombre de la empresa"
           i18n-placeholder="Nombre placeholder|Texto para el campo de nombre" />
 
         <mat-error *ngIf="errorName">{{ errorName }}</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width">
+      <mat-form-field appearance="outline" i18n-appearance class="full-width">
         <mat-label i18n="Correo label|Etiqueta para el campo correo"
           >Correo para registrar incidentes</mat-label
         >
         <input
-          matInput
           #email
+          matInput
           type="email"
           placeholder="Ingresa tu correo"
           i18n-placeholder="Correo placeholder|Texto para el campo de correo" />
         <mat-error *ngIf="errorEmail">{{ errorEmail }}</mat-error>
       </mat-form-field>
 
-      <button
+      <button i18n
         mat-raised-button
         class="register-button"
         (click)="CreateAccountAccess(name.value, email.value)">

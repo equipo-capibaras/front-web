@@ -27,8 +27,8 @@ import { RegisterService } from '../register.service';
   styleUrls: ['./company-register.component.scss'],
 })
 export class CompanyRegisterComponent implements OnInit {
-  errorName: string = '';
-  errorEmail: string = '';
+  errorName = '';
+  errorEmail = '';
 
   helper = new JwtHelperService();
 

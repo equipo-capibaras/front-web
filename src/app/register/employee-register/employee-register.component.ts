@@ -5,13 +5,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select'; // Import MatSelectModule
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RegisterService } from '../register.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-employee-register',
   standalone: true,
   imports: [
     RouterLink,
@@ -27,10 +26,10 @@ import { RegisterService } from '../register.service';
   styleUrls: ['./employee-register.component.scss'],
 })
 export class EmployeeRegisterComponent implements OnInit {
-  errorName: string = '';
-  errorEmail: string = '';
-  errorPassword: string = '';
-  errorConfirmPassword: string = '';
+  errorName = '';
+  errorEmail = '';
+  errorPassword = '';
+  errorConfirmPassword = '';
 
   helper = new JwtHelperService();
 
@@ -39,27 +38,69 @@ export class EmployeeRegisterComponent implements OnInit {
     private router: Router,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Initialization logic can be added here if needed
+    console.log('EmployeeRegisterComponent initialized');
+  }
+
+  validateEmail(email: string): boolean {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return emailPattern.test(email);
+  }
 
   CreateAccount(
-    AccountName: string,
+    name: string,
     email: string,
+    role: string,
     password: string,
     ConfirmPassword: string,
   ): void {
-    // Validar que los campos no estén vacíos y mostrar mensajes de error correspondientes
-    this.errorName = !AccountName ? $localize`:@@campo-obligatorio:Este campo es obligatorio` : '';
+    this.clearErrors();
 
-    this.errorPassword = !password ? $localize`:@@campo-obligatorio:Este campo es obligatorio` : '';
-    this.errorConfirmPassword = !ConfirmPassword
-      ? $localize`:@@campo-obligatorio:Este campo es obligatorio`
-      : '';
+    // Field validations
+    if (!name) {
+      this.errorName = 'Este campo es obligatorio';
+    }
+    if (!email) {
+      this.errorEmail = 'Este campo es obligatorio';
+    } else if (!this.validateEmail(email)) {
+      this.errorEmail = 'El formato del correo electrónico no es válido';
+    }
 
-    this.errorEmail = !email ? $localize`:@@campo-obligatorio:Este campo es obligatorio` : '';
+    if (!password) {
+      this.errorPassword = 'Este campo es obligatorio';
+    }
+    if (password !== ConfirmPassword) {
+      this.errorConfirmPassword = 'Las contraseñas no coinciden';
+    }
 
-    // Si hay algún error, detener la ejecución
-    if (!AccountName || !password || !email) {
+    if (this.errorName || this.errorEmail || this.errorPassword || this.errorConfirmPassword) {
       return;
     }
+
+    // Default role to admin
+    role = 'admin';
+
+    // Call the register service to create the account
+    this.registerService.CreateAccount(name, email, role, password).subscribe(
+      () => {
+        // On successful registration, redirect to plan selection page
+        this.router.navigate(['/select-plan']);
+      },
+      error => {
+        if (error.status === 400) {
+          this.errorEmail = 'El correo electrónico ya está registrado';
+        } else {
+          alert('Error al registrar la empresa');
+        }
+      },
+    );
+  }
+
+  clearErrors() {
+    this.errorName = '';
+    this.errorEmail = '';
+    this.errorPassword = '';
+    this.errorConfirmPassword = '';
   }
 }
