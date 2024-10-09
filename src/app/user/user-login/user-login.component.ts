@@ -50,10 +50,6 @@ export class UserLoginComponent implements OnInit {
   }
 
   loginUser(username: string, password: string): void {
-    // Validar que los campos no estén vacíos y mostrar mensajes de error correspondientes
-    //this.errorUsername = !username ? $localize`:@@campo-obligatorio:Este campo es obligatorio` : '';
-    //this.errorPassword = !password ? $localize`:@@campo-obligatorio:Este campo es obligatorio` : '';
-
     // Si hay algún error, detener la ejecución
     if (!username || !password) {
       return;
