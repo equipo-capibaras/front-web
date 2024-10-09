@@ -6,8 +6,6 @@ import { UserServiceService } from '../user-service.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { of } from 'rxjs';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MockHttpErrorResponseService } from 'src/app/interceptors/mock-http-error-response.service';
 
 describe('LoginComponent', () => {
   let component: UserLoginComponent;
@@ -21,15 +19,7 @@ describe('LoginComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [UserLoginComponent, RouterTestingModule, BrowserAnimationsModule],
-      providers: [
-        { provide: UserServiceService, useValue: userServiceMock },
-        {
-          provide: HTTP_INTERCEPTORS,
-          useClass: MockHttpErrorResponseService,
-          multi: true,
-        },
-        JwtHelperService,
-      ],
+      providers: [{ provide: UserServiceService, useValue: userServiceMock }, JwtHelperService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserLoginComponent);
