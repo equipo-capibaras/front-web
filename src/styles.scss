@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
-
 @import 'src/colors.scss';
+@import 'src/m3-theme.scss';
 
 @include mat.core();
 
@@ -9,8 +9,8 @@ $abcall-theme: mat.define-theme(
   (
     color: (
       theme-type: light,
-      primary: mat.$violet-palette,
-      tertiary: mat.$violet-palette,
+      primary: $_primary,
+      tertiary: $_tertiary,
     ),
     typography: (
       plain-family: 'Fira Sans',
