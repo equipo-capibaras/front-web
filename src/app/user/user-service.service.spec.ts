@@ -1,11 +1,12 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed, inject } from '@angular/core/testing';
 import { UserServiceService } from './user-service.service';
+import { environment } from 'src/environments/environment';
 
 describe('Service: UserService', () => {
   let service: UserServiceService;
   let httpTestingController: HttpTestingController;
-  const apiUrl = '/api/v1';
+  const apiUrl = environment.apiUrl;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -20,9 +21,10 @@ describe('Service: UserService', () => {
     httpTestingController.verify();
   });
 
-  it('should initiate service', inject([UserServiceService], (service: UserServiceService) => {
+  it('should initiate service', () => {
+    const service = TestBed.inject(UserServiceService);
     expect(service).toBeTruthy();
-  }));
+  });
 
   /**
    * Prueba unitaria para verificar si el método `login` hace la solicitud HTTP POST correctamente.
