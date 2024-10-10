@@ -16,16 +16,8 @@
           type="email"
           placeholder="Ingresa tu correo"
           i18n-placeholder="@@correoPlaceholder:Texto para el campo de correo" />
-        <mat-error
-          *ngIf="
-            loginForm.get('username')!.hasError('required') && loginForm.get('username')!.touched
-          "
-          >{{ errorUsername }}</mat-error
-        >
-        <mat-error
-          *ngIf="loginForm.get('username')!.hasError('email') && loginForm.get('username')!.touched"
-          >{{ errorUsernameType }}</mat-error
-        >
+        <mat-error *ngIf="shouldShowUsernameRequiredError()">{{ errorUsername }}</mat-error>
+        <mat-error *ngIf="shouldShowUsernameEmailError()">{{ errorUsernameType }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="full-width" i18n-ignore>
         <mat-label i18n="@@contrasenaLabel">Contraseña</mat-label>
@@ -38,12 +30,7 @@
           placeholder="Ingresa tu contraseña"
           i18n-placeholder="@@contrasenaPlaceholder:Texto para el campo de contraseña" />
 
-        <mat-error
-          *ngIf="
-            loginForm.get('password')!.hasError('required') && loginForm.get('password')!.touched
-          "
-          >{{ errorPassword }}</mat-error
-        >
+        <mat-error *ngIf="shouldShowPasswordRequiredError()">{{ errorPassword }}</mat-error>
       </mat-form-field>
       <button
         type="button"

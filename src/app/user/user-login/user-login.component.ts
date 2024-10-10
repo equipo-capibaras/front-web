@@ -63,4 +63,21 @@ export class UserLoginComponent implements OnInit {
       this.router.navigate(['/alarms']);
     });
   }
+
+  // Validación de errores para el campo 'username'
+  shouldShowUsernameRequiredError(): boolean {
+    const control = this.loginForm.get('username');
+    return (control?.hasError('required') ?? false) && (control?.touched ?? false);
+  }
+
+  shouldShowUsernameEmailError(): boolean {
+    const control = this.loginForm.get('username');
+    return (control?.hasError('email') ?? false) && (control?.touched ?? false);
+  }
+
+  // Validación de errores para el campo 'password'
+  shouldShowPasswordRequiredError(): boolean {
+    const control = this.loginForm.get('password');
+    return (control?.hasError('required') ?? false) && (control?.touched ?? false);
+  }
 }
