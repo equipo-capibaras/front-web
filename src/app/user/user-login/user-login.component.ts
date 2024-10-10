@@ -30,6 +30,8 @@ export class UserLoginComponent implements OnInit {
   errorUsernameType = $localize`:@@usuario-invalido:Debe ser un correo electrónico válido`;
   errorPassword = $localize`:@@campo-obligatorio:Este campo es obligatorio`;
   genericErrorUsername = '';
+  showUsernameError = false;
+  showPasswordError = false;
   helper = new JwtHelperService();
   loginForm!: FormGroup;
 
@@ -48,6 +50,10 @@ export class UserLoginComponent implements OnInit {
       username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
+
+    this.loginForm.valueChanges.subscribe(() => {
+      this.updateErrors();
+    });
   }
 
   loginUser(username: string, password: string): void {
@@ -65,33 +71,22 @@ export class UserLoginComponent implements OnInit {
     });
   }
 
-  // Validación de errores para el campo 'username'
-  determineUsernameError(): boolean {
-    const control = this.loginForm.get('username');
-
-    // Si no hay control, retornamos false
-    if (!control) return false;
-
-    // Validar si el campo es requerido
-    if (control.hasError('required') && control.touched) {
+  // Actualiza los mensajes de error en la vista
+  updateErrors(): void {
+    const usernameControl = this.loginForm.get('username');
+    if (usernameControl?.hasError('required') && usernameControl.touched) {
       this.genericErrorUsername = this.errorUsername;
-      return true;
-    }
-
-    // Validar si el valor ingresado no es un correo electrónico válido
-    if (control.hasError('email') && control.value) {
+      this.showUsernameError = true;
+    } else if (usernameControl?.hasError('email')) {
       this.genericErrorUsername = this.errorUsernameType;
-      return true;
+      this.showUsernameError = true;
+    } else {
+      this.showUsernameError = false;
     }
 
-    // Si no hay errores, retornamos false y limpiamos el mensaje
-    this.genericErrorUsername = '';
-    return false;
-  }
-
-  // Validación de errores para el campo 'password'
-  shouldShowPasswordRequiredError(): boolean {
-    const control = this.loginForm.get('password');
-    return (control?.hasError('required') ?? false) && (control?.touched ?? false);
+    const passwordControl = this.loginForm.get('password');
+    this.showPasswordError = passwordControl
+      ? passwordControl.hasError('required') && passwordControl.touched
+      : false;
   }
 }
