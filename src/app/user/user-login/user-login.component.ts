@@ -29,6 +29,7 @@ export class UserLoginComponent implements OnInit {
   errorUsername = $localize`:@@campo-obligatorio:Este campo es obligatorio`;
   errorUsernameType = $localize`:@@usuario-invalido:Debe ser un correo electrónico válido`;
   errorPassword = $localize`:@@campo-obligatorio:Este campo es obligatorio`;
+  genericErrorUsername = '';
   helper = new JwtHelperService();
   loginForm!: FormGroup;
 
@@ -65,14 +66,27 @@ export class UserLoginComponent implements OnInit {
   }
 
   // Validación de errores para el campo 'username'
-  shouldShowUsernameRequiredError(): boolean {
+  determineUsernameError(): boolean {
     const control = this.loginForm.get('username');
-    return (control?.hasError('required') ?? false) && (control?.touched ?? false);
-  }
 
-  shouldShowUsernameEmailError(): boolean {
-    const control = this.loginForm.get('username');
-    return (control?.hasError('email') ?? false) && (control?.touched ?? false);
+    // Si no hay control, retornamos false
+    if (!control) return false;
+
+    // Validar si el campo es requerido
+    if (control.hasError('required') && control.touched) {
+      this.genericErrorUsername = this.errorUsername;
+      return true;
+    }
+
+    // Validar si el valor ingresado no es un correo electrónico válido
+    if (control.hasError('email') && control.value) {
+      this.genericErrorUsername = this.errorUsernameType;
+      return true;
+    }
+
+    // Si no hay errores, retornamos false y limpiamos el mensaje
+    this.genericErrorUsername = '';
+    return false;
   }
 
   // Validación de errores para el campo 'password'
