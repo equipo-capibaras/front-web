@@ -5,37 +5,52 @@
     </div>
     <h1 class="mat-title-large" i18n="@@tituloLogin">Ingresa a tu cuenta</h1>
 
-    <form id="form-login" [formGroup]="loginForm" (ngSubmit)="(!loginForm.invalid)">
+    <form id="form-login" [formGroup]="loginForm" (ngSubmit)="login()">
       <mat-form-field appearance="outline" class="full-width" i18n-ignore>
         <mat-label i18n="@@correoLabel">Correo</mat-label>
         <input
-          #username
           id="username"
           matInput
           formControlName="username"
           type="email"
+          required
           placeholder="Ingresa tu correo"
           i18n-placeholder="@@correoPlaceholder:Texto para el campo de correo" />
-        <mat-error [hidden]="!showUsernameError">{{ genericErrorUsername }}</mat-error>
+
+        @if (username.invalid && (username.dirty || username.touched)) {
+          <mat-error>
+            @if (username.errors?.['required']) {
+              <span i18n="@@campo-obligatorio">Este campo es obligatorio</span>
+            }
+            @if (username.errors?.['email']) {
+              <span i18n="@@usuario-invalido">Debe ser un correo electrónico válido</span>
+            }
+          </mat-error>
+        }
       </mat-form-field>
       <mat-form-field appearance="outline" class="full-width" i18n-ignore>
         <mat-label i18n="@@contrasenaLabel">Contraseña</mat-label>
         <input
-          #password
           id="password"
           formControlName="password"
           matInput
           type="password"
+          required
           placeholder="Ingresa tu contraseña"
           i18n-placeholder="@@contrasenaPlaceholder:Texto para el campo de contraseña" />
 
-        <mat-error [hidden]="!showPasswordError">{{ errorPassword }}</mat-error>
+        @if (password.invalid && (password.dirty || password.touched)) {
+          <mat-error>
+            @if (password.errors?.['required']) {
+              <span i18n="@@campo-obligatorio">Este campo es obligatorio</span>
+            }
+          </mat-error>
+        }
       </mat-form-field>
       <button
-        type="button"
+        type="submit"
         mat-flat-button
         class="login-button mat-body-large"
-        (click)="loginUser(username.value, password.value)"
         i18n="@@botonIngresar">
         Ingresar
       </button>
