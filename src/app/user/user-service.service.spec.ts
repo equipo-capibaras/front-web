@@ -89,12 +89,9 @@ describe('Service: UserService', () => {
     const username = 'testuser';
     const password = 'password123';
 
-    service.login(username, password).subscribe(
-      response => {
-        expect(response).toBeNull(); // Verifica que la respuesta sea nula o indefinida
-      },
-      error => fail('No debería haber un error'),
-    );
+    service.login(username, password).subscribe(response => {
+      expect(response).toBeNull(); // Verifica que la respuesta sea nula o indefinida
+    });
 
     const req = httpTestingController.expectOne(`${apiUrl}/auth/employee`);
     expect(req.request.method).toBe('POST');

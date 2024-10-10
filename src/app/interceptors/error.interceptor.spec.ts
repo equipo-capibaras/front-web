@@ -37,7 +37,7 @@ describe('errorInterceptor', () => {
     // Simulamos el comportamiento del next function que debería devolver un Observable de error
     const next: HttpHandlerFn = () => throwError(() => httpErrorResponse);
 
-    interceptor({} as HttpRequest<any>, next).subscribe({
+    interceptor({} as HttpRequest<unknown>, next).subscribe({
       error: error => {
         expect(error.message).toBe('Usuario o contraseña incorrectos.');
         expect(snackBarSpy.open).toHaveBeenCalledWith(
@@ -52,13 +52,13 @@ describe('errorInterceptor', () => {
 
   it('should pass the request without error', done => {
     // Simulamos una respuesta exitosa
-    const httpSuccessResponse: Observable<HttpEvent<any>> = of({} as HttpEvent<any>);
+    const httpSuccessResponse: Observable<HttpEvent<unknown>> = of({} as HttpEvent<unknown>);
 
     const next: HttpHandlerFn = () => httpSuccessResponse;
 
-    interceptor({} as HttpRequest<any>, next).subscribe({
+    interceptor({} as HttpRequest<unknown>, next).subscribe({
       next: response => {
-        expect(response).toEqual({} as HttpEvent<any>);
+        expect(response).toEqual({} as HttpEvent<unknown>);
         expect(snackBarSpy.open).not.toHaveBeenCalled();
         done();
       },
@@ -73,7 +73,7 @@ describe('errorInterceptor', () => {
 
     const next: HttpHandlerFn = () => throwError(() => httpErrorResponse);
 
-    interceptor({} as HttpRequest<any>, next).subscribe({
+    interceptor({} as HttpRequest<unknown>, next).subscribe({
       error: error => {
         expect(error.message).toBe('No tienes permiso para acceder a este recurso.');
         expect(snackBarSpy.open).toHaveBeenCalledWith(
@@ -94,7 +94,7 @@ describe('errorInterceptor', () => {
 
     const next: HttpHandlerFn = () => throwError(() => httpErrorResponse);
 
-    interceptor({} as HttpRequest<any>, next).subscribe({
+    interceptor({} as HttpRequest<unknown>, next).subscribe({
       error: error => {
         expect(error.message).toBe('El recurso solicitado no fue encontrado.');
         expect(snackBarSpy.open).toHaveBeenCalledWith(
@@ -115,7 +115,7 @@ describe('errorInterceptor', () => {
 
     const next: HttpHandlerFn = () => throwError(() => httpErrorResponse);
 
-    interceptor({} as HttpRequest<any>, next).subscribe({
+    interceptor({} as HttpRequest<unknown>, next).subscribe({
       error: error => {
         expect(error.message).toBe(
           'El servidor está teniendo problemas. Por favor, inténtalo más tarde.',
@@ -138,7 +138,7 @@ describe('errorInterceptor', () => {
 
     const next: HttpHandlerFn = () => throwError(() => httpErrorResponse);
 
-    interceptor({} as HttpRequest<any>, next).subscribe({
+    interceptor({} as HttpRequest<unknown>, next).subscribe({
       error: error => {
         expect(error.message).toBe('Error 999: Unknown Error');
         expect(snackBarSpy.open).toHaveBeenCalledWith('Error 999: Unknown Error', 'Cerrar', {
