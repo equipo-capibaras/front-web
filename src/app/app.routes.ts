@@ -6,13 +6,6 @@ import { IncidentListComponent } from './incident/incident-list/incident-list.co
 import { EmployeeListComponent } from './client/employee-list/employee-list.component';
 import { authGuard } from './auth/auth.guard';
 
-// Default routes for each role
-export const defaultRoutes: { [key in Role]: string } = {
-  [Role.Admin]: '/admin',
-  [Role.Analyst]: '/dashboards',
-  [Role.Agent]: '/incidents',
-};
-
 export const routes: Routes = [
   { path: '', component: LoginComponent },
   {
