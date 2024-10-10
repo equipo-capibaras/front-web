@@ -11,9 +11,9 @@ interface LoginResponse {
   providedIn: 'root',
 })
 export class UserServiceService {
-  private apiUrl = environment.apiUrl;
+  private readonly apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   /**
    * Método para autenticar un usuario.

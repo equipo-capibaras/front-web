@@ -36,10 +36,9 @@ export class UserLoginComponent implements OnInit {
   loginForm!: FormGroup;
 
   constructor(
-    private userService: UserServiceService,
-    private router: Router,
-    private formBuilder: FormBuilder,
-    //private toastr: ToastrService,
+    private readonly userService: UserServiceService,
+    private readonly router: Router,
+    private readonly formBuilder: FormBuilder,
   ) {}
 
   ngOnInit(): void {
