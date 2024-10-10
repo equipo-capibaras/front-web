@@ -1,0 +1,68 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="logo-container">
+      <span class="logo-background"></span><span class="logo"></span>
+    </div>
+    <h1 class="mat-title-large" i18n="@@tituloLogin">Ingresa a tu cuenta</h1>
+
+    <form id="form-login" [formGroup]="loginForm" (ngSubmit)="login()">
+      <mat-form-field appearance="outline" class="full-width" i18n-ignore>
+        <mat-label i18n="@@correoLabel">Correo</mat-label>
+        <input
+          id="username"
+          matInput
+          formControlName="username"
+          type="email"
+          required
+          placeholder="Ingresa tu correo"
+          i18n-placeholder="@@correoPlaceholder:Texto para el campo de correo" />
+
+        @if (username.invalid && (username.dirty || username.touched)) {
+          <mat-error>
+            @if (username.errors?.['required']) {
+              <span i18n="@@campo-obligatorio">Este campo es obligatorio</span>
+            }
+            @if (username.errors?.['email']) {
+              <span i18n="@@usuario-invalido">Debe ser un correo electrónico válido</span>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="full-width" i18n-ignore>
+        <mat-label i18n="@@contrasenaLabel">Contraseña</mat-label>
+        <input
+          id="password"
+          formControlName="password"
+          matInput
+          type="password"
+          required
+          placeholder="Ingresa tu contraseña"
+          i18n-placeholder="@@contrasenaPlaceholder:Texto para el campo de contraseña" />
+
+        @if (password.invalid && (password.dirty || password.touched)) {
+          <mat-error>
+            @if (password.errors?.['required']) {
+              <span i18n="@@campo-obligatorio">Este campo es obligatorio</span>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-flat-button
+        class="login-button mat-body-large"
+        i18n="@@botonIngresar">
+        Ingresar
+      </button>
+    </form>
+    <div class="register-link">
+      <a
+        mat-button
+        class="register-link mat-body-medium"
+        routerLink="/register"
+        i18n="@@linkRegistro"
+        >¿Todavía no tienes cuenta? <strong>Regístrate</strong></a
+      >
+    </div>
+  </div>
+</div>
