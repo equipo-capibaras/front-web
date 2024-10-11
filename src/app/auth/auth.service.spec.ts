@@ -101,6 +101,14 @@ describe('AuthService', () => {
     expect(service.getRole()).toBeNull();
   });
 
+  it('getRole should return null if the token is invalid', () => {
+    localStorage.setItem('token', 'invalidToken');
+
+    initComponent();
+
+    expect(service.getRole()).toBeNull();
+  });
+
   it('logout should remove the token from local storage', () => {
     const tokenHeader = { alg: 'HS256', typ: 'JWT' };
     const tokenkPayload = { aud: 'unknown' };

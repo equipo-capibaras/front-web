@@ -17,11 +17,11 @@ import { Role } from './../auth/role';
 export class NavbarComponent implements OnDestroy {
   Role = Role;
   userRole: Role | null = null;
-  private roleSubscription!: Subscription;
+  private readonly roleSubscription!: Subscription;
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
+    private readonly authService: AuthService,
+    private readonly router: Router,
   ) {
     this.roleSubscription = this.authService.userRole$.subscribe((role: Role | null) => {
       this.userRole = role;

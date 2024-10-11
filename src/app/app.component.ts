@@ -14,7 +14,7 @@ import { Role } from './auth/role';
 export class AppComponent {
   userRole: Role | null = null;
 
-  constructor(private authService: AuthService) {
+  constructor(private readonly authService: AuthService) {
     this.authService.userRole$.subscribe((role: Role | null) => {
       this.userRole = role;
     });

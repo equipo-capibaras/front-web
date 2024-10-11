@@ -14,7 +14,7 @@ interface LoginResponse {
 })
 export class AuthService {
   private readonly apiUrl = environment.apiUrl;
-  private userRoleSubject = new BehaviorSubject<Role | null>(this.loadRoleFromToken());
+  private readonly userRoleSubject = new BehaviorSubject<Role | null>(this.loadRoleFromToken());
   public userRole$ = this.userRoleSubject.asObservable();
 
   constructor(private readonly http: HttpClient) {}
@@ -26,12 +26,16 @@ export class AuthService {
       return null;
     }
 
-    const decodedToken = jwtDecode(token);
-    const role = Object.values(Role).includes(decodedToken.aud as Role)
-      ? (decodedToken.aud as Role)
-      : null;
+    try {
+      const decodedToken = jwtDecode(token);
+      const role = Object.values(Role).includes(decodedToken.aud as Role)
+        ? (decodedToken.aud as Role)
+        : null;
 
-    return role;
+      return role;
+    } catch {
+      return null;
+    }
   }
 
   private setUserRole(): void {
