@@ -108,8 +108,7 @@ jobs:
             for lang in es-AR es-CO pt-BR; do
               mkdir "dist/abcall/browser/$lang/static"
               mv "dist/abcall/browser/$lang/"*.{css,js} "dist/abcall/browser/$lang/static"
-              mv "dist/abcall/browser/$lang/images" "dist/abcall/browser/$lang/static"
-              mv "dist/abcall/browser/$lang/fonts" "dist/abcall/browser/$lang/static"
+              mv "dist/abcall/browser/$lang/media" "dist/abcall/browser/$lang/static"
             done
       - persist_to_workspace:
           root: dist/abcall

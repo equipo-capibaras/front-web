@@ -36,7 +36,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               {
-                "glob": "**/*",
+                "glob": "favicon.ico",
                 "input": "public"
               }
             ],
@@ -90,10 +90,7 @@
             "buildTarget": "abcall:build",
             "format": "xlf",
             "outputPath": "src/locale",
-            "targetFiles": [
-              "messages.es-AR.xlf",
-              "messages.pt-BR.xlf"
-            ]
+            "targetFiles": ["messages.es-AR.xlf", "messages.pt-BR.xlf"]
           }
         },
         "test": {
