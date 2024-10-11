@@ -53,6 +53,24 @@
       <trans-unit id="prontoTableros" datatype="html">
         <source>Aquí pronto hay los tableros de control.</source>
       </trans-unit>
+      <trans-unit id="menuAccount" datatype="html">
+        <source> Mi cuenta </source>
+      </trans-unit>
+      <trans-unit id="menuCompany" datatype="html">
+        <source> Gestión empresa </source>
+      </trans-unit>
+      <trans-unit id="menuDashboard" datatype="html">
+        <source> Tableros de control </source>
+      </trans-unit>
+      <trans-unit id="menuIncident" datatype="html">
+        <source> Gestión de incidentes </source>
+      </trans-unit>
+      <trans-unit id="menuInvoice" datatype="html">
+        <source> Facturación </source>
+      </trans-unit>
+      <trans-unit id="menuLogout" datatype="html">
+        <source>Cerrar sesión</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

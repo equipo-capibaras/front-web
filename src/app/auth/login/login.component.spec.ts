@@ -16,7 +16,7 @@ describe('LoginComponent', () => {
   let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async () => {
-    authService = jasmine.createSpyObj('AuthService', ['isAuthenticated', 'getRole', 'login']);
+    authService = jasmine.createSpyObj('AuthService', ['getRole', 'login']);
 
     await TestBed.configureTestingModule({
       imports: [LoginComponent, NoopAnimationsModule],
@@ -27,7 +27,6 @@ describe('LoginComponent', () => {
   });
 
   function setupUnauthenticated() {
-    authService.isAuthenticated.and.returnValue(false);
     authService.getRole.and.returnValue(null);
 
     fixture = TestBed.createComponent(LoginComponent);
@@ -47,7 +46,6 @@ describe('LoginComponent', () => {
     spyOn(router, 'navigate');
     const role = faker.helpers.arrayElement(Object.values(Role));
 
-    authService.isAuthenticated.and.returnValue(true);
     authService.getRole.and.returnValue(role);
 
     fixture = TestBed.createComponent(LoginComponent);

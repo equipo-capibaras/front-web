@@ -1,30 +1,43 @@
-import { AppComponent } from './../app.component';
-import { AuthService } from './../auth/auth.service';
-import { TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-@Component({
-  selector: 'app-navbar',
-  template: '',
-})
-class MockNavbarComponent {}
+import { NavbarComponent } from './navbar.component';
+import { AuthService } from '../auth/auth.service';
+import { of } from 'rxjs';
+import { provideRouter, Router } from '@angular/router';
 
-describe('AppComponent', () => {
+describe('NavbarComponent', () => {
   let authService: jasmine.SpyObj<AuthService>;
+  let router: Router;
+  let component: NavbarComponent;
+  let fixture: ComponentFixture<NavbarComponent>;
 
   beforeEach(async () => {
-    authService = jasmine.createSpyObj('AuthService', ['isAuthenticated', 'getRole']);
-    authService.isAuthenticated.and.returnValue(true);
+    authService = jasmine.createSpyObj('AuthService', ['userRole$', 'logout']);
+    Object.defineProperty(authService, 'userRole$', {
+      get: () => of(null),
+    });
 
     await TestBed.configureTestingModule({
-      declarations: [AppComponent, MockNavbarComponent],
-      providers: [{ provide: AuthService, useValue: authService }],
+      imports: [NavbarComponent],
+      providers: [provideRouter([]), { provide: AuthService, useValue: authService }],
     }).compileComponents();
+
+    router = TestBed.inject(Router);
+
+    fixture = TestBed.createComponent(NavbarComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
-  it('should create the app navbar', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should logout when logout() is called', () => {
+    spyOn(router, 'navigate');
+
+    component.logout();
+    expect(authService.logout).toHaveBeenCalled();
+    expect(router.navigate).toHaveBeenCalledWith(['/']);
   });
 });

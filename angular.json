@@ -34,7 +34,12 @@
             "polyfills": ["zone.js", "@angular/localize/init"],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "public"
+              }
+            ],
             "styles": ["src/styles.scss"],
             "scripts": [],
             "localize": true,
@@ -94,7 +99,12 @@
             "polyfills": ["zone.js", "zone.js/testing", "@angular/localize/init"],
             "tsConfig": "tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              {
+                "glob": "favicon.ico",
+                "input": "public"
+              }
+            ],
             "styles": ["src/styles.scss"],
             "scripts": [],
             "karmaConfig": "karma.conf.js"

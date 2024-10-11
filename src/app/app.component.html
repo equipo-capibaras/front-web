@@ -1,6 +1,8 @@
-<main>
-  @if (isAuthenticated()) {
+<nav>
+  @if (userRole !== null) {
     <app-navbar />
   }
+</nav>
+<main>
   <router-outlet />
 </main>

@@ -4,7 +4,6 @@ import { of, map, catchError, Observable, BehaviorSubject } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from 'src/environments/environment';
 import { Role } from './role';
-import { Router } from '@angular/router';
 
 interface LoginResponse {
   token: string;
@@ -15,19 +14,28 @@ interface LoginResponse {
 })
 export class AuthService {
   private readonly apiUrl = environment.apiUrl;
-  private userRoleSubject = new BehaviorSubject<Role | null>(null); // Create a BehaviorSubject
-  public userRole$ = this.userRoleSubject.asObservable(); // Expose it as an observable
+  private userRoleSubject = new BehaviorSubject<Role | null>(this.loadRoleFromToken());
+  public userRole$ = this.userRoleSubject.asObservable();
 
-  constructor(
-    private readonly http: HttpClient,
-    private router: Router,
-  ) {
-    this.setUserRole(); // Initialize the user role from local storage on service instantiation
+  constructor(private readonly http: HttpClient) {}
+
+  private loadRoleFromToken(): Role | null {
+    const token = localStorage.getItem('token');
+
+    if (token === null) {
+      return null;
+    }
+
+    const decodedToken = jwtDecode(token);
+    const role = Object.values(Role).includes(decodedToken.aud as Role)
+      ? (decodedToken.aud as Role)
+      : null;
+
+    return role;
   }
 
   private setUserRole(): void {
-    const role = this.getRole();
-    this.userRoleSubject.next(role); // Emit the current role
+    this.userRoleSubject.next(this.loadRoleFromToken());
   }
 
   login(username: string, password: string): Observable<boolean> {
@@ -45,29 +53,12 @@ export class AuthService {
       );
   }
 
-  isAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
-    return token !== null;
-  }
-
   getRole(): Role | null {
-    const token = localStorage.getItem('token');
-
-    if (token === null) {
-      return null;
-    }
-
-    const decodedToken = jwtDecode(token);
-    const role = Object.values(Role).includes(decodedToken.aud as Role)
-      ? (decodedToken.aud as Role)
-      : null;
-
-    return role;
+    return this.userRoleSubject.value;
   }
 
   logout(): void {
     localStorage.removeItem('token');
-    this.userRoleSubject.next(null);
-    this.router.navigate(['/']);
+    this.setUserRole();
   }
 }

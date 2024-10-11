@@ -1,28 +1,40 @@
 <mat-toolbar color="primary">
   <div class="logo-container">
-    <img src="assets/images/logo.png" alt="Logo" i18n-alt class="logo" />
+    <div class="logo"></div>
   </div>
   <span class="spacer"></span>
 
   <div class="center-buttons">
-    @if (isAdmin()) {
-      <a i18n="@@companyManagement" mat-button routerLink="incidents"> Gestión empresa </a>
-      <a i18n="@@dashboard" mat-button routerLink="/dashboards">Tableros de control</a>
-      <a i18n="@@dashboard" mat-button routerLink="/dashboards">Facturación</a>
+    @if (userRole === Role.Admin) {
+      <button i18n="@@menuCompany" type="button" mat-button routerLink="/admin">
+        Gestión empresa
+      </button>
+      <button i18n="@@menuDashboard" type="button" mat-button routerLink="/dashboards">
+        Tableros de control
+      </button>
+      <button i18n="@@menuInvoice" type="button" mat-button routerLink="/invoice">
+        Facturación
+      </button>
     }
 
-    @if (isAgent()) {
-      <a i18n="@@dashboard" mat-button routerLink="/incidents"> Gestión de incidentes</a>
+    @if (userRole === Role.Agent) {
+      <button i18n="@@menuIncident" type="button" mat-button routerLink="/incidents">
+        Gestión de incidentes
+      </button>
     }
 
-    @if (isAnalyst()) {
-      <a i18n="@@dashboard" mat-button routerLink="/dashboards"> Tableros de control</a>
+    @if (userRole === Role.Analyst) {
+      <button i18n="@@menuDashboard" type="button" mat-button routerLink="/dashboards">
+        Tableros de control
+      </button>
     }
   </div>
   <span class="spacer"></span>
 
   <div class="right-buttons">
-    <button i18n="@@myAccount" mat-button routerLink="/my-account">Mi cuenta</button>
-    <button i18n="@@logout" mat-button (click)="logout()">Cerrar sesión</button>
+    <button i18n="@@menuAccount" type="button" mat-button routerLink="/my-account">
+      Mi cuenta
+    </button>
+    <button i18n="@@menuLogout" type="button" mat-button (click)="logout()">Cerrar sesión</button>
   </div>
 </mat-toolbar>
