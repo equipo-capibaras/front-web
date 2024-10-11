@@ -70,6 +70,30 @@
         <source>Aquí pronto hay el listado de incidentes.</source>
         <target>Aquí pronto hay el listado de incidentes.</target>
       </trans-unit>
+      <trans-unit id="menuCompany" datatype="html">
+        <source> Gestión empresa </source>
+        <target> Gestión empresa </target>
+      </trans-unit>
+      <trans-unit id="menuDashboard" datatype="html">
+        <source> Tableros de control </source>
+        <target> Tableros de control </target>
+      </trans-unit>
+      <trans-unit id="menuInvoice" datatype="html">
+        <source> Facturación </source>
+        <target> Facturación </target>
+      </trans-unit>
+      <trans-unit id="menuIncident" datatype="html">
+        <source> Gestión de incidentes </source>
+        <target> Gestión de incidentes </target>
+      </trans-unit>
+      <trans-unit id="menuAccount" datatype="html">
+        <source> Mi cuenta </source>
+        <target> Mi cuenta </target>
+      </trans-unit>
+      <trans-unit id="menuLogout" datatype="html">
+        <source>Cerrar sesión</source>
+        <target>Cerrar sesión</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

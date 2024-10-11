@@ -19,7 +19,7 @@ describe('authGuard', () => {
     TestBed.runInInjectionContext(() => authGuard(...guardParameters));
 
   beforeEach(() => {
-    authService = jasmine.createSpyObj('AuthService', ['isAuthenticated', 'getRole']);
+    authService = jasmine.createSpyObj('AuthService', ['getRole']);
     router = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
@@ -37,7 +37,6 @@ describe('authGuard', () => {
   it('should redirect to / and return false if user is not authenticated', () => {
     const role = faker.helpers.arrayElement(Object.values(Role));
 
-    authService.isAuthenticated.and.returnValue(false);
     authService.getRole.and.returnValue(null);
 
     const routeSnapshot = new ActivatedRouteSnapshot();
@@ -52,7 +51,6 @@ describe('authGuard', () => {
   it('should redirect to / and return false if role is unknown', () => {
     const role = faker.helpers.arrayElement(Object.values(Role));
 
-    authService.isAuthenticated.and.returnValue(true);
     authService.getRole.and.returnValue(null);
 
     const routeSnapshot = new ActivatedRouteSnapshot();
@@ -66,7 +64,6 @@ describe('authGuard', () => {
 
   it('should redirect to default route of role and return false if role is not allowed to access', () => {
     const roles = faker.helpers.arrayElements(Object.values(Role), 2);
-    authService.isAuthenticated.and.returnValue(true);
     authService.getRole.and.returnValue(roles[0]);
 
     const routeSnapshot = new ActivatedRouteSnapshot();
@@ -81,7 +78,6 @@ describe('authGuard', () => {
   it('should return true if role is allowed to access', () => {
     const role = faker.helpers.arrayElement(Object.values(Role));
 
-    authService.isAuthenticated.and.returnValue(true);
     authService.getRole.and.returnValue(role);
 
     const routeSnapshot = new ActivatedRouteSnapshot();

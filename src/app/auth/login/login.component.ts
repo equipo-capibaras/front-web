@@ -34,11 +34,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (this.authService.isAuthenticated()) {
-      const role = this.authService.getRole();
-      if (role !== null) {
-        this.router.navigate([defaultRoutes[role]]);
-      }
+    const role = this.authService.getRole();
+    if (role !== null) {
+      this.router.navigate([defaultRoutes[role]]);
     }
 
     this.loginForm = this.formBuilder.group({

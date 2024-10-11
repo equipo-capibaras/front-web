@@ -16,11 +16,15 @@ describe('AuthService', () => {
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting()],
     });
-    service = TestBed.inject(AuthService);
-    httpTestingController = TestBed.inject(HttpTestingController);
   });
 
+  function initComponent() {
+    service = TestBed.inject(AuthService);
+    httpTestingController = TestBed.inject(HttpTestingController);
+  }
+
   it('should be created', () => {
+    initComponent();
     expect(service).toBeTruthy();
   });
 
@@ -31,6 +35,8 @@ describe('AuthService', () => {
     const tokenHeader = { alg: 'HS256', typ: 'JWT' };
     const tokenkPayload = { aud: role };
     const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
+
+    initComponent();
 
     service.login(username, password).subscribe(result => {
       expect(result).toBe(true);
@@ -46,6 +52,8 @@ describe('AuthService', () => {
   it('login should return false on failed login', () => {
     const username = faker.internet.email();
     const password = faker.internet.password();
+
+    initComponent();
 
     service.login(username, password).subscribe(result => {
       expect(result).toBe(false);
@@ -64,16 +72,9 @@ describe('AuthService', () => {
     );
   });
 
-  it('isAuthenticated should return true if token exists', () => {
-    localStorage.setItem('token', 'mockToken');
-    expect(service.isAuthenticated()).toBe(true);
-  });
-
-  it('isAuthenticated should return false if token does not exist', () => {
-    expect(service.isAuthenticated()).toBe(false);
-  });
-
   it('getRole should return null if no token exists', () => {
+    initComponent();
+
     expect(service.getRole()).toBeNull();
   });
 
@@ -82,8 +83,10 @@ describe('AuthService', () => {
     const tokenHeader = { alg: 'HS256', typ: 'JWT' };
     const tokenkPayload = { aud: role };
     const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
-
     localStorage.setItem('token', mockToken);
+
+    initComponent();
+
     expect(service.getRole()).toBe(role);
   });
 
@@ -91,8 +94,32 @@ describe('AuthService', () => {
     const tokenHeader = { alg: 'HS256', typ: 'JWT' };
     const tokenkPayload = { aud: 'unknown' };
     const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
-
     localStorage.setItem('token', mockToken);
+
+    initComponent();
+
+    expect(service.getRole()).toBeNull();
+  });
+
+  it('getRole should return null if the token is invalid', () => {
+    localStorage.setItem('token', 'invalidToken');
+
+    initComponent();
+
+    expect(service.getRole()).toBeNull();
+  });
+
+  it('logout should remove the token from local storage', () => {
+    const tokenHeader = { alg: 'HS256', typ: 'JWT' };
+    const tokenkPayload = { aud: 'unknown' };
+    const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
+    localStorage.setItem('token', mockToken);
+
+    initComponent();
+
+    service.logout();
+
+    expect(localStorage.getItem('token')).toBeNull();
     expect(service.getRole()).toBeNull();
   });
 });
