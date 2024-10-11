@@ -2,12 +2,56 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="es-CO" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="demoText" datatype="html">
-        <source>Hola ABCall</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/app.component.html</context>
-          <context context-type="linenumber">1,2</context>
-        </context-group>
+      <trans-unit id="error-401" datatype="html">
+        <source>Usuario o contraseña incorrectos.</source>
+      </trans-unit>
+      <trans-unit id="error-403" datatype="html">
+        <source>No tienes permiso para acceder a este recurso.</source>
+      </trans-unit>
+      <trans-unit id="error-404" datatype="html">
+        <source>El recurso solicitado no fue encontrado.</source>
+      </trans-unit>
+      <trans-unit id="error-500" datatype="html">
+        <source>El servidor está teniendo problemas. Por favor, inténtalo más tarde.</source>
+      </trans-unit>
+      <trans-unit id="opt-cerrar" datatype="html">
+        <source>Cerrar</source>
+      </trans-unit>
+      <trans-unit id="tituloLogin" datatype="html">
+        <source>Ingresa a tu cuenta</source>
+      </trans-unit>
+      <trans-unit id="correoLabel" datatype="html">
+        <source>Correo</source>
+      </trans-unit>
+      <trans-unit id="correoPlaceholder:Texto para el campo de correo" datatype="html">
+        <source>Ingresa tu correo</source>
+      </trans-unit>
+      <trans-unit id="contrasenaLabel" datatype="html">
+        <source>Contraseña</source>
+      </trans-unit>
+      <trans-unit id="contrasenaPlaceholder:Texto para el campo de contraseña" datatype="html">
+        <source>Ingresa tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="botonIngresar" datatype="html">
+        <source> Ingresar </source>
+      </trans-unit>
+      <trans-unit id="linkRegistro" datatype="html">
+        <source>¿Todavía no tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Regístrate<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="campo-obligatorio" datatype="html">
+        <source>Este campo es obligatorio</source>
+      </trans-unit>
+      <trans-unit id="usuario-invalido" datatype="html">
+        <source>Debe ser un correo electrónico válido</source>
+      </trans-unit>
+      <trans-unit id="prontoEmpleados" datatype="html">
+        <source>Aquí pronto hay el listado de empleados.</source>
+      </trans-unit>
+      <trans-unit id="prontoIncidentes" datatype="html">
+        <source>Aquí pronto hay el listado de incidentes.</source>
+      </trans-unit>
+      <trans-unit id="prontoTableros" datatype="html">
+        <source>Aquí pronto hay los tableros de control.</source>
       </trans-unit>
     </body>
   </file>

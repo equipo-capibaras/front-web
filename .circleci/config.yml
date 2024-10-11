@@ -105,15 +105,11 @@ jobs:
           command: |
             cp public/favicon.ico dist/abcall/browser
             cp src/redirect-i18n.html dist/abcall/browser/index.html
-            mkdir dist/abcall/browser/es-AR/static
-            mv dist/abcall/browser/es-AR/*.css dist/abcall/browser/es-AR/static
-            mv dist/abcall/browser/es-AR/*.js dist/abcall/browser/es-AR/static
-            mkdir dist/abcall/browser/es-CO/static
-            mv dist/abcall/browser/es-CO/*.css dist/abcall/browser/es-CO/static
-            mv dist/abcall/browser/es-CO/*.js dist/abcall/browser/es-CO/static
-            mkdir dist/abcall/browser/pt-BR/static
-            mv dist/abcall/browser/pt-BR/*.css dist/abcall/browser/pt-BR/static
-            mv dist/abcall/browser/pt-BR/*.js dist/abcall/browser/pt-BR/static
+            for lang in es-AR es-CO pt-BR; do
+              mkdir "dist/abcall/browser/$lang/static"
+              mv "dist/abcall/browser/$lang/"*.{css,js} "dist/abcall/browser/$lang/static"
+              mv "dist/abcall/browser/$lang/media" "dist/abcall/browser/$lang/static"
+            done
       - persist_to_workspace:
           root: dist/abcall
           paths:
