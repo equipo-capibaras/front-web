@@ -1,4 +1,4 @@
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -19,7 +19,6 @@ import { defaultRoutes } from '../default.routes';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    NgIf,
     ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
