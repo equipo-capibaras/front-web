@@ -1,0 +1,31 @@
+mat-toolbar {
+  background-color: #b0c4de;
+  color: #2f4f4f;
+  padding: 0 16px;
+}
+
+.logo {
+  height: 60px;
+  width: 100px;
+  background-image: url('../../../public/images/logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.center-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.right-buttons {
+  display: flex;
+  margin-left: auto;
+}
+
+mat-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}

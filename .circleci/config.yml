@@ -104,14 +104,12 @@ jobs:
           name: Organize outputs for GCP
           command: |
             cp public/favicon.ico dist/abcall/browser
-            rm dist/abcall/browser/es-CO/favicon.ico
-            rm dist/abcall/browser/pt-BR/favicon.ico
-            mkdir dist/abcall/browser/es-CO/static
-            mv dist/abcall/browser/es-CO/*.css dist/abcall/browser/es-CO/static
-            mv dist/abcall/browser/es-CO/*.js dist/abcall/browser/es-CO/static
-            mkdir dist/abcall/browser/pt-BR/static
-            mv dist/abcall/browser/pt-BR/*.css dist/abcall/browser/pt-BR/static
-            mv dist/abcall/browser/pt-BR/*.js dist/abcall/browser/pt-BR/static
+            cp src/redirect-i18n.html dist/abcall/browser/index.html
+            for lang in es-AR es-CO pt-BR; do
+              mkdir "dist/abcall/browser/$lang/static"
+              mv "dist/abcall/browser/$lang/"*.{css,js} "dist/abcall/browser/$lang/static"
+              mv "dist/abcall/browser/$lang/media" "dist/abcall/browser/$lang/static"
+            done
       - persist_to_workspace:
           root: dist/abcall
           paths:

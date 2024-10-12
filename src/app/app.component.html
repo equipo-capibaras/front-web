@@ -1,4 +1,8 @@
+<nav>
+  @if (userRole !== null) {
+    <app-navbar />
+  }
+</nav>
 <main>
-  <h1 i18n="@@demoText">Hola ABCall</h1>
   <router-outlet />
 </main>

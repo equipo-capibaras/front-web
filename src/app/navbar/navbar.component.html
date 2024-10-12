@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+  <div class="logo-container">
+    <div class="logo"></div>
+  </div>
+  <span class="spacer"></span>
+
+  <div class="center-buttons">
+    @if (userRole === Role.Admin) {
+      <button i18n="@@menuCompany" type="button" mat-button routerLink="/admin">
+        Gestión empresa
+      </button>
+      <button i18n="@@menuDashboard" type="button" mat-button routerLink="/dashboards">
+        Tableros de control
+      </button>
+      <button i18n="@@menuInvoice" type="button" mat-button routerLink="/invoice">
+        Facturación
+      </button>
+    }
+
+    @if (userRole === Role.Agent) {
+      <button i18n="@@menuIncident" type="button" mat-button routerLink="/incidents">
+        Gestión de incidentes
+      </button>
+    }
+
+    @if (userRole === Role.Analyst) {
+      <button i18n="@@menuDashboard" type="button" mat-button routerLink="/dashboards">
+        Tableros de control
+      </button>
+    }
+  </div>
+  <span class="spacer"></span>
+
+  <div class="right-buttons">
+    <button i18n="@@menuAccount" type="button" mat-button routerLink="/my-account">
+      Mi cuenta
+    </button>
+    <button i18n="@@menuLogout" type="button" mat-button (click)="logout()">Cerrar sesión</button>
+  </div>
+</mat-toolbar>

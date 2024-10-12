@@ -4,95 +4,95 @@
     <body>
       <trans-unit id="error-401" datatype="html">
         <source>Usuario o contraseña incorrectos.</source>
-        <target>Usuário ou senha incorretos.</target>
+        <target>Usuario o contraseña incorrectos.</target>
       </trans-unit>
       <trans-unit id="error-403" datatype="html">
         <source>No tienes permiso para acceder a este recurso.</source>
-        <target>Você não tem permissão para acessar este recurso.</target>
+        <target>No tenés permiso para acceder a este recurso.</target>
       </trans-unit>
       <trans-unit id="error-404" datatype="html">
         <source>El recurso solicitado no fue encontrado.</source>
-        <target>O recurso solicitado não foi encontrado.</target>
+        <target>El recurso solicitado no se encontró.</target>
       </trans-unit>
       <trans-unit id="error-500" datatype="html">
         <source>El servidor está teniendo problemas. Por favor, inténtalo más tarde.</source>
-        <target>O servidor está com problemas. Por favor, tente novamente mais tarde.</target>
+        <target>El servidor está teniendo problemas. Por favor, inténtalo más tarde.</target>
       </trans-unit>
       <trans-unit id="opt-cerrar" datatype="html">
         <source>Cerrar</source>
-        <target>Fechar</target>
+        <target>Cerrar</target>
       </trans-unit>
       <trans-unit id="tituloLogin" datatype="html">
         <source>Ingresa a tu cuenta</source>
-        <target>Entre na sua conta</target>
+        <target>Ingresá a tu cuenta</target>
       </trans-unit>
       <trans-unit id="correoLabel" datatype="html">
         <source>Correo</source>
-        <target>Email</target>
+        <target>Correo</target>
       </trans-unit>
       <trans-unit id="correoPlaceholder:Texto para el campo de correo" datatype="html">
         <source>Ingresa tu correo</source>
-        <target>Insira seu email</target>
+        <target>Ingresá tu correo</target>
       </trans-unit>
       <trans-unit id="contrasenaLabel" datatype="html">
         <source>Contraseña</source>
-        <target>Senha</target>
+        <target>Contraseña</target>
       </trans-unit>
       <trans-unit id="contrasenaPlaceholder:Texto para el campo de contraseña" datatype="html">
         <source>Ingresa tu contraseña</source>
-        <target>Insira sua senha</target>
+        <target>Ingresá tu contraseña</target>
       </trans-unit>
       <trans-unit id="botonIngresar" datatype="html">
         <source> Ingresar </source>
-        <target> Entrar </target>
+        <target> Ingresar </target>
       </trans-unit>
       <trans-unit id="linkRegistro" datatype="html">
         <source>¿Todavía no tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Regístrate<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
-        <target>Ainda não tem uma conta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Registre-se<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
+        <target>¿Todavía no tenés cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Registrate<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
       </trans-unit>
       <trans-unit id="campo-obligatorio" datatype="html">
         <source>Este campo es obligatorio</source>
-        <target>Campo obrigatório</target>
+        <target>Este campo es obligatorio</target>
       </trans-unit>
       <trans-unit id="usuario-invalido" datatype="html">
         <source>Debe ser un correo electrónico válido</source>
-        <target>Deve ser um email válido</target>
+        <target>Debe ser un correo electrónico válido</target>
       </trans-unit>
       <trans-unit id="prontoTableros" datatype="html">
         <source>Aquí pronto hay los tableros de control.</source>
-        <target>Em breve você encontrará os painéis de controle aqui.</target>
+        <target>Aquí pronto hay los tableros de control.</target>
       </trans-unit>
       <trans-unit id="prontoEmpleados" datatype="html">
         <source>Aquí pronto hay el listado de empleados.</source>
-        <target>Em breve você encontrará a lista de funcionários aqui.</target>
+        <target>Aquí pronto hay el listado de empleados.</target>
       </trans-unit>
       <trans-unit id="prontoIncidentes" datatype="html">
         <source>Aquí pronto hay el listado de incidentes.</source>
-        <target>Em breve você encontrará a lista de incidentes aqui.</target>
+        <target>Aquí pronto hay el listado de incidentes.</target>
       </trans-unit>
       <trans-unit id="menuCompany" datatype="html">
         <source> Gestión empresa </source>
-        <target> Gestão da empresa </target>
+        <target> Gestión empresa </target>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
         <source> Tableros de control </source>
-        <target> Painéis de controlo </target>
+        <target> Tableros de control </target>
       </trans-unit>
       <trans-unit id="menuInvoice" datatype="html">
         <source> Facturación </source>
-        <target> Faturação </target>
+        <target> Facturación </target>
       </trans-unit>
       <trans-unit id="menuIncident" datatype="html">
         <source> Gestión de incidentes </source>
-        <target> Gestão de incidentes </target>
+        <target> Gestión de incidentes </target>
       </trans-unit>
       <trans-unit id="menuAccount" datatype="html">
         <source> Mi cuenta </source>
-        <target> Minha conta </target>
+        <target> Mi cuenta </target>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Cerrar sesión</source>
-        <target>Terminar sessão</target>
+        <target>Cerrar sesión</target>
       </trans-unit>
     </body>
   </file>
