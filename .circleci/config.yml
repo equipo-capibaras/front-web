@@ -133,6 +133,13 @@ jobs:
           background: true
           command: ng serve -c production --no-watch
       - run:
+          name: Setup fixtures
+          command: |
+            mkdir -p cypress/fixtures
+            echo "$CY_LOGIN_ADMIN" > cypress/fixtures/login.admin.json
+            echo "$CY_LOGIN_AGENT" > cypress/fixtures/login.agent.json
+            echo "$CY_LOGIN_ANALYST" > cypress/fixtures/login.analyst.json
+      - run:
           name: Wait for the server to start
           command: wait-on -t 30s http://localhost:4200
       - run:
