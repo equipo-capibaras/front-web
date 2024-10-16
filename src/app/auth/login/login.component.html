@@ -6,7 +6,7 @@
     <h1 class="mat-title-large" i18n="@@tituloLogin">Ingresa a tu cuenta</h1>
 
     <form id="form-login" [formGroup]="loginForm" (ngSubmit)="login()">
-      <mat-form-field appearance="outline" class="full-width" i18n-ignore>
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label i18n="@@correoLabel">Correo</mat-label>
         <input
           id="username"
@@ -28,12 +28,12 @@
           </mat-error>
         }
       </mat-form-field>
-      <mat-form-field appearance="outline" class="full-width" i18n-ignore>
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label i18n="@@contrasenaLabel">Contraseña</mat-label>
         <input
           id="password"
-          formControlName="password"
           matInput
+          formControlName="password"
           type="password"
           required
           placeholder="Ingresa tu contraseña"
