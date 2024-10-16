@@ -1,0 +1,150 @@
+<div class="register-container">
+  <div class="register-card">
+    <div class="logo-container">
+      <span class="logo-background"></span><span class="logo"></span>
+    </div>
+    <h1 class="mat-title-large" i18n="@@registerTitel">Crea tu cuenta</h1>
+
+    <form id="form-register" [formGroup]="registerForm" (ngSubmit)="register()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="@@registerLabelName">Nombre</mat-label>
+        <input
+          id="name"
+          matInput
+          formControlName="name"
+          type="text"
+          required
+          placeholder="Ingresa el nombre"
+          i18n-placeholder="@@registerPlaceholderName" />
+
+        @if (name.invalid && (name.dirty || name.touched)) {
+          <mat-error>
+            @if (name.errors?.['required']) {
+              <span i18n="@@registerErrorRequired">Este campo es obligatorio.</span>
+            }
+            @if (name.errors?.['maxlength']) {
+              <span i18n="@@registerErrorTooLong60"
+                >Este campo no puede superar los 60 caracteres.</span
+              >
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="@@registerLabelEmail">Correo</mat-label>
+        <input
+          id="email"
+          matInput
+          formControlName="email"
+          type="email"
+          placeholder="Ingresa tu correo"
+          i18n-placeholder="@@registerPlaceholderEmail" />
+
+        @if (email.invalid && (email.dirty || email.touched)) {
+          <mat-error>
+            @if (email.errors?.['required']) {
+              <span i18n="@@registerErrorRequired">Este campo es obligatorio.</span>
+            }
+            @if (email.errors?.['email']) {
+              <span i18n="@@registerErrorInvalidEmail">Debe ser un correo electrónico válido</span>
+            }
+            @if (email.errors?.['maxlength']) {
+              <span i18n="@@registerErrorTooLong60"
+                >Este campo no puede superar los 60 caracteres.</span
+              >
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="@@registerLabelRole">¿Qué rol desempeña?</mat-label>
+        <mat-select formControlName="role">
+          <mat-option value="admin" i18n="@@registerOptionRoleAdmin">Administrador</mat-option>
+          <mat-option value="agent" i18n="@@registerOptionRoleAgente">Agente</mat-option>
+          <mat-option value="analyst" i18n="@@registerOptionRoleOAnalista">Analítica</mat-option>
+        </mat-select>
+
+        @if (role.invalid && (role.dirty || role.touched)) {
+          <mat-error>
+            @if (role.errors?.['required']) {
+              <span i18n="@@registerErrorRequired">Este campo es obligatorio.</span>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="@@registerLabelPassword">Contraseña</mat-label>
+        <input
+          id="password"
+          matInput
+          formControlName="password"
+          type="password"
+          placeholder="Ingresa tu contraseña"
+          i18n-placeholder="@@registerPlaceholderPassword" />
+
+        @if (password.invalid && (password.dirty || password.touched)) {
+          <mat-error>
+            @if (password.errors?.['required']) {
+              <span i18n="@@registerErrorRequired">Este campo es obligatorio.</span>
+            }
+            @if (password.errors?.['minlength']) {
+              <span i18n="@@registerErrorPasswordShort"
+                >La contraseña debe tener al menos 8 caracteres.</span
+              >
+            }
+            @if (
+              password.errors?.['passwordMismatch'] &&
+              (passwordConfirmation.dirty || passwordConfirmation.touched)
+            ) {
+              <span i18n="@@registerErrorPasswordMismatch">Las contraseñas no coinciden.</span>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label i18n="@@registerLabelPasswordConfirmation">Confirma tu contraseña</mat-label>
+        <input
+          id="passwordConfirmation"
+          matInput
+          formControlName="passwordConfirmation"
+          type="password"
+          placeholder="Confirma tu contraseña"
+          i18n-placeholder="@@registerPlaceholderPasswordConfirmation" />
+
+        @if (
+          passwordConfirmation.invalid &&
+          (passwordConfirmation.dirty || passwordConfirmation.touched)
+        ) {
+          <mat-error>
+            @if (passwordConfirmation.errors?.['required']) {
+              <span i18n="@@registerErrorRequired">Este campo es obligatorio.</span>
+            }
+            @if (
+              passwordConfirmation.errors?.['passwordMismatch'] &&
+              (password.dirty || password.touched)
+            ) {
+              <span i18n="@@registerErrorPasswordMismatch">Las contraseñas no coinciden.</span>
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <button
+        type="submit"
+        mat-flat-button
+        class="register-button mat-body-large"
+        i18n="@@registerButtonSubmit">
+        Crear Cuenta
+      </button>
+    </form>
+    <div class="login-link">
+      <a mat-button class="login-link mat-body-medium" routerLink="/" i18n="@@registerLinkLogin"
+        >Ya tienes cuenta? <strong>Ingresa</strong></a
+      >
+    </div>
+  </div>
+</div>
