@@ -14,34 +14,34 @@
       <trans-unit id="error-500" datatype="html">
         <source>El servidor está teniendo problemas. Por favor, inténtalo más tarde.</source>
       </trans-unit>
-      <trans-unit id="opt-cerrar" datatype="html">
+      <trans-unit id="snackbarClose" datatype="html">
         <source>Cerrar</source>
       </trans-unit>
-      <trans-unit id="tituloLogin" datatype="html">
+      <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
       </trans-unit>
-      <trans-unit id="correoLabel" datatype="html">
+      <trans-unit id="loginLabelEmail" datatype="html">
         <source>Correo</source>
       </trans-unit>
-      <trans-unit id="correoPlaceholder:Texto para el campo de correo" datatype="html">
+      <trans-unit id="loginPlaceholderEmail" datatype="html">
         <source>Ingresa tu correo</source>
       </trans-unit>
-      <trans-unit id="contrasenaLabel" datatype="html">
+      <trans-unit id="loginLabelPassword" datatype="html">
         <source>Contraseña</source>
       </trans-unit>
-      <trans-unit id="contrasenaPlaceholder:Texto para el campo de contraseña" datatype="html">
+      <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
       </trans-unit>
-      <trans-unit id="botonIngresar" datatype="html">
-        <source> Ingresar </source>
+      <trans-unit id="loginButtonSubmit" datatype="html">
+        <source>Ingresar</source>
       </trans-unit>
-      <trans-unit id="linkRegistro" datatype="html">
+      <trans-unit id="loginLinkRegister" datatype="html">
         <source>¿Todavía no tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Regístrate<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
       </trans-unit>
-      <trans-unit id="campo-obligatorio" datatype="html">
+      <trans-unit id="loginErrorRequired" datatype="html">
         <source>Este campo es obligatorio</source>
       </trans-unit>
-      <trans-unit id="usuario-invalido" datatype="html">
+      <trans-unit id="loginErrorInvalidEmail" datatype="html">
         <source>Debe ser un correo electrónico válido</source>
       </trans-unit>
       <trans-unit id="prontoEmpleados" datatype="html">
@@ -54,22 +54,82 @@
         <source>Aquí pronto hay los tableros de control.</source>
       </trans-unit>
       <trans-unit id="menuAccount" datatype="html">
-        <source> Mi cuenta </source>
+        <source>Mi cuenta</source>
       </trans-unit>
       <trans-unit id="menuCompany" datatype="html">
-        <source> Gestión empresa </source>
+        <source>Gestión empresa</source>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
-        <source> Tableros de control </source>
+        <source>Tableros de control</source>
       </trans-unit>
       <trans-unit id="menuIncident" datatype="html">
-        <source> Gestión de incidentes </source>
+        <source>Gestión de incidentes</source>
       </trans-unit>
       <trans-unit id="menuInvoice" datatype="html">
-        <source> Facturación </source>
+        <source>Facturación</source>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Cerrar sesión</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterButtonSubmit" datatype="html">
+        <source>Crear Cuenta</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorInvalidEmail" datatype="html">
+        <source>Debe ser un correo electrónico válido</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorPasswordMismatch" datatype="html">
+        <source>Las contraseñas no coinciden.</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorPasswordShort" datatype="html">
+        <source>La contraseña debe tener al menos 8 caracteres.</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorRequired" datatype="html">
+        <source>Este campo es obligatorio.</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorTooLong60" datatype="html">
+        <source>Este campo no puede superar los 60 caracteres.</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelEmail" datatype="html">
+        <source>Correo</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelName" datatype="html">
+        <source>Nombre</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelPassword" datatype="html">
+        <source>Contraseña</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelPasswordConfirmation" datatype="html">
+        <source>Confirma tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelRole" datatype="html">
+        <source>¿Qué rol desempeña?</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLinkLogin" datatype="html">
+        <source>Ya tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Ingresa<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterOptionRoleAdmin" datatype="html">
+        <source>Administrador</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterOptionRoleAgente" datatype="html">
+        <source>Agente</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterOptionRoleOAnalista" datatype="html">
+        <source>Analítica</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderEmail" datatype="html">
+        <source>Ingresa tu correo</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderName" datatype="html">
+        <source>Ingresa el nombre</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderPassword" datatype="html">
+        <source>Ingresa tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderPasswordConfirmation" datatype="html">
+        <source>Confirma tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterTitle" datatype="html">
+        <source>Crea tu cuenta</source>
       </trans-unit>
     </body>
   </file>

@@ -22,4 +22,29 @@ describe('EmployeeRegisterComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should set error for password mismatch', () => {
+    const passwordControl = component.registerForm.get('password');
+    const passwordConfirmationControl = component.registerForm.get('passwordConfirmation');
+
+    passwordControl?.setValue('password123');
+    passwordConfirmationControl?.setValue('differentPassword');
+    expect(passwordControl?.hasError('passwordMismatch')).toBeTruthy();
+    expect(passwordConfirmationControl?.hasError('passwordMismatch')).toBeTruthy();
+  });
+
+  it('should give no error for matching passwords', () => {
+    const passwordControl = component.registerForm.get('password');
+    const passwordConfirmationControl = component.registerForm.get('passwordConfirmation');
+
+    passwordControl?.setValue('password123');
+    passwordConfirmationControl?.setValue('password123');
+    expect(passwordControl?.hasError('passwordMismatch')).toBeFalsy();
+    expect(passwordConfirmationControl?.hasError('passwordMismatch')).toBeFalsy();
+  });
+
+  it('should mark all fields as touched on invalid submit', () => {
+    component.register();
+    expect(component.registerForm.touched).toBeTruthy();
+  });
 });
