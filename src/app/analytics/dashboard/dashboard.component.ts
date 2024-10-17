@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
+  host: {
+    class: 'dashboard',
+  },
 })
 export class DashboardComponent {}
