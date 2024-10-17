@@ -29,6 +29,15 @@ describe('Accessibility Tests', () => {
     cy.checkA11y(undefined, undefined, terminalLog);
   });
 
+  it('`/register` page has no detectable a11y violations on load', () => {
+    cy.visit('/register');
+
+    cy.wait(2000);
+
+    cy.injectAxe();
+    cy.checkA11y(undefined, undefined, terminalLog);
+  });
+
   it('`/admin` page has no detectable a11y violations on load', () => {
     cy.visit('/');
 

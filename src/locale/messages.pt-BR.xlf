@@ -18,43 +18,43 @@
         <source>El servidor está teniendo problemas. Por favor, inténtalo más tarde.</source>
         <target>O servidor está com problemas. Por favor, tente novamente mais tarde.</target>
       </trans-unit>
-      <trans-unit id="opt-cerrar" datatype="html">
+      <trans-unit id="snackbarClose" datatype="html">
         <source>Cerrar</source>
         <target>Fechar</target>
       </trans-unit>
-      <trans-unit id="tituloLogin" datatype="html">
+      <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
         <target>Entre na sua conta</target>
       </trans-unit>
-      <trans-unit id="correoLabel" datatype="html">
+      <trans-unit id="loginLabelEmail" datatype="html">
         <source>Correo</source>
         <target>Email</target>
       </trans-unit>
-      <trans-unit id="correoPlaceholder:Texto para el campo de correo" datatype="html">
+      <trans-unit id="loginPlaceholderEmail" datatype="html">
         <source>Ingresa tu correo</source>
         <target>Insira seu email</target>
       </trans-unit>
-      <trans-unit id="contrasenaLabel" datatype="html">
+      <trans-unit id="loginLabelPassword" datatype="html">
         <source>Contraseña</source>
         <target>Senha</target>
       </trans-unit>
-      <trans-unit id="contrasenaPlaceholder:Texto para el campo de contraseña" datatype="html">
+      <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
         <target>Insira sua senha</target>
       </trans-unit>
-      <trans-unit id="botonIngresar" datatype="html">
-        <source> Ingresar </source>
-        <target> Entrar </target>
+      <trans-unit id="loginButtonSubmit" datatype="html">
+        <source>Ingresar</source>
+        <target>Entrar</target>
       </trans-unit>
-      <trans-unit id="linkRegistro" datatype="html">
+      <trans-unit id="loginLinkRegister" datatype="html">
         <source>¿Todavía no tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Regístrate<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>Ainda não tem uma conta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Registre-se<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
       </trans-unit>
-      <trans-unit id="campo-obligatorio" datatype="html">
+      <trans-unit id="loginErrorRequired" datatype="html">
         <source>Este campo es obligatorio</source>
         <target>Campo obrigatório</target>
       </trans-unit>
-      <trans-unit id="usuario-invalido" datatype="html">
+      <trans-unit id="loginErrorInvalidEmail" datatype="html">
         <source>Debe ser un correo electrónico válido</source>
         <target>Deve ser um email válido</target>
       </trans-unit>
@@ -71,28 +71,108 @@
         <target>Em breve você encontrará a lista de incidentes aqui.</target>
       </trans-unit>
       <trans-unit id="menuCompany" datatype="html">
-        <source> Gestión empresa </source>
-        <target> Gestão da empresa </target>
+        <source>Gestión empresa</source>
+        <target>Gestão da empresa</target>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
-        <source> Tableros de control </source>
-        <target> Painéis de controlo </target>
+        <source>Tableros de control</source>
+        <target>Painéis de controlo</target>
       </trans-unit>
       <trans-unit id="menuInvoice" datatype="html">
-        <source> Facturación </source>
-        <target> Faturação </target>
+        <source>Facturación</source>
+        <target>Faturação</target>
       </trans-unit>
       <trans-unit id="menuIncident" datatype="html">
-        <source> Gestión de incidentes </source>
-        <target> Gestão de incidentes </target>
+        <source>Gestión de incidentes</source>
+        <target>Gestão de incidentes</target>
       </trans-unit>
       <trans-unit id="menuAccount" datatype="html">
-        <source> Mi cuenta </source>
-        <target> Minha conta </target>
+        <source>Mi cuenta</source>
+        <target>Minha conta</target>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Cerrar sesión</source>
         <target>Terminar sessão</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterTitle" datatype="html">
+        <source>Crea tu cuenta</source>
+        <target>Crie sua conta</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelName" datatype="html">
+        <source>Nombre</source>
+        <target>Nome</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderName" datatype="html">
+        <source>Ingresa el nombre</source>
+        <target>Digite o nome</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorRequired" datatype="html">
+        <source>Este campo es obligatorio.</source>
+        <target>Esse campo é obrigatório.</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorTooLong60" datatype="html">
+        <source>Este campo no puede superar los 60 caracteres.</source>
+        <target>Esse campo não pode exceder 60 caracteres.</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelEmail" datatype="html">
+        <source>Correo</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderEmail" datatype="html">
+        <source>Ingresa tu correo</source>
+        <target>Insira seu email</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorInvalidEmail" datatype="html">
+        <source>Debe ser un correo electrónico válido</source>
+        <target>Deve ser um email válido</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelRole" datatype="html">
+        <source>¿Qué rol desempeña?</source>
+        <target>Qual é a função dele?</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterOptionRoleAdmin" datatype="html">
+        <source>Administrador</source>
+        <target>Administrador</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterOptionRoleAgente" datatype="html">
+        <source>Agente</source>
+        <target>Agente</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterOptionRoleOAnalista" datatype="html">
+        <source>Analítica</source>
+        <target>Análises</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelPassword" datatype="html">
+        <source>Contraseña</source>
+        <target>Senha</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderPassword" datatype="html">
+        <source>Ingresa tu contraseña</source>
+        <target>Insira sua senha</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorPasswordShort" datatype="html">
+        <source>La contraseña debe tener al menos 8 caracteres.</source>
+        <target>A senha deve ter pelo menos 8 caracteres.</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorPasswordMismatch" datatype="html">
+        <source>Las contraseñas no coinciden.</source>
+        <target>As senhas não correspondem.</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelPasswordConfirmation" datatype="html">
+        <source>Confirma tu contraseña</source>
+        <target>Confirme sua senha</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderPasswordConfirmation" datatype="html">
+        <source>Confirma tu contraseña</source>
+        <target>Confirme sua senha</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterButtonSubmit" datatype="html">
+        <source>Crear Cuenta</source>
+        <target>Criar conta</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLinkLogin" datatype="html">
+        <source>Ya tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Ingresa<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+        <target>Já tem uma conta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Entre<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
       </trans-unit>
     </body>
   </file>

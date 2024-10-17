@@ -29,7 +29,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       }
 
       // Mostrar el SnackBar con el mensaje de error y duración de 5 segundos
-      snackBar.open(errorMessage, $localize`:@@opt-cerrar:Cerrar`, {
+      snackBar.open(errorMessage, $localize`:@@snackbarClose:Cerrar`, {
         duration: 10000,
       });
 

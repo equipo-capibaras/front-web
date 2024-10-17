@@ -90,7 +90,9 @@
             "buildTarget": "abcall:build",
             "format": "xlf",
             "outputPath": "src/locale",
-            "targetFiles": ["messages.es-AR.xlf", "messages.pt-BR.xlf"]
+            "targetFiles": ["messages.es-AR.xlf", "messages.pt-BR.xlf"],
+            "trim": true,
+            "sort": "stableAlphabetNew"
           }
         },
         "test": {
