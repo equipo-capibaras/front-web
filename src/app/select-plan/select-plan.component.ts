@@ -25,14 +25,14 @@ import { SelectPlanService } from './select-plan.service'; // Import the SelectP
     MatCardModule,
   ],
   templateUrl: './select-plan.component.html',
-  styleUrls: ['./select-plan.component.scss'], // Corrected styleUrls
+  styleUrls: ['./select-plan.component.scss'],
 })
 export class SelectPlanComponent {
   selectPlanForm!: FormGroup;
 
   constructor(
     private readonly router: Router,
-    private readonly selectPlanService: SelectPlanService, // Inject the SelectPlanService
+    private readonly selectPlanService: SelectPlanService,
   ) {}
 
   savePlan(planName: string, planPrice: number) {
@@ -46,7 +46,7 @@ export class SelectPlanComponent {
       if (success) {
         this.router.navigate(['/']);
       } else {
-        this.router.navigate(['/']); // Navigate on failure as well
+        this.router.navigate(['/']);
       }
     });
   }
