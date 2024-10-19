@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 import {
   FormBuilder,
   FormGroup,
@@ -15,6 +17,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialog } from '@angular/material/dialog';
+import { EmployeeService } from '../employee.service';
 
 @Component({
   selector: 'app-register',
@@ -38,6 +42,9 @@ export class EmployeeRegisterComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
+    private readonly http: HttpClient,
+    private readonly dialog: MatDialog,
+    private readonly employeeService: EmployeeService,
   ) {}
 
   matchPasswordValidator(): ValidatorFn {
@@ -112,5 +119,13 @@ export class EmployeeRegisterComponent implements OnInit {
       this.registerForm.markAllAsTouched();
       return;
     }
+
+    const { name, email, password, role } = this.registerForm.value;
+
+    this.employeeService.registerEmployee({ name, email, password, role }).subscribe(success => {
+      if (success) {
+        this.router.navigate(['/company-register']);
+      }
+    });
   }
 }
