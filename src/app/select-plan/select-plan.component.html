@@ -1,0 +1,105 @@
+<div class="select-plan-container">
+  <!-- Plan Emprendedor -->
+  <mat-card class="plan-card">
+    <mat-card-header class="entrepreneur">
+      <mat-card-title i18n="@@planEmprendedorTitle">Emprendedor</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="price">
+        <span class="price-value" i18n="@@planEmprendedorPrice">$5.25</span>
+        <span class="price-detail" i18n="@@planPriceDetail">/mes + incidencias</span>
+
+        <button
+          type="button"
+          mat-flat-button
+          color="primary"
+          class="select-button"
+          (click)="savePlan('Emprendedor', 5.25)"
+          i18n="@@selectButton">
+          Seleccionar
+        </button>
+      </div>
+      <ul class="plan-features">
+        <li i18n="@@featurePersonalSupport">
+          Atención telefónica personalizada de soporte para tus clientes.
+        </li>
+        <li i18n="@@featureSpecializedAgents">
+          Agentes especializados que registran cada incidente.
+        </li>
+        <li i18n="@@featureIncidentEscalation">Automatización del escalamiento de incidentes.</li>
+        <li i18n="@@featureRealTimeBoards">Tableros de control en tiempo real.</li>
+        <li i18n="@@featureAutomaticNotifications">
+          Notificaciones automáticas al resolver incidentes.
+        </li>
+        <li i18n="@@featureWebApplication">Consulta y registro por aplicación web.</li>
+        <li i18n="@@featureContinuousMonitoring">
+          Monitoreo continuo para detectar situaciones urgentes.
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Plan Empresario -->
+  <mat-card class="plan-card">
+    <mat-card-header class="businessman">
+      <mat-card-title i18n="@@planEmpresarioTitle">Empresario</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="price">
+        <span class="price-value" i18n="@@planEmpresarioPrice">$6.75</span>
+        <span class="price-detail" i18n="@@planPriceDetail">/mes + incidencias</span>
+
+        <button
+          type="button"
+          mat-flat-button
+          color="primary"
+          class="select-button"
+          (click)="savePlan('Empresario', 6.75)"
+          i18n="@@selectButton">
+          Seleccionar
+        </button>
+      </div>
+      <ul class="plan-features">
+        <li i18n="@@featureAllFromEmprendedor">Todo lo del plan Emprendedor.</li>
+        <li i18n="@@featureMultipleChannels">
+          Múltiples canales de contacto: teléfono, chatbot, app móvil, correo.
+        </li>
+        <li i18n="@@featureOutboundCalls">
+          Llamadas de salida para encuestas de satisfacción y ventas.
+        </li>
+        <li i18n="@@featureAdvancedDashboards">
+          Tableros avanzados para analizar operaciones y objetivos.
+        </li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Plan Empresario + -->
+  <mat-card class="plan-card">
+    <mat-card-header class="businessmanplus">
+      <mat-card-title i18n="@@planEmpresarioPlusTitle">Empresario +</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="price">
+        <span class="price-value" i18n="@@planEmpresarioPlusPrice">$8.55</span>
+        <span class="price-detail" i18n="@@planPriceDetail">/mes + incidencias</span>
+
+        <button
+          type="button"
+          mat-flat-button
+          color="primary"
+          class="select-button"
+          (click)="savePlan('Empresario+', 8.55)"
+          i18n="@@selectButton">
+          Seleccionar
+        </button>
+      </div>
+      <ul class="plan-features">
+        <li i18n="@@featureAllFromEmpresario">Todo lo del plan Empresario.</li>
+        <li i18n="@@featurePredictiveAnalytics">Analítica predictiva para PQRs.</li>
+        <li i18n="@@featureRiskAnalysis">Análisis de riesgo basado en casos previos.</li>
+        <li i18n="@@featureKeyMonitoring">Monitoreo de indicadores clave de satisfacción.</li>
+      </ul>
+    </mat-card-content>
+  </mat-card>
+</div>

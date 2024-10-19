@@ -1,0 +1,66 @@
+<div class="company-register-container">
+  <div class="company-register-card">
+    <div class="logo-container">
+      <span class="logo-background"></span><span class="logo"></span>
+    </div>
+    <h1 class="mat-title-large" i18n="@@employeeRegisterTitle">Ingresa los datos de la empresa</h1>
+
+    <form id="form-company-register" [formGroup]="createAccountForm" (ngSubmit)="registerCompany()">
+      <mat-form-field appearance="outline" class="full-width">
+        <input
+          id="name"
+          matInput
+          formControlName="name"
+          type="text"
+          required
+          placeholder="Nombre"
+          i18n-placeholder="@@companyNamePlaceholder" />
+
+        @if (name.invalid && (name.dirty || name.touched)) {
+          <mat-error>
+            @if (name.errors?.['required']) {
+              <span i18n="@@employeeRegisterErrorRequired">Este campo es obligatorio.</span>
+            }
+            @if (name.errors?.['maxlength']) {
+              <span i18n="@@employeeRegisterErrorTooLong60"
+                >Este campo no puede superar los 60 caracteres.</span
+              >
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <input
+          id="email"
+          matInput
+          formControlName="email"
+          placeholder="Correo"
+          i18n-placeholder="@@companyEmailPlaceholder" />
+        <mat-hint i18n="@@companyEmailHint">&#64;capibaras.io</mat-hint>
+
+        @if (email.invalid && (email.dirty || email.touched)) {
+          <mat-error>
+            @if (email.errors?.['required']) {
+              <span i18n="@@employeeRegisterErrorRequired">Este campo es obligatorio.</span>
+            }
+
+            @if (email.errors?.['maxlength']) {
+              <span i18n="@@employeeRegisterErrorTooLong60"
+                >Este campo no puede superar los 60 caracteres.</span
+              >
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <button
+        type="submit"
+        mat-flat-button
+        class="login-button mat-body-large"
+        i18n="@@createAccountButton">
+        Crear Cuenta
+      </button>
+    </form>
+  </div>
+</div>
