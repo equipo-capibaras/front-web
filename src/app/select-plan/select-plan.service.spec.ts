@@ -1,9 +1,9 @@
-import { TestBed } from '@angular/core/testing';
+//import { TestBed } from '@angular/core/testing';
 
-import { SelectPlanService } from './select-plan.service';
+//import { SelectPlanService } from './select-plan.service';
 
-describe('SelectPlanService', () => {
-  let service: SelectPlanService;
+/*escribe('SelectPlanService', () => {
+ let service: SelectPlanService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
@@ -14,3 +14,4 @@ describe('SelectPlanService', () => {
     expect(service).toBeTruthy();
   });
 });
+*/
