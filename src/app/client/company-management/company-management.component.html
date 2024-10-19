@@ -1,4 +1,4 @@
-<div class="page">
+<div class="page company-management">
   <div class="page__container">
     <div class="page__header">
       <h1 class="page__title">Gestión empresa</h1>
@@ -11,14 +11,11 @@
       </span>
     </div>
 
-    <app-company-info></app-company-info>
-
-    <div class="actions">
-      <button mat-raised-button color="primary" aria-label="Invitar a empleado a la empresa">
-        Invitar empleado
-      </button>
+    <div class="company-management__info">
+      <app-company-info />
+      <app-invite-employee />
     </div>
 
-    <app-employee-list></app-employee-list>
+    <app-employee-list />
   </div>
 </div>

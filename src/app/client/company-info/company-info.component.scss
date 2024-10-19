@@ -23,18 +23,5 @@
 
   &__text {
     font-size: 1rem;
-    color: #333;
-  }
-
-  &__link {
-    font-size: 0.9rem;
-    color: #007bff;
-    text-decoration: underline;
-    margin-left: 10px;
-    cursor: pointer;
-
-    &:hover {
-      color: #0056b3;
-    }
   }
 }

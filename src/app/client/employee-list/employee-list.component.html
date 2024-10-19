@@ -1,3 +1,36 @@
-<div class="container">
-  <h1 class="mat-title-large" i18n="@@prontoEmpleados">Aquí pronto hay el listado de empleados.</h1>
+<div class="employees-list page__table">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nombre</th>
+      <td mat-cell *matCellDef="let employee">{{ employee.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Correo</th>
+      <td mat-cell *matCellDef="let employee">{{ employee.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="rol">
+      <th mat-header-cell *matHeaderCellDef>Rol</th>
+      <td mat-cell *matCellDef="let employee">{{ employee.rol }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="invitation">
+      <th mat-header-cell *matHeaderCellDef>Estado invitación</th>
+      <td mat-cell *matCellDef="let employee">
+        <mat-chip *ngIf="employee.invitation === 'Aceptada'" class="page__chip--success"
+          ><span class="material-symbols-outlined">check</span> {{ employee.invitation }}</mat-chip
+        >
+        <mat-chip *ngIf="employee.invitation === 'Pendiente'" class="page__chip--warning">
+          <span class="material-symbols-outlined">schedule</span>
+          {{ employee.invitation }}</mat-chip
+        >
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" aria-label="Select page of employees" />
 </div>
