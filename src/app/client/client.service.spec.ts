@@ -151,22 +151,30 @@ describe('ClientService', () => {
   }));
 
   it('should load client data and update the subject', fakeAsync(() => {
-    const nextSpy = spyOn(service['clientDataSubject'], 'next').and.callThrough();
+    let result: Client | null = null;
 
-    service.loadClientData();
+    service.loadClientData().subscribe((response: Client | null) => {
+      result = response;
+    });
 
     const req = httpTestingController.expectOne(`${service['apiUrl']}/clients/me`);
     expect(req.request.method).toBe('GET');
     req.flush(mockClientData);
 
     tick();
-    expect(nextSpy).toHaveBeenCalledWith(mockClientData);
+
+    expect(result).not.toBeNull();
+    if (result !== null) {
+      expect(result).toEqual(mockClientData);
+    }
   }));
 
   it('should handle HTTP error in loadClientData and set null', fakeAsync(() => {
-    const nextSpy = spyOn(service['clientDataSubject'], 'next').and.callThrough();
+    let result: Client | null = null;
 
-    service.loadClientData();
+    service.loadClientData().subscribe((response: Client | null) => {
+      result = response;
+    });
 
     const req = httpTestingController.expectOne(`${service['apiUrl']}/clients/me`);
     expect(req.request.method).toBe('GET');
@@ -174,7 +182,7 @@ describe('ClientService', () => {
 
     tick();
 
-    expect(nextSpy).toHaveBeenCalledWith(null);
+    expect(result).toBeNull();
   }));
 
   it('should load employee data and return EmployeeListResponse', fakeAsync(() => {

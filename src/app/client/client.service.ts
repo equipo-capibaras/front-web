@@ -58,19 +58,12 @@ export class ClientService {
     );
   }
 
-  loadClientData(): void {
-    this.http
-      .get<Client>(`${this.apiUrl}/clients/me`)
-      .pipe(
-        map(data => {
-          this.clientDataSubject.next(data);
-        }),
-        catchError(_ => {
-          this.clientDataSubject.next(null);
-          return of(null);
-        }),
-      )
-      .subscribe();
+  loadClientData(): Observable<Client | null> {
+    return this.http.get<Client>(`${this.apiUrl}/clients/me`).pipe(
+      catchError(_ => {
+        return of(null);
+      }),
+    );
   }
 
   loadClientEmployees(pageSize: number, page: number): Observable<EmployeeListResponse | null> {

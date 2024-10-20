@@ -19,7 +19,7 @@
       </trans-unit>
       <trans-unit id="roleColumn" datatype="html">
         <source>Rol</source>
-        <target state="new">Rol</target>
+        <target>Rol</target>
       </trans-unit>
       <trans-unit id="snackbarClose" datatype="html">
         <source>Cerrar</source>
@@ -46,6 +46,9 @@
         <source>Ingresa tu contraseña</source>
       </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
+        <source>Estado Invitación</source>
+      </trans-unit>
+      <trans-unit id="invitationStatusColumn" datatype="html">
         <source>Estado Invitación</source>
       </trans-unit>
       <trans-unit id="inviteEmployee" datatype="html">
@@ -134,6 +137,7 @@
       </trans-unit>
       <trans-unit id="prontoEmpleados" datatype="html">
         <source>Aquí pronto hay el listado de empleados.</source>
+      </trans-unit>
       <trans-unit id="paginatorItemsPerPage" datatype="html">
         <source>Items por página:</source>
       </trans-unit>

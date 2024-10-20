@@ -1,23 +1,25 @@
+<!-- eslint-disable @angular-eslint/template/i18n -->
+<!-- eslint-disable @angular-eslint/template/attributes-order -->
 <div class="employees-list page__table">
   <table mat-table [dataSource]="employeesList">
-    <ng-container matColumnDef="name" i18n-matColumnDef="@@nameColumn">
-      <th *matHeaderCellDef mat-header-cell i18n="@@name">Nombre</th>
-      <td *matCellDef="let employee" mat-cell>{{ employee.name }}</td>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef i18n="@@name">Nombre</th>
+      <td mat-cell *matCellDef="let employee">{{ employee.name }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="email" i18n-matColumnDef="@@emailColumn">
-      <th *matHeaderCellDef mat-header-cell i18n="@@email">Correo</th>
-      <td *matCellDef="let employee" mat-cell>{{ employee.email }}</td>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef i18n="@@email">Correo</th>
+      <td mat-cell *matCellDef="let employee">{{ employee.email }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="role" i18n-matColumnDef="@@roleColumn">
-      <th *matHeaderCellDef mat-header-cell i18n="@@role">Rol</th>
-      <td *matCellDef="let employee" mat-cell>{{ employeeRole[employee.role] }}</td>
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef i18n="@@role">Rol</th>
+      <td mat-cell *matCellDef="let employee">{{ employeeRole[employee.role] }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="invitationStatus" i18n-matColumnDef="@@invitationStatus">
-      <th *matHeaderCellDef mat-header-cell i18n="@@invitationStatus">Estado Invitación</th>
-      <td *matCellDef="let employee" mat-cell>
+    <ng-container matColumnDef="invitationStatus">
+      <th mat-header-cell *matHeaderCellDef i18n="@@invitationStatus">Estado Invitación</th>
+      <td mat-cell *matCellDef="let employee">
         <mat-chip [ngClass]="chipInfo[employee.invitationStatus].cssClass">
           <span class="material-symbols-outlined">
             {{ chipInfo[employee.invitationStatus].icon }}
@@ -27,13 +29,12 @@
       </td>
     </ng-container>
 
-    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-    <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
 
   <mat-paginator
     aria-label="Select page"
-    i18n-aria-label="@@selectPage"
     [length]="totalEmployees"
     [pageSizeOptions]="[5, 10, 20]" />
 </div>

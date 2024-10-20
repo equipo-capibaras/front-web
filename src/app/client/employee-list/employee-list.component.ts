@@ -10,7 +10,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CustomPaginatorIntl } from '../../pagination/pagination';
 import { CommonModule } from '@angular/common';
 import { ClientService } from '../client.service';
-import { Employee } from 'src/app/employee/Employee';
+import { Employee } from '../../employee/employee';
 
 @Component({
   selector: 'app-employee-list',
@@ -47,7 +47,7 @@ export class EmployeeListComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private clientService: ClientService) {}
+  constructor(private readonly clientService: ClientService) {}
 
   ngOnInit(): void {
     this.loadEmployees(5, 1);

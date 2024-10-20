@@ -14,12 +14,10 @@ import { CommonModule } from '@angular/common';
 export class ClientInfoComponent implements OnInit {
   clientData: Client | null = null;
 
-  constructor(private clientService: ClientService) {}
+  constructor(private readonly clientService: ClientService) {}
 
   ngOnInit(): void {
-    this.clientService.loadClientData();
-
-    this.clientService.clientData$.subscribe(data => {
+    this.clientService.loadClientData().subscribe(data => {
       this.clientData = data;
     });
   }

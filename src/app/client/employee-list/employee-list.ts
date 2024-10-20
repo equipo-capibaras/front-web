@@ -1,4 +1,4 @@
-import { Employee } from 'src/app/employee/Employee';
+import { Employee } from '../../employee/employee';
 
 export interface EmployeeListResponse {
   employees: Employee[];
