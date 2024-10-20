@@ -33,7 +33,7 @@ describe('AuthService', () => {
     const password = faker.internet.password();
     const role = faker.helpers.arrayElement(Object.values(Role));
     const tokenHeader = { alg: 'HS256', typ: 'JWT' };
-    const tokenkPayload = { aud: role };
+    const tokenkPayload = { role: role };
     const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
 
     initComponent();
@@ -81,7 +81,7 @@ describe('AuthService', () => {
   it('getRole should return the role from the token payload', () => {
     const role = faker.helpers.arrayElement(Object.values(Role));
     const tokenHeader = { alg: 'HS256', typ: 'JWT' };
-    const tokenkPayload = { aud: role };
+    const tokenkPayload = { role: role };
     const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
     localStorage.setItem('token', mockToken);
 
@@ -92,7 +92,7 @@ describe('AuthService', () => {
 
   it('getRole should return null if the role is invalid', () => {
     const tokenHeader = { alg: 'HS256', typ: 'JWT' };
-    const tokenkPayload = { aud: 'unknown' };
+    const tokenkPayload = { role: 'unknown' };
     const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
     localStorage.setItem('token', mockToken);
 
@@ -111,7 +111,7 @@ describe('AuthService', () => {
 
   it('logout should remove the token from local storage', () => {
     const tokenHeader = { alg: 'HS256', typ: 'JWT' };
-    const tokenkPayload = { aud: 'unknown' };
+    const tokenkPayload = { role: 'unknown' };
     const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
     localStorage.setItem('token', mockToken);
 

@@ -5,9 +5,10 @@ import {
   HttpRequest,
   HttpHandlerFn,
   HttpEvent,
+  HttpContext,
 } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { errorInterceptor } from './error.interceptor';
+import { ACCEPTED_ERRORS, errorInterceptor } from './error.interceptor';
 import { of, throwError, Observable } from 'rxjs';
 
 describe('errorInterceptor', () => {
@@ -144,6 +145,25 @@ describe('errorInterceptor', () => {
         expect(snackBarSpy.open).toHaveBeenCalledWith('Error 999: Unknown Error', 'Cerrar', {
           duration: 10000,
         });
+        done();
+      },
+    });
+  });
+
+  it('should rethrow error if status code is in ACCEPTED_ERRORS', done => {
+    const acceptedErrorStatus = 400;
+    const context = new HttpContext().set(ACCEPTED_ERRORS, [acceptedErrorStatus]);
+
+    const httpErrorResponse = new HttpErrorResponse({
+      status: 400,
+      statusText: 'Bad Request',
+    });
+
+    const next: HttpHandlerFn = () => throwError(() => httpErrorResponse);
+
+    interceptor({ context: context } as HttpRequest<unknown>, next).subscribe({
+      error: error => {
+        expect(error.status).toBe(acceptedErrorStatus);
         done();
       },
     });

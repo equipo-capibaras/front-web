@@ -74,6 +74,9 @@
       <trans-unit id="employeeRegisterButtonSubmit" datatype="html">
         <source>Crear Cuenta</source>
       </trans-unit>
+      <trans-unit id="employeeRegisterErrorEmailRegistered" datatype="html">
+        <source>Ya existe un usuario con este email.</source>
+      </trans-unit>
       <trans-unit id="employeeRegisterErrorInvalidEmail" datatype="html">
         <source>Debe ser un correo electrónico válido</source>
       </trans-unit>
@@ -127,6 +130,9 @@
       </trans-unit>
       <trans-unit id="employeeRegisterPlaceholderPasswordConfirmation" datatype="html">
         <source>Confirma tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterSuccess" datatype="html">
+        <source>Cuenta creada exitosamente</source>
       </trans-unit>
       <trans-unit id="employeeRegisterTitle" datatype="html">
         <source>Crea tu cuenta</source>
