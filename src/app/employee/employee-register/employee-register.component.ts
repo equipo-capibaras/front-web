@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-
 import {
   FormBuilder,
   FormGroup,
@@ -17,8 +15,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDialog } from '@angular/material/dialog';
-import { EmployeeService } from '../employee.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { DuplicateEmailError, EmployeeService } from '../employee.service';
+import { AuthService } from '../../auth/auth.service';
+import { defaultRoutes } from '../../auth/default.routes';
+import { Role } from '../../auth/role';
 
 @Component({
   selector: 'app-register',
@@ -42,9 +43,9 @@ export class EmployeeRegisterComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
-    private readonly http: HttpClient,
-    private readonly dialog: MatDialog,
+    private readonly snackbar: MatSnackBar,
     private readonly employeeService: EmployeeService,
+    private readonly authService: AuthService,
   ) {}
 
   matchPasswordValidator(): ValidatorFn {
@@ -122,10 +123,43 @@ export class EmployeeRegisterComponent implements OnInit {
 
     const { name, email, password, role } = this.registerForm.value;
 
-    this.employeeService.registerEmployee({ name, email, password, role }).subscribe(success => {
-      if (success) {
-        this.router.navigate(['/company-register']);
-      }
+    this.employeeService.register({ name, email, password, role }).subscribe({
+      next: _response => {
+        this.authService.login(email, password).subscribe({
+          next: success => {
+            if (!success) {
+              return;
+            }
+
+            this.snackbar.open(
+              $localize`:@@employeeRegisterSuccess:Cuenta creada exitosamente`,
+              $localize`:@@snackbarClose:Cerrar`,
+              {
+                duration: 10000,
+              },
+            );
+
+            const userRole = this.authService.getRole();
+
+            if (userRole !== null) {
+              if (userRole === Role.Admin) {
+                this.router.navigate(['/client/register']);
+              } else {
+                this.router.navigate([defaultRoutes[userRole]]);
+              }
+            }
+          },
+        });
+      },
+      error: error => {
+        if (error instanceof DuplicateEmailError) {
+          const errorMessage = $localize`:@@employeeRegisterErrorEmailRegistered:Ya existe un usuario con este email.`;
+
+          this.snackbar.open(errorMessage, $localize`:@@snackbarClose:Cerrar`, {
+            duration: 10000,
+          });
+        }
+      },
     });
   }
 }

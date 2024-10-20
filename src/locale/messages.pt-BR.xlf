@@ -94,6 +94,10 @@
         <source>Cerrar sesión</source>
         <target>Terminar sessão</target>
       </trans-unit>
+      <trans-unit id="employeeRegisterSuccess" datatype="html">
+        <source>Cuenta creada exitosamente</source>
+        <target>Conta criada com êxito</target>
+      </trans-unit>
       <trans-unit id="employeeRegisterTitle" datatype="html">
         <source>Crea tu cuenta</source>
         <target>Crie sua conta</target>
@@ -121,6 +125,10 @@
       <trans-unit id="employeeRegisterPlaceholderEmail" datatype="html">
         <source>Ingresa tu correo</source>
         <target>Insira seu email</target>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorEmailRegistered" datatype="html">
+        <source>Ya existe un usuario con este email.</source>
+        <target>Já existe um utilizador com este email.</target>
       </trans-unit>
       <trans-unit id="employeeRegisterErrorInvalidEmail" datatype="html">
         <source>Debe ser un correo electrónico válido</source>

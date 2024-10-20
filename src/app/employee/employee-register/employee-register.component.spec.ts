@@ -1,34 +1,38 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { provideRouter, Router } from '@angular/router';
-import { of } from 'rxjs';
-import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideRouter } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { of, throwError } from 'rxjs';
+import { faker } from '@faker-js/faker';
 import { EmployeeRegisterComponent } from './employee-register.component';
-import { EmployeeService } from '../employee.service';
+import { AuthService } from '../../auth/auth.service';
+import { DuplicateEmailError, EmployeeResponse, EmployeeService } from '../employee.service';
+import { Role } from '../../auth/role';
 
 describe('EmployeeRegisterComponent', () => {
   let component: EmployeeRegisterComponent;
   let fixture: ComponentFixture<EmployeeRegisterComponent>;
+  let authService: jasmine.SpyObj<AuthService>;
   let employeeService: jasmine.SpyObj<EmployeeService>;
-  let router: Router;
+  let snackBar: jasmine.SpyObj<MatSnackBar>;
 
   beforeEach(async () => {
-    employeeService = jasmine.createSpyObj('EmployeeService', ['registerEmployee']);
+    authService = jasmine.createSpyObj('AuthService', ['getRole', 'login']);
+    employeeService = jasmine.createSpyObj('EmployeeService', ['register']);
+    snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
 
     await TestBed.configureTestingModule({
-      imports: [
-        EmployeeRegisterComponent,
-        NoopAnimationsModule,
-        RouterTestingModule,
-        HttpClientTestingModule,
+      imports: [EmployeeRegisterComponent, NoopAnimationsModule],
+      providers: [
+        provideRouter([]),
+        { provide: AuthService, useValue: authService },
+        { provide: EmployeeService, useValue: employeeService },
+        { provide: MatSnackBar, useValue: snackBar },
       ],
-      providers: [{ provide: EmployeeService, useValue: employeeService }, provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(EmployeeRegisterComponent);
     component = fixture.componentInstance;
-    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 
@@ -57,47 +61,70 @@ describe('EmployeeRegisterComponent', () => {
   });
 
   it('should mark all fields as touched on invalid submit', () => {
-    spyOn(component.registerForm, 'markAllAsTouched');
-
     component.register();
-
-    expect(component.registerForm.markAllAsTouched).toHaveBeenCalled();
-    expect(component.registerForm.invalid).toBeTruthy();
+    expect(component.registerForm.touched).toBeTruthy();
   });
 
-  it('should navigate on successful registration', () => {
-    const navigateSpy = spyOn(router, 'navigate');
+  for (const role of Object.values(Role)) {
+    it('should register a employee', () => {
+      component.register();
+
+      const name = faker.person.fullName();
+      const email = faker.internet.email();
+      const password = faker.internet.password();
+
+      component.registerForm.setValue({
+        name: name,
+        email: email,
+        role: role,
+        password: password,
+        passwordConfirmation: password,
+      });
+
+      const mockResponse: EmployeeResponse = {
+        id: faker.string.uuid(),
+        clientId: null,
+        name: name,
+        email: email,
+        role: role,
+        invitationStatus: 'pending',
+        invitationDate: faker.date.past(),
+      };
+
+      employeeService.register.and.returnValue(of(mockResponse));
+      authService.getRole.and.returnValue(role);
+      authService.login.and.returnValue(of(true));
+
+      component.register();
+
+      expect(employeeService.register).toHaveBeenCalledWith({
+        name: name,
+        email: email,
+        role: role,
+        password: password,
+      });
+    });
+  }
+
+  it('should show error snackbar on duplicate email error', () => {
+    component.register();
+
+    const name = faker.person.fullName();
+    const email = faker.internet.email();
+    const password = faker.internet.password();
+
     component.registerForm.setValue({
-      name: 'John Doe',
-      email: 'john@example.com',
-      password: 'password123',
-      passwordConfirmation: 'password123',
-      role: 'admin',
+      name: name,
+      email: email,
+      role: faker.helpers.arrayElement(Object.values(Role)),
+      password: password,
+      passwordConfirmation: password,
     });
 
-    employeeService.registerEmployee.and.returnValue(of({ success: true }));
+    employeeService.register.and.returnValue(throwError(() => new DuplicateEmailError()));
 
     component.register();
 
-    expect(employeeService.registerEmployee).toHaveBeenCalled();
-    expect(navigateSpy).toHaveBeenCalledWith(['/company-register']);
-  });
-
-  it('should not navigate on registration failure', () => {
-    const navigateSpy = spyOn(router, 'navigate');
-    component.registerForm.setValue({
-      name: 'John Doe',
-      email: 'john@example.com',
-      password: 'password123',
-      passwordConfirmation: 'password123',
-      role: 'admin',
-    });
-
-    employeeService.registerEmployee.and.returnValue(of(false));
-
-    component.register();
-
-    expect(employeeService.registerEmployee).toHaveBeenCalled();
-    expect(navigateSpy).not.toHaveBeenCalled();
+    expect(snackBar.open).toHaveBeenCalled();
   });
 });

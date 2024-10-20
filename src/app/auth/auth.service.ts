@@ -5,6 +5,11 @@ import { jwtDecode } from 'jwt-decode';
 import { environment } from 'src/environments/environment';
 import { Role } from './role';
 
+interface DecodedToken {
+  aud: string;
+  role: Role;
+}
+
 interface LoginResponse {
   token: string;
 }
@@ -27,10 +32,8 @@ export class AuthService {
     }
 
     try {
-      const decodedToken = jwtDecode(token);
-      const role = Object.values(Role).includes(decodedToken.aud as Role)
-        ? (decodedToken.aud as Role)
-        : null;
+      const decodedToken = jwtDecode<DecodedToken>(token);
+      const role = Object.values(Role).includes(decodedToken.role) ? decodedToken.role : null;
 
       return role;
     } catch {

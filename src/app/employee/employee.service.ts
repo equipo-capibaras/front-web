@@ -1,7 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { of } from 'rxjs';
+import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
+import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
+
+export class DuplicateEmailError extends Error {
+  constructor(message?: string) {
+    super(message ?? 'Email already registered.');
+    this.name = 'DuplicateEmailError';
+  }
+}
+
+export interface EmployeeResponse {
+  id: string;
+  clientId: string | null;
+  name: string;
+  email: string;
+  role: string;
+  invitationStatus: string;
+  invitationDate: Date;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -9,24 +27,22 @@ import { map, catchError } from 'rxjs/operators';
 export class EmployeeService {
   constructor(private readonly http: HttpClient) {}
 
-  registerEmployee(employeeData: { name: string; email: string; password: string; role: string }) {
-    return this.http.post<any>(`/api/v1/employees`, employeeData).pipe(
-      map(response => {
-        console.log('Registration successful:', response);
-        localStorage.setItem('employeeId', response.id);
-        return response;
-      }),
-      catchError(error => {
-        // Check if it's a 409 conflict error and handle it
-        if (error.error.message === 'Email already registered') {
-          console.error('Error:', error.error.message);
-          alert('This email is already registered. Please use a different email.');
-        } else {
-          console.error('Registration failed:', error); // Handle other errors
-          alert('Registration failed. Please try again.');
-        }
-        return of(false);
-      }),
-    );
+  register(employeeData: { name: string; email: string; password: string; role: string }) {
+    const context = new HttpContext().set(ACCEPTED_ERRORS, [409]);
+
+    return this.http
+      .post<EmployeeResponse>(`/api/v1/employees`, employeeData, { context: context })
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            return throwError(() => new DuplicateEmailError());
+          }
+
+          return throwError(() => error);
+        }),
+      );
   }
 }
