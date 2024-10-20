@@ -14,8 +14,17 @@
       <trans-unit id="error-500" datatype="html">
         <source>El servidor está teniendo problemas. Por favor, inténtalo más tarde.</source>
       </trans-unit>
+      <trans-unit id="role" datatype="html">
+        <source>Rol</source>
+      </trans-unit>
       <trans-unit id="snackbarClose" datatype="html">
         <source>Cerrar</source>
+      </trans-unit>
+      <trans-unit id="statusAccepted" datatype="html">
+        <source>Aceptada</source>
+      </trans-unit>
+      <trans-unit id="statusPending" datatype="html">
+        <source>Pendiente</source>
       </trans-unit>
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
@@ -31,6 +40,12 @@
       </trans-unit>
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="invitationStatus" datatype="html">
+        <source>Estado Invitación</source>
+      </trans-unit>
+      <trans-unit id="inviteEmployee" datatype="html">
+        <source>Invitar empleado</source>
       </trans-unit>
       <trans-unit id="loginButtonSubmit" datatype="html">
         <source>Ingresar</source>
@@ -115,6 +130,17 @@
       </trans-unit>
       <trans-unit id="prontoEmpleados" datatype="html">
         <source>Aquí pronto hay el listado de empleados.</source>
+      <trans-unit id="paginatorItemsPerPage" datatype="html">
+        <source>Items por página:</source>
+      </trans-unit>
+      <trans-unit id="paginatorNextPage" datatype="html">
+        <source>Siguiente página</source>
+      </trans-unit>
+      <trans-unit id="paginatorPreviousPage" datatype="html">
+        <source>Página anterior</source>
+      </trans-unit>
+      <trans-unit id="plan" datatype="html">
+        <source>Plan <x id="INTERPOLATION" equiv-text="{{ formattedPlan }}"/></source>
       </trans-unit>
       <trans-unit id="prontoIncidentes" datatype="html">
         <source>Aquí pronto hay el listado de incidentes.</source>
@@ -125,7 +151,7 @@
       <trans-unit id="menuAccount" datatype="html">
         <source>Mi cuenta</source>
       </trans-unit>
-      <trans-unit id="menuCompany" datatype="html">
+      <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
@@ -185,10 +211,10 @@
       <trans-unit id="employeeRegisterErrorTooLong60" datatype="html">
         <source>Este campo no puede superar los 60 caracteres.</source>
       </trans-unit>
-      <trans-unit id="employeeRegisterLabelEmail" datatype="html">
+      <trans-unit id="email" datatype="html">
         <source>Correo</source>
       </trans-unit>
-      <trans-unit id="employeeRegisterLabelName" datatype="html">
+      <trans-unit id="name" datatype="html">
         <source>Nombre</source>
       </trans-unit>
       <trans-unit id="employeeRegisterLabelPassword" datatype="html">
@@ -229,6 +255,12 @@
       </trans-unit>
       <trans-unit id="employeeRegisterTitle" datatype="html">
         <source>Crea tu cuenta</source>
+      </trans-unit>
+      <trans-unit id="change" datatype="html">
+        <source>Cambiar</source>
+      </trans-unit>
+      <trans-unit id="clientManagementPageDescription" datatype="html">
+        <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e invitar fácilmente a tus empleados<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que se unan a la empresa, permitiéndoles acceder a las herramientas y funcionalidades disponibles en la plataforma. También podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>actualizar el plan<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> actual de tu empresa.</source>
       </trans-unit>
     </body>
   </file>

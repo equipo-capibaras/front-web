@@ -1,5 +1,10 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator, MatPaginatorModule, MatPaginatorIntl } from '@angular/material/paginator';
+import {
+  MatPaginator,
+  MatPaginatorModule,
+  MatPaginatorIntl,
+  PageEvent,
+} from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { CustomPaginatorIntl } from '../../pagination/pagination';
@@ -18,22 +23,25 @@ import { Employee } from 'src/app/employee/Employee';
 export class EmployeeListComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'email', 'role', 'invitationStatus'];
   employeesList = new MatTableDataSource<Employee>();
+  pageSize = 5;
+  pageIndex = 0;
+
+  employeeRole: { [key: string]: string } = {
+    analyst: $localize`:@@employeeRegisterOptionRoleOAnalista:Analítica`,
+    agent: $localize`:@@employeeRegisterOptionRoleAgente:Agente`,
+    admin: $localize`:@@employeeRegisterOptionRoleAdmin:Administrador`,
+  };
   chipInfo: { [key: string]: { icon: string; text: string; cssClass: string } } = {
     accepted: {
       icon: 'check',
-      text: 'Aceptada',
+      text: $localize`:@@statusAccepted:Aceptada`,
       cssClass: 'page__chip--success',
     },
     pending: {
       icon: 'schedule',
-      text: 'Pendiente',
+      text: $localize`:@@statusPending:Pendiente`,
       cssClass: 'page__chip--warning',
     },
-  };
-  employeeRole: { [key: string]: string } = {
-    analyst: 'Analista',
-    agent: 'Agente',
-    admin: 'Administrador',
   };
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -41,16 +49,23 @@ export class EmployeeListComponent implements AfterViewInit {
   constructor(private clientService: ClientService) {}
 
   ngOnInit(): void {
-    this.clientService.loadClientEmployees();
-
-    this.clientService.clientEmployees$.subscribe(data => {
-      if (data?.employees) {
-        this.employeesList.data = data.employees;
-      }
-    });
+    this.loadEmployees();
   }
 
   ngAfterViewInit() {
     this.employeesList.paginator = this.paginator;
+    this.paginator.page.subscribe((event: PageEvent) => {
+      this.pageSize = event.pageSize;
+      this.pageIndex = event.pageIndex;
+      this.loadEmployees();
+    });
+  }
+
+  loadEmployees() {
+    this.clientService.loadClientEmployees(this.pageSize, this.pageIndex + 1).subscribe(data => {
+      if (data?.employees) {
+        this.employeesList.data = data.employees;
+      }
+    });
   }
 }

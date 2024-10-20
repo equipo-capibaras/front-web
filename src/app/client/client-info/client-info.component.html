@@ -2,16 +2,16 @@
   <ul class="company-info__list">
     <li class="company-info__item">
       <span class="material-symbols-outlined company-info__icon">business</span>
-      <span class="company-info__text">{{ clientData.name || '-' }}</span>
+      <span>{{ clientData.name || '-' }}</span>
     </li>
     <li class="company-info__item">
       <span class="material-symbols-outlined company-info__icon">email</span>
-      <span class="company-info__text">{{ clientData.emailIncidents || '-' }}</span>
+      <span>{{ clientData.emailIncidents || '-' }}</span>
     </li>
     <li class="company-info__item">
       <span class="material-symbols-outlined company-info__icon">star</span>
-      <span class="company-info__text">Plan {{ formattedPlan }}</span>
-      <a href="#" class="page__link">Cambiar</a>
+      <span i18n="@@plan">Plan {{ formattedPlan }}</span>
+      <a href="#" class="page__link" i18n="@@change">Cambiar</a>
     </li>
   </ul>
 </div>

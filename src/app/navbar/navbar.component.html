@@ -7,7 +7,12 @@
 
     <div class="center-buttons">
       @if (userRole === Role.Admin) {
-        <button id="btn-company" i18n="@@menuCompany" type="button" mat-button routerLink="/admin">
+        <button
+          id="btn-company"
+          i18n="@@companyManagement"
+          type="button"
+          mat-button
+          routerLink="/admin">
           Gestión empresa
         </button>
         <button

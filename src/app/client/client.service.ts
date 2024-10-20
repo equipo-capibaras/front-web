@@ -74,17 +74,13 @@ export class ClientService {
       .subscribe();
   }
 
-  loadClientEmployees(): void {
-    this.http
-      .get<EmployeeListResponse>(`${this.apiUrl}/employees`)
+  loadClientEmployees(pageSize: number, page: number): Observable<EmployeeListResponse> {
+    return this.http
+      .get<EmployeeListResponse>(`${this.apiUrl}/employees?pageSize=${pageSize}&page=${page}`)
       .pipe(
-        map(data => {
-          this.clientEmployeesSubject.next(data);
-        }),
         catchError(_ => {
-          return of(null);
+          return of({ employees: [], totalPages: 0, currentPage: 0 });
         }),
-      )
-      .subscribe();
+      );
   }
 }
