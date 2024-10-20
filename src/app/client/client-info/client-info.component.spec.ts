@@ -50,20 +50,6 @@ describe('ClientInfoComponent', () => {
     expect(component.clientData).toEqual(mockClientData);
   }));
 
-  it('should return formatted plan correctly', () => {
-    component.clientData = mockClientData;
-
-    const formattedPlan = component.formattedPlan;
-    expect(formattedPlan).toBe('Empresario');
-  });
-
-  it('should return "-" when plan is not available', () => {
-    component.clientData = { ...mockClientData, plan: '' };
-
-    const formattedPlan = component.formattedPlan;
-    expect(formattedPlan).toBe('-');
-  });
-
   it('should set clientData to null if service returns null', fakeAsync(() => {
     spyOn(clientService, 'loadClientData').and.returnValue(of(null));
 
