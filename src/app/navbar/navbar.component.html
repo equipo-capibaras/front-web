@@ -1,62 +1,69 @@
-<mat-toolbar color="primary">
-  <div class="logo-container">
-    <div class="logo"></div>
-  </div>
-  <span class="spacer"></span>
+@if (showNavbar) {
+  <mat-toolbar color="primary">
+    <div class="logo-container">
+      <div class="logo"></div>
+    </div>
+    <span class="spacer"></span>
 
-  <div class="center-buttons">
-    @if (userRole === Role.Admin) {
-      <button id="btn-company" i18n="@@menuCompany" type="button" mat-button routerLink="/admin">
-        Gestión empresa
-      </button>
+    <div class="center-buttons">
+      @if (userRole === Role.Admin) {
+        <button id="btn-company" i18n="@@menuCompany" type="button" mat-button routerLink="/admin">
+          Gestión empresa
+        </button>
+        <button
+          id="btn-dashboards"
+          i18n="@@menuDashboard"
+          type="button"
+          mat-button
+          routerLink="/dashboards">
+          Tableros de control
+        </button>
+        <button
+          id="btn-invoice"
+          i18n="@@menuInvoice"
+          type="button"
+          mat-button
+          routerLink="/invoice">
+          Facturación
+        </button>
+      }
+
+      @if (userRole === Role.Agent) {
+        <button
+          id="btn-incidents"
+          i18n="@@menuIncident"
+          type="button"
+          mat-button
+          routerLink="/incidents">
+          Gestión de incidentes
+        </button>
+      }
+
+      @if (userRole === Role.Analyst) {
+        <button
+          id="btn-dashboards"
+          i18n="@@menuDashboard"
+          type="button"
+          mat-button
+          routerLink="/dashboards">
+          Tableros de control
+        </button>
+      }
+    </div>
+    <span class="spacer"></span>
+
+    <div class="right-buttons">
       <button
-        id="btn-dashboards"
-        i18n="@@menuDashboard"
+        id="btn-myaccount"
+        i18n="@@menuAccount"
         type="button"
         mat-button
-        routerLink="/dashboards">
-        Tableros de control
+        routerLink="/my-account">
+        Mi cuenta
       </button>
-      <button id="btn-invoice" i18n="@@menuInvoice" type="button" mat-button routerLink="/invoice">
-        Facturación
+      <button id="btn-logout" i18n="@@menuLogout" type="button" mat-button (click)="logout()">
+        Cerrar sesión
       </button>
-    }
-
-    @if (userRole === Role.Agent) {
-      <button
-        id="btn-incidents"
-        i18n="@@menuIncident"
-        type="button"
-        mat-button
-        routerLink="/incidents">
-        Gestión de incidentes
-      </button>
-    }
-
-    @if (userRole === Role.Analyst) {
-      <button
-        id="btn-dashboards"
-        i18n="@@menuDashboard"
-        type="button"
-        mat-button
-        routerLink="/dashboards">
-        Tableros de control
-      </button>
-    }
-  </div>
-  <span class="spacer"></span>
-
-  <div class="right-buttons">
-    <button
-      id="btn-myaccount"
-      i18n="@@menuAccount"
-      type="button"
-      mat-button
-      routerLink="/my-account">
-      Mi cuenta
-    </button>
-    <button id="btn-logout" i18n="@@menuLogout" type="button" mat-button (click)="logout()">
-      Cerrar sesión
-    </button>
-  </div>
-</mat-toolbar>
+    </div>
+  </mat-toolbar>
+}

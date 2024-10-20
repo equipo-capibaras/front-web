@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,6 +9,13 @@ import { EmployeeRegisterComponent } from './employee-register.component';
 import { AuthService } from '../../auth/auth.service';
 import { DuplicateEmailError, EmployeeResponse, EmployeeService } from '../employee.service';
 import { Role } from '../../auth/role';
+
+@Component({
+  selector: 'app-mock',
+  standalone: true,
+})
+// eslint-disable-next-line @angular-eslint/component-class-suffix
+class ComponentMock {}
 
 describe('EmployeeRegisterComponent', () => {
   let component: EmployeeRegisterComponent;
@@ -24,7 +32,11 @@ describe('EmployeeRegisterComponent', () => {
     await TestBed.configureTestingModule({
       imports: [EmployeeRegisterComponent, NoopAnimationsModule],
       providers: [
-        provideRouter([]),
+        provideRouter([
+          { path: 'dashboards', component: ComponentMock },
+          { path: 'incidents', component: ComponentMock },
+          { path: 'client/register', component: ComponentMock },
+        ]),
         { provide: AuthService, useValue: authService },
         { provide: EmployeeService, useValue: employeeService },
         { provide: MatSnackBar, useValue: snackBar },
@@ -66,7 +78,7 @@ describe('EmployeeRegisterComponent', () => {
   });
 
   for (const role of Object.values(Role)) {
-    it('should register a employee', () => {
+    it('should register a employee', waitForAsync(() => {
       component.register();
 
       const name = faker.person.fullName();
@@ -103,10 +115,10 @@ describe('EmployeeRegisterComponent', () => {
         role: role,
         password: password,
       });
-    });
+    }));
   }
 
-  it('should show error snackbar on duplicate email error', () => {
+  it('should show error snackbar on duplicate email error', waitForAsync(() => {
     component.register();
 
     const name = faker.person.fullName();
@@ -126,5 +138,5 @@ describe('EmployeeRegisterComponent', () => {
     component.register();
 
     expect(snackBar.open).toHaveBeenCalled();
-  });
+  }));
 });

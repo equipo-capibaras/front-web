@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { faker } from '@faker-js/faker';
@@ -30,7 +30,7 @@ describe('EmployeeService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should register a new employee successfully', () => {
+  it('should register a new employee successfully', waitForAsync(() => {
     const employeeData = generateEmployeeData();
 
     const mockResponse: EmployeeResponse = {
@@ -54,9 +54,9 @@ describe('EmployeeService', () => {
     expect(req.request.body).toEqual(employeeData);
     expect(req.request.context.get(ACCEPTED_ERRORS)).toEqual([409]);
     req.flush(mockResponse);
-  });
+  }));
 
-  it('should throw DuplicateEmailError when email is already registered', () => {
+  it('should throw DuplicateEmailError when email is already registered', waitForAsync(() => {
     const employeeData = generateEmployeeData();
 
     service.register(employeeData).subscribe({
@@ -71,9 +71,9 @@ describe('EmployeeService', () => {
     expect(req.request.body).toEqual(employeeData);
     expect(req.request.context.get(ACCEPTED_ERRORS)).toEqual([409]);
     req.flush({}, { status: 409, statusText: 'Conflict' });
-  });
+  }));
 
-  it('should rethrow other errors', () => {
+  it('should rethrow other errors', waitForAsync(() => {
     const employeeData = generateEmployeeData();
 
     service.register(employeeData).subscribe({
@@ -87,5 +87,5 @@ describe('EmployeeService', () => {
     expect(req.request.body).toEqual(employeeData);
     expect(req.request.context.get(ACCEPTED_ERRORS)).toEqual([409]);
     req.flush({}, { status: 500, statusText: 'Internal Server Error' });
-  });
+  }));
 });
