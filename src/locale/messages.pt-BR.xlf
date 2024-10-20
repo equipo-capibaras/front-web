@@ -174,6 +174,38 @@
         <source>Confirma tu contraseña</source>
         <target>Confirme sua senha</target>
       </trans-unit>
+      <trans-unit id="clientRegisterButtonSubmit" datatype="html">
+        <source>Crear Cuenta</source>
+        <target>Criar uma conta</target>
+      </trans-unit>
+      <trans-unit id="clientRegisterErrorEmailRegistered" datatype="html">
+        <source>Ya existe una empresa con este email.</source>
+        <target>Já existe uma empresa com este email.</target>
+      </trans-unit>
+      <trans-unit id="clientRegisterErrorRequired" datatype="html">
+        <source>Este campo es obligatorio.</source>
+        <target>Esse campo é obrigatório.</target>
+      </trans-unit>
+      <trans-unit id="clientRegisterErrorTooLong60" datatype="html">
+        <source>Este campo no puede superar los 60 caracteres.</source>
+        <target>Esse campo não pode exceder 60 caracteres.</target>
+      </trans-unit>
+      <trans-unit id="clientRegisterPlaceholderEmailPrefix" datatype="html">
+        <source>Correo para reportar incidentes</source>
+        <target>Correio para registar incidentes</target>
+      </trans-unit>
+      <trans-unit id="clientRegisterPlaceholderName" datatype="html">
+        <source>Nombre</source>
+        <target>Nome</target>
+      </trans-unit>
+      <trans-unit id="clientRegisterSuccess" datatype="html">
+        <source>Empresa creada exitosamente</source>
+        <target>Empresa criada com êxito</target>
+      </trans-unit>
+      <trans-unit id="clientRegisterTitle" datatype="html">
+        <source>Ingresa los datos de la empresa</source>
+        <target>Introduza os dados da sua empresa</target>
+      </trans-unit>
       <trans-unit id="employeeRegisterButtonSubmit" datatype="html">
         <source>Crear Cuenta</source>
         <target>Criar conta</target>

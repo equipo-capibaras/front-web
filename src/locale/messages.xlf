@@ -71,6 +71,30 @@
       <trans-unit id="menuLogout" datatype="html">
         <source>Cerrar sesión</source>
       </trans-unit>
+      <trans-unit id="clientRegisterButtonSubmit" datatype="html">
+        <source>Crear Cuenta</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterErrorEmailRegistered" datatype="html">
+        <source>Ya existe una empresa con este email.</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterErrorRequired" datatype="html">
+        <source>Este campo es obligatorio.</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterErrorTooLong60" datatype="html">
+        <source>Este campo no puede superar los 60 caracteres.</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterPlaceholderEmailPrefix" datatype="html">
+        <source>Correo para reportar incidentes</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterPlaceholderName" datatype="html">
+        <source>Nombre</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterSuccess" datatype="html">
+        <source>Empresa creada exitosamente</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterTitle" datatype="html">
+        <source>Ingresa los datos de la empresa</source>
+      </trans-unit>
       <trans-unit id="employeeRegisterButtonSubmit" datatype="html">
         <source>Crear Cuenta</source>
       </trans-unit>

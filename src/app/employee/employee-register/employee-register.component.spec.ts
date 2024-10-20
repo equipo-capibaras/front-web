@@ -79,8 +79,6 @@ describe('EmployeeRegisterComponent', () => {
 
   for (const role of Object.values(Role)) {
     it('should register a employee', waitForAsync(() => {
-      component.register();
-
       const name = faker.person.fullName();
       const email = faker.internet.email();
       const password = faker.internet.password();
@@ -119,8 +117,6 @@ describe('EmployeeRegisterComponent', () => {
   }
 
   it('should show error snackbar on duplicate email error', waitForAsync(() => {
-    component.register();
-
     const name = faker.person.fullName();
     const email = faker.internet.email();
     const password = faker.internet.password();
