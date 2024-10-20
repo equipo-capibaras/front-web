@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 import { Client } from './client';
@@ -27,8 +27,6 @@ export class ClientService {
   private readonly apiUrl = environment.apiUrl;
   private readonly clientDataSubject = new BehaviorSubject<Client | null>(null);
   public clientData$ = this.clientDataSubject.asObservable();
-  private readonly clientEmployeesSubject = new BehaviorSubject<EmployeeListResponse | null>(null);
-  public clientEmployees$ = this.clientEmployeesSubject.asObservable();
 
   constructor(private readonly http: HttpClient) {}
 
@@ -68,20 +66,21 @@ export class ClientService {
           this.clientDataSubject.next(data);
         }),
         catchError(_ => {
+          this.clientDataSubject.next(null);
           return of(null);
         }),
       )
       .subscribe();
   }
 
-  loadClientEmployees(pageSize: number, page: number): Observable<EmployeeListResponse> {
+  loadClientEmployees(pageSize: number, page: number): Observable<EmployeeListResponse | null> {
     return this.http
       .get<EmployeeListResponse>(
         `${this.apiUrl}/employees?page_size=${pageSize}&page_number=${page}`,
       )
       .pipe(
         catchError(_ => {
-          return of({ employees: [], totalPages: 0, currentPage: 0, totalEmployees: 0 });
+          return of(null);
         }),
       );
   }

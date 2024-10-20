@@ -1,22 +1,23 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ClientManagementComponent } from './client-management.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
-import { CompanyManagementComponent } from './client-management.component';
+describe('ClientManagementComponent', () => {
+  let component: ClientManagementComponent;
+  let fixture: ComponentFixture<ClientManagementComponent>;
 
-describe('CompanyManagementComponent', () => {
-  let component: CompanyManagementComponent;
-  let fixture: ComponentFixture<CompanyManagementComponent>;
-
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CompanyManagementComponent],
+      imports: [ClientManagementComponent, NoopAnimationsModule],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CompanyManagementComponent);
+    fixture = TestBed.createComponent(ClientManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

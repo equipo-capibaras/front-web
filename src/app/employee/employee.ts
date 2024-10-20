@@ -4,6 +4,6 @@ export interface Employee {
   name: string;
   email: string;
   role: 'analyst' | 'agent' | 'admin';
-  invitationStatus: string;
+  invitationStatus: 'accepted' | 'pending';
   invitationDate: string;
 }

@@ -43,21 +43,18 @@ export class EmployeeListComponent implements AfterViewInit {
   };
 
   totalEmployees = 0;
+  isLoadingResults = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private clientService: ClientService) {}
 
   ngOnInit(): void {
-    console.log(`entra a ngOnInit, this.paginator:  ${this.paginator}`);
     this.loadEmployees(5, 1);
   }
 
   ngAfterViewInit() {
     this.paginator.page.subscribe((event: PageEvent) => {
-      console.log(
-        `entra a ngAfterViewInit -> this.paginator.page.suscribe, this.paginator.pageSize: ${this.paginator.pageSize}, this.paginator.pageIndex: ${this.paginator.pageIndex}`,
-      );
       this.loadEmployees(event.pageSize, event.pageIndex + 1);
     });
   }

@@ -1,19 +1,22 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { InviteEmployeeComponent } from './invite-employee.component';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('InviteEmployeeComponent', () => {
   let component: InviteEmployeeComponent;
   let fixture: ComponentFixture<InviteEmployeeComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ InviteEmployeeComponent ]
-    })
-    .compileComponents();
+      imports: [InviteEmployeeComponent, NoopAnimationsModule],
+      providers: [provideHttpClient(), provideHttpClientTesting()],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
