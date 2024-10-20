@@ -1,7 +1,9 @@
 import { inject } from '@angular/core';
-import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
+import { HttpContextToken, HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, throwError } from 'rxjs';
+
+export const ACCEPTED_ERRORS = new HttpContextToken<number[]>(() => []);
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const snackBar = inject(MatSnackBar);
@@ -9,6 +11,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       let errorMessage = '';
+
+      if (req.context?.get(ACCEPTED_ERRORS).includes(error.status)) {
+        return throwError(() => error);
+      }
 
       // Identificar el tipo de error según el código de estado
       switch (error.status) {
@@ -28,12 +34,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           errorMessage = `Error ${error.status}: ${error.statusText}`;
       }
 
-      // Mostrar el SnackBar con el mensaje de error y duración de 5 segundos
-      snackBar.open(errorMessage, $localize`:@@opt-cerrar:Cerrar`, {
+      snackBar.open(errorMessage, $localize`:@@snackbarClose:Cerrar`, {
         duration: 10000,
       });
 
-      // Propagar el error para que sea manejado en otros lugares si es necesario
       return throwError(() => new Error(errorMessage));
     }),
   );

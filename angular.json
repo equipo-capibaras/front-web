@@ -46,6 +46,14 @@
             "i18nMissingTranslation": "error"
           },
           "configurations": {
+            "es-AR": {
+              "localize": ["es-AR"],
+              "outputPath": "dist/abcall/es-AR"
+            },
+            "pt-BR": {
+              "localize": ["pt-BR"],
+              "outputPath": "dist/abcall/pt-BR"
+            },
             "production": {
               "budgets": [
                 {
@@ -80,8 +88,15 @@
             },
             "development": {
               "buildTarget": "abcall:build:development"
+            },
+            "es-AR": {
+              "buildTarget": "abcall:build:es-AR"
+            },
+            "pt-BR": {
+              "buildTarget": "abcall:build:pt-BR"
             }
           },
+
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
@@ -90,7 +105,9 @@
             "buildTarget": "abcall:build",
             "format": "xlf",
             "outputPath": "src/locale",
-            "targetFiles": ["messages.es-AR.xlf", "messages.pt-BR.xlf"]
+            "targetFiles": ["messages.es-AR.xlf", "messages.pt-BR.xlf"],
+            "trim": true,
+            "sort": "stableAlphabetNew"
           }
         },
         "test": {

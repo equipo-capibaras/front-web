@@ -9,6 +9,8 @@ export default defineConfig({
     baseUrl: 'http://localhost:4200',
     video: true,
     videoCompression: true,
+    viewportWidth: 1280,
+    viewportHeight: 720,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setupNodeEvents(on: Cypress.PluginEvents, config: Cypress.PluginConfigOptions) {
       on('task', {

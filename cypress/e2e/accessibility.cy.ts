@@ -1,4 +1,5 @@
 import axe from 'axe-core';
+import Login from 'cypress/pageobjects/login';
 
 function terminalLog(violations: axe.Result[]) {
   cy.task(
@@ -19,8 +20,68 @@ function terminalLog(violations: axe.Result[]) {
 }
 
 describe('Accessibility Tests', () => {
-  it('Login page has no detectable a11y violations on load', () => {
+  it('`/` page has no detectable a11y violations on load', () => {
     cy.visit('/');
+
+    cy.wait(2000);
+
+    cy.injectAxe();
+    cy.checkA11y(undefined, undefined, terminalLog);
+  });
+
+  it('`/register` page has no detectable a11y violations on load', () => {
+    cy.visit('/register');
+
+    cy.wait(2000);
+
+    cy.injectAxe();
+    cy.checkA11y(undefined, undefined, terminalLog);
+  });
+
+  it('`/admin` page has no detectable a11y violations on load', () => {
+    cy.visit('/');
+
+    cy.fixture('login.admin.json').then(loginData => {
+      const login = new Login();
+      login.login(loginData.email, loginData.password);
+    });
+
+    cy.location('pathname').should('eq', '/admin');
+
+    cy.wait(2000);
+
+    cy.injectAxe();
+    cy.checkA11y(undefined, undefined, terminalLog);
+  });
+
+  it('`/dashboards` page has no detectable a11y violations on load', () => {
+    cy.visit('/');
+
+    cy.fixture('login.analyst.json').then(loginData => {
+      const login = new Login();
+      login.login(loginData.email, loginData.password);
+    });
+
+    cy.location('pathname').should('eq', '/dashboards');
+
+    cy.wait(2000);
+
+    cy.injectAxe();
+    cy.checkA11y(undefined, undefined, terminalLog);
+  });
+
+  it('`/incidents` page has no detectable a11y violations on load', () => {
+    cy.visit('/');
+
+    cy.fixture('login.agent.json').then(loginData => {
+      const login = new Login();
+      login.login(loginData.email, loginData.password);
+    });
+
+    cy.location('pathname').should('eq', '/incidents');
+
+    cy.wait(2000);
+
     cy.injectAxe();
     cy.checkA11y(undefined, undefined, terminalLog);
   });

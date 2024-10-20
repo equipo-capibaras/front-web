@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,17 +11,9 @@ import { AuthService } from './auth/auth.service';
 class NavbarMock {}
 
 describe('AppComponent', () => {
-  let authService: jasmine.SpyObj<AuthService>;
-
   beforeEach(async () => {
-    authService = jasmine.createSpyObj('AuthService', ['userRole$']);
-    Object.defineProperty(authService, 'userRole$', {
-      get: () => of(null),
-    });
-
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [{ provide: AuthService, useValue: authService }],
     })
       .overrideComponent(AppComponent, {
         remove: { imports: [NavbarComponent] },

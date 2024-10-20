@@ -1,0 +1,79 @@
+@import 'src/colors.scss';
+
+.client-register-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.client-register-card {
+  position: relative;
+  background-color: white;
+  padding: 110px 2rem 2rem 2rem;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  margin-top: 100px;
+  margin-bottom: 2rem;
+}
+
+.logo-container {
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 185px;
+  height: 160px;
+}
+
+.logo {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 185px;
+  height: 160px;
+  background-image: url('../../../../public/images/logo.png');
+}
+
+.logo-background {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 160px;
+  background: white;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.25));
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.register-button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+}
+
+#form-client-register {
+  padding-top: 1.5rem;
+}
+
+.mat-divider {
+  display: flex;
+  align-items: baseline;
+}
+
+.inputEmail {
+  width: 70%;
+}
+
+.clientEmailHint {
+  margin-left: 0.5rem;
+}

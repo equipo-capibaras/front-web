@@ -14,38 +14,141 @@
       <trans-unit id="error-500" datatype="html">
         <source>El servidor está teniendo problemas. Por favor, inténtalo más tarde.</source>
       </trans-unit>
-      <trans-unit id="opt-cerrar" datatype="html">
+      <trans-unit id="role" datatype="html">
+        <source>Rol</source>
+      </trans-unit>
+      <trans-unit id="roleColumn" datatype="html">
+        <source>Rol</source>
+        <target>Rol</target>
+      </trans-unit>
+      <trans-unit id="snackbarClose" datatype="html">
         <source>Cerrar</source>
       </trans-unit>
-      <trans-unit id="tituloLogin" datatype="html">
+      <trans-unit id="statusAccepted" datatype="html">
+        <source>Aceptada</source>
+      </trans-unit>
+      <trans-unit id="statusPending" datatype="html">
+        <source>Pendiente</source>
+      </trans-unit>
+      <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
       </trans-unit>
-      <trans-unit id="correoLabel" datatype="html">
+      <trans-unit id="loginLabelEmail" datatype="html">
         <source>Correo</source>
       </trans-unit>
-      <trans-unit id="correoPlaceholder:Texto para el campo de correo" datatype="html">
+      <trans-unit id="loginPlaceholderEmail" datatype="html">
         <source>Ingresa tu correo</source>
       </trans-unit>
-      <trans-unit id="contrasenaLabel" datatype="html">
+      <trans-unit id="loginLabelPassword" datatype="html">
         <source>Contraseña</source>
       </trans-unit>
-      <trans-unit id="contrasenaPlaceholder:Texto para el campo de contraseña" datatype="html">
+      <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
       </trans-unit>
-      <trans-unit id="botonIngresar" datatype="html">
-        <source> Ingresar </source>
+      <trans-unit id="invitationStatus" datatype="html">
+        <source>Estado Invitación</source>
       </trans-unit>
-      <trans-unit id="linkRegistro" datatype="html">
+      <trans-unit id="invitationStatusColumn" datatype="html">
+        <source>Estado Invitación</source>
+      </trans-unit>
+      <trans-unit id="inviteEmployee" datatype="html">
+        <source>Invitar empleado</source>
+      </trans-unit>
+      <trans-unit id="loginButtonSubmit" datatype="html">
+        <source>Ingresar</source>
+      </trans-unit>
+      <trans-unit id="loginLinkRegister" datatype="html">
         <source>¿Todavía no tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Regístrate<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
       </trans-unit>
-      <trans-unit id="campo-obligatorio" datatype="html">
+      <trans-unit id="loginErrorRequired" datatype="html">
         <source>Este campo es obligatorio</source>
       </trans-unit>
-      <trans-unit id="usuario-invalido" datatype="html">
+      <trans-unit id="loginErrorInvalidEmail" datatype="html">
         <source>Debe ser un correo electrónico válido</source>
+      </trans-unit>
+      <trans-unit id="planEmprendedorPrice" datatype="html">
+        <source>$21,000</source>
+      </trans-unit>
+      <trans-unit id="planEmprendedorTitle" datatype="html">
+        <source>Emprendedor</source>
+      </trans-unit>
+      <trans-unit id="planEmpresarioPlusPrice" datatype="html">
+        <source>$34,000</source>
+      </trans-unit>
+      <trans-unit id="planEmpresarioPlusTitle" datatype="html">
+        <source>Empresario +</source>
+      </trans-unit>
+      <trans-unit id="planEmpresarioPrice" datatype="html">
+        <source>$27,000</source>
+      </trans-unit>
+      <trans-unit id="planEmpresarioTitle" datatype="html">
+        <source>Empresario</source>
+      </trans-unit>
+      <trans-unit id="planFeatureAdvancedDashboards" datatype="html">
+        <source>Tableros avanzados para analizar operaciones y objetivos.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureAllFromEmprendedor" datatype="html">
+        <source>Todo lo del plan Emprendedor.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureAllFromEmpresario" datatype="html">
+        <source>Todo lo del plan Empresario.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureAutomaticNotifications" datatype="html">
+        <source>Notificaciones automáticas al resolver incidentes.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureContinuousMonitoring" datatype="html">
+        <source>Monitoreo continuo para detectar situaciones urgentes.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureIncidentEscalation" datatype="html">
+        <source>Automatización del escalamiento de incidentes.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureKeyMonitoring" datatype="html">
+        <source>Monitoreo de indicadores clave de satisfacción.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureMultipleChannels" datatype="html">
+        <source>Múltiples canales de contacto: teléfono, chatbot, app móvil, correo.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureOutboundCalls" datatype="html">
+        <source>Llamadas de salida para encuestas de satisfacción y ventas.</source>
+      </trans-unit>
+      <trans-unit id="planFeaturePersonalSupport" datatype="html">
+        <source>Atención telefónica personalizada de soporte para tus clientes.</source>
+      </trans-unit>
+      <trans-unit id="planFeaturePredictiveAnalytics" datatype="html">
+        <source>Analítica predictiva para PQRs.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureRealTimeBoards" datatype="html">
+        <source>Tableros de control en tiempo real.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureRiskAnalysis" datatype="html">
+        <source>Análisis de riesgo basado en casos previos.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureSpecializedAgents" datatype="html">
+        <source>Agentes especializados que registran cada incidente.</source>
+      </trans-unit>
+      <trans-unit id="planFeatureWebApplication" datatype="html">
+        <source>Consulta y registro por aplicación web.</source>
+      </trans-unit>
+      <trans-unit id="planPriceDetail" datatype="html">
+        <source>/mes + incidencias</source>
+      </trans-unit>
+      <trans-unit id="planSelectButton" datatype="html">
+        <source>Seleccionar</source>
       </trans-unit>
       <trans-unit id="prontoEmpleados" datatype="html">
         <source>Aquí pronto hay el listado de empleados.</source>
+      </trans-unit>
+      <trans-unit id="paginatorItemsPerPage" datatype="html">
+        <source>Items por página:</source>
+      </trans-unit>
+      <trans-unit id="paginatorNextPage" datatype="html">
+        <source>Siguiente página</source>
+      </trans-unit>
+      <trans-unit id="paginatorPreviousPage" datatype="html">
+        <source>Página anterior</source>
+      </trans-unit>
+      <trans-unit id="plan" datatype="html">
+        <source>Plan <x id="INTERPOLATION" equiv-text="{{ formattedPlan }}"/></source>
       </trans-unit>
       <trans-unit id="prontoIncidentes" datatype="html">
         <source>Aquí pronto hay el listado de incidentes.</source>
@@ -54,22 +157,127 @@
         <source>Aquí pronto hay los tableros de control.</source>
       </trans-unit>
       <trans-unit id="menuAccount" datatype="html">
-        <source> Mi cuenta </source>
+        <source>Mi cuenta</source>
       </trans-unit>
-      <trans-unit id="menuCompany" datatype="html">
-        <source> Gestión empresa </source>
+      <trans-unit id="companyManagement" datatype="html">
+        <source>Gestión empresa</source>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
-        <source> Tableros de control </source>
+        <source>Tableros de control</source>
       </trans-unit>
       <trans-unit id="menuIncident" datatype="html">
-        <source> Gestión de incidentes </source>
+        <source>Gestión de incidentes</source>
       </trans-unit>
       <trans-unit id="menuInvoice" datatype="html">
-        <source> Facturación </source>
+        <source>Facturación</source>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Cerrar sesión</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterButtonSubmit" datatype="html">
+        <source>Crear Cuenta</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterErrorEmailRegistered" datatype="html">
+        <source>Ya existe una empresa con este email.</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterErrorRequired" datatype="html">
+        <source>Este campo es obligatorio.</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterErrorTooLong60" datatype="html">
+        <source>Este campo no puede superar los 60 caracteres.</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterPlaceholderEmailPrefix" datatype="html">
+        <source>Correo para reportar incidentes</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterPlaceholderName" datatype="html">
+        <source>Nombre</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterSuccess" datatype="html">
+        <source>Empresa creada exitosamente</source>
+      </trans-unit>
+      <trans-unit id="clientRegisterTitle" datatype="html">
+        <source>Ingresa los datos de la empresa</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterButtonSubmit" datatype="html">
+        <source>Crear Cuenta</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorEmailRegistered" datatype="html">
+        <source>Ya existe un usuario con este email.</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorInvalidEmail" datatype="html">
+        <source>Debe ser un correo electrónico válido</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorPasswordMismatch" datatype="html">
+        <source>Las contraseñas no coinciden.</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorPasswordShort" datatype="html">
+        <source>La contraseña debe tener al menos 8 caracteres.</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorRequired" datatype="html">
+        <source>Este campo es obligatorio.</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterErrorTooLong60" datatype="html">
+        <source>Este campo no puede superar los 60 caracteres.</source>
+      </trans-unit>
+      <trans-unit id="email" datatype="html">
+        <source>Correo</source>
+      </trans-unit>
+      <trans-unit id="name" datatype="html">
+        <source>Nombre</source>
+      </trans-unit>
+      <trans-unit id="emailColumn" datatype="html">
+        <source>Correo</source>
+      </trans-unit>
+      <trans-unit id="nameColumn" datatype="html">
+        <source>Nombre</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelPassword" datatype="html">
+        <source>Contraseña</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelPasswordConfirmation" datatype="html">
+        <source>Confirma tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLabelRole" datatype="html">
+        <source>¿Qué rol desempeña?</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterLinkLogin" datatype="html">
+        <source>Ya tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Ingresa<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterOptionRoleAdmin" datatype="html">
+        <source>Administrador</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterOptionRoleAgente" datatype="html">
+        <source>Agente</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterOptionRoleOAnalista" datatype="html">
+        <source>Analítica</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderEmail" datatype="html">
+        <source>Ingresa tu correo</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderName" datatype="html">
+        <source>Ingresa el nombre</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderPassword" datatype="html">
+        <source>Ingresa tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterPlaceholderPasswordConfirmation" datatype="html">
+        <source>Confirma tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterSuccess" datatype="html">
+        <source>Cuenta creada exitosamente</source>
+      </trans-unit>
+      <trans-unit id="employeeRegisterTitle" datatype="html">
+        <source>Crea tu cuenta</source>
+      </trans-unit>
+      <trans-unit id="change" datatype="html">
+        <source>Cambiar</source>
+      </trans-unit>
+      <trans-unit id="clientManagementPageDescription" datatype="html">
+        <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e invitar fácilmente a tus empleados<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que se unan a la empresa, permitiéndoles acceder a las herramientas y funcionalidades disponibles en la plataforma. También podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>actualizar el plan<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> actual de tu empresa.</source>
+      </trans-unit>
+      <trans-unit id="selectPage" datatype="html">
+       <source>Seleccionar página</source>
       </trans-unit>
     </body>
   </file>

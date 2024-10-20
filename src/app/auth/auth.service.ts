@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 import { of, map, catchError, Observable, BehaviorSubject } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from 'src/environments/environment';
 import { Role } from './role';
+import { NO_TOKEN } from '../interceptors/token.interceptor';
 
-interface LoginResponse {
+interface DecodedToken {
+  aud: string;
+  role: Role;
+}
+
+interface TokenResponse {
   token: string;
 }
 
@@ -27,10 +33,8 @@ export class AuthService {
     }
 
     try {
-      const decodedToken = jwtDecode(token);
-      const role = Object.values(Role).includes(decodedToken.aud as Role)
-        ? (decodedToken.aud as Role)
-        : null;
+      const decodedToken = jwtDecode<DecodedToken>(token);
+      const role = Object.values(Role).includes(decodedToken.role) ? decodedToken.role : null;
 
       return role;
     } catch {
@@ -43,8 +47,14 @@ export class AuthService {
   }
 
   login(username: string, password: string): Observable<boolean> {
+    const context = new HttpContext().set(NO_TOKEN, true);
+
     return this.http
-      .post<LoginResponse>(`${this.apiUrl}/auth/employee`, { username, password })
+      .post<TokenResponse>(
+        `${this.apiUrl}/auth/employee`,
+        { username, password },
+        { context: context },
+      )
       .pipe(
         map(response => {
           localStorage.setItem('token', response.token);
@@ -64,5 +74,22 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     this.setUserRole();
+  }
+
+  refreshToken() {
+    return this.http.post<TokenResponse>(`${this.apiUrl}/auth/employee/refresh`, {}).pipe(
+      map(response => {
+        localStorage.setItem('token', response.token);
+        this.setUserRole();
+        return true;
+      }),
+      catchError(() => {
+        return of(false);
+      }),
+    );
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 }
