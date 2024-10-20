@@ -1,5 +1,7 @@
 <nav>
-  <app-navbar />
+  @if (userRole !== null) {
+    <app-navbar />
+  }
 </nav>
 <main>
   <router-outlet />

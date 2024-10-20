@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CompanyManagementComponent } from './company-management.component';
+import { CompanyManagementComponent } from './client-management.component';
 
 describe('CompanyManagementComponent', () => {
   let component: CompanyManagementComponent;
@@ -11,9 +11,8 @@ describe('CompanyManagementComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CompanyManagementComponent ]
-    })
-    .compileComponents();
+      declarations: [CompanyManagementComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

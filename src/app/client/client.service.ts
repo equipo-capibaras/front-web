@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
-import { of, throwError } from 'rxjs';
+import { BehaviorSubject, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
+import { Client } from './client';
+import { environment } from 'src/environments/environment';
 
 export class DuplicateEmailError extends Error {
   constructor(message?: string) {
@@ -17,11 +19,14 @@ export interface ClientResponse {
   emailIncidents: string;
   plan: string | null;
 }
-
 @Injectable({
   providedIn: 'root',
 })
 export class ClientService {
+  private readonly apiUrl = environment.apiUrl;
+  private readonly clientDataSubject = new BehaviorSubject<Client | null>(null);
+  public clientData$ = this.clientDataSubject.asObservable();
+
   constructor(private readonly http: HttpClient) {}
 
   register(clientData: { name: string; prefixEmailIncidents: string }) {
@@ -50,5 +55,20 @@ export class ClientService {
         return of(false);
       }),
     );
+  }
+
+  loadClientData(): void {
+    this.http
+      .get<Client>(`${this.apiUrl}/clients/me`)
+      .pipe(
+        map(data => {
+          this.clientDataSubject.next(data);
+        }),
+        catchError(error => {
+          console.error('Error fetching client data', error);
+          return of(null);
+        }),
+      )
+      .subscribe();
   }
 }
