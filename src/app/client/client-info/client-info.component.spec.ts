@@ -1,9 +1,7 @@
-/* tslint:disable:no-unused-variable */
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ClientInfoComponent } from './client-info.component';
 import { ClientService } from '../client.service';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
-import { of, BehaviorSubject } from 'rxjs';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Client } from '../client';
 import { provideHttpClient } from '@angular/common/http';
@@ -20,8 +18,6 @@ describe('ClientInfoComponent', () => {
     plan: 'empresario',
     emailIncidents: 'pqrs-empresa@capibaras.io',
   };
-
-  const clientDataSubject = new BehaviorSubject<Client | null>(mockClientData);
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({

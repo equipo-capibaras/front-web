@@ -42,7 +42,7 @@ export const routes: Routes = [
     path: 'admin',
     component: ClientManagementComponent,
     canActivate: [authGuard],
-    data: { roles: [Role.Admin] },
+    data: { roles: [Role.Admin], showNavbar: true },
   },
   {
     path: 'dashboards',

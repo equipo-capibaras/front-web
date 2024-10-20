@@ -11,7 +11,7 @@ module.exports = function (config) {
       require('karma-mocha-reporter'),
       require('karma-junit-reporter'),
       require('karma-coverage'),
-      require('@angular-devkit/build-angular/plugins/karma')
+      require('@angular-devkit/build-angular/plugins/karma'),
     ],
     client: {
       jasmine: {
@@ -24,16 +24,12 @@ module.exports = function (config) {
     junitReporter: {
       outputDir: require('path').join(__dirname, './junit'),
       outputFile: 'test-results.xml',
-      useBrowserName: false
+      useBrowserName: false,
     },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/abcall'),
       subdir: '.',
-      reporters: [
-        { type: 'html' },
-        { type: 'lcovonly' },
-        { type: 'text-summary' }
-      ]
+      reporters: [{ type: 'html' }, { type: 'lcovonly' }, { type: 'text-summary' }],
     },
     reporters: ['mocha', 'junit'],
     browsers: ['ChromeHeadless'],

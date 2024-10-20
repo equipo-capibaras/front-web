@@ -148,7 +148,6 @@ describe('ClientService', () => {
     );
     expect(req.request.method).toBe('POST');
     req.flush({}, { status: 500, statusText: 'Internal Server Error' });
-
   }));
 
   it('should load client data and update the subject', fakeAsync(() => {

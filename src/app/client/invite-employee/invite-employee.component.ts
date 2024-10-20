@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -8,8 +8,4 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./invite-employee.component.css'],
   imports: [MatButtonModule],
 })
-export class InviteEmployeeComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class InviteEmployeeComponent {}

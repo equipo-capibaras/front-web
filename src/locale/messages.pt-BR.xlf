@@ -22,6 +22,10 @@
         <source>Rol</source>
         <target state="new">Rol</target>
       </trans-unit>
+      <trans-unit id="roleColumn" datatype="html">
+        <source>Rol</source>
+        <target state="new">Rol</target>
+      </trans-unit>
       <trans-unit id="snackbarClose" datatype="html">
         <source>Cerrar</source>
         <target>Fechar</target>
@@ -233,6 +237,10 @@
         <source>Nombre</source>
         <target>Nome</target>
       </trans-unit>
+      <trans-unit id="nameColumn" datatype="html">
+        <source>Nombre</source>
+        <target>Nome</target>
+      </trans-unit>
       <trans-unit id="employeeRegisterPlaceholderName" datatype="html">
         <source>Ingresa el nombre</source>
         <target>Digite o nome</target>
@@ -246,6 +254,10 @@
         <target>Esse campo não pode exceder 60 caracteres.</target>
       </trans-unit>
       <trans-unit id="email" datatype="html">
+        <source>Correo</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="emailColumn" datatype="html">
         <source>Correo</source>
         <target>Email</target>
       </trans-unit>
@@ -348,6 +360,10 @@
       <trans-unit id="clientManagementPageDescription" datatype="html">
         <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e invitar fácilmente a tus empleados<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que se unan a la empresa, permitiéndoles acceder a las herramientas y funcionalidades disponibles en la plataforma. También podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>actualizar el plan<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> actual de tu empresa.</source>
         <target>Em <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gerenciar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, você poderá <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e convidar facilmente seus funcionários<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que eles se juntem à empresa, permitindo-lhes acessar as ferramentas e funcionalidades disponíveis na plataforma. Você também poderá <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>atualizar o plano<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> atual da sua empresa.</target>
+      </trans-unit>
+      <trans-unit id="selectPage" datatype="html">
+       <source>Seleccionar página</source>
+       <target>Selecione a página</target>
       </trans-unit>
     </body>
   </file>

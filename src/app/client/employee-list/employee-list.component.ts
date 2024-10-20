@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import {
   MatPaginator,
   MatPaginatorModule,
@@ -20,16 +20,16 @@ import { Employee } from 'src/app/employee/Employee';
   styleUrl: './employee-list.component.scss',
   providers: [{ provide: MatPaginatorIntl, useClass: CustomPaginatorIntl }],
 })
-export class EmployeeListComponent implements AfterViewInit {
+export class EmployeeListComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['name', 'email', 'role', 'invitationStatus'];
   employeesList = new MatTableDataSource<Employee>();
 
-  employeeRole: { [key: string]: string } = {
+  employeeRole: Record<string, string> = {
     analyst: $localize`:@@employeeRegisterOptionRoleOAnalista:Analítica`,
     agent: $localize`:@@employeeRegisterOptionRoleAgente:Agente`,
     admin: $localize`:@@employeeRegisterOptionRoleAdmin:Administrador`,
   };
-  chipInfo: { [key: string]: { icon: string; text: string; cssClass: string } } = {
+  chipInfo: Record<string, { icon: string; text: string; cssClass: string }> = {
     accepted: {
       icon: 'check',
       text: $localize`:@@statusAccepted:Aceptada`,
