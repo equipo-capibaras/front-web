@@ -1,0 +1,72 @@
+<div class="client-register-container">
+  <div class="client-register-card">
+    <div class="logo-container">
+      <span class="logo-background"></span><span class="logo"></span>
+    </div>
+    <h1 class="mat-title-large" i18n="@@clientRegisterTitle">Ingresa los datos de la empresa</h1>
+
+    <form id="form-client-register" [formGroup]="registerForm" (ngSubmit)="register()">
+      <mat-form-field appearance="outline" class="full-width">
+        <input
+          id="name"
+          matInput
+          formControlName="name"
+          type="text"
+          required
+          placeholder="Nombre"
+          i18n-placeholder="@@clientRegisterPlaceholderName" />
+
+        @if (name.invalid && (name.dirty || name.touched)) {
+          <mat-error>
+            @if (name.errors?.['required']) {
+              <span i18n="@@clientRegisterErrorRequired">Este campo es obligatorio.</span>
+            }
+            @if (name.errors?.['maxlength']) {
+              <span i18n="@@clientRegisterErrorTooLong60"
+                >Este campo no puede superar los 60 caracteres.</span
+              >
+            }
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <div class="mat-divider">
+        <mat-form-field appearance="outline" class="full-width inputEmail">
+          <input
+            id="email"
+            matInput
+            formControlName="email"
+            type="text"
+            required
+            placeholder="Correo para reportar incidentes"
+            i18n-placeholder="@@clientRegisterPlaceholderEmailPrefix" />
+
+          @if (email.invalid && (email.dirty || email.touched)) {
+            <mat-error>
+              @if (email.errors?.['required']) {
+                <span i18n="@@clientRegisterErrorRequired">Este campo es obligatorio.</span>
+              }
+
+              @if (email.errors?.['maxlength']) {
+                <span i18n="@@clientRegisterErrorTooLong60"
+                  >Este campo no puede superar los 60 caracteres.</span
+                >
+              }
+            </mat-error>
+          }
+        </mat-form-field>
+        <div>
+          <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
+          <span class="clientEmailHint">&#64;capibaras.io</span>
+        </div>
+      </div>
+      <button
+        type="submit"
+        mat-flat-button
+        class="register-button mat-body-large"
+        i18n="@@clientRegisterButtonSubmit">
+        Crear Cuenta
+      </button>
+    </form>
+  </div>
+</div>
