@@ -13,6 +13,11 @@ import { CommonModule } from '@angular/common';
 })
 export class ClientInfoComponent implements OnInit {
   clientData: Client | null = null;
+  clientPlan: Record<string, string> = {
+    emprendedor: $localize`:@@planEmprendedorTitle:Emprendedor`,
+    empresario: $localize`:@@planEmpresarioTitle:Empresario`,
+    empresario_plus: $localize`:@@planEmpresarioPlusTitle:Empresario +`,
+  };
 
   constructor(private readonly clientService: ClientService) {}
 
@@ -20,14 +25,5 @@ export class ClientInfoComponent implements OnInit {
     this.clientService.loadClientData().subscribe(data => {
       this.clientData = data;
     });
-  }
-
-  get formattedPlan(): string {
-    if (this.clientData?.plan) {
-      return (
-        this.clientData.plan.charAt(0).toUpperCase() + this.clientData.plan.slice(1).toLowerCase()
-      );
-    }
-    return '-';
   }
 }
