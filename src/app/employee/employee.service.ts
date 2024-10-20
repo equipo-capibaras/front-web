@@ -3,6 +3,7 @@ import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http
 import { throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
+import { NO_TOKEN } from '../interceptors/token.interceptor';
 
 export class DuplicateEmailError extends Error {
   constructor(message?: string) {
@@ -28,7 +29,9 @@ export class EmployeeService {
   constructor(private readonly http: HttpClient) {}
 
   register(employeeData: { name: string; email: string; password: string; role: string }) {
-    const context = new HttpContext().set(ACCEPTED_ERRORS, [409]);
+    const context = new HttpContext();
+    context.set(ACCEPTED_ERRORS, [409]);
+    context.set(NO_TOKEN, true);
 
     return this.http
       .post<EmployeeResponse>(`/api/v1/employees`, employeeData, { context: context })

@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClientService, DuplicateEmailError } from '../client.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-client-register',
@@ -34,6 +35,7 @@ export class ClientRegisterComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly snackbar: MatSnackBar,
     private readonly clientService: ClientService,
+    private readonly authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -70,7 +72,11 @@ export class ClientRegisterComponent implements OnInit {
           },
         );
 
-        this.router.navigate(['/client/select-plan']);
+        this.authService.refreshToken().subscribe({
+          next: () => {
+            this.router.navigate(['/client/select-plan']);
+          },
+        });
       },
       error: error => {
         if (error instanceof DuplicateEmailError) {

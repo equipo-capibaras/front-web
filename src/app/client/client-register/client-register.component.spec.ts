@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ClientRegisterComponent } from './client-register.component';
 import { ClientResponse, ClientService, DuplicateEmailError } from '../client.service';
+import { AuthService } from '../../auth/auth.service';
 import { of, throwError } from 'rxjs';
 
 @Component({
@@ -20,9 +21,11 @@ describe('ClientRegisterComponent', () => {
   let component: ClientRegisterComponent;
   let fixture: ComponentFixture<ClientRegisterComponent>;
   let clientService: jasmine.SpyObj<ClientService>;
+  let authService: jasmine.SpyObj<AuthService>;
   let snackBar: jasmine.SpyObj<MatSnackBar>;
 
   beforeEach(async () => {
+    authService = jasmine.createSpyObj('AuthService', ['refreshToken']);
     clientService = jasmine.createSpyObj('ClientService', ['register']);
     snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
 
@@ -30,6 +33,7 @@ describe('ClientRegisterComponent', () => {
       imports: [ClientRegisterComponent, NoopAnimationsModule],
       providers: [
         provideRouter([{ path: 'client/select-plan', component: ComponentMock }]),
+        { provide: AuthService, useValue: authService },
         { provide: ClientService, useValue: clientService },
         { provide: MatSnackBar, useValue: snackBar },
       ],
@@ -65,6 +69,7 @@ describe('ClientRegisterComponent', () => {
       plan: null,
     };
 
+    authService.refreshToken.and.returnValue(of(true));
     clientService.register.and.returnValue(of(mockResponse));
 
     component.register();

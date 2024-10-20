@@ -122,4 +122,52 @@ describe('AuthService', () => {
     expect(localStorage.getItem('token')).toBeNull();
     expect(service.getRole()).toBeNull();
   });
+
+  it('getToken should return the token from local storage', () => {
+    const tokenHeader = { alg: 'HS256', typ: 'JWT' };
+    const tokenkPayload = { role: 'unknown' };
+    const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
+    localStorage.setItem('token', mockToken);
+
+    initComponent();
+
+    expect(service.getToken()).toBe(mockToken);
+  });
+
+  it('refreshToken should return true on successful refresh', () => {
+    const role = faker.helpers.arrayElement(Object.values(Role));
+    const tokenHeader = { alg: 'HS256', typ: 'JWT' };
+    const tokenkPayload = { role: role };
+    const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
+
+    initComponent();
+
+    service.refreshToken().subscribe(result => {
+      expect(result).toBe(true);
+      expect(localStorage.getItem('token')).toBe(mockToken);
+    });
+
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/auth/employee/refresh`);
+    expect(req.request.method).toBe('POST');
+    req.flush({ token: mockToken });
+  });
+
+  it('refreshToken should return false on failed refresh', () => {
+    initComponent();
+
+    service.refreshToken().subscribe(result => {
+      expect(result).toBe(false);
+      expect(localStorage.getItem('token')).toBeNull();
+    });
+
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/auth/employee/refresh`);
+    expect(req.request.method).toBe('POST');
+    req.flush(
+      {
+        message: 'Internal Server Error',
+        code: 500,
+      },
+      { status: 500, statusText: 'Internal Server Error' },
+    );
+  });
 });
