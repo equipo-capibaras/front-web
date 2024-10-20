@@ -76,10 +76,12 @@ export class ClientService {
 
   loadClientEmployees(pageSize: number, page: number): Observable<EmployeeListResponse> {
     return this.http
-      .get<EmployeeListResponse>(`${this.apiUrl}/employees?pageSize=${pageSize}&page=${page}`)
+      .get<EmployeeListResponse>(
+        `${this.apiUrl}/employees?page_size=${pageSize}&page_number=${page}`,
+      )
       .pipe(
         catchError(_ => {
-          return of({ employees: [], totalPages: 0, currentPage: 0 });
+          return of({ employees: [], totalPages: 0, currentPage: 0, totalEmployees: 0 });
         }),
       );
   }

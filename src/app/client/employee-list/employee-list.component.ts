@@ -23,8 +23,6 @@ import { Employee } from 'src/app/employee/Employee';
 export class EmployeeListComponent implements AfterViewInit {
   displayedColumns: string[] = ['name', 'email', 'role', 'invitationStatus'];
   employeesList = new MatTableDataSource<Employee>();
-  pageSize = 5;
-  pageIndex = 0;
 
   employeeRole: { [key: string]: string } = {
     analyst: $localize`:@@employeeRegisterOptionRoleOAnalista:Analítica`,
@@ -44,27 +42,31 @@ export class EmployeeListComponent implements AfterViewInit {
     },
   };
 
+  totalEmployees = 0;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private clientService: ClientService) {}
 
   ngOnInit(): void {
-    this.loadEmployees();
+    console.log(`entra a ngOnInit, this.paginator:  ${this.paginator}`);
+    this.loadEmployees(5, 1);
   }
 
   ngAfterViewInit() {
-    this.employeesList.paginator = this.paginator;
     this.paginator.page.subscribe((event: PageEvent) => {
-      this.pageSize = event.pageSize;
-      this.pageIndex = event.pageIndex;
-      this.loadEmployees();
+      console.log(
+        `entra a ngAfterViewInit -> this.paginator.page.suscribe, this.paginator.pageSize: ${this.paginator.pageSize}, this.paginator.pageIndex: ${this.paginator.pageIndex}`,
+      );
+      this.loadEmployees(event.pageSize, event.pageIndex + 1);
     });
   }
 
-  loadEmployees() {
-    this.clientService.loadClientEmployees(this.pageSize, this.pageIndex + 1).subscribe(data => {
+  loadEmployees(pageSize: number, page: number) {
+    this.clientService.loadClientEmployees(pageSize, page).subscribe(data => {
       if (data?.employees) {
         this.employeesList.data = data.employees;
+        this.totalEmployees = data.totalEmployees;
       }
     });
   }
