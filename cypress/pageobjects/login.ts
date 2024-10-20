@@ -11,9 +11,17 @@ export default class Login {
     return cy.get('button[type="submit"]');
   }
 
+  get registerLink() {
+    return cy.get('.register-link a');
+  }
+
   login(email: string, password: string) {
     this.email.type(email);
     this.password.type(password);
     this.submit.click();
+  }
+
+  goToRegister() {
+    this.registerLink.click();
   }
 }
