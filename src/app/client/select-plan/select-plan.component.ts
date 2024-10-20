@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -8,7 +8,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
-import { SelectPlanService } from './select-plan.service'; // Import the SelectPlanService
+import { ClientService } from '../client.service';
+import { AuthService } from '../../auth/auth.service';
+import { defaultRoutes } from '../../auth/default.routes';
 
 @Component({
   selector: 'app-select-plan',
@@ -32,15 +34,17 @@ export class SelectPlanComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly selectPlanService: SelectPlanService,
+    private readonly authService: AuthService,
+    private readonly clientService: ClientService,
   ) {}
 
   savePlan(planName: string) {
-    this.selectPlanService.savePlan(planName).subscribe(success => {
+    this.clientService.savePlan(planName).subscribe(success => {
       if (success) {
-        this.router.navigate(['/']);
-      } else {
-        this.router.navigate(['/']);
+        const role = this.authService.getRole();
+        if (role !== null) {
+          this.router.navigate([defaultRoutes[role]]);
+        }
       }
     });
   }

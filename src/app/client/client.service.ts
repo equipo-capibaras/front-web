@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 
@@ -37,6 +37,17 @@ export class ClientService {
         }
 
         return throwError(() => error);
+      }),
+    );
+  }
+
+  savePlan(planName: string) {
+    return this.http.post<ClientResponse>(`/api/v1/clients/me/plan/${planName}`, {}).pipe(
+      map(() => {
+        return true;
+      }),
+      catchError(() => {
+        return of(false);
       }),
     );
   }

@@ -7,7 +7,7 @@ import { IncidentListComponent } from './incident/incident-list/incident-list.co
 import { EmployeeListComponent } from './client/employee-list/employee-list.component';
 import { ClientRegisterComponent } from './client/client-register/client-register.component';
 import { authGuard } from './auth/auth.guard';
-import { SelectPlanComponent } from './select-plan/select-plan.component';
+import { SelectPlanComponent } from './client/select-plan/select-plan.component';
 
 export const routes: Routes = [
   {
@@ -32,7 +32,7 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'select-plan',
+    path: 'client/select-plan',
     component: SelectPlanComponent,
     data: {
       showNavbar: false,

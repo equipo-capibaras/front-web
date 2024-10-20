@@ -82,4 +82,36 @@ describe('ClientService', () => {
     expect(req.request.context.get(ACCEPTED_ERRORS)).toEqual([409]);
     req.flush({}, { status: 500, statusText: 'Internal Server Error' });
   }));
+
+  it('should save a plan successfully', waitForAsync(() => {
+    const planName = faker.helpers.arrayElement(['emprendedor', 'empresario', 'empresario_plus']);
+
+    service.savePlan(planName).subscribe({
+      next: response => {
+        expect(response).toBeTrue();
+      },
+    });
+
+    const req = httpTestingController.expectOne(
+      `${environment.apiUrl}/clients/me/plan/${planName}`,
+    );
+    expect(req.request.method).toBe('POST');
+    req.flush({});
+  }));
+
+  it('should return false when saving a plan fails', waitForAsync(() => {
+    const planName = faker.helpers.arrayElement(['emprendedor', 'empresario', 'empresario_plus']);
+
+    service.savePlan(planName).subscribe({
+      next: response => {
+        expect(response).toBeFalse();
+      },
+    });
+
+    const req = httpTestingController.expectOne(
+      `${environment.apiUrl}/clients/me/plan/${planName}`,
+    );
+    expect(req.request.method).toBe('POST');
+    req.flush({}, { status: 500, statusText: 'Internal Server Error' });
+  }));
 });
