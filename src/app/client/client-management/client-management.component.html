@@ -1,0 +1,21 @@
+<div class="page company-management">
+  <div class="page__container">
+    <div class="page__header">
+      <h1 class="page__title" i18n="@@companyManagement">Gestión empresa</h1>
+      <span class="page__description" i18n="@@clientManagementPageDescription">
+        En <em>Gestionar Empresa</em>, podrás
+        <strong class="page__description--strong">ver e invitar fácilmente a tus empleados</strong>
+        para que se unan a la empresa, permitiéndoles acceder a las herramientas y funcionalidades
+        disponibles en la plataforma. También podrás
+        <strong class="page__description--strong">actualizar el plan</strong> actual de tu empresa.
+      </span>
+    </div>
+
+    <div class="company-management__info">
+      <app-client-info />
+      <app-invite-employee />
+    </div>
+
+    <app-employee-list />
+  </div>
+</div>

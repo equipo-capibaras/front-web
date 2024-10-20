@@ -59,6 +59,7 @@ body {
   background-color: $blue-50;
   color: $blue-800;
   font-family: 'Fira Sans', sans-serif;
+  font-size: 16px;
 }
 
 h1,
@@ -86,4 +87,108 @@ router-outlet + * {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  &__container {
+    max-width: 1280px;
+    width: 100%;
+    padding: 55px 24px;
+  }
+
+  &__header {
+    padding-bottom: 32px;
+    border-bottom: 1px solid $blue-500;
+  }
+
+  &__description {
+    font-weight: 300;
+    &--strong {
+      font-weight: 400;
+    }
+  }
+
+  h1.page__title {
+    font-size: 2rem;
+    line-height: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .mat-mdc-chip.page__chip {
+    &--success {
+      background-color: $success;
+      box-shadow: 1px red solid;
+      border: none;
+    }
+    &--warning {
+      background-color: $warning;
+    }
+
+    &--success,
+    &--warning {
+      .mdc-evolution-chip__text-label {
+        color: white;
+        font-weight: 400;
+      }
+    }
+  }
+
+  &__link {
+    color: $blue-800;
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 500;
+
+    &:hover {
+      color: #0056b3;
+    }
+  }
+
+  &__table {
+    .mat-mdc-table {
+      background-color: transparent;
+      thead {
+        background-color: $blue-500;
+        .mat-mdc-header-cell {
+          color: white;
+          font-weight: 400;
+        }
+      }
+      .mat-mdc-cell {
+        color: $blue-700;
+        font-weight: 300;
+        border-bottom-color: $blue-500;
+      }
+    }
+
+    .mat-mdc-paginator {
+      background-color: transparent;
+      .mat-mdc-paginator-page-size-label,
+      .mat-mdc-paginator-range-label {
+        font-size: 0.875rem;
+        color: $blue-800;
+      }
+    }
+
+    .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      .material-symbols-outlined {
+        font-size: 1.125rem;
+      }
+    }
+  }
+
+  .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled)
+    .mdc-evolution-chip__action--primary::before {
+    border-color: transparent;
+  }
+
+  button {
+    font-weight: 400;
+  }
 }

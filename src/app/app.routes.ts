@@ -4,10 +4,10 @@ import { LoginComponent } from './auth/login/login.component';
 import { EmployeeRegisterComponent } from './employee/employee-register/employee-register.component';
 import { DashboardComponent } from './analytics/dashboard/dashboard.component';
 import { IncidentListComponent } from './incident/incident-list/incident-list.component';
-import { EmployeeListComponent } from './client/employee-list/employee-list.component';
 import { ClientRegisterComponent } from './client/client-register/client-register.component';
 import { authGuard } from './auth/auth.guard';
 import { SelectPlanComponent } from './client/select-plan/select-plan.component';
+import { ClientManagementComponent } from './client/client-management/client-management.component';
 
 export const routes: Routes = [
   {
@@ -40,12 +40,9 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    component: EmployeeListComponent,
+    component: ClientManagementComponent,
     canActivate: [authGuard],
-    data: {
-      roles: [Role.Admin],
-      showNavbar: true,
-    },
+    data: { roles: [Role.Admin], showNavbar: true },
   },
   {
     path: 'dashboards',

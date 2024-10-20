@@ -18,9 +18,25 @@
         <source>El servidor está teniendo problemas. Por favor, inténtalo más tarde.</source>
         <target>O servidor está com problemas. Por favor, tente novamente mais tarde.</target>
       </trans-unit>
+      <trans-unit id="role" datatype="html">
+        <source>Rol</source>
+        <target>Função</target>
+      </trans-unit>
+      <trans-unit id="roleColumn" datatype="html">
+        <source>Rol</source>
+        <target>Rol</target>
+      </trans-unit>
       <trans-unit id="snackbarClose" datatype="html">
         <source>Cerrar</source>
         <target>Fechar</target>
+      </trans-unit>
+      <trans-unit id="statusAccepted" datatype="html">
+        <source>Aceptada</source>
+        <target>Aceita</target>
+      </trans-unit>
+      <trans-unit id="statusPending" datatype="html">
+        <source>Pendiente</source>
+        <target>Pendente</target>
       </trans-unit>
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
@@ -41,6 +57,18 @@
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
         <target>Insira sua senha</target>
+      </trans-unit>
+      <trans-unit id="invitationStatus" datatype="html">
+        <source>Estado Invitación</source>
+        <target>Status do Convite</target>
+      </trans-unit>
+      <trans-unit id="invitationStatusColumn" datatype="html">
+        <source>Estado Invitación</source>
+        <target>Status do Convite</target>
+      </trans-unit>
+      <trans-unit id="inviteEmployee" datatype="html">
+        <source>Invitar empleado</source>
+        <target>Convidar funcionário</target>
       </trans-unit>
       <trans-unit id="loginButtonSubmit" datatype="html">
         <source>Ingresar</source>
@@ -158,11 +186,27 @@
         <source>Aquí pronto hay el listado de empleados.</source>
         <target>Em breve você encontrará a lista de funcionários aqui.</target>
       </trans-unit>
+      <trans-unit id="paginatorItemsPerPage" datatype="html">
+        <source>Items por página:</source>
+        <target>Itens por página:</target>
+      </trans-unit>
+      <trans-unit id="paginatorNextPage" datatype="html">
+        <source>Siguiente página</source>
+        <target>Próxima página</target>
+      </trans-unit>
+      <trans-unit id="paginatorPreviousPage" datatype="html">
+        <source>Página anterior</source>
+        <target>Página anterior</target>
+      </trans-unit>
+      <trans-unit id="plan" datatype="html">
+        <source>Plan <x id="INTERPOLATION" equiv-text="{{ formattedPlan }}"/></source>
+        <target>Plano <x id="INTERPOLATION" equiv-text="{{ formattedPlan }}"/></target>
+      </trans-unit>
       <trans-unit id="prontoIncidentes" datatype="html">
         <source>Aquí pronto hay el listado de incidentes.</source>
         <target>Em breve você encontrará a lista de incidentes aqui.</target>
       </trans-unit>
-      <trans-unit id="menuCompany" datatype="html">
+      <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
         <target>Gestão da empresa</target>
       </trans-unit>
@@ -194,7 +238,11 @@
         <source>Crea tu cuenta</source>
         <target>Crie sua conta</target>
       </trans-unit>
-      <trans-unit id="employeeRegisterLabelName" datatype="html">
+      <trans-unit id="name" datatype="html">
+        <source>Nombre</source>
+        <target>Nome</target>
+      </trans-unit>
+      <trans-unit id="nameColumn" datatype="html">
         <source>Nombre</source>
         <target>Nome</target>
       </trans-unit>
@@ -210,7 +258,11 @@
         <source>Este campo no puede superar los 60 caracteres.</source>
         <target>Esse campo não pode exceder 60 caracteres.</target>
       </trans-unit>
-      <trans-unit id="employeeRegisterLabelEmail" datatype="html">
+      <trans-unit id="email" datatype="html">
+        <source>Correo</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="emailColumn" datatype="html">
         <source>Correo</source>
         <target>Email</target>
       </trans-unit>
@@ -305,6 +357,18 @@
       <trans-unit id="employeeRegisterLinkLogin" datatype="html">
         <source>Ya tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Ingresa<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>Já tem uma conta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Entre<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="change" datatype="html">
+        <source>Cambiar</source>
+        <target>Alterar</target>
+      </trans-unit>
+      <trans-unit id="clientManagementPageDescription" datatype="html">
+        <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e invitar fácilmente a tus empleados<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que se unan a la empresa, permitiéndoles acceder a las herramientas y funcionalidades disponibles en la plataforma. También podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>actualizar el plan<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> actual de tu empresa.</source>
+        <target>Em <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gerenciar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, você poderá <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e convidar facilmente seus funcionários<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que eles se juntem à empresa, permitindo-lhes acessar as ferramentas e funcionalidades disponíveis na plataforma. Você também poderá <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>atualizar o plano<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> atual da sua empresa.</target>
+      </trans-unit>
+      <trans-unit id="selectPage" datatype="html">
+       <source>Seleccionar página</source>
+       <target>Selecione a página</target>
       </trans-unit>
     </body>
   </file>

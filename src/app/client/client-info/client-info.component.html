@@ -1,0 +1,20 @@
+<div class="company-info">
+  <ul class="company-info__list">
+    <li class="company-info__item">
+      <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
+      <span class="material-symbols-outlined company-info__icon">business</span>
+      <span>{{ clientData?.name || '-' }}</span>
+    </li>
+    <li class="company-info__item">
+      <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
+      <span class="material-symbols-outlined company-info__icon">email</span>
+      <span>{{ clientData?.emailIncidents || '-' }}</span>
+    </li>
+    <li class="company-info__item">
+      <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
+      <span class="material-symbols-outlined company-info__icon">star</span>
+      <span i18n="@@plan">Plan {{ formattedPlan }}</span>
+      <a href="#" class="page__link" i18n="@@change">Cambiar</a>
+    </li>
+  </ul>
+</div>
