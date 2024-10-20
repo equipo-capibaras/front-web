@@ -34,12 +34,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           errorMessage = `Error ${error.status}: ${error.statusText}`;
       }
 
-      // Mostrar el SnackBar con el mensaje de error y duración de 5 segundos
       snackBar.open(errorMessage, $localize`:@@snackbarClose:Cerrar`, {
         duration: 10000,
       });
 
-      // Propagar el error para que sea manejado en otros lugares si es necesario
       return throwError(() => new Error(errorMessage));
     }),
   );

@@ -4,6 +4,8 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
 import { CustomPaginatorIntl } from '../../pagination/pagination';
 import { CommonModule } from '@angular/common';
+import { ClientService } from '../client.service';
+import { Employee } from 'src/app/employee/Employee';
 
 @Component({
   selector: 'app-employee-list',
@@ -14,46 +16,41 @@ import { CommonModule } from '@angular/common';
   providers: [{ provide: MatPaginatorIntl, useClass: CustomPaginatorIntl }],
 })
 export class EmployeeListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['name', 'email', 'rol', 'invitation'];
-  dataSource = new MatTableDataSource<Employee>(ELEMENT_DATA);
+  displayedColumns: string[] = ['name', 'email', 'role', 'invitationStatus'];
+  employeesList = new MatTableDataSource<Employee>();
+  chipInfo: { [key: string]: { icon: string; text: string; cssClass: string } } = {
+    accepted: {
+      icon: 'check',
+      text: 'Aceptada',
+      cssClass: 'page__chip--success',
+    },
+    pending: {
+      icon: 'schedule',
+      text: 'Pendiente',
+      cssClass: 'page__chip--warning',
+    },
+  };
+  employeeRole: { [key: string]: string } = {
+    analyst: 'Analista',
+    agent: 'Agente',
+    admin: 'Administrador',
+  };
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  constructor(private clientService: ClientService) {}
+
+  ngOnInit(): void {
+    this.clientService.loadClientEmployees();
+
+    this.clientService.clientEmployees$.subscribe(data => {
+      if (data?.employees) {
+        this.employeesList.data = data.employees;
+      }
+    });
+  }
+
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.employeesList.paginator = this.paginator;
   }
 }
-
-export interface Employee {
-  name: string;
-  email: string;
-  rol: string;
-  invitation: string;
-}
-
-const ELEMENT_DATA: Employee[] = [
-  {
-    name: 'Maria Aristizabal',
-    email: 'maria@empresa.com',
-    rol: 'Administrador',
-    invitation: 'Aceptada',
-  },
-  {
-    name: 'Maria Aristizabal',
-    email: 'maria@empresa.com',
-    rol: 'Administrador',
-    invitation: 'Aceptada',
-  },
-  {
-    name: 'Maria Aristizabal',
-    email: 'maria@empresa.com',
-    rol: 'Administrador',
-    invitation: 'Aceptada',
-  },
-  {
-    name: 'Maria Aristizabal',
-    email: 'maria@empresa.com',
-    rol: 'Administrador',
-    invitation: 'Pendiente',
-  },
-];

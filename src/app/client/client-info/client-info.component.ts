@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Client } from '../client';
 import { ClientService } from '../client.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-client-info',
   standalone: true,
   templateUrl: './client-info.component.html',
   styleUrls: ['./client-info.component.scss'],
-  imports: [MatIconModule],
+  imports: [MatIconModule, CommonModule],
 })
 export class ClientInfoComponent implements OnInit {
   clientData: Client | null = null;
@@ -20,7 +21,15 @@ export class ClientInfoComponent implements OnInit {
 
     this.clientService.clientData$.subscribe(data => {
       this.clientData = data;
-      console.log('Client Data:', this.clientData);
     });
+  }
+
+  get formattedPlan(): string {
+    if (this.clientData?.plan) {
+      return (
+        this.clientData.plan.charAt(0).toUpperCase() + this.clientData.plan.slice(1).toLowerCase()
+      );
+    }
+    return '-';
   }
 }

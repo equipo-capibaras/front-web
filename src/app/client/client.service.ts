@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 import { Client } from './client';
 import { environment } from 'src/environments/environment';
+import { EmployeeListResponse } from './employee-list/employee-list';
 
 export class DuplicateEmailError extends Error {
   constructor(message?: string) {
@@ -26,6 +27,8 @@ export class ClientService {
   private readonly apiUrl = environment.apiUrl;
   private readonly clientDataSubject = new BehaviorSubject<Client | null>(null);
   public clientData$ = this.clientDataSubject.asObservable();
+  private readonly clientEmployeesSubject = new BehaviorSubject<EmployeeListResponse | null>(null);
+  public clientEmployees$ = this.clientEmployeesSubject.asObservable();
 
   constructor(private readonly http: HttpClient) {}
 
@@ -64,8 +67,21 @@ export class ClientService {
         map(data => {
           this.clientDataSubject.next(data);
         }),
-        catchError(error => {
-          console.error('Error fetching client data', error);
+        catchError(_ => {
+          return of(null);
+        }),
+      )
+      .subscribe();
+  }
+
+  loadClientEmployees(): void {
+    this.http
+      .get<EmployeeListResponse>(`${this.apiUrl}/employees`)
+      .pipe(
+        map(data => {
+          this.clientEmployeesSubject.next(data);
+        }),
+        catchError(_ => {
           return of(null);
         }),
       )
