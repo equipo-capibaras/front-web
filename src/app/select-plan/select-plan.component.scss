@@ -1,0 +1,144 @@
+@import 'src/colors.scss'; // Ruta hacia tu archivo de colores
+
+// Aplicamos la paleta personalizada
+$primary-color: $blue-500;
+$primary-hover: $blue-400;
+$background-light: $blue-50;
+$grey-600: #6b6b6b;
+$grey-800: #424242;
+
+// Contenedor principal
+.select-plan-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 2rem;
+  background-color: $background-light;
+  font-size: 24px;
+}
+
+// Tarjetas de planes
+.plan-card {
+  flex: 1;
+  max-width: 320px;
+
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 784px;
+  background-color: white;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  }
+}
+.mat-mdc-card-header {
+  padding: 10%;
+  margin: 0;
+  margin-bottom: 0.5rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+}
+
+.entrepreneur {
+  background: $primary-color;
+  text-align: center;
+}
+.businessman {
+  background: $blue-600;
+  text-align: center;
+}
+.businessmanplus {
+  background: $blue-700;
+  text-align: center;
+}
+
+.plan-header {
+  text-align: center;
+  margin-bottom: 1rem;
+
+  mat-card-title {
+    color: $primary-color;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  mat-card-subtitle {
+    margin-top: 0.5rem;
+  }
+}
+
+// Precio del plan
+.price {
+  font-weight: bold;
+  color: $primary-color;
+  text-align: CENTER;
+  margin-bottom: 0.5rem;
+  margin-top: 2rem;
+}
+
+.price-value {
+  font-size: 64px;
+  color: $blue-800;
+  font-weight: 400;
+}
+
+.price-detail {
+  display: block;
+  color: $blue-600;
+  font-size: 18px;
+  margin-top: 1rem;
+  font-weight: 100;
+  margin-bottom: 30px;
+}
+
+// Lista de características del plan
+.plan-features {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  flex-grow: 1;
+  padding: 1.5rem;
+  li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: $grey-800;
+    list-style: disc;
+  }
+}
+
+// Acciones de la tarjeta
+.mat-card-actions {
+  text-align: center;
+  padding-top: 1rem;
+
+  button {
+    width: 100%;
+    background-color: $primary-color;
+    color: white;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $primary-hover;
+    }
+  }
+}
+
+.plan-features li {
+  color: $blue-800;
+}
+
+.custom-line {
+  border-top: 1px solid $blue-200;
+  margin: 5px 0;
+  width: 100%;
+  margin-top: 30px;
+}
