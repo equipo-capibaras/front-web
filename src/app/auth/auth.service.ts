@@ -5,6 +5,9 @@ import { jwtDecode } from 'jwt-decode';
 import { environment } from 'src/environments/environment';
 import { Role } from './role';
 import { NO_TOKEN } from '../interceptors/token.interceptor';
+import { Router } from '@angular/router';
+import { SnackbarService } from '../services/snackbar.service';
+import { ERROR_MESSAGES } from '../shared/error-messages';
 
 interface DecodedToken {
   aud: string;
@@ -23,7 +26,11 @@ export class AuthService {
   private readonly userRoleSubject = new BehaviorSubject<Role | null>(this.loadRoleFromToken());
   public userRole$ = this.userRoleSubject.asObservable();
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly router: Router,
+    private readonly snackbarService: SnackbarService,
+  ) {}
 
   private loadRoleFromToken(): Role | null {
     const token = localStorage.getItem('token');
@@ -58,7 +65,7 @@ export class AuthService {
       .pipe(
         map(response => {
           localStorage.setItem('token', response.token);
-          this.setUserRole(); // Set the user role after successful login
+          this.setUserRole();
           return true;
         }),
         catchError(() => {
@@ -91,5 +98,12 @@ export class AuthService {
 
   getToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  handleTokenExpired() {
+    this.snackbarService.showError(ERROR_MESSAGES.JWT_EXPIRED);
+    localStorage.removeItem('token');
+    this.setUserRole();
+    this.router.navigate(['/']);
   }
 }

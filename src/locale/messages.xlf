@@ -5,6 +5,12 @@
       <trans-unit id="error-401" datatype="html">
         <source>Usuario o contraseña incorrectos.</source>
       </trans-unit>
+      <trans-unit id="error-jwt-expired" datatype="html">
+        <source>Tu sesión ha expirado. Por favor, inicia sesión nuevamente.</source>
+      </trans-unit>
+      <trans-unit id="error-jwt-missing" datatype="html">
+        <source>Falta el token de autenticación.</source>
+      </trans-unit>
       <trans-unit id="error-403" datatype="html">
         <source>No tienes permiso para acceder a este recurso.</source>
       </trans-unit>
