@@ -170,4 +170,14 @@ describe('AuthService', () => {
       { status: 500, statusText: 'Internal Server Error' },
     );
   });
+
+  it('handleTokenExpired should remove token, show error, and navigate to login', () => {
+    initComponent();
+
+    localStorage.setItem('token', 'fakeToken');
+    service.handleTokenExpired();
+    expect(localStorage.getItem('token')).toBeNull();
+    expect(snackbarServiceSpy.showError).toHaveBeenCalledWith(ERROR_MESSAGES.JWT_EXPIRED);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
+  });
 });
