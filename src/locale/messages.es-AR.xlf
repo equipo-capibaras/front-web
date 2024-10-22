@@ -12,7 +12,7 @@
       </trans-unit>
       <trans-unit id="error-jwt-missing" datatype="html">
         <source>Falta el token de autenticación.</source>
-        <target>>Falta el token de autenticación.</target>
+        <target>Falta el token de autenticación.</target>
       </trans-unit>
       <trans-unit id="error-403" datatype="html">
         <source>No tienes permiso para acceder a este recurso.</source>
