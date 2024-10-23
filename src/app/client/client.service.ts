@@ -58,8 +58,18 @@ export class ClientService {
     );
   }
 
-  loadClientData(): Observable<Client | null> {
+  loadClientData(forceUpdate = false): Observable<Client | null> {
+    const currentClientData = this.clientDataSubject.getValue();
+
+    if (currentClientData && !forceUpdate) {
+      return of(currentClientData);
+    }
+
     return this.http.get<Client>(`${this.apiUrl}/clients/me`).pipe(
+      map(clientData => {
+        this.clientDataSubject.next(clientData);
+        return clientData;
+      }),
       catchError(_ => {
         return of(null);
       }),

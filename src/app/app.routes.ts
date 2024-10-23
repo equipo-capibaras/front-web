@@ -45,6 +45,15 @@ export const routes: Routes = [
     data: { roles: [Role.Admin], showNavbar: true },
   },
   {
+    path: 'admin/change-plan',
+    component: SelectPlanComponent,
+    canActivate: [authGuard],
+    data: {
+      roles: [Role.Admin],
+      showNavbar: true,
+    },
+  },
+  {
     path: 'dashboards',
     component: DashboardComponent,
     canActivate: [authGuard],

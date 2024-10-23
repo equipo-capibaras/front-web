@@ -14,7 +14,7 @@
       <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
       <span class="material-symbols-outlined company-info__icon">star</span>
       <span i18n="@@plan">Plan {{ clientPlan[clientData?.plan || 'emprendedor'] }}</span>
-      <a href="#" class="page__link" i18n="@@change">Cambiar</a>
+      <a class="page__link" [routerLink]="['/admin/change-plan']" i18n="@@change">Cambiar</a>
     </li>
   </ul>
 </div>

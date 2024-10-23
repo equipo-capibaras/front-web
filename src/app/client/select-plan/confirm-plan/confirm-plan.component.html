@@ -1,0 +1,16 @@
+<mat-dialog-content>
+  <p i18n="@@changePlanQuestion">
+    ¿Estás seguro de que deseas cambiar del plan <strong>{{ data.currentPlan }}</strong> al plan
+    <strong>{{ data.newPlan }}</strong
+    >?
+  </p>
+  <p i18n="@@changePlanPrice"><strong>Precio mensual:</strong> {{ data.newPrice }}</p>
+  <hr />
+  <p i18n="@@changePlanImportant"><strong>Importante: </strong>{{ billingMessage }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" mat-button (click)="onCancel()" i18n="@@changePlanCancel">Cancelar</button>
+  <button type="button" mat-button color="primary" (click)="onConfirm()" i18n="@@changePlanConfirm">
+    Confirmar
+  </button>
+</mat-dialog-actions>
