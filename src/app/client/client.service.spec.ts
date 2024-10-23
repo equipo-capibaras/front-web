@@ -169,11 +169,14 @@ describe('ClientService', () => {
     }
   }));
 
-  it('should handle HTTP error in loadClientData and set null', fakeAsync(() => {
-    let result: Client | null = null;
+  it('should handle HTTP error in loadClientData and send error', fakeAsync(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let errorResponse: any;
 
-    service.loadClientData().subscribe((response: Client | null) => {
-      result = response;
+    service.loadClientData().subscribe({
+      error: error => {
+        errorResponse = error;
+      },
     });
 
     const req = httpTestingController.expectOne(`${service['apiUrl']}/clients/me`);
@@ -182,7 +185,8 @@ describe('ClientService', () => {
 
     tick();
 
-    expect(result).toBeNull();
+    expect(errorResponse.status).toBe(500);
+    expect(errorResponse.statusText).toBe('Server Error');
   }));
 
   it('should load employee data and return EmployeeListResponse', fakeAsync(() => {

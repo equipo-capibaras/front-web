@@ -3,6 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ClientManagementComponent } from './client-management.component';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { ActivatedRoute } from '@angular/router';
 
 describe('ClientManagementComponent', () => {
   let component: ClientManagementComponent;
@@ -11,7 +12,11 @@ describe('ClientManagementComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [ClientManagementComponent, NoopAnimationsModule],
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: ActivatedRoute, useValue: {} },
+      ],
     }).compileComponents();
   }));
 

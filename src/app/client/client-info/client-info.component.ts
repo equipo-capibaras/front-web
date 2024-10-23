@@ -3,13 +3,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { Client } from '../client';
 import { ClientService } from '../client.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-client-info',
   standalone: true,
   templateUrl: './client-info.component.html',
   styleUrls: ['./client-info.component.scss'],
-  imports: [MatIconModule, CommonModule],
+  imports: [MatIconModule, CommonModule, RouterModule],
 })
 export class ClientInfoComponent implements OnInit {
   clientData: Client | null = null;
@@ -19,11 +21,19 @@ export class ClientInfoComponent implements OnInit {
     empresario_plus: $localize`:@@planEmpresarioPlusTitle:Empresario +`,
   };
 
-  constructor(private readonly clientService: ClientService) {}
+  constructor(
+    private readonly clientService: ClientService,
+    private readonly snackbarService: SnackbarService,
+  ) {}
 
   ngOnInit(): void {
-    this.clientService.loadClientData().subscribe(data => {
-      this.clientData = data;
+    this.clientService.loadClientData(true).subscribe({
+      next: data => {
+        this.clientData = data;
+      },
+      error: err => {
+        this.snackbarService.showError(err);
+      },
     });
   }
 }
