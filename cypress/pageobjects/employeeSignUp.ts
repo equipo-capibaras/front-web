@@ -1,26 +1,26 @@
 export default class EmployeeSignUp {
   get employeeName() {
-    return cy.get('input[id="name"]');
+    return cy.get('#form-employee-register input[id="name"]');
   }
 
   get employeeEmail() {
-    return cy.get('input[id="email"]');
+    return cy.get('#form-employee-register input[id="email"]');
   }
 
   get password() {
-    return cy.get('input[id="password"]');
+    return cy.get('#form-employee-register input[id="password"]');
   }
 
   get confirmPassword() {
-    return cy.get('input[id="passwordConfirmation"]');
+    return cy.get('#form-employee-register input[id="passwordConfirmation"]');
   }
 
   get roleDropdown() {
-    return cy.get('mat-select[formcontrolname="role"]');
+    return cy.get('#form-employee-register mat-select[formcontrolname="role"]');
   }
 
   get submit() {
-    return cy.get('button[type="submit"]');
+    return cy.get('#form-employee-register button[type="submit"]');
   }
 
   selectRole(role: string) {
@@ -41,9 +41,5 @@ export default class EmployeeSignUp {
     this.password.type(password);
     this.confirmPassword.type(confirmPassword, { force: true });
     this.submit.click();
-  }
-
-  checkClientEmailHint() {
-    this.clientEmailHint.should('contain', '@capibaras.io');
   }
 }
