@@ -7,21 +7,28 @@ import {
   HttpEvent,
   HttpContext,
 } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ACCEPTED_ERRORS, errorInterceptor } from './error.interceptor';
 import { of, throwError, Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
+import { SnackbarService } from '../services/snackbar.service';
+import { ERROR_MESSAGES } from '../shared/error-messages';
 
 describe('errorInterceptor', () => {
-  let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
+  let snackbarServiceSpy: jasmine.SpyObj<SnackbarService>;
+  let authServiceSpy: jasmine.SpyObj<AuthService>;
 
   const interceptor: HttpInterceptorFn = (req, next) =>
     TestBed.runInInjectionContext(() => errorInterceptor(req, next));
 
   beforeEach(() => {
-    snackBarSpy = jasmine.createSpyObj('MatSnackBar', ['open']);
+    snackbarServiceSpy = jasmine.createSpyObj('SnackbarService', ['showError']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['handleTokenExpired']);
 
     TestBed.configureTestingModule({
-      providers: [{ provide: MatSnackBar, useValue: snackBarSpy }],
+      providers: [
+        { provide: SnackbarService, useValue: snackbarServiceSpy },
+        { provide: AuthService, useValue: authServiceSpy },
+      ],
     });
   });
 
@@ -35,24 +42,52 @@ describe('errorInterceptor', () => {
       statusText: 'Unauthorized',
     });
 
-    // Simulamos el comportamiento del next function que debería devolver un Observable de error
     const next: HttpHandlerFn = () => throwError(() => httpErrorResponse);
 
     interceptor({} as HttpRequest<unknown>, next).subscribe({
       error: error => {
-        expect(error.message).toBe('Usuario o contraseña incorrectos.');
-        expect(snackBarSpy.open).toHaveBeenCalledWith(
-          'Usuario o contraseña incorrectos.',
-          'Cerrar',
-          { duration: 10000 },
-        );
+        expect(error.message).toBe(ERROR_MESSAGES.AUTH_INVALID);
+        expect(snackbarServiceSpy.showError).toHaveBeenCalledWith(ERROR_MESSAGES.AUTH_INVALID);
+        done();
+      },
+    });
+  });
+
+  it('should handle 401 Unauthorized with JWT expired error', done => {
+    const httpErrorResponse = new HttpErrorResponse({
+      status: 401,
+      error: { message: 'Jwt is expired' },
+    });
+
+    const next: HttpHandlerFn = () => throwError(() => httpErrorResponse);
+
+    interceptor({} as HttpRequest<unknown>, next).subscribe({
+      error: error => {
+        expect(error.message).toBe(ERROR_MESSAGES.JWT_EXPIRED);
+        expect(authServiceSpy.handleTokenExpired).toHaveBeenCalled();
+        done();
+      },
+    });
+  });
+
+  it('should handle 401 Unauthorized with JWT missing error', done => {
+    const httpErrorResponse = new HttpErrorResponse({
+      status: 401,
+      error: { message: 'Jwt is missing' },
+    });
+
+    const next: HttpHandlerFn = () => throwError(() => httpErrorResponse);
+
+    interceptor({} as HttpRequest<unknown>, next).subscribe({
+      error: error => {
+        expect(error.message).toBe(ERROR_MESSAGES.JWT_MISSING);
+        expect(snackbarServiceSpy.showError).toHaveBeenCalledWith(ERROR_MESSAGES.JWT_MISSING);
         done();
       },
     });
   });
 
   it('should pass the request without error', done => {
-    // Simulamos una respuesta exitosa
     const httpSuccessResponse: Observable<HttpEvent<unknown>> = of({} as HttpEvent<unknown>);
 
     const next: HttpHandlerFn = () => httpSuccessResponse;
@@ -60,7 +95,7 @@ describe('errorInterceptor', () => {
     interceptor({} as HttpRequest<unknown>, next).subscribe({
       next: response => {
         expect(response).toEqual({} as HttpEvent<unknown>);
-        expect(snackBarSpy.open).not.toHaveBeenCalled();
+        expect(snackbarServiceSpy.showError).not.toHaveBeenCalled();
         done();
       },
     });
@@ -76,12 +111,8 @@ describe('errorInterceptor', () => {
 
     interceptor({} as HttpRequest<unknown>, next).subscribe({
       error: error => {
-        expect(error.message).toBe('No tienes permiso para acceder a este recurso.');
-        expect(snackBarSpy.open).toHaveBeenCalledWith(
-          'No tienes permiso para acceder a este recurso.',
-          'Cerrar',
-          { duration: 10000 },
-        );
+        expect(error.message).toBe(ERROR_MESSAGES.UNAUTHORIZED);
+        expect(snackbarServiceSpy.showError).toHaveBeenCalledWith(ERROR_MESSAGES.UNAUTHORIZED);
         done();
       },
     });
@@ -97,12 +128,8 @@ describe('errorInterceptor', () => {
 
     interceptor({} as HttpRequest<unknown>, next).subscribe({
       error: error => {
-        expect(error.message).toBe('El recurso solicitado no fue encontrado.');
-        expect(snackBarSpy.open).toHaveBeenCalledWith(
-          'El recurso solicitado no fue encontrado.',
-          'Cerrar',
-          { duration: 10000 },
-        );
+        expect(error.message).toBe(ERROR_MESSAGES.NOT_FOUND);
+        expect(snackbarServiceSpy.showError).toHaveBeenCalledWith(ERROR_MESSAGES.NOT_FOUND);
         done();
       },
     });
@@ -118,14 +145,8 @@ describe('errorInterceptor', () => {
 
     interceptor({} as HttpRequest<unknown>, next).subscribe({
       error: error => {
-        expect(error.message).toBe(
-          'El servidor está teniendo problemas. Por favor, inténtalo más tarde.',
-        );
-        expect(snackBarSpy.open).toHaveBeenCalledWith(
-          'El servidor está teniendo problemas. Por favor, inténtalo más tarde.',
-          'Cerrar',
-          { duration: 10000 },
-        );
+        expect(error.message).toBe(ERROR_MESSAGES.SERVER_ERROR);
+        expect(snackbarServiceSpy.showError).toHaveBeenCalledWith(ERROR_MESSAGES.SERVER_ERROR);
         done();
       },
     });
@@ -142,9 +163,7 @@ describe('errorInterceptor', () => {
     interceptor({} as HttpRequest<unknown>, next).subscribe({
       error: error => {
         expect(error.message).toBe('Error 999: Unknown Error');
-        expect(snackBarSpy.open).toHaveBeenCalledWith('Error 999: Unknown Error', 'Cerrar', {
-          duration: 10000,
-        });
+        expect(snackbarServiceSpy.showError).toHaveBeenCalledWith('Error 999: Unknown Error');
         done();
       },
     });

@@ -3,12 +3,11 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { faker } from '@faker-js/faker';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { ClientRegisterComponent } from './client-register.component';
 import { ClientResponse, ClientService, DuplicateEmailError } from '../client.service';
 import { AuthService } from '../../auth/auth.service';
 import { of, throwError } from 'rxjs';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-mock',
@@ -22,12 +21,12 @@ describe('ClientRegisterComponent', () => {
   let fixture: ComponentFixture<ClientRegisterComponent>;
   let clientService: jasmine.SpyObj<ClientService>;
   let authService: jasmine.SpyObj<AuthService>;
-  let snackBar: jasmine.SpyObj<MatSnackBar>;
+  let snackbarService: jasmine.SpyObj<SnackbarService>;
 
   beforeEach(async () => {
     authService = jasmine.createSpyObj('AuthService', ['refreshToken']);
     clientService = jasmine.createSpyObj('ClientService', ['register']);
-    snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
+    snackbarService = jasmine.createSpyObj('SnackbarService', ['showError', 'showSuccess']);
 
     await TestBed.configureTestingModule({
       imports: [ClientRegisterComponent, NoopAnimationsModule],
@@ -35,7 +34,7 @@ describe('ClientRegisterComponent', () => {
         provideRouter([{ path: 'client/select-plan', component: ComponentMock }]),
         { provide: AuthService, useValue: authService },
         { provide: ClientService, useValue: clientService },
-        { provide: MatSnackBar, useValue: snackBar },
+        { provide: SnackbarService, useValue: snackbarService },
       ],
     }).compileComponents();
 
@@ -95,6 +94,6 @@ describe('ClientRegisterComponent', () => {
 
     component.register();
 
-    expect(snackBar.open).toHaveBeenCalled();
+    expect(snackbarService.showError).toHaveBeenCalled();
   }));
 });

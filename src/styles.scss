@@ -192,3 +192,23 @@ router-outlet + * {
     font-weight: 400;
   }
 }
+
+.success-snackbar.mat-mdc-snack-bar-container {
+  .mat-mdc-snackbar-surface {
+    background-color: $success;
+  }
+}
+
+.error-snackbar.mat-mdc-snack-bar-container {
+  .mat-mdc-snackbar-surface {
+    background-color: $red-warn;
+  }
+}
+
+.success-snackbar,
+.error-snackbar {
+  .mat-mdc-snackbar-surface,
+  .mdc-button__label {
+    color: white;
+  }
+}
