@@ -70,8 +70,9 @@ export class ClientService {
         this.clientDataSubject.next(clientData);
         return clientData;
       }),
-      catchError(_ => {
-        return of(null);
+      catchError(err => {
+        console.log('entra al catchError', err.message);
+        return throwError(() => err);
       }),
     );
   }

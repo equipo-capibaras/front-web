@@ -1,29 +1,33 @@
 <div class="select-plan-base">
   <div class="select-plan-container">
-    <mat-card *ngFor="let plan of plans; trackBy: trackByPlanId" class="plan-card">
-      <mat-card-header [ngClass]="plan.headerClass">
-        <mat-card-title>{{ plan.title }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="price">
-          <span class="price-value">{{ plan.price }}</span>
-          <span class="price-detail" i18n="@@planPriceDetail">/mes + incidencias</span>
-          <button
-            type="button"
-            mat-flat-button
-            color="primary"
-            class="select-button"
-            [disabled]="currentPlan?.id === plan.id"
-            i18n="@@planSelectButton"
-            (click)="handlePlanSelection(plan.id, plan.title, plan.price)">
-            Seleccionar
-          </button>
-          <div class="custom-line"></div>
-        </div>
-        <ul class="plan-features">
-          <li *ngFor="let feature of plan.features">{{ feature }}</li>
-        </ul>
-      </mat-card-content>
-    </mat-card>
+    @for (plan of plans; track plan.id) {
+      <mat-card class="plan-card">
+        <mat-card-header [ngClass]="plan.headerClass">
+          <mat-card-title>{{ plan.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="price">
+            <span class="price-value">{{ plan.price }}</span>
+            <span class="price-detail" i18n="@@planPriceDetail">/mes + incidencias</span>
+            <button
+              type="button"
+              mat-flat-button
+              color="primary"
+              class="select-button"
+              [disabled]="currentPlan?.id === plan.id"
+              i18n="@@planSelectButton"
+              (click)="handlePlanSelection(plan.id, plan.title, plan.price)">
+              Seleccionar
+            </button>
+            <div class="custom-line"></div>
+          </div>
+          <ul class="plan-features">
+            @for (feature of plan.features; track feature) {
+              <li>{{ feature }}</li>
+            }
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    }
   </div>
 </div>

@@ -25,8 +25,7 @@ export class ConfirmPlanComponent {
   billingMessage: string;
 
   constructor() {
-    const today = new Date();
-    const currentDay = today.getDate();
+    const currentDay = new Date().getDate();
 
     this.isWithinAdvancePaymentPeriod = currentDay <= 5;
 

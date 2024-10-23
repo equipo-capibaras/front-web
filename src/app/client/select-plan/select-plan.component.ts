@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule, NgClass } from '@angular/common';
+import { NgClass, NgFor } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -30,7 +30,7 @@ import { SnackbarService } from 'src/app/services/snackbar.service';
     ReactiveFormsModule,
     MatCardModule,
     MatDialogModule,
-    CommonModule,
+    NgFor,
   ],
   templateUrl: './select-plan.component.html',
   styleUrls: ['./select-plan.component.scss'],
@@ -97,7 +97,7 @@ export class SelectPlanComponent {
           }
         },
         error: err => {
-          this.snackbarService.showError(err);
+          this.snackbarService.showError(err.message);
         },
       });
     }
@@ -137,9 +137,5 @@ export class SelectPlanComponent {
         }
       }
     });
-  }
-
-  trackByPlanId(index: number, plan: Plan): string {
-    return plan.id;
   }
 }
