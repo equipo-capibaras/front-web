@@ -192,7 +192,7 @@
       </trans-unit>
       <trans-unit id="plan" datatype="html">
         <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
-        <target>Plan <x id="INTERPOLATION" equiv-text="{{ formattedPlan }}"/></target>
+        <target>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></target>
       </trans-unit>
       <trans-unit id="prontoIncidentes" datatype="html">
         <source>Aquí pronto hay el listado de incidentes.</source>

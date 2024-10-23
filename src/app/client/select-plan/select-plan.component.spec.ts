@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogHarness } from '@angular/material/dialog/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectPlanComponent } from './select-plan.component';
 import { AuthService } from '../../auth/auth.service';
 import { ClientService } from '../client.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
-import { Observable, of, throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { Role } from 'src/app/auth/role';

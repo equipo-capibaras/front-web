@@ -12,7 +12,6 @@ import {
 @Component({
   selector: 'app-confirm-plan',
   templateUrl: './confirm-plan.component.html',
-  styleUrls: ['./confirm-plan.component.css'],
   standalone: true,
   imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent],
   changeDetection: ChangeDetectionStrategy.OnPush,

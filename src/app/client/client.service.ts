@@ -71,7 +71,6 @@ export class ClientService {
         return clientData;
       }),
       catchError(err => {
-        console.log('entra al catchError', err.message);
         return throwError(() => err);
       }),
     );
