@@ -1,14 +1,14 @@
 export default class ClientSignUp {
   get companyName() {
-    return cy.get('input[id="name"]');
+    return cy.get('#form-client-register input[id="name"]');
   }
 
   get companyEmail() {
-    return cy.get('input[id="email"]');
+    return cy.get('#form-client-register input[id="email"]');
   }
 
   get submit() {
-    return cy.get('button[type="submit"]');
+    return cy.get('#form-client-register button[type="submit"]');
   }
 
   companyRegister(name: string, email: string) {

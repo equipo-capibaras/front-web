@@ -30,10 +30,6 @@
         <source>Rol</source>
         <target>Rol</target>
       </trans-unit>
-      <trans-unit id="snackbarClose" datatype="html">
-        <source>Cerrar</source>
-        <target>Cerrar</target>
-      </trans-unit>
       <trans-unit id="statusAccepted" datatype="html">
         <source>Aceptada</source>
         <target>Aceptada</target>
@@ -182,10 +178,6 @@
         <source>Seleccionar</source>
         <target>Seleccionar</target>
       </trans-unit>
-      <trans-unit id="prontoEmpleados" datatype="html">
-        <source>Aquí pronto hay el listado de empleados.</source>
-        <target>Aquí pronto hay el listado de empleados.</target>
-      </trans-unit>
       <trans-unit id="paginatorItemsPerPage" datatype="html">
         <source>Items por página:</source>
         <target>Items por página:</target>
@@ -199,8 +191,8 @@
         <target>Página anterior</target>
       </trans-unit>
       <trans-unit id="plan" datatype="html">
-        <source>Plan <x id="INTERPOLATION" equiv-text="{{ formattedPlan }}"/></source>
-        <target>Plan <x id="INTERPOLATION" equiv-text="{{ formattedPlan }}"/></target>
+        <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
+        <target>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></target>
       </trans-unit>
       <trans-unit id="prontoIncidentes" datatype="html">
         <source>Aquí pronto hay el listado de incidentes.</source>
@@ -345,6 +337,34 @@
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>
         <target>Cambiar</target>
+      </trans-unit>
+      <trans-unit id="changePlanCancel" datatype="html">
+        <source>Cancelar</source>
+        <target>Cancelar</target>
+      </trans-unit>
+      <trans-unit id="changePlanConfirm" datatype="html">
+        <source>Confirmar</source>
+        <target>Confirmar</target>
+      </trans-unit>
+      <trans-unit id="changePlanImportant" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Importante: <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ billingMessage }}"/></source>
+        <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Importante: <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ billingMessage }}"/></target>
+      </trans-unit>
+      <trans-unit id="changePlanIsBillingPeriod" datatype="html">
+        <source>El cambio de plan se aplicará a partir del próximo mes.</source>
+        <target>El cambio de plan se aplicará a partir del próximo mes.</target>
+      </trans-unit>
+      <trans-unit id="changePlanNotBillingPeriod" datatype="html">
+        <source>Estás dentro de los 5 primeros días del mes. El cambio de plan se reflejará en tu factura de este mes.</source>
+        <target>Estás dentro de los 5 primeros días del mes. El cambio de plan se reflejará en tu factura de este mes.</target>
+      </trans-unit>
+      <trans-unit id="changePlanPrice" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Precio mensual:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> <x id="INTERPOLATION" equiv-text="{{ data.newPrice }}"/></source>
+        <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Precio mensual:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> <x id="INTERPOLATION" equiv-text="{{ data.newPrice }}"/></target>
+      </trans-unit>
+      <trans-unit id="changePlanQuestion" datatype="html">
+        <source>¿Estás seguro de que deseas cambiar del plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ data.currentPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> al plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ data.newPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/>?</source>
+        <target>¿Estás seguro de que deseas cambiar del plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ data.currentPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> al plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ data.newPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/>?</target>
       </trans-unit>
       <trans-unit id="clientManagementPageDescription" datatype="html">
         <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e invitar fácilmente a tus empleados<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que se unan a la empresa, permitiéndoles acceder a las herramientas y funcionalidades disponibles en la plataforma. También podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>actualizar el plan<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> actual de tu empresa.</source>
