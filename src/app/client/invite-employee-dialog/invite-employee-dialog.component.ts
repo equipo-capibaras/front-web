@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -10,14 +9,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { ClientService } from '../client.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-invite-employee-dialog',
   standalone: true,
   imports: [
     RouterLink,
-    NgClass,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -31,6 +29,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class InviteEmployeeDialogComponent implements OnInit {
   inviteForm: FormGroup;
 
+  @ViewChild('confirmationDialog') confirmationDialog: TemplateRef<any>;
+
   constructor(
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
@@ -38,11 +38,13 @@ export class InviteEmployeeDialogComponent implements OnInit {
     private readonly authService: AuthService,
     private readonly snackbarService: SnackbarService,
     private dialogRef: MatDialogRef<InviteEmployeeDialogComponent>,
+    private dialog: MatDialog,
   ) {
     this.inviteForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email, Validators.maxLength(60)]],
     });
   }
+
   ngOnInit(): void {
     this.inviteForm = this.formBuilder.group(
       {
@@ -51,28 +53,45 @@ export class InviteEmployeeDialogComponent implements OnInit {
       {},
     );
   }
+
   get email() {
     return this.inviteForm.get('email')!;
   }
 
   inviteUser(): void {
     if (this.inviteForm.valid) {
-      const { email } = this.inviteForm.value;
+      const email = this.inviteForm.value.email;
 
-      this.clientService.inviteUser(email).subscribe(success => {
-        if (success) {
-          const role = this.authService.getRole();
-          if (role) {
-            this.router.navigate([role]);
-          }
-          this.dialogRef.close();
-        } else {
-          // Handle the error case (e.g., show a snackbar message)
-        }
-      });
+      this.openConfirmationDialog(email);
     } else {
       this.inviteForm.markAllAsTouched();
     }
+  }
+
+  openConfirmationDialog(email: string) {
+    const dialogRef = this.dialog.open(this.confirmationDialog, {
+      data: { email },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.onConfirmInvite(email);
+      }
+    });
+  }
+
+  onConfirmInvite(email: string) {
+    this.clientService.inviteUser(email).subscribe(success => {
+      if (success) {
+        const role = this.authService.getRole();
+        if (role) {
+          this.router.navigate([role]);
+        }
+        this.dialogRef.close();
+      } else {
+        // Si falla, muestra un mensaje de error
+      }
+    });
   }
 
   onCancel(): void {
