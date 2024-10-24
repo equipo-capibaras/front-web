@@ -1,0 +1,60 @@
+<div class="invite-user-container">
+  <div>
+    <h2 i18n="@@textInviteUser">Invitar usuario</h2>
+    <a i18n="@@close" class="close-button" (click)="onCancel()"> X </a>
+  </div>
+
+  <div class="custom-line"></div>
+
+  <p i18n="@@text">
+    Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa
+  </p>
+  <form [formGroup]="inviteForm" (ngSubmit)="inviteUser()">
+    <mat-form-field appearance="outline" class="full-width">
+      <input
+        id="email"
+        matInput
+        formControlName="email"
+        type="email"
+        placeholder="Correo"
+        i18n-placeholder="@@inviteEmailPlaceholder" />
+
+      @if (email.invalid && (email.dirty || email.touched)) {
+        <mat-error>
+          @if (email.errors?.['required']) {
+            <span i18n="@@employeeRegisterErrorRequired">Este campo es obligatorio.</span>
+          }
+          @if (email.errors?.['email']) {
+            <span i18n="@@employeeRegisterErrorInvalidEmail"
+              >Debe ser un correo electrónico válido</span
+            >
+          }
+          @if (email.errors?.['maxlength']) {
+            <span i18n="@@employeeRegisterErrorTooLong60"
+              >Este campo no puede superar los 60 caracteres.</span
+            >
+          }
+        </mat-error>
+      }
+    </mat-form-field>
+
+    <div class="invite-actions">
+      <button
+        mat-button
+        class="buttonCancel"
+        type="button"
+        (click)="onCancel()"
+        i18n="@@inviteCancelButton">
+        Cancelar
+      </button>
+
+      <button
+        type="submit"
+        mat-flat-button
+        class="register-button mat-body-large"
+        i18n="@@inviteSubmitButton">
+        Invitar
+      </button>
+    </div>
+  </form>
+</div>
