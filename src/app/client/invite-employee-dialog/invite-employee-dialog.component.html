@@ -3,13 +3,10 @@
     <h2 i18n="@@textInviteUser">Invitar usuario</h2>
     <a i18n="@@close" class="close-button" (click)="onCancel()"> X </a>
   </div>
-
   <div class="custom-line"></div>
-
   <p i18n="@@text">
-    Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa.
+    Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa
   </p>
-
   <form [formGroup]="inviteForm" (ngSubmit)="inviteUser()">
     <mat-form-field appearance="outline" class="full-width">
       <input
@@ -37,7 +34,6 @@
         </mat-error>
       }
     </mat-form-field>
-
     <div class="invite-actions">
       <button
         mat-button
@@ -47,7 +43,6 @@
         i18n="@@inviteCancelButton">
         Cancelar
       </button>
-
       <button
         type="submit"
         mat-flat-button
@@ -57,34 +52,4 @@
       </button>
     </div>
   </form>
-
-  <!-- Diálogo de confirmación -->
-  <ng-template #confirmationDialog let-data="data">
-    <div class="invite-user-container-confirm">
-      <div>
-        <h2 i18n="@@ConfirmarInvitación">Confirmar Invitación</h2>
-        <a i18n="@@close" class="close-button" (click)="onCancel()"> X </a>
-      </div>
-
-      <div class="custom-line"></div>
-
-      <p i18n="@@textInvitation">
-        El usuario {{ email }} tiene el Rol: Empleado y será registrado con este rol a tu empresa.
-      </p>
-
-      <p i18n="@@textConfirm">Deseas confirmar la invitación?</p>
-      <div class="invite-user-container">
-        <button i18n="@@onCancelConfirmation" mat-button type="button" (click)="onCancel()">
-          Cancelar
-        </button>
-        <button
-          i18n="@@onConfirmInvite"
-          mat-raised-button
-          type="button"
-          (click)="onConfirmInvite(email.value)">
-          Confirmar
-        </button>
-      </div>
-    </div>
-  </ng-template>
 </div>
