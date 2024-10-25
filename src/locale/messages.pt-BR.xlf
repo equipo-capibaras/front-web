@@ -30,6 +30,10 @@
         <source>Rol</source>
         <target>Função</target>
       </trans-unit>
+      <trans-unit id="selectPage" datatype="html">
+        <source>Seleccionar página</source>
+        <target>Selecionar página</target>
+      </trans-unit>
       <trans-unit id="statusAccepted" datatype="html">
         <source>Aceptada</source>
         <target>Aceita</target>
@@ -37,6 +41,10 @@
       <trans-unit id="statusPending" datatype="html">
         <source>Pendiente</source>
         <target>Pendente</target>
+      </trans-unit>
+      <trans-unit id="user" datatype="html">
+        <source>Usuario</source>
+        <target>Usuário</target>
       </trans-unit>
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
@@ -57,6 +65,30 @@
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
         <target>Insira sua senha</target>
+      </trans-unit>
+      <trans-unit id="incidentManagement" datatype="html">
+        <source>Gestión incidentes</source>
+        <target>Gestão de incidentes</target>
+      </trans-unit>
+      <trans-unit id="incidentManagementPageDescription" datatype="html">
+        <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver y seguir fácilmente el estado de todas las incidencias asignadas a tu nombre.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Además, tendrás la opción de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>crear nuevas incidencias<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de manera rápida y eficiente.</source>
+        <target>Em <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestão de incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, pode <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>pode ver e seguir facilmente o estado de todos os incidentes atribuídos ao seu nome.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Terá também a opção de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>criar novos incidentes<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de forma rápida e eficiente.</target>
+      </trans-unit>
+      <trans-unit id="incidentStatus" datatype="html">
+        <source>Estado</source>
+        <target>Estado</target>
+      </trans-unit>
+      <trans-unit id="incidentStatusClosed" datatype="html">
+        <source>Cerrada</source>
+        <target>Fechado</target>
+      </trans-unit>
+      <trans-unit id="incidentStatusEscalated" datatype="html">
+        <source>Escalado</source>
+        <target>Escalonado</target>
+      </trans-unit>
+      <trans-unit id="incidentStatusOpen" datatype="html">
+        <source>Abierta</source>
+        <target>Aberto</target>
       </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
@@ -194,13 +226,17 @@
         <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
         <target>Plano <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></target>
       </trans-unit>
-      <trans-unit id="prontoIncidentes" datatype="html">
-        <source>Aquí pronto hay el listado de incidentes.</source>
-        <target>Em breve você encontrará a lista de incidentes aqui.</target>
-      </trans-unit>
       <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
         <target>Gestão da empresa</target>
+      </trans-unit>
+      <trans-unit id="createIncident" datatype="html">
+        <source>Crear incidente</source>
+        <target>Criar incidente</target>
+      </trans-unit>
+      <trans-unit id="dateFiling" datatype="html">
+        <source>Fecha radicación</source>
+        <target>Data de apresentação</target>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
         <source>Tableros de control</source>
@@ -341,6 +377,10 @@
       <trans-unit id="employeeRegisterLinkLogin" datatype="html">
         <source>Ya tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Ingresa<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>Já tem uma conta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Entre<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="actions" datatype="html">
+        <source>Acciones</source>
+        <target>Acções</target>
       </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>

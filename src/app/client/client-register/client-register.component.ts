@@ -8,8 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { ClientService, DuplicateEmailError } from '../client.service';
-import { AuthService } from 'src/app/auth/auth.service';
-import { SnackbarService } from 'src/app/services/snackbar.service';
+import { AuthService } from '../../auth/auth.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-client-register',

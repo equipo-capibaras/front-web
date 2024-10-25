@@ -8,7 +8,7 @@ import { EmployeeRegisterComponent } from './employee-register.component';
 import { AuthService } from '../../auth/auth.service';
 import { DuplicateEmailError, EmployeeResponse, EmployeeService } from '../employee.service';
 import { Role } from '../../auth/role';
-import { SnackbarService } from 'src/app/services/snackbar.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-mock',
