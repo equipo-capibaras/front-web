@@ -2,7 +2,12 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { faker } from '@faker-js/faker';
-import { EmployeeService, EmployeeResponse, DuplicateEmailError } from './employee.service';
+import {
+  EmployeeService,
+  EmployeeResponse,
+  DuplicateEmailError,
+  IncidentListResponse,
+} from './employee.service';
 import { environment } from '../../environments/environment';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 import { Role } from '../auth/role';
@@ -87,5 +92,17 @@ describe('EmployeeService', () => {
     expect(req.request.body).toEqual(employeeData);
     expect(req.request.context.get(ACCEPTED_ERRORS)).toEqual([409]);
     req.flush({}, { status: 500, statusText: 'Internal Server Error' });
+  }));
+
+  it('should handle HTTP error in loadIncidents and return null', waitForAsync(() => {
+    service.loadIncidents(5, 1).subscribe((response: IncidentListResponse | null) => {
+      expect(response).toBeNull();
+    });
+
+    const req = httpTestingController.expectOne(
+      `${environment.apiUrl}/employees/me/incidents?page_size=5&page_number=1`,
+    );
+    expect(req.request.method).toBe('GET');
+    req.flush(null, { status: 500, statusText: 'Server Error' });
   }));
 });

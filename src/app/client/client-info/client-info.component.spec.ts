@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, fakeAsync, waitForAsync } from '@angular/cor
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { ClientInfoComponent } from './client-info.component';
 import { ClientService } from '../client.service';
-import { SnackbarService } from 'src/app/services/snackbar.service';
+import { SnackbarService } from '../../services/snackbar.service';
 import { of, throwError } from 'rxjs';
 import { Client } from '../client';
 import { provideHttpClient } from '@angular/common/http';

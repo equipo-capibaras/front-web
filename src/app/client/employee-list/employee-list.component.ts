@@ -23,6 +23,7 @@ import { Employee } from '../../employee/employee';
 export class EmployeeListComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['name', 'email', 'role', 'invitationStatus'];
   employeesList = new MatTableDataSource<Employee>();
+  totalEmployees = 0;
 
   employeeRole: Record<string, string> = {
     analyst: $localize`:@@employeeRegisterOptionRoleOAnalista:Analítica`,
@@ -42,10 +43,7 @@ export class EmployeeListComponent implements AfterViewInit, OnInit {
     },
   };
 
-  totalEmployees = 0;
-  isLoadingResults = true;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private readonly clientService: ClientService) {}
 

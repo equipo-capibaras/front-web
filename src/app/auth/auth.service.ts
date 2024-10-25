@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { of, map, catchError, Observable, BehaviorSubject } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { Role } from './role';
 import { NO_TOKEN } from '../interceptors/token.interceptor';
 import { Router } from '@angular/router';

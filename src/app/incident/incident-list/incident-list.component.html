@@ -1,5 +1,83 @@
-<div class="container">
-  <h1 class="mat-title-large" i18n="@@prontoIncidentes">
-    Aquí pronto hay el listado de incidentes.
-  </h1>
+<div class="page">
+  <div class="page__container">
+    <div class="page__header">
+      <h1 class="page__title" i18n="@@incidentManagement">Gestión incidentes</h1>
+      <span class="page__description" i18n="@@incidentManagementPageDescription">
+        En <em>Gestionar incidentes</em>, podrás
+        <strong class="page__description--strong"
+          >ver y seguir fácilmente el estado de todas las incidencias asignadas a tu nombre.</strong
+        >
+        Además, tendrás la opción de
+        <strong class="page__description--strong">crear nuevas incidencias</strong> de manera rápida
+        y eficiente.
+      </span>
+    </div>
+
+    <div class="incident-list__header">
+      <button mat-flat-button type="button" i18n="@@createIncident">Crear incidente</button>
+    </div>
+
+    <div class="incident-list page__table">
+      <table mat-table [dataSource]="incidentsList">
+        <ng-container matColumnDef="name">
+          <th *matHeaderCellDef mat-header-cell i18n="@@name">Nombre</th>
+          <td *matCellDef="let incident" mat-cell>{{ incident.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="user">
+          <th *matHeaderCellDef mat-header-cell i18n="@@user">Usuario</th>
+          <td *matCellDef="let incident" mat-cell>{{ incident.user }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateFiling">
+          <th *matHeaderCellDef mat-header-cell i18n="@@dateFiling">Fecha radicación</th>
+          <td *matCellDef="let incident" mat-cell>{{ incident.filingDate | date: 'longDate' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th *matHeaderCellDef mat-header-cell i18n="@@incidentStatus">Estado</th>
+          <td *matCellDef="let incident" mat-cell>
+            <mat-chip [ngClass]="chipInfo[incident.status].cssClass">
+              <span class="material-symbols-outlined">
+                {{ chipInfo[incident.status].icon }}
+              </span>
+              {{ chipInfo[incident.status].text }}
+            </mat-chip>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th *matHeaderCellDef mat-header-cell i18n="@@actions">Acciones</th>
+          <td *matCellDef="let incident" mat-cell>
+            <button
+              mat-icon-button
+              type="button"
+              aria-label="Ver incidente"
+              i18n-aria-label="@@viewIncident">
+              <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
+              <span class="material-symbols-outlined">visibility</span>
+            </button>
+            <span class="horizontal-spacer"></span>
+            <button
+              mat-icon-button
+              type="button"
+              aria-label="Cambiar estado de incidente"
+              i18n-aria-label="@@changeStateIncident">
+              <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
+              <span class="material-symbols-outlined">cached</span>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+      </table>
+
+      <mat-paginator
+        aria-label="Seleccionar página"
+        i18n-aria-label="@@selectPage"
+        [length]="totalIncidents"
+        [pageSizeOptions]="[5, 10, 20]" />
+    </div>
+  </div>
 </div>

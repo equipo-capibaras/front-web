@@ -14,7 +14,7 @@ import { AuthService } from '../../auth/auth.service';
 import { defaultRoutes } from '../../auth/default.routes';
 import { ConfirmPlanComponent } from './confirm-plan/confirm-plan.component';
 import { Plan } from './plan';
-import { SnackbarService } from 'src/app/services/snackbar.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-select-plan',

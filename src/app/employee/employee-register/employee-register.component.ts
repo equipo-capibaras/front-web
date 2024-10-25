@@ -19,7 +19,7 @@ import { DuplicateEmailError, EmployeeService } from '../employee.service';
 import { AuthService } from '../../auth/auth.service';
 import { defaultRoutes } from '../../auth/default.routes';
 import { Role } from '../../auth/role';
-import { SnackbarService } from 'src/app/services/snackbar.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-register',
