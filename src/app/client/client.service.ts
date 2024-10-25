@@ -14,6 +14,28 @@ export class DuplicateEmailError extends Error {
   }
 }
 
+export class DuplicateEmployeeExistError extends Error {
+  constructor(message?: string) {
+    super(message ?? 'Employee already linked to your company.');
+    this.name = 'DuplicateEmployeeExistError';
+  }
+}
+
+export interface Employee {
+  id: string;
+  clientId: string;
+  name: string;
+  email: string;
+  role: string;
+  invitationStatus: string;
+  invitationDate: string;
+}
+
+export interface ClientInviteUserResponse {
+  message: string;
+  employee: Employee;
+}
+
 export interface ClientResponse {
   id: string;
   name: string;
@@ -84,6 +106,26 @@ export class ClientService {
       .pipe(
         catchError(_ => {
           return of(null);
+        }),
+      );
+  }
+
+  inviteUser(email: string) {
+    const emailSend = { email };
+    const context = new HttpContext().set(ACCEPTED_ERRORS, [409]);
+
+    return this.http
+      .post<ClientResponse>(`${this.apiUrl}/employees/invite`, emailSend, { context: context })
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            return throwError(() => new DuplicateEmployeeExistError());
+          }
+
+          return throwError(() => error);
         }),
       );
   }

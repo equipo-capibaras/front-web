@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { ClientService } from '../client.service';
+import { ClientService, DuplicateEmployeeExistError } from '../client.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -55,21 +55,37 @@ export class InviteEmployeeDialogComponent implements OnInit {
   inviteUser(): void {
     if (this.inviteForm.valid) {
       const { email } = this.inviteForm.value;
-      this.clientService.inviteUser(email).subscribe(success => {
-        if (success) {
-          const role = this.authService.getRole();
-          if (role) {
-            this.router.navigate([role]);
+      this.clientService.inviteUser(email).subscribe({
+        next: success => {
+          if (!success) {
+            return;
           }
-          this.dialogRef.close();
-        } else {
-          // Handle the error case (e.g., show a snackbar message)
-        }
+
+          this.snackbarService.showSuccess(
+            $localize`:@@employeeRegisterSuccess:Empleado invitado exitosamente.`,
+          );
+
+          if (success) {
+            const role = this.authService.getRole();
+            if (role) {
+              this.router.navigate([role]);
+            }
+            this.dialogRef.close();
+          } else {
+            // Handle the error case (e.g., show a snackbar message)
+          }
+        },
+        error: error => {
+          if (error instanceof DuplicateEmployeeExistError) {
+            this.snackbarService.showError(
+              $localize`:@@DuplicateEmployeeExistError:Empleado ya vinculado a tu empresa.`,
+            );
+          }
+        },
       });
-    } else {
-      this.inviteForm.markAllAsTouched();
     }
   }
+
   onCancel(): void {
     this.dialogRef.close();
   }

@@ -2,7 +2,12 @@ import { fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { faker } from '@faker-js/faker';
-import { ClientService, ClientResponse, DuplicateEmailError } from './client.service';
+import {
+  ClientService,
+  ClientResponse,
+  DuplicateEmailError,
+  DuplicateEmployeeExistError,
+} from './client.service';
 import { environment } from '../../environments/environment';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 import { Client } from './client';
@@ -226,5 +231,57 @@ describe('ClientService', () => {
     tick();
 
     expect(result).toBeNull();
+  }));
+
+  it('should send an invitation successfully', waitForAsync(() => {
+    const email = 'test@example.com';
+    const mockResponse: ClientResponse = {
+      id: '1',
+      name: 'Empresa S.A.S',
+      plan: 'empresario',
+      emailIncidents: email,
+    };
+
+    service.inviteUser(email).subscribe(response => {
+      expect(response).toEqual(mockResponse);
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invite`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual({ email });
+    expect(req.request.context.get(ACCEPTED_ERRORS)).toEqual([409]);
+    req.flush(mockResponse);
+  }));
+
+  it('should throw DuplicateEmployeeExistError when 409 conflict error occurs', waitForAsync(() => {
+    const email = 'duplicate@example.com';
+
+    service.inviteUser(email).subscribe({
+      error: error => {
+        expect(error).toBeInstanceOf(DuplicateEmployeeExistError);
+      },
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invite`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual({ email });
+    expect(req.request.context.get(ACCEPTED_ERRORS)).toEqual([409]);
+    req.flush({}, { status: 409, statusText: 'Conflict' });
+  }));
+
+  it('should rethrow other errors in inviteUser', waitForAsync(() => {
+    const email = 'error@example.com';
+
+    service.inviteUser(email).subscribe({
+      error: error => {
+        expect(error).not.toBeNull();
+        expect(error.status).toBe(500);
+      },
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invite`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual({ email });
+    req.flush({}, { status: 500, statusText: 'Internal Server Error' });
   }));
 });
