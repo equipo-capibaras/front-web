@@ -49,12 +49,20 @@
         <ng-container matColumnDef="actions">
           <th *matHeaderCellDef mat-header-cell i18n="@@actions">Acciones</th>
           <td *matCellDef="let incident" mat-cell>
-            <button mat-icon-button type="button">
+            <button
+              mat-icon-button
+              type="button"
+              aria-label="Ver incidente"
+              i18n-aria-label="@@viewIncident">
               <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
               <span class="material-symbols-outlined">visibility</span>
             </button>
             <span class="horizontal-spacer"></span>
-            <button mat-icon-button type="button">
+            <button
+              mat-icon-button
+              type="button"
+              aria-label="Cambiar estado de incidente"
+              i18n-aria-label="@@changeStateIncident">
               <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
               <span class="material-symbols-outlined">cached</span>
             </button>

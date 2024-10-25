@@ -94,7 +94,7 @@ describe('EmployeeService', () => {
     req.flush({}, { status: 500, statusText: 'Internal Server Error' });
   }));
 
-  it('should handle HTTP error in loadClientEmployees and return null', waitForAsync(() => {
+  it('should handle HTTP error in loadIncidents and return null', waitForAsync(() => {
     service.loadIncidents(5, 1).subscribe((response: IncidentListResponse | null) => {
       expect(response).toBeNull();
     });
