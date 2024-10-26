@@ -31,7 +31,7 @@ describe('IncidentListComponent', () => {
         incidents: [
           {
             name: 'Cobro incorrecto',
-            user: {
+            reportedBy: {
               id: faker.string.uuid(),
               name: faker.person.fullName(),
               email: faker.internet.email(),

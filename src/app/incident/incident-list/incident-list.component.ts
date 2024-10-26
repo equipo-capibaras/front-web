@@ -79,7 +79,7 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
         this.incidentsList.data = data.incidents.map(incident => {
           return {
             name: incident.name,
-            user: incident.user.email,
+            user: incident.reportedBy.email,
             filingDate: incident.filingDate,
             status: incident.status,
           };
