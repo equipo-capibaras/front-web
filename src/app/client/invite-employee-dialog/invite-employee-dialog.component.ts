@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,7 +12,6 @@ import {
   DuplicateEmployeeExistError,
   EmployeeNoFoundError,
 } from '../client.service';
-import { AuthService } from 'src/app/auth/auth.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DialogService } from './dialog.services';
@@ -42,14 +41,12 @@ export class InviteEmployeeDialogComponent implements OnInit {
   }>;
 
   constructor(
-    private readonly router: Router,
     private readonly formBuilder: FormBuilder,
     private readonly clientService: ClientService,
     private readonly dialogService: DialogService,
-    private readonly authService: AuthService,
     private readonly snackbarService: SnackbarService,
-    private dialogRef: MatDialogRef<InviteEmployeeDialogComponent>,
-    private dialog: MatDialog,
+    public dialogRef: MatDialogRef<InviteEmployeeDialogComponent>,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
