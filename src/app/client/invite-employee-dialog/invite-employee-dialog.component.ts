@@ -65,23 +65,20 @@ export class InviteEmployeeDialogComponent implements OnInit {
   }
 
   inviteUser() {
-    if (this.inviteForm.invalid) {
-      return;
+    if (this.inviteForm.valid) {
+      const email = this.inviteForm.value.email;
+      this.clientService.getRoleByEmail(email).subscribe({
+        next: data => {
+          const role = data.role;
+          this.openConfirmationDialog(email, role);
+        },
+        error: () => {
+          this.snackbarService.showError('Error retrieving role');
+        },
+      });
     }
-
-    const email = this.inviteForm.controls['email'].value;
-    this.clientService.inviteUser(email).subscribe({
-      next: () => {
-        this.snackbarService.showSuccess('Empleado invitado exitosamente.');
-        this.dialogRef.close();
-      },
-      error: err => {
-        if (err instanceof DuplicateEmployeeExistError) {
-          this.snackbarService.showError('Empleado ya vinculado a tu empresa.');
-        }
-      },
-    });
   }
+
   openConfirmationDialog(email: string, role: string): void {
     console.log(role);
     console.log(email);
