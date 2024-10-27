@@ -30,6 +30,10 @@
         <source>Rol</source>
         <target>Rol</target>
       </trans-unit>
+      <trans-unit id="selectPage" datatype="html">
+        <source>Seleccionar página</source>
+        <target>Seleccionar página</target>
+      </trans-unit>
       <trans-unit id="statusAccepted" datatype="html">
         <source>Aceptada</source>
         <target>Aceptada</target>
@@ -37,6 +41,14 @@
       <trans-unit id="statusPending" datatype="html">
         <source>Pendiente</source>
         <target>Pendiente</target>
+      </trans-unit>
+      <trans-unit id="user" datatype="html">
+        <source>Usuario</source>
+        <target>Usuario</target>
+      </trans-unit>
+      <trans-unit id="viewIncident" datatype="html">
+        <source>Ver incidente</source>
+        <target>Ver incidente</target>
       </trans-unit>
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
@@ -57,6 +69,30 @@
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
         <target>Ingresá tu contraseña</target>
+      </trans-unit>
+      <trans-unit id="incidentManagement" datatype="html">
+        <source>Gestión incidentes</source>
+        <target>Gestión incidentes</target>
+      </trans-unit>
+      <trans-unit id="incidentManagementPageDescription" datatype="html">
+        <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver y seguir fácilmente el estado de todas las incidencias asignadas a tu nombre.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Además, tendrás la opción de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>crear nuevas incidencias<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de manera rápida y eficiente.</source>
+        <target>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver y seguir fácilmente el estado de todas las incidencias asignadas a tu nombre.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Además, tendrás la opción de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>crear nuevas incidencias<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de manera rápida y eficiente.</target>
+      </trans-unit>
+      <trans-unit id="incidentStatus" datatype="html">
+        <source>Estado</source>
+        <target>Estado</target>
+      </trans-unit>
+      <trans-unit id="incidentStatusClosed" datatype="html">
+        <source>Cerrada</source>
+        <target>Cerrada</target>
+      </trans-unit>
+      <trans-unit id="incidentStatusEscalated" datatype="html">
+        <source>Escalado</source>
+        <target>Escalado</target>
+      </trans-unit>
+      <trans-unit id="incidentStatusOpen" datatype="html">
+        <source>Abierta</source>
+        <target>Abierta</target>
       </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
@@ -194,13 +230,17 @@
         <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
         <target>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></target>
       </trans-unit>
-      <trans-unit id="prontoIncidentes" datatype="html">
-        <source>Aquí pronto hay el listado de incidentes.</source>
-        <target>Aquí pronto hay el listado de incidentes.</target>
-      </trans-unit>
       <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
         <target>Gestión empresa</target>
+      </trans-unit>
+      <trans-unit id="createIncident" datatype="html">
+        <source>Crear incidente</source>
+        <target>Crear incidente</target>
+      </trans-unit>
+      <trans-unit id="dateFiling" datatype="html">
+        <source>Fecha radicación</source>
+        <target>Fecha radicación</target>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
         <source>Tableros de control</source>
@@ -229,6 +269,10 @@
       <trans-unit id="employeeRegisterTitle" datatype="html">
         <source>Crea tu cuenta</source>
         <target>Creá tu cuenta</target>
+      </trans-unit>
+      <trans-unit id="emptyIncidentList" datatype="html">
+        <source>No tienes incidentes asignados</source>
+        <target>No tenés incidentes asignados</target>
       </trans-unit>
       <trans-unit id="name" datatype="html">
         <source>Nombre</source>
@@ -334,6 +378,10 @@
         <source>Ingresa los datos de la empresa</source>
         <target>Ingresá los datos de la empresa</target>
       </trans-unit>
+      <trans-unit id="actions" datatype="html">
+        <source>Acciones</source>
+        <target>Acciones</target>
+      </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>
         <target>Cambiar</target>
@@ -365,6 +413,10 @@
       <trans-unit id="changePlanQuestion" datatype="html">
         <source>¿Estás seguro de que deseas cambiar del plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ data.currentPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> al plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ data.newPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/>?</source>
         <target>¿Estás seguro de que deseas cambiar del plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ data.currentPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> al plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ data.newPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/>?</target>
+      </trans-unit>
+      <trans-unit id="changeStateIncident" datatype="html">
+        <source>Cambiar estado de incidente</source>
+        <target>Cambiar estado de incidente</target>
       </trans-unit>
       <trans-unit id="clientManagementPageDescription" datatype="html">
         <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e invitar fácilmente a tus empleados<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que se unan a la empresa, permitiéndoles acceder a las herramientas y funcionalidades disponibles en la plataforma. También podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>actualizar el plan<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> actual de tu empresa.</source>

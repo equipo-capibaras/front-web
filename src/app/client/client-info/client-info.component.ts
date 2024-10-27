@@ -4,7 +4,7 @@ import { Client } from '../client';
 import { ClientService } from '../client.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SnackbarService } from 'src/app/services/snackbar.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-client-info',

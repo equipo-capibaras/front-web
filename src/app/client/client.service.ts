@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 import { Client } from './client';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { EmployeeListResponse } from './employee-list/employee-list';
 
 export class DuplicateEmailError extends Error {

@@ -126,9 +126,13 @@ router-outlet + * {
     &--warning {
       background-color: $warning;
     }
+    &--blue {
+      background-color: $chip-blue;
+    }
 
     &--success,
-    &--warning {
+    &--warning,
+    &--blue {
       .mdc-evolution-chip__text-label {
         color: white;
         font-weight: 400;

@@ -7,7 +7,7 @@ import { ClientRegisterComponent } from './client-register.component';
 import { ClientResponse, ClientService, DuplicateEmailError } from '../client.service';
 import { AuthService } from '../../auth/auth.service';
 import { of, throwError } from 'rxjs';
-import { SnackbarService } from 'src/app/services/snackbar.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-mock',
