@@ -270,6 +270,10 @@
         <source>Crea tu cuenta</source>
         <target>Creá tu cuenta</target>
       </trans-unit>
+      <trans-unit id="emptyIncidentList" datatype="html">
+        <source>No tienes incidentes asignados</source>
+        <target>No tienes incidentes asignados</target>
+      </trans-unit>
       <trans-unit id="name" datatype="html">
         <source>Nombre</source>
         <target>Nombre</target>
