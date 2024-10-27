@@ -80,7 +80,7 @@
           i18n-aria-label="@@selectPage"
           [length]="totalIncidents"
           [pageSizeOptions]="[5, 10, 20]" />
-      } @else if (!isLoading && incidentsList.data.length > 0) {
+      } @else if (!isLoading && incidentsList.data.length === 0) {
         <div class="no-incidents-message" i18n="@@emptyIncidentList">
           No tienes incidentes asignados
         </div>
