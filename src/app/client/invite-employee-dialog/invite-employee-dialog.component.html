@@ -54,7 +54,7 @@
   </form>
 
   <!-- Diálogo de confirmación -->
-  <ng-template #confirmationDialog let-data="data">
+  <ng-template #confirmationDialog let-data>
     <div class="invite-user-container-confirm">
       <div>
         <h2 i18n="@@ConfirmarInvitación">Confirmar Invitación</h2>
@@ -62,9 +62,9 @@
           i18n="@@close"
           class="close-button"
           href="#"
+          tabindex="0"
           (click)="onCancelThis()"
-          (keydown.enter)="onCancelThis()"
-          tabindex="0">
+          (keydown.enter)="onCancelThis()">
           X
         </a>
       </div>
@@ -79,10 +79,10 @@
           i18n="@@close"
           class="close-button"
           href="#"
-          (click)="onCancelThis()"
-          (keydown.enter)="onCancelThis()"
           tabindex="0"
-          class="buttonCancel mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base">
+          class="buttonCancel mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"
+          (click)="onCancelThis()"
+          (keydown.enter)="onCancelThis()">
           Cancelar
         </a>
         <button

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpContext } from '@angular/common/http';
 import { of, map, catchError, Observable, BehaviorSubject } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from '../../environments/environment';
@@ -8,6 +7,7 @@ import { NO_TOKEN } from '../interceptors/token.interceptor';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../services/snackbar.service';
 import { ERROR_MESSAGES } from '../shared/error-messages';
+import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
 
 interface DecodedToken {
   aud: string;
@@ -16,6 +16,16 @@ interface DecodedToken {
 
 interface TokenResponse {
   token: string;
+}
+
+export interface Invitation {
+  id: string;
+  clientId: string;
+  invitationStatus: 'pending' | 'accepted' | 'declined';
+  name: string;
+  email: string;
+  role: string;
+  invitationDate: Date;
 }
 
 @Injectable({
@@ -105,5 +115,42 @@ export class AuthService {
     localStorage.removeItem('token');
     this.setUserRole();
     this.router.navigate(['/']);
+  }
+
+  checkPendingInvitation(token: string): Observable<Invitation | null> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http
+      .get<Invitation | null>(`${this.apiUrl}/employees/me`, { headers })
+      .pipe(catchError(() => of(null)));
+  }
+
+  acceptInvitation(): Observable<void> {
+    const body = { response: 'accepted' };
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken}`,
+    });
+
+    return this.http.post<void>(`${this.apiUrl}/employees/invitation`, body, { headers }).pipe(
+      catchError(_err => {
+        this.snackbarService.showError('INVITATION_ACCEPT_FAILED');
+        return of(undefined);
+      }),
+    );
+  }
+
+  declineInvitation(): Observable<void> {
+    const body = { response: 'decline' };
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this.getToken}`,
+    });
+    return this.http.post<void>(`${this.apiUrl}/employees/invitation`, body, { headers }).pipe(
+      catchError(_err => {
+        this.snackbarService.showError('INVITATION_DECLINE_FAILED');
+        return of(undefined);
+      }),
+    );
   }
 }

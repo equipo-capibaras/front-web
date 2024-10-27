@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpContext, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
@@ -42,6 +42,14 @@ export interface ClientResponse {
   emailIncidents: string;
   plan: string | null;
 }
+
+export class EmployeeNoFoundError extends Error {
+  constructor(message?: string) {
+    super(message ?? 'Employee not found');
+    this.name = 'EmployeeNoFoundError';
+  }
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -124,8 +132,9 @@ export class ClientService {
     const emailSend = { email };
     const context = new HttpContext().set(ACCEPTED_ERRORS, [409]);
 
+    //return of(this.mockEmployee);
     return this.http
-      .post<ClientResponse>(`/employees/invite`, emailSend, { context: context })
+      .post<ClientResponse>(`${this.apiUrl}/employees/invite`, emailSend, { context: context })
       .pipe(
         map(response => {
           return response;
@@ -139,11 +148,20 @@ export class ClientService {
         }),
       );
   }
+
   getRoleByEmail(email: string): Observable<Employee> {
-    // Simulate the behavior of the API call with mock data
-    if (email === this.mockEmployee.email) {
-      return of(this.mockEmployee); // Return mock employee data
-    }
-    return throwError(() => new HttpErrorResponse({ error: 'User not found', status: 404 }));
+    const context = new HttpContext().set(ACCEPTED_ERRORS, [404]);
+
+    return this.http
+      .post<Employee>(`${this.apiUrl}/employees/detail`, { email }, { context: context })
+      .pipe(
+        map(employeeData => employeeData),
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 404) {
+            return throwError(() => new EmployeeNoFoundError());
+          }
+          return throwError(() => error);
+        }),
+      );
   }
 }

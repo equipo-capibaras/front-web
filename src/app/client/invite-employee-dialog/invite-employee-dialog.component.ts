@@ -7,7 +7,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { ClientService, DuplicateEmployeeExistError } from '../client.service';
+import {
+  ClientService,
+  DuplicateEmployeeExistError,
+  EmployeeNoFoundError,
+} from '../client.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -36,7 +40,6 @@ export class InviteEmployeeDialogComponent implements OnInit {
     email: string;
     role: string;
   }>;
-  employee: { email: string; role: string } = { email: '', role: '' };
 
   constructor(
     private readonly router: Router,
@@ -71,13 +74,20 @@ export class InviteEmployeeDialogComponent implements OnInit {
 
           this.openConfirmationDialog(email, role);
         },
-        error: () => {
-          this.snackbarService.showError('Error retrieving role');
+        error: error => {
+          if (error instanceof DuplicateEmployeeExistError) {
+            this.snackbarService.showError('Empleado ya vinculado a tu empresa.');
+          }
+          if (error instanceof EmployeeNoFoundError) {
+            this.snackbarService.showError('No se encontró el empleado.');
+          }
         },
       });
     }
   }
   openConfirmationDialog(email: string, role: string): void {
+    console.log(role);
+    console.log(email);
     this.dialog
       .open(this.confirmationDialog, {
         data: { email, role },
@@ -96,20 +106,27 @@ export class InviteEmployeeDialogComponent implements OnInit {
         if (!success) {
           return;
         }
-        this.snackbarService.showSuccess('Empleado invitado exitosamente.');
         this.dialogRef.close();
+        this.snackbarService.showSuccess('Empleado invitado exitosamente.');
+
+        // Close all dialogs
+        this.dialogService.closeAllDialogs();
+
+        // Refresh the page
+        window.location.reload();
       },
       error: error => {
         if (error instanceof DuplicateEmployeeExistError) {
           this.snackbarService.showError('Empleado ya vinculado a tu empresa.');
+        }
+        if (error instanceof EmployeeNoFoundError) {
+          this.snackbarService.showError('No se encontró el empleado.');
         }
       },
     });
   }
   inviteUserBack(email: string): void {
     if (this.inviteForm.valid) {
-      //onst { email } = this.inviteForm.value;
-
       console.log(email);
 
       this.clientService.inviteUser(email).subscribe({
@@ -127,6 +144,7 @@ export class InviteEmployeeDialogComponent implements OnInit {
             if (role) {
               this.router.navigate([role]);
             }
+            this.dialogService.closeAllDialogs();
             this.dialogRef.close();
           } else {
             // Handle the error case (e.g., show a snackbar message)
@@ -140,6 +158,7 @@ export class InviteEmployeeDialogComponent implements OnInit {
           }
         },
       });
+      this.dialogService.closeAllDialogs();
     }
   }
 
