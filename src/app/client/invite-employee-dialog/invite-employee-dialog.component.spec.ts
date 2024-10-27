@@ -3,12 +3,13 @@ import { InviteEmployeeDialogComponent } from './invite-employee-dialog.componen
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ClientService, DuplicateEmployeeExistError, ClientResponse } from '../client.service';
+import { ClientResponse, ClientService, DuplicateEmployeeExistError } from '../client.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Employee } from 'src/app/employee/employee';
 
 describe('InviteEmployeeDialogComponent', () => {
   let component: InviteEmployeeDialogComponent;
@@ -18,6 +19,24 @@ describe('InviteEmployeeDialogComponent', () => {
   let dialogRef: jasmine.SpyObj<MatDialogRef<InviteEmployeeDialogComponent>>;
   let authService: jasmine.SpyObj<AuthService>;
 
+  const mockResponse: Employee = {
+    id: '1dabcf78-e62a-41fd-b69c-fd7c775b04d4',
+    clientId: '22128c04-0c2c-4633-8317-0fffd552f7a6',
+    name: 'Mariana Sanchez Torres',
+    email: 'mariana@globalcom.ec',
+    role: 'analyst',
+    invitationStatus: 'accepted',
+    invitationDate: '2024-10-12T16:32:48+00:00',
+  };
+
+  const ClientResponseClient: ClientResponse = {
+    id: '1dabcf78-e62a-41fd-b69c-fd7c775b04d4',
+    name: 'Mariana Sanchez Torres',
+    emailIncidents: 'mariana@globalcom.ec',
+    invitationStatus: 'accepted',
+    invitationDate: '2024-10-12T16:32:48+00:00',
+  };
+
   beforeEach(async () => {
     clientService = jasmine.createSpyObj('ClientService', ['inviteUser']);
     snackbarService = jasmine.createSpyObj('SnackbarService', ['showSuccess', 'showError']);
@@ -25,7 +44,12 @@ describe('InviteEmployeeDialogComponent', () => {
     authService = jasmine.createSpyObj('AuthService', ['getRole']);
 
     await TestBed.configureTestingModule({
-      imports: [InviteEmployeeDialogComponent, ReactiveFormsModule, BrowserAnimationsModule],
+      imports: [
+        InviteEmployeeDialogComponent, // Mueve el componente aquí
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        HttpClientTestingModule, // Required to mock HTTP requests
+      ],
       providers: [
         FormBuilder,
         { provide: ClientService, useValue: clientService },
@@ -50,16 +74,9 @@ describe('InviteEmployeeDialogComponent', () => {
     component.inviteUser();
     expect(clientService.inviteUser).not.toHaveBeenCalled();
   });
-
   it('should show success message and close dialog on successful invite', () => {
+    const mockResponse = { message: 'Success' }; // Adjust response as needed
     component.inviteForm.controls['email'].setValue('test@example.com');
-
-    const mockResponse: ClientResponse = {
-      id: 'd90733f8-ca35-45ce-a600-81f7a131ae5c',
-      name: 'viviana',
-      emailIncidents: 'analista@gmail.com',
-      plan: 'analyst',
-    };
 
     clientService.inviteUser.and.returnValue(of(mockResponse));
 
@@ -83,7 +100,6 @@ describe('InviteEmployeeDialogComponent', () => {
       $localize`:@@DuplicateEmployeeExistError:Empleado ya vinculado a tu empresa.`,
     );
   });
-
   it('should close dialog on cancel', () => {
     component.onCancel();
     expect(dialogRef.close).toHaveBeenCalled();

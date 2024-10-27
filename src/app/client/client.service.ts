@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
@@ -49,6 +49,16 @@ export class ClientService {
   private readonly apiUrl = environment.apiUrl;
   private readonly clientDataSubject = new BehaviorSubject<Client | null>(null);
   public clientData$ = this.clientDataSubject.asObservable();
+
+  private mockEmployee: Employee = {
+    id: '1dabcf78-e62a-41fd-b69c-fd7c775b04d4',
+    clientId: '22128c04-0c2c-4633-8317-0fffd552f7a6',
+    name: 'Mariana Sanchez Torres',
+    email: 'agente@gmail.com',
+    role: 'analyst',
+    invitationStatus: 'accepted',
+    invitationDate: '2024-10-12T16:32:48+00:00',
+  };
 
   constructor(private readonly http: HttpClient) {}
 
@@ -115,7 +125,7 @@ export class ClientService {
     const context = new HttpContext().set(ACCEPTED_ERRORS, [409]);
 
     return this.http
-      .post<ClientResponse>(`${this.apiUrl}/employees/invite`, emailSend, { context: context })
+      .post<ClientResponse>(`/employees/invite`, emailSend, { context: context })
       .pipe(
         map(response => {
           return response;
@@ -128,5 +138,12 @@ export class ClientService {
           return throwError(() => error);
         }),
       );
+  }
+  getRoleByEmail(email: string): Observable<Employee> {
+    // Simulate the behavior of the API call with mock data
+    if (email === this.mockEmployee.email) {
+      return of(this.mockEmployee); // Return mock employee data
+    }
+    return throwError(() => new HttpErrorResponse({ error: 'User not found', status: 404 }));
   }
 }

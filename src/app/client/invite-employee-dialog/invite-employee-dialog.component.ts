@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -10,7 +10,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { ClientService, DuplicateEmployeeExistError } from '../client.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DialogService } from './dialog.services';
+
 @Component({
   selector: 'app-invite-employee-dialog',
   standalone: true,
@@ -28,19 +30,25 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./invite-employee-dialog.component.scss'],
 })
 export class InviteEmployeeDialogComponent implements OnInit {
-  inviteForm: FormGroup;
+  inviteForm!: FormGroup;
+
+  @ViewChild('confirmationDialog') confirmationDialog!: TemplateRef<{
+    email: string;
+    role: string;
+  }>;
+  employee: { email: string; role: string } = { email: '', role: '' };
+
   constructor(
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
     private readonly clientService: ClientService,
+    private readonly dialogService: DialogService,
     private readonly authService: AuthService,
     private readonly snackbarService: SnackbarService,
     private dialogRef: MatDialogRef<InviteEmployeeDialogComponent>,
-  ) {
-    this.inviteForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(60)]],
-    });
-  }
+    private dialog: MatDialog,
+  ) {}
+
   ngOnInit(): void {
     this.inviteForm = this.formBuilder.group(
       {
@@ -52,9 +60,58 @@ export class InviteEmployeeDialogComponent implements OnInit {
   get email() {
     return this.inviteForm.get('email')!;
   }
+
   inviteUser(): void {
     if (this.inviteForm.valid) {
-      const { email } = this.inviteForm.value;
+      const email = this.inviteForm.value.email;
+
+      this.clientService.getRoleByEmail(email).subscribe({
+        next: data => {
+          const role = data.role;
+
+          this.openConfirmationDialog(email, role);
+        },
+        error: () => {
+          this.snackbarService.showError('Error retrieving role');
+        },
+      });
+    }
+  }
+  openConfirmationDialog(email: string, role: string): void {
+    this.dialog
+      .open(this.confirmationDialog, {
+        data: { email, role },
+      })
+      .afterClosed()
+      .subscribe(result => {
+        if (result) {
+          this.onConfirmInvite(email);
+        }
+      });
+  }
+
+  onConfirmInvite(email: string) {
+    this.clientService.inviteUser(email).subscribe({
+      next: success => {
+        if (!success) {
+          return;
+        }
+        this.snackbarService.showSuccess('Empleado invitado exitosamente.');
+        this.dialogRef.close();
+      },
+      error: error => {
+        if (error instanceof DuplicateEmployeeExistError) {
+          this.snackbarService.showError('Empleado ya vinculado a tu empresa.');
+        }
+      },
+    });
+  }
+  inviteUserBack(email: string): void {
+    if (this.inviteForm.valid) {
+      //onst { email } = this.inviteForm.value;
+
+      console.log(email);
+
       this.clientService.inviteUser(email).subscribe({
         next: success => {
           if (!success) {
@@ -88,5 +145,9 @@ export class InviteEmployeeDialogComponent implements OnInit {
 
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  onCancelThis(): void {
+    this.dialogService.closeAllDialogs();
   }
 }

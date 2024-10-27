@@ -52,4 +52,47 @@
       </button>
     </div>
   </form>
+
+  <!-- Diálogo de confirmación -->
+  <ng-template #confirmationDialog let-data="data">
+    <div class="invite-user-container-confirm">
+      <div>
+        <h2 i18n="@@ConfirmarInvitación">Confirmar Invitación</h2>
+        <a
+          i18n="@@close"
+          class="close-button"
+          href="#"
+          (click)="onCancelThis()"
+          (keydown.enter)="onCancelThis()"
+          tabindex="0">
+          X
+        </a>
+      </div>
+      <div class="custom-line"></div>
+      <p i18n="@@textInvitation">
+        El usuario {{ data?.email }} tiene el Rol: {{ data?.role }} y será registrado con este rol a
+        tu empresa.
+      </p>
+      <p i18n="@@textConfirm">¿Deseas confirmar la invitación?</p>
+      <div class="invite-user-container">
+        <a
+          i18n="@@close"
+          class="close-button"
+          href="#"
+          (click)="onCancelThis()"
+          (keydown.enter)="onCancelThis()"
+          tabindex="0"
+          class="buttonCancel mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base">
+          Cancelar
+        </a>
+        <button
+          i18n="@@onConfirmInvite"
+          mat-raised-button
+          type="button"
+          (click)="onConfirmInvite(data?.email)">
+          Confirmar
+        </button>
+      </div>
+    </div>
+  </ng-template>
 </div>

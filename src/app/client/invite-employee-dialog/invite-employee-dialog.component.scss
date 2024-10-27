@@ -96,3 +96,24 @@ button[mat-raised-button]:hover {
   padding: 20px;
   width: 400px;
 }
+
+.invite-user-container {
+  float: right;
+}
+button[mat-button] {
+  color: #4267b2;
+  margin-right: 15px;
+  padding: 20px;
+  border: 1px solid #4267b2;
+  background-color: none;
+}
+
+.buttonCancel:hover {
+  background-color: #acc8ff;
+  color: white;
+  min-width: 100px;
+}
+
+.buttonCancel {
+  min-width: 100px;
+}

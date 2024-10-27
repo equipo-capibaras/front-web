@@ -7,6 +7,7 @@ import {
   ClientResponse,
   DuplicateEmailError,
   DuplicateEmployeeExistError,
+  Employee,
 } from './client.service';
 import { environment } from '../../environments/environment';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
@@ -235,11 +236,14 @@ describe('ClientService', () => {
 
   it('should send an invitation successfully', waitForAsync(() => {
     const email = 'test@example.com';
-    const mockResponse: ClientResponse = {
-      id: '1',
-      name: 'Empresa S.A.S',
-      plan: 'empresario',
-      emailIncidents: email,
+    const mockResponse: Employee = {
+      id: '1dabcf78-e62a-41fd-b69c-fd7c775b04d4',
+      clientId: '22128c04-0c2c-4633-8317-0fffd552f7a6',
+      name: 'Mariana Sanchez Torres',
+      email: 'mariana@globalcom.ec',
+      role: 'analyst',
+      invitationStatus: 'accepted',
+      invitationDate: '2024-10-12T16:32:48+00:00',
     };
 
     service.inviteUser(email).subscribe(response => {
