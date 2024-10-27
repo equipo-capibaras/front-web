@@ -93,6 +93,12 @@ describe('AuthService', () => {
     expect(service.getRole()).toBeNull();
   });
 
+  it('isUnassigned should return null if no token exists', () => {
+    initComponent();
+
+    expect(service.isUnassigned()).toBeNull();
+  });
+
   it('getRole should return the role from the token payload', () => {
     const role = faker.helpers.arrayElement(Object.values(Role));
     const tokenHeader = { alg: 'HS256', typ: 'JWT' };
@@ -194,5 +200,17 @@ describe('AuthService', () => {
     expect(localStorage.getItem('token')).toBeNull();
     expect(snackbarServiceSpy.showError).toHaveBeenCalledWith(ERROR_MESSAGES.JWT_EXPIRED);
     expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
+  });
+
+  it('isUnassigned should return the true if unassigned', () => {
+    const role = faker.helpers.arrayElement(Object.values(Role));
+    const tokenHeader = { alg: 'HS256', typ: 'JWT' };
+    const tokenkPayload = { aud: 'unassigned_' + role };
+    const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
+    localStorage.setItem('token', mockToken);
+
+    initComponent();
+
+    expect(service.isUnassigned()).toBe(true);
   });
 });

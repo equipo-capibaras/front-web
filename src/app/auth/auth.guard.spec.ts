@@ -19,7 +19,7 @@ describe('authGuard', () => {
     TestBed.runInInjectionContext(() => authGuard(...guardParameters));
 
   beforeEach(() => {
-    authService = jasmine.createSpyObj('AuthService', ['getRole']);
+    authService = jasmine.createSpyObj('AuthService', ['getRole', 'isUnassigned']);
     router = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
@@ -38,6 +38,7 @@ describe('authGuard', () => {
     const role = faker.helpers.arrayElement(Object.values(Role));
 
     authService.getRole.and.returnValue(null);
+    authService.isUnassigned.and.returnValue(null);
 
     const routeSnapshot = new ActivatedRouteSnapshot();
     routeSnapshot.data = { roles: [role] };
@@ -52,6 +53,7 @@ describe('authGuard', () => {
     const role = faker.helpers.arrayElement(Object.values(Role));
 
     authService.getRole.and.returnValue(null);
+    authService.isUnassigned.and.returnValue(null);
 
     const routeSnapshot = new ActivatedRouteSnapshot();
     routeSnapshot.data = { roles: [role] };
@@ -65,6 +67,7 @@ describe('authGuard', () => {
   it('should redirect to default route of role and return false if role is not allowed to access', () => {
     const roles = faker.helpers.arrayElements(Object.values(Role), 2);
     authService.getRole.and.returnValue(roles[0]);
+    authService.isUnassigned.and.returnValue(false);
 
     const routeSnapshot = new ActivatedRouteSnapshot();
     routeSnapshot.data = { roles: [roles[1]] };
@@ -79,6 +82,7 @@ describe('authGuard', () => {
     const role = faker.helpers.arrayElement(Object.values(Role));
 
     authService.getRole.and.returnValue(role);
+    authService.isUnassigned.and.returnValue(false);
 
     const routeSnapshot = new ActivatedRouteSnapshot();
     routeSnapshot.data = { roles: [role] };
@@ -87,5 +91,19 @@ describe('authGuard', () => {
 
     expect(router.navigate).not.toHaveBeenCalled();
     expect(result).toBe(true);
+  });
+
+  it('should redirect to /unassigned if user is unassigned', () => {
+    const role = faker.helpers.arrayElement(Object.values(Role));
+    authService.getRole.and.returnValue(role);
+    authService.isUnassigned.and.returnValue(true);
+
+    const routeSnapshot = new ActivatedRouteSnapshot();
+    routeSnapshot.data = { roles: [role] };
+
+    const result = executeGuard(routeSnapshot, {} as RouterStateSnapshot);
+
+    expect(router.navigate).toHaveBeenCalledWith(['/unassigned']);
+    expect(result).toBe(false);
   });
 });

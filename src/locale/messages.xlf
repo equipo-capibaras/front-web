@@ -32,6 +32,9 @@
       <trans-unit id="statusPending" datatype="html">
         <source>Pendiente</source>
       </trans-unit>
+      <trans-unit id="unassignedInfo" datatype="html">
+        <source>Aún no está vinculado a una empresa. Contacte con su administrador.</source>
+      </trans-unit>
       <trans-unit id="user" datatype="html">
         <source>Usuario</source>
       </trans-unit>
