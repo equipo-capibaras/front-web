@@ -75,16 +75,27 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   acceptInvitation() {
-    this.authService.acceptInvitation().subscribe(() => {
-      this.invitation = null;
-      console.log('Invitation accepted.');
+    console.log('Accepting invitation...');
+    this.authService.acceptInvitation().subscribe({
+      next: () => {
+        this.invitation = null;
+        console.log('Invitation accepted.');
+      },
+      error: err => {
+        console.error('Error accepting invitation:', err);
+      },
     });
   }
-
   declineInvitation() {
-    this.authService.declineInvitation().subscribe(() => {
-      this.invitation = null;
-      console.log('Invitation declined.');
+    console.log('Declining invitation...');
+    this.authService.declineInvitation().subscribe({
+      next: () => {
+        this.invitation = null;
+        console.log('Invitation declined.');
+      },
+      error: err => {
+        console.error('Error declining invitation:', err);
+      },
     });
   }
 

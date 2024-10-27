@@ -216,3 +216,50 @@ router-outlet + * {
     color: white;
   }
 }
+
+.mat-mdc-dialog-component-host h1,
+.mat-mdc-dialog-component-host P {
+  font-size: 16px !important;
+  color: $blue-800 !important;
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.mat-mdc-dialog-component-host {
+  padding: 10px;
+}
+
+.mat-mdc-dialog-component-host .Accept {
+  width: 100px;
+  border: 1px solid #4267b2;
+  background: none;
+  margin-right: 25px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: #4267b2;
+  color: white;
+  cursor: pointer;
+}
+
+.mat-mdc-dialog-component-host .Accept:hover {
+  background-color: #3b7bfc;
+}
+.mat-mdc-dialog-component-host .Decline {
+  width: 100px;
+  border: 1px solid #4267b2;
+  background: none;
+  margin-right: 25px;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+.mat-mdc-dialog-component-host .Decline:hover {
+  background-color: #d2def7;
+}
+
+.invite-user-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}

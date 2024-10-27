@@ -7,8 +7,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   template: `
     <h1 class="Texth2" i18n>Invitacion de la compañia {{ data.name }}</h1>
     <p i18n>Role: {{ data.role }}</p>
-    <button mat-button data-testid="accept-button" (click)="onAccept()">Accept</button>
-    <button mat-button data-testid="decline-button" (click)="onDecline()">Decline</button>
+    <div class="invite-user-container">
+      <button class="Accept" mat-button data-testid="accept-button" (click)="onAccept()">
+        Accept
+      </button>
+      <button class="Decline" mat-button data-testid="decline-button" (click)="onDecline()">
+        Decline
+      </button>
+    </div>
   `,
 })
 export class InvitationDialogComponent {
