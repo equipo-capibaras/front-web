@@ -272,7 +272,7 @@
       </trans-unit>
       <trans-unit id="emptyIncidentList" datatype="html">
         <source>No tienes incidentes asignados</source>
-        <target>No tienes incidentes asignados</target>
+        <target>No tenés incidentes asignados</target>
       </trans-unit>
       <trans-unit id="name" datatype="html">
         <source>Nombre</source>

@@ -75,11 +75,6 @@
           <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
           <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
         </table>
-        <mat-paginator
-          aria-label="Seleccionar página"
-          i18n-aria-label="@@selectPage"
-          [length]="totalIncidents"
-          [pageSizeOptions]="[5, 10, 20]" />
       } @else if (!isLoading && incidentsList.data.length === 0) {
         <div class="no-incidents-message" i18n="@@emptyIncidentList">
           No tienes incidentes asignados
@@ -87,6 +82,13 @@
       } @else {
         <div></div>
       }
+      <!-- eslint-disable-next-line @angular-eslint/template/no-inline-styles -->
+      <mat-paginator
+        aria-label="Seleccionar página"
+        i18n-aria-label="@@selectPage"
+        [style.display]="!isLoading && incidentsList.data.length > 0 ? null : 'none'"
+        [length]="totalIncidents"
+        [pageSizeOptions]="[5, 10, 20]" />
     </div>
   </div>
 </div>
