@@ -78,6 +78,21 @@ export class AuthService {
     return this.userRoleSubject.value;
   }
 
+  isUnassigned(): boolean | null {
+    const token = localStorage.getItem('token');
+
+    if (token === null) {
+      return null;
+    }
+
+    try {
+      const decodedToken = jwtDecode<DecodedToken>(token);
+      return decodedToken.aud.startsWith('unassigned_');
+    } catch {
+      return null;
+    }
+  }
+
   logout(): void {
     localStorage.removeItem('token');
     this.setUserRole();

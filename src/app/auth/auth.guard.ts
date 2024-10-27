@@ -14,6 +14,11 @@ export const authGuard: CanActivateFn = (route, _state) => {
     return false;
   }
 
+  if (authService.isUnassigned() && route.data['allowUnassigned'] !== true) {
+    router.navigate(['/unassigned']);
+    return false;
+  }
+
   const roles = route.data['roles'];
 
   if (!roles.includes(role)) {

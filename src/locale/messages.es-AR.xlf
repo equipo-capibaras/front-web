@@ -42,6 +42,10 @@
         <source>Pendiente</source>
         <target>Pendiente</target>
       </trans-unit>
+      <trans-unit id="unassignedInfo" datatype="html">
+        <source>Aún no está vinculado a una empresa. Contacte con su administrador.</source>
+        <target>Aún no estás vinculado a una empresa. Contactá con su administrador.</target>
+      </trans-unit>
       <trans-unit id="user" datatype="html">
         <source>Usuario</source>
         <target>Usuario</target>
