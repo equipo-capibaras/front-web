@@ -287,6 +287,9 @@
       <trans-unit id="employeeRegisterTitle" datatype="html">
         <source>Crea tu cuenta</source>
       </trans-unit>
+      <trans-unit id="emptyIncidentList" datatype="html">
+        <source>No tienes incidentes asignados</source>
+      </trans-unit>
       <trans-unit id="actions" datatype="html">
         <source>Acciones</source>
       </trans-unit>

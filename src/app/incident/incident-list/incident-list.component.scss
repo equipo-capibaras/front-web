@@ -6,6 +6,12 @@
     justify-content: end;
     padding: 1.5rem 0;
   }
+
+  .no-incidents-message {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .mat-mdc-icon-button {

@@ -40,6 +40,7 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['name', 'user', 'dateFiling', 'status', 'actions'];
   incidentsList = new MatTableDataSource<IncidentListEntry>();
   totalIncidents = 0;
+  isLoading = true;
 
   chipInfo: Record<string, { icon: string; text: string; cssClass: string }> = {
     created: {
@@ -74,6 +75,7 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   }
 
   loadIncidents(pageSize: number, page: number) {
+    this.isLoading = true;
     this.employeeService.loadIncidents(pageSize, page).subscribe(data => {
       if (data?.incidents) {
         this.incidentsList.data = data.incidents.map(incident => {
@@ -85,6 +87,7 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
           };
         });
         this.totalIncidents = data.totalIncidents;
+        this.isLoading = false;
       }
     });
   }
