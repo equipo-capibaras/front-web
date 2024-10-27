@@ -64,26 +64,23 @@ export class InviteEmployeeDialogComponent implements OnInit {
     return this.inviteForm.get('email')!;
   }
 
-  inviteUser(): void {
-    if (this.inviteForm.valid) {
-      const email = this.inviteForm.value.email;
-
-      this.clientService.getRoleByEmail(email).subscribe({
-        next: data => {
-          const role = data.role;
-
-          this.openConfirmationDialog(email, role);
-        },
-        error: error => {
-          if (error instanceof DuplicateEmployeeExistError) {
-            this.snackbarService.showError('Empleado ya vinculado a tu empresa.');
-          }
-          if (error instanceof EmployeeNoFoundError) {
-            this.snackbarService.showError('No se encontró el empleado.');
-          }
-        },
-      });
+  inviteUser() {
+    if (this.inviteForm.invalid) {
+      return;
     }
+
+    const email = this.inviteForm.controls['email'].value;
+    this.clientService.inviteUser(email).subscribe({
+      next: () => {
+        this.snackbarService.showSuccess('Empleado invitado exitosamente.');
+        this.dialogRef.close();
+      },
+      error: err => {
+        if (err instanceof DuplicateEmployeeExistError) {
+          this.snackbarService.showError('Empleado ya vinculado a tu empresa.');
+        }
+      },
+    });
   }
   openConfirmationDialog(email: string, role: string): void {
     console.log(role);
@@ -124,42 +121,6 @@ export class InviteEmployeeDialogComponent implements OnInit {
         }
       },
     });
-  }
-  inviteUserBack(email: string): void {
-    if (this.inviteForm.valid) {
-      console.log(email);
-
-      this.clientService.inviteUser(email).subscribe({
-        next: success => {
-          if (!success) {
-            return;
-          }
-
-          this.snackbarService.showSuccess(
-            $localize`:@@employeeRegisterSuccess:Empleado invitado exitosamente.`,
-          );
-
-          if (success) {
-            const role = this.authService.getRole();
-            if (role) {
-              this.router.navigate([role]);
-            }
-            this.dialogService.closeAllDialogs();
-            this.dialogRef.close();
-          } else {
-            // Handle the error case (e.g., show a snackbar message)
-          }
-        },
-        error: error => {
-          if (error instanceof DuplicateEmployeeExistError) {
-            this.snackbarService.showError(
-              $localize`:@@DuplicateEmployeeExistError:Empleado ya vinculado a tu empresa.`,
-            );
-          }
-        },
-      });
-      this.dialogService.closeAllDialogs();
-    }
   }
 
   onCancel(): void {

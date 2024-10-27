@@ -5,10 +5,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-invitation-dialog',
   template: `
-    <h1 i18n>Invitacion de la compañia {{ data.name }}</h1>
+    <h1 class="Texth2" i18n>Invitacion de la compañia {{ data.name }}</h1>
     <p i18n>Role: {{ data.role }}</p>
-    <button i18n mat-button (click)="accept()">Acceptar</button>
-    <button i18n mat-button (click)="decline()">Declinar</button>
+    <button mat-button data-testid="accept-button" (click)="onAccept()">Accept</button>
+    <button mat-button data-testid="decline-button" (click)="onDecline()">Decline</button>
   `,
 })
 export class InvitationDialogComponent {
@@ -17,11 +17,11 @@ export class InvitationDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
 
-  accept() {
+  onAccept(): void {
     this.dialogRef.close('accepted');
   }
 
-  decline() {
+  onDecline(): void {
     this.dialogRef.close('declined');
   }
 }

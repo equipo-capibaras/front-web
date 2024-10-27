@@ -20,10 +20,15 @@ describe('NavbarComponent', () => {
   let fixture: ComponentFixture<NavbarComponent>;
 
   beforeEach(async () => {
-    authService = jasmine.createSpyObj('AuthService', ['userRole$', 'logout']);
+    authService = jasmine.createSpyObj('AuthService', ['userRole$', 'logout', 'getToken']);
+
+    // Mock the userRole$ observable
     Object.defineProperty(authService, 'userRole$', {
       get: () => of(null),
     });
+
+    // Mock getToken to return a fake token
+    authService.getToken.and.returnValue('mock-token'); // Adjust as needed based on your component’s expectation
 
     await TestBed.configureTestingModule({
       imports: [NavbarComponent],
