@@ -47,6 +47,14 @@ button[mat-raised-button]:hover {
   align-items: center;
   justify-content: center;
   padding: 20px;
+
+  float: right;
+
+  text-align: center;
+  font-size: 22px !important;
+  color: $blue-800 !important;
+  font-weight: bold;
+  width: 80%;
 }
 .invite-actions {
   float: right;
@@ -88,9 +96,6 @@ button[mat-raised-button]:hover {
   width: 400px;
 }
 
-.invite-user-container {
-  float: right;
-}
 button[mat-button] {
   margin-right: 15px;
   padding: 12px;
@@ -109,14 +114,6 @@ button[mat-button] {
 
 .Accept {
   color: white !important;
-}
-
-.invite-user-container {
-  text-align: center;
-  font-size: 22px !important;
-  color: $blue-800 !important;
-  font-weight: bold;
-  width: 80%;
 }
 
 .dialog-actions {
@@ -146,12 +143,6 @@ button[mat-raised-button]:hover {
   width: 100%;
 }
 
-.invite-user-container {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
 .invite-actions {
   float: right;
 }
@@ -172,17 +163,6 @@ button[mat-raised-button]:hover {
   margin-right: 25px;
 }
 
-.invite-user-container-confirm {
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  width: 400px;
-}
-
-.invite-user-container {
-  float: right;
-}
 button[mat-button] {
   color: #4267b2;
   margin-right: 15px;
