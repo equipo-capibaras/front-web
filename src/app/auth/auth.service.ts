@@ -7,7 +7,7 @@ import { NO_TOKEN } from '../interceptors/token.interceptor';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../services/snackbar.service';
 import { ERROR_MESSAGES } from '../shared/error-messages';
-import { HttpClient, HttpContext, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpContext } from '@angular/common/http';
 
 interface DecodedToken {
   aud: string;

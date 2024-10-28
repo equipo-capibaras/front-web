@@ -7,7 +7,6 @@ import {
   ClientResponse,
   DuplicateEmailError,
   DuplicateEmployeeExistError,
-  Employee,
 } from './client.service';
 import { environment } from '../../environments/environment';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
