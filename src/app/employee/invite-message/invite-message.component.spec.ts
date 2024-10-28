@@ -35,25 +35,21 @@ describe('InvitationDialogComponent', () => {
   });
 
   it('should close the dialog with "accepted" when accept button is clicked', () => {
-    const acceptButton = fixture.debugElement.query(
-      By.css('[data-testid="accept-button"]'),
-    ).nativeElement;
-    acceptButton.click();
+    const acceptButton = fixture.debugElement.query(By.css('.Accept')).nativeElement;
+    acceptButton.click(); // Simulate button click
     expect(dialogRefSpy.close).toHaveBeenCalledWith('accepted');
   });
 
   it('should close the dialog with "declined" when decline button is clicked', () => {
-    const declineButton = fixture.debugElement.query(
-      By.css('[data-testid="decline-button"]'),
-    ).nativeElement;
-    declineButton.click();
+    const declineButton = fixture.debugElement.query(By.css('.Decline')).nativeElement;
+    declineButton.click(); // Simulate button click
     expect(dialogRefSpy.close).toHaveBeenCalledWith('declined');
   });
 
   it('should render heading text', () => {
     const heading = fixture.debugElement.query(By.css('h1')).nativeElement;
     expect(heading.textContent).toContain(
-      'Desea aceptar la invitacion para asociarse a una compañia?',
+      ' Desea aceptar la invitación para asociarse a una compañía? ',
     );
   });
 
@@ -62,8 +58,8 @@ describe('InvitationDialogComponent', () => {
   });
 
   it('should have Accept and Decline buttons', () => {
-    const acceptButton = fixture.debugElement.query(By.css('[data-testid="accept-button"]'));
-    const declineButton = fixture.debugElement.query(By.css('[data-testid="decline-button"]'));
+    const acceptButton = fixture.debugElement.query(By.css('.Accept'));
+    const declineButton = fixture.debugElement.query(By.css('.Decline'));
 
     expect(acceptButton).toBeTruthy();
     expect(declineButton).toBeTruthy();
