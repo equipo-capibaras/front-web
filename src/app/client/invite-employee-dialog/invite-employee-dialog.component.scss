@@ -55,6 +55,8 @@ button[mat-raised-button]:hover {
   align-items: center;
   justify-content: center;
   padding: 20px;
+
+  float: right;
 }
 .invite-actions {
   float: right;
@@ -96,9 +98,6 @@ button[mat-raised-button]:hover {
   width: 400px;
 }
 
-.invite-user-container {
-  float: right;
-}
 button[mat-button] {
   color: #4267b2;
   margin-right: 15px;
