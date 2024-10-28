@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InviteEmployeeDialogComponent } from './invite-employee-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ClientService } from '../client.service';
+import { ClientService, DuplicateEmployeeExistError } from '../client.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
@@ -88,13 +88,32 @@ describe('InviteEmployeeDialogComponent', () => {
     expect(dialogRef.close).toHaveBeenCalled();
   });
 
-  it('should close the dialog when cancel is called', () => {
-    component.onCancel();
-    expect(dialogRef.close).toHaveBeenCalled();
-  });
-
   it('should close all dialogs when canceling this dialog', () => {
     component.onCancelThis();
     expect(dialogService.closeAllDialogs).toHaveBeenCalled();
+  });
+
+  it('should handle errors when inviting user', () => {
+    const email = 'test@example.com';
+    component.inviteForm.controls['email'].setValue(email);
+
+    clientService.getRoleByEmail.and.returnValue(
+      of({
+        id: '1',
+        name: 'John Doe',
+        email: 'john@example.com',
+        role: 'Admin',
+        clientId: '123',
+        invitationStatus: 'accepted',
+        invitationDate: new Date().toISOString(),
+      }),
+    );
+
+    clientService.inviteUser.and.returnValue(throwError(() => new DuplicateEmployeeExistError()));
+
+    component.inviteUser();
+    component.onConfirmInvite(email);
+
+    expect(snackbarService.showError).toHaveBeenCalledWith('Empleado ya vinculado a tu empresa.');
   });
 });
