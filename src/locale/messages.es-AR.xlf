@@ -52,7 +52,7 @@
       </trans-unit>
       <trans-unit id="textInvitation" datatype="html">
         <source>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a tu empresa.</source>
-        <target state="new">El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a tu empresa.</target>
+        <target>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a vos empresa.</target>
       </trans-unit>
       <trans-unit id="textInviteUser" datatype="html">
         <source>Invitar usuario</source>
