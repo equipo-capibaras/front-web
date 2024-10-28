@@ -1,7 +1,15 @@
 <div class="invite-user-container">
   <div>
     <h2 i18n="@@textInviteUser">Invitar usuario</h2>
-    <a i18n="@@close" class="close-button" (click)="onCancel()"> X </a>
+
+    <a
+      i18n="@@close"
+      class="close-button"
+      tabindex="0"
+      (click)="onCancel()"
+      (keydown.enter)="onCancel()">
+      x
+    </a>
   </div>
   <div class="custom-line"></div>
   <p i18n="@@text">
@@ -77,10 +85,9 @@
       <div class="invite-user-container">
         <a
           i18n="@@close"
-          class="close-button"
+          class="close-button buttonCancel mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"
           href="#"
           tabindex="0"
-          class="buttonCancel mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"
           (click)="onCancelThis()"
           (keydown.enter)="onCancelThis()">
           Cancelar

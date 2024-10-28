@@ -1,22 +1,23 @@
 <div class="invite-user-container">
   <h1 class="Texth2" i18n="@@invite_title">
-    Desea aceptar la invitacion para asociarse a una compañia?
+    Desea aceptar la invitación para asociarse a una compañía?
   </h1>
   <div class="invite-user-container">
+
     <button
       type="button"
       class="Accept"
       mat-button
-      data-testid="accept-button"
+      data-testid="accept-button" <!-- eslint-disable-line @angular-eslint/template/i18n -->
       (click)="onConfirm()"
       i18n="@@accept_button">
-      Acceptar
+      Aceptar
     </button>
     <button
       type="button"
       class="Decline"
       mat-button
-      data-testid="decline-button"
+      data-testid="decline-button" <!-- eslint-disable-line @angular-eslint/template/i18n -->
       (click)="onDecline()"
       i18n="@@cancel_button">
       Cancelar
