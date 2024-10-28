@@ -72,7 +72,6 @@ button[mat-raised-button]:hover {
   color: #5a667f;
   float: right;
   font-size: 16px;
-  margin-top: 14px;
   margin-right: 20px;
 }
 
@@ -171,19 +170,6 @@ button[mat-raised-button]:hover {
   border: 1px solid #4267b2;
   background: none;
   margin-right: 25px;
-}
-
-.close-button {
-  color: #5a667f;
-  float: right;
-  font-size: 16px;
-  margin-top: 14px;
-  margin-right: 20px;
-}
-
-.close-button:hover {
-  font-weight: 900;
-  cursor: pointer;
 }
 
 .invite-user-container-confirm {
