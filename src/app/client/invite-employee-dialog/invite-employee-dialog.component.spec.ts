@@ -42,7 +42,6 @@ describe('InviteEmployeeDialogComponent', () => {
     fixture = TestBed.createComponent(InviteEmployeeDialogComponent);
     component = fixture.componentInstance;
 
-    // Mock the getRoleByEmail return value
     clientService.getRoleByEmail.and.returnValue(
       of({
         id: '1',
@@ -85,7 +84,17 @@ describe('InviteEmployeeDialogComponent', () => {
   });
 
   it('should close the dialog when cancel is called', () => {
-    component.onCancel(); // Call the method to test
-    expect(dialogRef.close).toHaveBeenCalled(); // Check if close was called
+    component.onCancel();
+    expect(dialogRef.close).toHaveBeenCalled();
+  });
+
+  it('should close the dialog when cancel is called', () => {
+    component.onCancel();
+    expect(dialogRef.close).toHaveBeenCalled();
+  });
+
+  it('should close all dialogs when canceling this dialog', () => {
+    component.onCancelThis();
+    expect(dialogService.closeAllDialogs).toHaveBeenCalled();
   });
 });
