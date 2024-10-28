@@ -12,7 +12,7 @@ export interface DialogData {
 export class DialogService {
   private dialogs: MatDialogRef<DialogData>[] = [];
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private readonly dialog: MatDialog) {}
 
   closeAllDialogs() {
     this.dialogs.forEach(dialog => dialog.close());

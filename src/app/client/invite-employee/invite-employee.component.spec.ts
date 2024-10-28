@@ -30,15 +30,18 @@ describe('InviteEmployeeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should open the invite dialog', () => {
+  it('should open the invite dialog when openInviteDialog is called', () => {
     component.openInviteDialog();
-    expect(dialogSpy.open).toHaveBeenCalledWith(InviteEmployeeDialogComponent, { width: '461px' });
+    expect(dialogSpy.open).toHaveBeenCalledWith(InviteEmployeeDialogComponent, {
+      width: '461px',
+    });
   });
 
-  it('should open the dialog when button is clicked', () => {
+  it('should open the dialog when the button is clicked', () => {
     const button = fixture.debugElement.query(By.css('button'));
-    button.nativeElement.click(); // Simulate button click
-
-    expect(dialogSpy.open).toHaveBeenCalledWith(InviteEmployeeDialogComponent, { width: '461px' });
+    button.nativeElement.click();
+    expect(dialogSpy.open).toHaveBeenCalledWith(InviteEmployeeDialogComponent, {
+      width: '461px',
+    });
   });
 });

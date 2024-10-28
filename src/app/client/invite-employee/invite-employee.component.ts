@@ -9,7 +9,7 @@ import { InviteEmployeeDialogComponent } from '../invite-employee-dialog/invite-
   imports: [MatButtonModule],
 })
 export class InviteEmployeeComponent {
-  constructor(private dialog: MatDialog) {}
+  constructor(private readonly dialog: MatDialog) {}
 
   openInviteDialog(): void {
     this.dialog.open(InviteEmployeeDialogComponent, {

@@ -17,7 +17,7 @@ export class EmployeeUnassignedComponent implements OnInit {
   invitation: Invitation | null = null;
 
   constructor(
-    private dialog: MatDialog,
+    private readonly dialog: MatDialog,
     private readonly clientService: ClientService,
     private readonly authService: AuthService,
     private readonly router: Router,

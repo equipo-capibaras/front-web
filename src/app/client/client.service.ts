@@ -59,7 +59,7 @@ export class ClientService {
   private readonly clientDataSubject = new BehaviorSubject<Client | null>(null);
   public clientData$ = this.clientDataSubject.asObservable();
 
-  private mockEmployee: Employee = {
+  private readonly mockEmployee: Employee = {
     id: '1dabcf78-e62a-41fd-b69c-fd7c775b04d4',
     clientId: '22128c04-0c2c-4633-8317-0fffd552f7a6',
     name: 'Mariana Sanchez Torres',

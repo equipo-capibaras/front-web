@@ -157,4 +157,9 @@ describe('InviteEmployeeDialogComponent', () => {
     expect(snackbarService.showSuccess).toHaveBeenCalledWith('Empleado invitado exitosamente.');
     expect(component.reloadPage).toHaveBeenCalled();
   });
+
+  it('should initialize the form with the correct controls', () => {
+    expect(component.inviteForm).toBeDefined();
+    expect(component.inviteForm.controls['email']).toBeDefined();
+  });
 });
