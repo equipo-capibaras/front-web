@@ -49,7 +49,7 @@ describe('InvitationDialogComponent', () => {
   it('should render heading text', () => {
     const heading = fixture.debugElement.query(By.css('h1')).nativeElement;
     expect(heading.textContent).toContain(
-      ' Desea aceptar la invitación para asociarse a una compañía? ',
+      '¿Desea aceptar la invitación para asociarse a una compañía?',
     );
   });
 

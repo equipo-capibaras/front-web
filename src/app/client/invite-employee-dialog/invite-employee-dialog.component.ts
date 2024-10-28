@@ -57,6 +57,11 @@ export class InviteEmployeeDialogComponent implements OnInit {
       {},
     );
   }
+
+  reloadPage() {
+    window.location.reload();
+  }
+
   get email() {
     return this.inviteForm.get('email')!;
   }
@@ -100,11 +105,9 @@ export class InviteEmployeeDialogComponent implements OnInit {
         this.dialogRef.close();
         this.snackbarService.showSuccess('Empleado invitado exitosamente.');
 
-        // Close all dialogs
         this.dialogService.closeAllDialogs();
 
-        // Refresh the page
-        window.location.reload();
+        this.reloadPage();
       },
       error: error => {
         if (error instanceof DuplicateEmployeeExistError) {
