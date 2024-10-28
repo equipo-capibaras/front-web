@@ -176,13 +176,14 @@ export class ClientService {
     });
 
     return this.http.post<void>(`${this.apiUrl}/employees/invitation`, body, { headers }).pipe(
+      map(response => response),
       catchError(err => {
         if (err.status === 409) {
           this.snackbarService.showError('Ya estás vinculado a la organización');
         } else {
           this.snackbarService.showError('INVITATION_ACCEPT_FAILED');
         }
-        return of(undefined); // Return an observable that emits undefined
+        return of(undefined);
       }),
     );
   }
@@ -193,6 +194,7 @@ export class ClientService {
       Authorization: `Bearer ${token}`,
     });
     return this.http.post<void>(`${this.apiUrl}/employees/invitation`, body, { headers }).pipe(
+      map(response => response),
       catchError(_err => {
         this.snackbarService.showError('INVITATION_DECLINE_FAILED');
         return of(undefined);

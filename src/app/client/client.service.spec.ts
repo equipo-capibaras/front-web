@@ -7,6 +7,8 @@ import {
   ClientResponse,
   DuplicateEmailError,
   DuplicateEmployeeExistError,
+  EmployeeNoFoundError,
+  Employee,
 } from './client.service';
 import { environment } from '../../environments/environment';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
@@ -283,5 +285,133 @@ describe('ClientService', () => {
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual({ email });
     req.flush({}, { status: 500, statusText: 'Internal Server Error' });
+  }));
+
+  it('should get role by email successfully', waitForAsync(() => {
+    const email = 'employee@example.com';
+    const mockEmployee: Employee = {
+      id: '1',
+      clientId: '123',
+      name: 'John Doe',
+      email,
+      role: 'analyst',
+      invitationStatus: 'accepted',
+      invitationDate: '2024-01-01T00:00:00Z',
+    };
+
+    service.getRoleByEmail(email).subscribe(response => {
+      expect(response).toEqual(mockEmployee);
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/detail`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual({ email });
+    req.flush(mockEmployee);
+  }));
+
+  it('should throw EmployeeNoFoundError when employee not found', waitForAsync(() => {
+    const email = 'notfound@example.com';
+
+    service.getRoleByEmail(email).subscribe({
+      error: error => {
+        expect(error).toBeInstanceOf(EmployeeNoFoundError);
+      },
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/detail`);
+    expect(req.request.method).toBe('POST');
+    req.flush({}, { status: 404, statusText: 'Not Found' });
+  }));
+
+  it('should rethrow other errors in getRoleByEmail', waitForAsync(() => {
+    const email = 'error@example.com';
+
+    service.getRoleByEmail(email).subscribe({
+      error: error => {
+        expect(error).not.toBeNull();
+        expect(error.status).toBe(500);
+      },
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/detail`);
+    expect(req.request.method).toBe('POST');
+    req.flush({}, { status: 500, statusText: 'Internal Server Error' });
+  }));
+
+  it('should accept invitation successfully', waitForAsync(() => {
+    const token = 'valid_token';
+
+    service.acceptInvitation(token).subscribe(response => {
+      expect(response).not.toBeUndefined();
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invitation`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${token}`);
+    req.flush({});
+  }));
+
+  it('should show snackbar error for duplicate link when accepting invitation', waitForAsync(() => {
+    const token = 'duplicate_token';
+    const snackbarSpy = spyOn(service['snackbarService'], 'showError');
+
+    service.acceptInvitation(token).subscribe({
+      error: error => {
+        expect(error).toBeUndefined();
+      },
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invitation`);
+    expect(req.request.method).toBe('POST');
+    req.flush({}, { status: 409, statusText: 'Conflict' });
+
+    expect(snackbarSpy).toHaveBeenCalledWith('Ya estás vinculado a la organización');
+  }));
+
+  it('should show snackbar error for generic error in acceptInvitation', waitForAsync(() => {
+    const token = 'error_token';
+    const snackbarSpy = spyOn(service['snackbarService'], 'showError');
+
+    service.acceptInvitation(token).subscribe({
+      error: error => {
+        expect(error).toBeUndefined();
+      },
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invitation`);
+    expect(req.request.method).toBe('POST');
+    req.flush({}, { status: 500, statusText: 'Internal Server Error' });
+
+    expect(snackbarSpy).toHaveBeenCalledWith('INVITATION_ACCEPT_FAILED');
+  }));
+
+  it('should decline invitation successfully', waitForAsync(() => {
+    const token = 'valid_token';
+
+    service.declineInvitation(token).subscribe(response => {
+      expect(response).not.toBeUndefined();
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invitation`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${token}`);
+    req.flush({});
+  }));
+
+  it('should show snackbar error for generic error in declineInvitation', waitForAsync(() => {
+    const token = 'error_token';
+    const snackbarSpy = spyOn(service['snackbarService'], 'showError');
+
+    service.declineInvitation(token).subscribe({
+      error: error => {
+        expect(error).toBeUndefined();
+      },
+    });
+
+    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invitation`);
+    expect(req.request.method).toBe('POST');
+    req.flush({}, { status: 500, statusText: 'Internal Server Error' });
+
+    expect(snackbarSpy).toHaveBeenCalledWith('INVITATION_DECLINE_FAILED');
   }));
 });
