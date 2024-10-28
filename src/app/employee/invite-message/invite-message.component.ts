@@ -7,7 +7,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./invite-message.component.scss'],
 })
 export class InvitationDialogComponent {
-  constructor(private dialogRef: MatDialogRef<InvitationDialogComponent>) {}
+  constructor(private readonly dialogRef: MatDialogRef<InvitationDialogComponent>) {}
 
   onConfirm(): void {
     this.dialogRef.close('accepted');
