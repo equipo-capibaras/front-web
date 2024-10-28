@@ -1,15 +1,8 @@
 <div class="invite-user-container">
   <div>
     <h2 i18n="@@textInviteUser">Invitar usuario</h2>
-
-    <a
-      i18n="@@close"
-      class="close-button"
-      tabindex="0"
-      (click)="onCancel()"
-      (keydown.enter)="onCancel()">
-      x
-    </a>
+    <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
+    <a class="close-button" tabindex="0" (click)="onCancel()" (keydown.enter)="onCancel()">X</a>
   </div>
   <div class="custom-line"></div>
   <p i18n="@@text">
@@ -67,12 +60,12 @@
       <div>
         <h2 i18n="@@ConfirmarInvitación">Confirmar Invitación</h2>
         <a
-          i18n="@@close"
           class="close-button"
           href="#"
           tabindex="0"
           (click)="onCancelThis()"
           (keydown.enter)="onCancelThis()">
+          <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
           X
         </a>
       </div>
@@ -84,7 +77,7 @@
       <p i18n="@@textConfirm">¿Deseas confirmar la invitación?</p>
       <div class="invite-user-container">
         <a
-          i18n="@@close"
+          i18n="@@cancel_button"
           class="close-button buttonCancel mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"
           href="#"
           tabindex="0"
