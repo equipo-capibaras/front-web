@@ -189,7 +189,7 @@ export class ClientService {
   }
 
   declineInvitation(token: string): Observable<void> {
-    const body = { response: 'decline' };
+    const body = { response: 'declined' };
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
