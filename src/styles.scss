@@ -224,6 +224,9 @@ router-outlet + * {
   padding-left: 10px;
   padding-right: 10px;
 }
+.mat-mdc-dialog-component-host {
+  padding: 10px;
+}
 
 .mat-mdc-dialog-component-host .Accept {
   width: 100px;

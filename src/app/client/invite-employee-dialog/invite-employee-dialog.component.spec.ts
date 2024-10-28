@@ -58,6 +58,12 @@ describe('InviteEmployeeDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should create the form correctly', () => {
+    expect(component.inviteForm.valid).toBeFalse();
+    component.inviteForm.controls['email'].setValue('test@example.com');
+    expect(component.inviteForm.valid).toBeTrue();
+  });
+
   it('should not invite user if form is invalid', () => {
     component.inviteForm.controls['email'].setValue('');
     component.inviteUser();
