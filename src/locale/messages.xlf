@@ -5,6 +5,12 @@
       <trans-unit id="error-401" datatype="html">
         <source>Usuario o contraseña incorrectos.</source>
       </trans-unit>
+      <trans-unit id="error-jwt-expired" datatype="html">
+        <source>Tu sesión ha expirado. Por favor, inicia sesión nuevamente.</source>
+      </trans-unit>
+      <trans-unit id="error-jwt-missing" datatype="html">
+        <source>Falta el token de autenticación.</source>
+      </trans-unit>
       <trans-unit id="error-403" datatype="html">
         <source>No tienes permiso para acceder a este recurso.</source>
       </trans-unit>
@@ -17,18 +23,35 @@
       <trans-unit id="role" datatype="html">
         <source>Rol</source>
       </trans-unit>
-      <trans-unit id="roleColumn" datatype="html">
-        <source>Rol</source>
-        <target>Rol</target>
-      </trans-unit>
-      <trans-unit id="snackbarClose" datatype="html">
-        <source>Cerrar</source>
+      <trans-unit id="selectPage" datatype="html">
+        <source>Seleccionar página</source>
       </trans-unit>
       <trans-unit id="statusAccepted" datatype="html">
         <source>Aceptada</source>
       </trans-unit>
       <trans-unit id="statusPending" datatype="html">
         <source>Pendiente</source>
+      </trans-unit>
+      <trans-unit id="text" datatype="html">
+        <source>Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa</source>
+      </trans-unit>
+      <trans-unit id="textConfirm" datatype="html">
+        <source>¿Deseas confirmar la invitación?</source>
+      </trans-unit>
+      <trans-unit id="textInvitation" datatype="html">
+        <source>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a tu empresa.</source>
+      </trans-unit>
+      <trans-unit id="textInviteUser" datatype="html">
+        <source>Invitar usuario</source>
+      </trans-unit>
+      <trans-unit id="unassignedInfo" datatype="html">
+        <source>Aún no está vinculado a una empresa. Contacte con su administrador.</source>
+      </trans-unit>
+      <trans-unit id="user" datatype="html">
+        <source>Usuario</source>
+      </trans-unit>
+      <trans-unit id="viewIncident" datatype="html">
+        <source>Ver incidente</source>
       </trans-unit>
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
@@ -45,14 +68,41 @@
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
       </trans-unit>
+      <trans-unit id="incidentManagement" datatype="html">
+        <source>Gestión incidentes</source>
+      </trans-unit>
+      <trans-unit id="incidentManagementPageDescription" datatype="html">
+        <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver y seguir fácilmente el estado de todas las incidencias asignadas a tu nombre.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Además, tendrás la opción de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>crear nuevas incidencias<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de manera rápida y eficiente.</source>
+      </trans-unit>
+      <trans-unit id="incidentStatus" datatype="html">
+        <source>Estado</source>
+      </trans-unit>
+      <trans-unit id="incidentStatusClosed" datatype="html">
+        <source>Cerrada</source>
+      </trans-unit>
+      <trans-unit id="incidentStatusEscalated" datatype="html">
+        <source>Escalado</source>
+      </trans-unit>
+      <trans-unit id="incidentStatusOpen" datatype="html">
+        <source>Abierta</source>
+      </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
       </trans-unit>
-      <trans-unit id="invitationStatusColumn" datatype="html">
-        <source>Estado Invitación</source>
+      <trans-unit id="invite_title" datatype="html">
+        <source>Desea aceptar la invitación para asociarse a una compañía?</source>
+      </trans-unit>
+      <trans-unit id="inviteCancelButton" datatype="html">
+        <source>Cancelar</source>
+      </trans-unit>
+      <trans-unit id="inviteEmailPlaceholder" datatype="html">
+        <source>Correo</source>
       </trans-unit>
       <trans-unit id="inviteEmployee" datatype="html">
         <source>Invitar empleado</source>
+      </trans-unit>
+      <trans-unit id="inviteSubmitButton" datatype="html">
+        <source>Invitar</source>
       </trans-unit>
       <trans-unit id="loginButtonSubmit" datatype="html">
         <source>Ingresar</source>
@@ -135,8 +185,8 @@
       <trans-unit id="planSelectButton" datatype="html">
         <source>Seleccionar</source>
       </trans-unit>
-      <trans-unit id="prontoEmpleados" datatype="html">
-        <source>Aquí pronto hay el listado de empleados.</source>
+      <trans-unit id="onConfirmInvite" datatype="html">
+        <source>Confirmar</source>
       </trans-unit>
       <trans-unit id="paginatorItemsPerPage" datatype="html">
         <source>Items por página:</source>
@@ -148,10 +198,7 @@
         <source>Página anterior</source>
       </trans-unit>
       <trans-unit id="plan" datatype="html">
-        <source>Plan <x id="INTERPOLATION" equiv-text="{{ formattedPlan }}"/></source>
-      </trans-unit>
-      <trans-unit id="prontoIncidentes" datatype="html">
-        <source>Aquí pronto hay el listado de incidentes.</source>
+        <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
       </trans-unit>
       <trans-unit id="prontoTableros" datatype="html">
         <source>Aquí pronto hay los tableros de control.</source>
@@ -161,6 +208,15 @@
       </trans-unit>
       <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
+      </trans-unit>
+      <trans-unit id="ConfirmarInvitación" datatype="html">
+        <source>Confirmar Invitación</source>
+      </trans-unit>
+      <trans-unit id="createIncident" datatype="html">
+        <source>Crear incidente</source>
+      </trans-unit>
+      <trans-unit id="dateFiling" datatype="html">
+        <source>Fecha radicación</source>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
         <source>Tableros de control</source>
@@ -225,12 +281,6 @@
       <trans-unit id="name" datatype="html">
         <source>Nombre</source>
       </trans-unit>
-      <trans-unit id="emailColumn" datatype="html">
-        <source>Correo</source>
-      </trans-unit>
-      <trans-unit id="nameColumn" datatype="html">
-        <source>Nombre</source>
-      </trans-unit>
       <trans-unit id="employeeRegisterLabelPassword" datatype="html">
         <source>Contraseña</source>
       </trans-unit>
@@ -270,14 +320,47 @@
       <trans-unit id="employeeRegisterTitle" datatype="html">
         <source>Crea tu cuenta</source>
       </trans-unit>
+      <trans-unit id="emptyIncidentList" datatype="html">
+        <source>No tienes incidentes asignados</source>
+      </trans-unit>
+      <trans-unit id="accept_button" datatype="html">
+        <source>Aceptar</source>
+      </trans-unit>
+      <trans-unit id="actions" datatype="html">
+        <source>Acciones</source>
+      </trans-unit>
+      <trans-unit id="cancel_button" datatype="html">
+        <source>Cancelar</source>
+      </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>
       </trans-unit>
+      <trans-unit id="changePlanCancel" datatype="html">
+        <source>Cancelar</source>
+      </trans-unit>
+      <trans-unit id="changePlanConfirm" datatype="html">
+        <source>Confirmar</source>
+      </trans-unit>
+      <trans-unit id="changePlanImportant" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Importante: <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ billingMessage }}"/></source>
+      </trans-unit>
+      <trans-unit id="changePlanIsBillingPeriod" datatype="html">
+        <source>El cambio de plan se aplicará a partir del próximo mes.</source>
+      </trans-unit>
+      <trans-unit id="changePlanNotBillingPeriod" datatype="html">
+        <source>Estás dentro de los 5 primeros días del mes. El cambio de plan se reflejará en tu factura de este mes.</source>
+      </trans-unit>
+      <trans-unit id="changePlanPrice" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Precio mensual:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> <x id="INTERPOLATION" equiv-text="{{ data.newPrice }}"/></source>
+      </trans-unit>
+      <trans-unit id="changePlanQuestion" datatype="html">
+        <source>¿Estás seguro de que deseas cambiar del plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ data.currentPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> al plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ data.newPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/>?</source>
+      </trans-unit>
+      <trans-unit id="changeStateIncident" datatype="html">
+        <source>Cambiar estado de incidente</source>
+      </trans-unit>
       <trans-unit id="clientManagementPageDescription" datatype="html">
         <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e invitar fácilmente a tus empleados<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que se unan a la empresa, permitiéndoles acceder a las herramientas y funcionalidades disponibles en la plataforma. También podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>actualizar el plan<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> actual de tu empresa.</source>
-      </trans-unit>
-      <trans-unit id="selectPage" datatype="html">
-       <source>Seleccionar página</source>
       </trans-unit>
     </body>
   </file>

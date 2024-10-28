@@ -6,15 +6,30 @@ import { faker } from '@faker-js/faker';
 import { environment } from '../../environments/environment';
 import { AuthService } from './auth.service';
 import { Role } from './role';
+import { ERROR_MESSAGES } from '../shared/error-messages';
+import { SnackbarService } from '../services/snackbar.service';
+import { Router } from '@angular/router';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AuthService', () => {
   let service: AuthService;
   let httpTestingController: HttpTestingController;
+  let snackbarServiceSpy: jasmine.SpyObj<SnackbarService>;
+  let routerSpy: jasmine.SpyObj<Router>;
 
   beforeEach(() => {
     localStorage.clear();
+    snackbarServiceSpy = jasmine.createSpyObj('SnackbarService', ['showError']);
+    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+
     TestBed.configureTestingModule({
-      providers: [provideHttpClient(), provideHttpClientTesting()],
+      imports: [NoopAnimationsModule],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        { provide: SnackbarService, useValue: snackbarServiceSpy },
+        { provide: Router, useValue: routerSpy },
+      ],
     });
   });
 
@@ -76,6 +91,12 @@ describe('AuthService', () => {
     initComponent();
 
     expect(service.getRole()).toBeNull();
+  });
+
+  it('isUnassigned should return null if no token exists', () => {
+    initComponent();
+
+    expect(service.isUnassigned()).toBeNull();
   });
 
   it('getRole should return the role from the token payload', () => {
@@ -169,5 +190,27 @@ describe('AuthService', () => {
       },
       { status: 500, statusText: 'Internal Server Error' },
     );
+  });
+
+  it('handleTokenExpired should remove token, show error, and navigate to login', () => {
+    initComponent();
+
+    localStorage.setItem('token', 'fakeToken');
+    service.handleTokenExpired();
+    expect(localStorage.getItem('token')).toBeNull();
+    expect(snackbarServiceSpy.showError).toHaveBeenCalledWith(ERROR_MESSAGES.JWT_EXPIRED);
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/']);
+  });
+
+  it('isUnassigned should return the true if unassigned', () => {
+    const role = faker.helpers.arrayElement(Object.values(Role));
+    const tokenHeader = { alg: 'HS256', typ: 'JWT' };
+    const tokenkPayload = { aud: 'unassigned_' + role };
+    const mockToken = `${btoa(JSON.stringify(tokenHeader))}.${btoa(JSON.stringify(tokenkPayload))}.fakeSignature`;
+    localStorage.setItem('token', mockToken);
+
+    initComponent();
+
+    expect(service.isUnassigned()).toBe(true);
   });
 });

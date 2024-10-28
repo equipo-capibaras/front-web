@@ -67,6 +67,14 @@ mat-form-field {
   color: $blue-800 !important;
 }
 
-#form-register {
+#form-employee-register {
   padding-top: 1.5rem;
+}
+
+.invite-user-container-confirm {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  width: 400px;
 }

@@ -15,11 +15,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { DuplicateEmailError, EmployeeService } from '../employee.service';
 import { AuthService } from '../../auth/auth.service';
 import { defaultRoutes } from '../../auth/default.routes';
 import { Role } from '../../auth/role';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-register',
@@ -43,9 +43,9 @@ export class EmployeeRegisterComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
-    private readonly snackbar: MatSnackBar,
     private readonly employeeService: EmployeeService,
     private readonly authService: AuthService,
+    private readonly snackbarService: SnackbarService,
   ) {}
 
   matchPasswordValidator(): ValidatorFn {
@@ -131,12 +131,8 @@ export class EmployeeRegisterComponent implements OnInit {
               return;
             }
 
-            this.snackbar.open(
+            this.snackbarService.showSuccess(
               $localize`:@@employeeRegisterSuccess:Cuenta creada exitosamente`,
-              $localize`:@@snackbarClose:Cerrar`,
-              {
-                duration: 10000,
-              },
             );
 
             const userRole = this.authService.getRole();
@@ -153,11 +149,9 @@ export class EmployeeRegisterComponent implements OnInit {
       },
       error: error => {
         if (error instanceof DuplicateEmailError) {
-          const errorMessage = $localize`:@@employeeRegisterErrorEmailRegistered:Ya existe un usuario con este email.`;
-
-          this.snackbar.open(errorMessage, $localize`:@@snackbarClose:Cerrar`, {
-            duration: 10000,
-          });
+          this.snackbarService.showError(
+            $localize`:@@employeeRegisterErrorEmailRegistered:Ya existe un usuario con este email.`,
+          );
         }
       },
     });

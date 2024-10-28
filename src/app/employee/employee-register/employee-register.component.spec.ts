@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { of, throwError } from 'rxjs';
 import { faker } from '@faker-js/faker';
 import { EmployeeRegisterComponent } from './employee-register.component';
 import { AuthService } from '../../auth/auth.service';
 import { DuplicateEmailError, EmployeeResponse, EmployeeService } from '../employee.service';
 import { Role } from '../../auth/role';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-mock',
@@ -22,12 +22,12 @@ describe('EmployeeRegisterComponent', () => {
   let fixture: ComponentFixture<EmployeeRegisterComponent>;
   let authService: jasmine.SpyObj<AuthService>;
   let employeeService: jasmine.SpyObj<EmployeeService>;
-  let snackBar: jasmine.SpyObj<MatSnackBar>;
+  let snackbarService: jasmine.SpyObj<SnackbarService>;
 
   beforeEach(async () => {
     authService = jasmine.createSpyObj('AuthService', ['getRole', 'login']);
     employeeService = jasmine.createSpyObj('EmployeeService', ['register']);
-    snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
+    snackbarService = jasmine.createSpyObj('SnackbarService', ['showError', 'showSuccess']);
 
     await TestBed.configureTestingModule({
       imports: [EmployeeRegisterComponent, NoopAnimationsModule],
@@ -39,7 +39,7 @@ describe('EmployeeRegisterComponent', () => {
         ]),
         { provide: AuthService, useValue: authService },
         { provide: EmployeeService, useValue: employeeService },
-        { provide: MatSnackBar, useValue: snackBar },
+        { provide: SnackbarService, useValue: snackbarService },
       ],
     }).compileComponents();
 
@@ -133,6 +133,6 @@ describe('EmployeeRegisterComponent', () => {
 
     component.register();
 
-    expect(snackBar.open).toHaveBeenCalled();
+    expect(snackbarService.showError).toHaveBeenCalled();
   }));
 });

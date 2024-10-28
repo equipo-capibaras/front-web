@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { throwError, of, Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 import { NO_TOKEN } from '../interceptors/token.interceptor';
+import { environment } from '../../environments/environment';
 
 export class DuplicateEmailError extends Error {
   constructor(message?: string) {
@@ -22,10 +23,27 @@ export interface EmployeeResponse {
   invitationDate: Date;
 }
 
+export interface IncidentListResponse {
+  incidents: {
+    name: string;
+    reportedBy: {
+      id: string;
+      name: string;
+      email: string;
+    };
+    filingDate: Date;
+    status: string;
+  }[];
+  totalPages: number;
+  currentPage: number;
+  totalIncidents: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class EmployeeService {
+  private readonly apiUrl = environment.apiUrl;
   constructor(private readonly http: HttpClient) {}
 
   register(employeeData: { name: string; email: string; password: string; role: string }) {
@@ -34,7 +52,7 @@ export class EmployeeService {
     context.set(NO_TOKEN, true);
 
     return this.http
-      .post<EmployeeResponse>(`/api/v1/employees`, employeeData, { context: context })
+      .post<EmployeeResponse>(`${this.apiUrl}/employees`, employeeData, { context: context })
       .pipe(
         map(response => {
           return response;
@@ -45,6 +63,18 @@ export class EmployeeService {
           }
 
           return throwError(() => error);
+        }),
+      );
+  }
+
+  loadIncidents(pageSize: number, page: number): Observable<IncidentListResponse | null> {
+    return this.http
+      .get<IncidentListResponse>(
+        `${this.apiUrl}/employees/me/incidents?page_size=${pageSize}&page_number=${page}`,
+      )
+      .pipe(
+        catchError(_ => {
+          return of(null);
         }),
       );
   }

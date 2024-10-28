@@ -6,6 +6,14 @@
         <source>Usuario o contraseña incorrectos.</source>
         <target>Usuário ou senha incorretos.</target>
       </trans-unit>
+      <trans-unit id="error-jwt-expired" datatype="html">
+        <source>Tu sesión ha expirado. Por favor, inicia sesión nuevamente.</source>
+        <target>Sua sessão expirou. Por favor, faça login novamente.</target>
+      </trans-unit>
+      <trans-unit id="error-jwt-missing" datatype="html">
+        <source>Falta el token de autenticación.</source>
+        <target>Falta o token de autenticação.</target>
+      </trans-unit>
       <trans-unit id="error-403" datatype="html">
         <source>No tienes permiso para acceder a este recurso.</source>
         <target>Você não tem permissão para acessar este recurso.</target>
@@ -22,13 +30,9 @@
         <source>Rol</source>
         <target>Função</target>
       </trans-unit>
-      <trans-unit id="roleColumn" datatype="html">
-        <source>Rol</source>
-        <target>Rol</target>
-      </trans-unit>
-      <trans-unit id="snackbarClose" datatype="html">
-        <source>Cerrar</source>
-        <target>Fechar</target>
+      <trans-unit id="selectPage" datatype="html">
+        <source>Seleccionar página</source>
+        <target>Selecionar página</target>
       </trans-unit>
       <trans-unit id="statusAccepted" datatype="html">
         <source>Aceptada</source>
@@ -37,6 +41,34 @@
       <trans-unit id="statusPending" datatype="html">
         <source>Pendiente</source>
         <target>Pendente</target>
+      </trans-unit>
+      <trans-unit id="text" datatype="html">
+        <source>Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa</source>
+        <target>Introduza o correio do utilizador que pretende convidar a juntar-se à empresa.</target>
+      </trans-unit>
+      <trans-unit id="textConfirm" datatype="html">
+        <source>¿Deseas confirmar la invitación?</source>
+        <target>Deseja confirmar o convite?</target>
+      </trans-unit>
+      <trans-unit id="textInvitation" datatype="html">
+        <source>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a tu empresa.</source>
+        <target>O usuário <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tem a função: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> e será registado com esta função na sua empresa.</target>
+      </trans-unit>
+      <trans-unit id="textInviteUser" datatype="html">
+        <source>Invitar usuario</source>
+        <target>Convidar utilizador</target>
+      </trans-unit>
+      <trans-unit id="unassignedInfo" datatype="html">
+        <source>Aún no está vinculado a una empresa. Contacte con su administrador.</source>
+        <target>Ainda não está vinculado a uma empresa. Entre em contato com seu administrador.</target>
+      </trans-unit>
+      <trans-unit id="user" datatype="html">
+        <source>Usuario</source>
+        <target>Usuário</target>
+      </trans-unit>
+      <trans-unit id="viewIncident" datatype="html">
+        <source>Ver incidente</source>
+        <target>Ver incidente</target>
       </trans-unit>
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
@@ -58,17 +90,53 @@
         <source>Ingresa tu contraseña</source>
         <target>Insira sua senha</target>
       </trans-unit>
+      <trans-unit id="incidentManagement" datatype="html">
+        <source>Gestión incidentes</source>
+        <target>Gestão de incidentes</target>
+      </trans-unit>
+      <trans-unit id="incidentManagementPageDescription" datatype="html">
+        <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver y seguir fácilmente el estado de todas las incidencias asignadas a tu nombre.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Además, tendrás la opción de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>crear nuevas incidencias<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de manera rápida y eficiente.</source>
+        <target>Em <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestão de incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, pode <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e seguir facilmente o estado de todos os incidentes atribuídos ao seu nome.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>Também, terá a opção de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>criar novos incidentes<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de forma rápida e eficiente.</target>
+      </trans-unit>
+      <trans-unit id="incidentStatus" datatype="html">
+        <source>Estado</source>
+        <target>Estado</target>
+      </trans-unit>
+      <trans-unit id="incidentStatusClosed" datatype="html">
+        <source>Cerrada</source>
+        <target>Fechado</target>
+      </trans-unit>
+      <trans-unit id="incidentStatusEscalated" datatype="html">
+        <source>Escalado</source>
+        <target>Escalonado</target>
+      </trans-unit>
+      <trans-unit id="incidentStatusOpen" datatype="html">
+        <source>Abierta</source>
+        <target>Aberto</target>
+      </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
         <target>Status do Convite</target>
       </trans-unit>
-      <trans-unit id="invitationStatusColumn" datatype="html">
-        <source>Estado Invitación</source>
-        <target>Status do Convite</target>
+      <trans-unit id="invite_title" datatype="html">
+        <source>Desea aceptar la invitación para asociarse a una compañía?</source>
+        <target>Gostaria de aceitar o convite para se juntar a uma empresa?</target>
+      </trans-unit>
+      <trans-unit id="inviteCancelButton" datatype="html">
+        <source>Cancelar</source>
+        <target>Cancelar</target>
+      </trans-unit>
+      <trans-unit id="inviteEmailPlaceholder" datatype="html">
+        <source>Correo</source>
+        <target>Correio</target>
       </trans-unit>
       <trans-unit id="inviteEmployee" datatype="html">
         <source>Invitar empleado</source>
         <target>Convidar funcionário</target>
+      </trans-unit>
+      <trans-unit id="inviteSubmitButton" datatype="html">
+        <source>Invitar</source>
+        <target>Convite</target>
       </trans-unit>
       <trans-unit id="loginButtonSubmit" datatype="html">
         <source>Ingresar</source>
@@ -182,9 +250,9 @@
         <source>Seleccionar</source>
         <target>Selecione</target>
       </trans-unit>
-      <trans-unit id="prontoEmpleados" datatype="html">
-        <source>Aquí pronto hay el listado de empleados.</source>
-        <target>Em breve você encontrará a lista de funcionários aqui.</target>
+      <trans-unit id="onConfirmInvite" datatype="html">
+        <source>Confirmar</source>
+        <target>Confirmar</target>
       </trans-unit>
       <trans-unit id="paginatorItemsPerPage" datatype="html">
         <source>Items por página:</source>
@@ -199,16 +267,24 @@
         <target>Página anterior</target>
       </trans-unit>
       <trans-unit id="plan" datatype="html">
-        <source>Plan <x id="INTERPOLATION" equiv-text="{{ formattedPlan }}"/></source>
-        <target>Plano <x id="INTERPOLATION" equiv-text="{{ formattedPlan }}"/></target>
-      </trans-unit>
-      <trans-unit id="prontoIncidentes" datatype="html">
-        <source>Aquí pronto hay el listado de incidentes.</source>
-        <target>Em breve você encontrará a lista de incidentes aqui.</target>
+        <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
+        <target>Plano <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></target>
       </trans-unit>
       <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
         <target>Gestão da empresa</target>
+      </trans-unit>
+      <trans-unit id="ConfirmarInvitación" datatype="html">
+        <source>Confirmar Invitación</source>
+        <target>Confirmar convite</target>
+      </trans-unit>
+      <trans-unit id="createIncident" datatype="html">
+        <source>Crear incidente</source>
+        <target>Criar incidente</target>
+      </trans-unit>
+      <trans-unit id="dateFiling" datatype="html">
+        <source>Fecha radicación</source>
+        <target>Data de apresentação</target>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
         <source>Tableros de control</source>
@@ -238,11 +314,11 @@
         <source>Crea tu cuenta</source>
         <target>Crie sua conta</target>
       </trans-unit>
-      <trans-unit id="name" datatype="html">
-        <source>Nombre</source>
-        <target>Nome</target>
+      <trans-unit id="emptyIncidentList" datatype="html">
+        <source>No tienes incidentes asignados</source>
+        <target>Você não tem incidentes atribuídos</target>
       </trans-unit>
-      <trans-unit id="nameColumn" datatype="html">
+      <trans-unit id="name" datatype="html">
         <source>Nombre</source>
         <target>Nome</target>
       </trans-unit>
@@ -259,10 +335,6 @@
         <target>Esse campo não pode exceder 60 caracteres.</target>
       </trans-unit>
       <trans-unit id="email" datatype="html">
-        <source>Correo</source>
-        <target>Email</target>
-      </trans-unit>
-      <trans-unit id="emailColumn" datatype="html">
         <source>Correo</source>
         <target>Email</target>
       </trans-unit>
@@ -358,17 +430,57 @@
         <source>Ya tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Ingresa<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>Já tem uma conta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Entre<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
       </trans-unit>
+      <trans-unit id="accept_button" datatype="html">
+        <source>Aceptar</source>
+        <target>Aceitar</target>
+      </trans-unit>
+      <trans-unit id="actions" datatype="html">
+        <source>Acciones</source>
+        <target>Ações</target>
+      </trans-unit>
+      <trans-unit id="cancel_button" datatype="html">
+        <source>Cancelar</source>
+        <target>Cancelar</target>
+      </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>
         <target>Alterar</target>
       </trans-unit>
+      <trans-unit id="changePlanCancel" datatype="html">
+        <source>Cancelar</source>
+        <target>Cancelar</target>
+      </trans-unit>
+      <trans-unit id="changePlanConfirm" datatype="html">
+        <source>Confirmar</source>
+        <target>Confirmar</target>
+      </trans-unit>
+      <trans-unit id="changePlanImportant" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Importante: <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ billingMessage }}"/></source>
+        <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Importante: <x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ billingMessage }}"/></target>
+      </trans-unit>
+      <trans-unit id="changePlanIsBillingPeriod" datatype="html">
+        <source>El cambio de plan se aplicará a partir del próximo mes.</source>
+        <target>A mudança de plano será aplicada a partir do próximo mês.</target>
+      </trans-unit>
+      <trans-unit id="changePlanNotBillingPeriod" datatype="html">
+        <source>Estás dentro de los 5 primeros días del mes. El cambio de plan se reflejará en tu factura de este mes.</source>
+        <target>Você está dentro dos primeiros 5 dias do mês. A mudança de plano será refletida na sua fatura deste mês.</target>
+      </trans-unit>
+      <trans-unit id="changePlanPrice" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Precio mensual:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> <x id="INTERPOLATION" equiv-text="{{ data.newPrice }}"/></source>
+        <target><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Preço mensal:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> <x id="INTERPOLATION" equiv-text="{{ data.newPrice }}"/></target>
+      </trans-unit>
+      <trans-unit id="changePlanQuestion" datatype="html">
+        <source>¿Estás seguro de que deseas cambiar del plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ data.currentPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> al plan <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ data.newPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/>?</source>
+        <target>Você tem certeza de que deseja mudar do plano <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ data.currentPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para o plano <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ data.newPlan }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>?</target>
+      </trans-unit>
+      <trans-unit id="changeStateIncident" datatype="html">
+        <source>Cambiar estado de incidente</source>
+        <target>Alterar o estado do incidente</target>
+      </trans-unit>
       <trans-unit id="clientManagementPageDescription" datatype="html">
         <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e invitar fácilmente a tus empleados<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que se unan a la empresa, permitiéndoles acceder a las herramientas y funcionalidades disponibles en la plataforma. También podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>actualizar el plan<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> actual de tu empresa.</source>
         <target>Em <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gerenciar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, você poderá <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e convidar facilmente seus funcionários<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que eles se juntem à empresa, permitindo-lhes acessar as ferramentas e funcionalidades disponíveis na plataforma. Você também poderá <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>atualizar o plano<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> atual da sua empresa.</target>
-      </trans-unit>
-      <trans-unit id="selectPage" datatype="html">
-       <source>Seleccionar página</source>
-       <target>Selecione a página</target>
       </trans-unit>
     </body>
   </file>

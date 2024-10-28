@@ -7,9 +7,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClientService, DuplicateEmailError } from '../client.service';
-import { AuthService } from 'src/app/auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-client-register',
@@ -33,9 +33,9 @@ export class ClientRegisterComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
-    private readonly snackbar: MatSnackBar,
     private readonly clientService: ClientService,
     private readonly authService: AuthService,
+    private readonly snackbarService: SnackbarService,
   ) {}
 
   ngOnInit(): void {
@@ -64,14 +64,9 @@ export class ClientRegisterComponent implements OnInit {
 
     this.clientService.register({ name, prefixEmailIncidents }).subscribe({
       next: _response => {
-        this.snackbar.open(
+        this.snackbarService.showSuccess(
           $localize`:@@clientRegisterSuccess:Empresa creada exitosamente`,
-          $localize`:@@snackbarClose:Cerrar`,
-          {
-            duration: 10000,
-          },
         );
-
         this.authService.refreshToken().subscribe({
           next: () => {
             this.router.navigate(['/client/select-plan']);
@@ -80,11 +75,9 @@ export class ClientRegisterComponent implements OnInit {
       },
       error: error => {
         if (error instanceof DuplicateEmailError) {
-          const errorMessage = $localize`:@@clientRegisterErrorEmailRegistered:Ya existe una empresa con este email.`;
-
-          this.snackbar.open(errorMessage, $localize`:@@snackbarClose:Cerrar`, {
-            duration: 10000,
-          });
+          this.snackbarService.showError(
+            $localize`:@@clientRegisterErrorEmailRegistered:Ya existe una empresa con este email.`,
+          );
         }
       },
     });

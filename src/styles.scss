@@ -126,9 +126,13 @@ router-outlet + * {
     &--warning {
       background-color: $warning;
     }
+    &--blue {
+      background-color: $chip-blue;
+    }
 
     &--success,
-    &--warning {
+    &--warning,
+    &--blue {
       .mdc-evolution-chip__text-label {
         color: white;
         font-weight: 400;
@@ -191,4 +195,70 @@ router-outlet + * {
   button {
     font-weight: 400;
   }
+}
+
+.success-snackbar.mat-mdc-snack-bar-container {
+  .mat-mdc-snackbar-surface {
+    background-color: $success;
+  }
+}
+
+.error-snackbar.mat-mdc-snack-bar-container {
+  .mat-mdc-snackbar-surface {
+    background-color: $red-warn;
+  }
+}
+
+.success-snackbar,
+.error-snackbar {
+  .mat-mdc-snackbar-surface,
+  .mdc-button__label {
+    color: white;
+  }
+}
+.mat-mdc-dialog-component-host h1,
+.mat-mdc-dialog-component-host P {
+  font-size: 16px !important;
+  color: $blue-800 !important;
+  float: left;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.mat-mdc-dialog-component-host {
+  padding: 10px;
+}
+
+.mat-mdc-dialog-component-host .Accept {
+  width: 100px;
+  border: 1px solid #4267b2;
+  margin-right: 25px;
+  border-radius: 20px;
+  padding: 10px;
+  background-color: #4267b2;
+  color: white;
+  cursor: pointer;
+}
+
+.mat-mdc-dialog-component-host .Accept:hover {
+  background-color: #3b7bfc;
+  color: white;
+}
+.mat-mdc-dialog-component-host .Decline {
+  width: 100px;
+  border: 1px solid #4267b2;
+  background: none;
+  margin-right: 25px;
+  border-radius: 20px;
+  padding: 10px;
+  cursor: pointer;
+}
+.mat-mdc-dialog-component-host .Decline:hover {
+  background-color: #d2def7;
+}
+
+.invite-user-container {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }

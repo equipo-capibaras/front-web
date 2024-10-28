@@ -1,6 +1,23 @@
-.container {
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@import 'src/colors.scss';
+
+.incident-list {
+  &__header {
+    display: flex;
+    justify-content: end;
+    padding: 1.5rem 0;
+  }
+
+  .no-incidents-message {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.mat-mdc-icon-button {
+  color: $blue-500;
+}
+
+.horizontal-spacer {
+  padding: 0 0.5rem;
 }

@@ -8,6 +8,7 @@ import { ClientRegisterComponent } from './client/client-register/client-registe
 import { authGuard } from './auth/auth.guard';
 import { SelectPlanComponent } from './client/select-plan/select-plan.component';
 import { ClientManagementComponent } from './client/client-management/client-management.component';
+import { EmployeeUnassignedComponent } from './employee/employee-unassigned/employee-unassigned.component';
 
 export const routes: Routes = [
   {
@@ -39,10 +40,25 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'unassigned',
+    component: EmployeeUnassignedComponent,
+    canActivate: [authGuard],
+    data: { roles: [Role.Agent, Role.Analyst], allowUnassigned: true, showNavbar: true },
+  },
+  {
     path: 'admin',
     component: ClientManagementComponent,
     canActivate: [authGuard],
     data: { roles: [Role.Admin], showNavbar: true },
+  },
+  {
+    path: 'admin/change-plan',
+    component: SelectPlanComponent,
+    canActivate: [authGuard],
+    data: {
+      roles: [Role.Admin],
+      showNavbar: true,
+    },
   },
   {
     path: 'dashboards',

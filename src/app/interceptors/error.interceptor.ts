@@ -1,12 +1,15 @@
 import { inject } from '@angular/core';
 import { HttpContextToken, HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, throwError } from 'rxjs';
+import { SnackbarService } from '../services/snackbar.service';
+import { AuthService } from '../auth/auth.service';
+import { ERROR_MESSAGES } from '../shared/error-messages';
 
 export const ACCEPTED_ERRORS = new HttpContextToken<number[]>(() => []);
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-  const snackBar = inject(MatSnackBar);
+  const snackbarService = inject(SnackbarService);
+  const authService = inject(AuthService);
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
@@ -16,27 +19,33 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         return throwError(() => error);
       }
 
-      // Identificar el tipo de error según el código de estado
-      switch (error.status) {
-        case 401:
-          errorMessage = $localize`:@@error-401:Usuario o contraseña incorrectos.`;
-          break;
-        case 403:
-          errorMessage = $localize`:@@error-403:No tienes permiso para acceder a este recurso.`;
-          break;
-        case 404:
-          errorMessage = $localize`:@@error-404:El recurso solicitado no fue encontrado.`;
-          break;
-        case 500:
-          errorMessage = $localize`:@@error-500:El servidor está teniendo problemas. Por favor, inténtalo más tarde.`;
-          break;
-        default:
-          errorMessage = `Error ${error.status}: ${error.statusText}`;
+      if (error.status === 401) {
+        if (error.error?.message === 'Jwt is expired') {
+          authService.handleTokenExpired();
+          return throwError(() => new Error(ERROR_MESSAGES.JWT_EXPIRED));
+        } else if (error.error?.message === 'Jwt is missing') {
+          errorMessage = ERROR_MESSAGES.JWT_MISSING;
+        } else {
+          errorMessage = ERROR_MESSAGES.AUTH_INVALID;
+        }
+      } else {
+        switch (error.status) {
+          case 403:
+            errorMessage = ERROR_MESSAGES.UNAUTHORIZED;
+            break;
+          case 404:
+            errorMessage = ERROR_MESSAGES.NOT_FOUND;
+
+            break;
+          case 500:
+            errorMessage = ERROR_MESSAGES.SERVER_ERROR;
+            break;
+          default:
+            errorMessage = `Error ${error.status}: ${error.statusText}`;
+        }
       }
 
-      snackBar.open(errorMessage, $localize`:@@snackbarClose:Cerrar`, {
-        duration: 10000,
-      });
+      snackbarService.showError(errorMessage);
 
       return throwError(() => new Error(errorMessage));
     }),
