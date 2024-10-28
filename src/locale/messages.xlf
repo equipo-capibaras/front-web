@@ -32,6 +32,18 @@
       <trans-unit id="statusPending" datatype="html">
         <source>Pendiente</source>
       </trans-unit>
+      <trans-unit id="text" datatype="html">
+        <source>Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa</source>
+      </trans-unit>
+      <trans-unit id="textConfirm" datatype="html">
+        <source>¿Deseas confirmar la invitación?</source>
+      </trans-unit>
+      <trans-unit id="textInvitation" datatype="html">
+        <source>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a tu empresa.</source>
+      </trans-unit>
+      <trans-unit id="textInviteUser" datatype="html">
+        <source>Invitar usuario</source>
+      </trans-unit>
       <trans-unit id="unassignedInfo" datatype="html">
         <source>Aún no está vinculado a una empresa. Contacte con su administrador.</source>
       </trans-unit>
@@ -77,8 +89,20 @@
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
       </trans-unit>
+      <trans-unit id="invite_title" datatype="html">
+        <source>Desea aceptar la invitación para asociarse a una compañía?</source>
+      </trans-unit>
+      <trans-unit id="inviteCancelButton" datatype="html">
+        <source>Cancelar</source>
+      </trans-unit>
+      <trans-unit id="inviteEmailPlaceholder" datatype="html">
+        <source>Correo</source>
+      </trans-unit>
       <trans-unit id="inviteEmployee" datatype="html">
         <source>Invitar empleado</source>
+      </trans-unit>
+      <trans-unit id="inviteSubmitButton" datatype="html">
+        <source>Invitar</source>
       </trans-unit>
       <trans-unit id="loginButtonSubmit" datatype="html">
         <source>Ingresar</source>
@@ -161,6 +185,9 @@
       <trans-unit id="planSelectButton" datatype="html">
         <source>Seleccionar</source>
       </trans-unit>
+      <trans-unit id="onConfirmInvite" datatype="html">
+        <source>Confirmar</source>
+      </trans-unit>
       <trans-unit id="paginatorItemsPerPage" datatype="html">
         <source>Items por página:</source>
       </trans-unit>
@@ -181,6 +208,9 @@
       </trans-unit>
       <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
+      </trans-unit>
+      <trans-unit id="ConfirmarInvitación" datatype="html">
+        <source>Confirmar Invitación</source>
       </trans-unit>
       <trans-unit id="createIncident" datatype="html">
         <source>Crear incidente</source>
@@ -293,8 +323,14 @@
       <trans-unit id="emptyIncidentList" datatype="html">
         <source>No tienes incidentes asignados</source>
       </trans-unit>
+      <trans-unit id="accept_button" datatype="html">
+        <source>Aceptar</source>
+      </trans-unit>
       <trans-unit id="actions" datatype="html">
         <source>Acciones</source>
+      </trans-unit>
+      <trans-unit id="cancel_button" datatype="html">
+        <source>Cancelar</source>
       </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>
