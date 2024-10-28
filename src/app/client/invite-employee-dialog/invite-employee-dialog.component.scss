@@ -35,6 +35,11 @@ button {
 
 button[mat-button] {
   color: #4267b2; /* Cancel button - Grey */
+  color: #4267b2;
+  margin-right: 15px;
+  padding: 20px;
+  border: 1px solid #4267b2;
+  background-color: none;
 }
 
 button[mat-raised-button] {
@@ -72,12 +77,6 @@ button[mat-raised-button]:hover {
   width: 461px;
 }
 
-.buttonCancel {
-  border: 1px solid #4267b2;
-  background: none;
-  margin-right: 25px;
-}
-
 .close-button {
   color: #5a667f;
   float: right;
@@ -98,14 +97,6 @@ button[mat-raised-button]:hover {
   width: 400px;
 }
 
-button[mat-button] {
-  color: #4267b2;
-  margin-right: 15px;
-  padding: 20px;
-  border: 1px solid #4267b2;
-  background-color: none;
-}
-
 .buttonCancel:hover {
   background-color: #acc8ff;
   color: white;
@@ -113,5 +104,8 @@ button[mat-button] {
 }
 
 .buttonCancel {
+  border: 1px solid #4267b2;
+  background: none;
+  margin-right: 25px;
   min-width: 100px;
 }

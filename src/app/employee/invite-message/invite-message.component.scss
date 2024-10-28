@@ -66,14 +66,13 @@ button[mat-raised-button]:hover {
   display: flex;
   margin-bottom: 15px;
 }
-#cdk-overlay-0 {
-  width: 461px;
-}
 
 .buttonCancel {
   border: 1px solid #4267b2;
   background: none;
   margin-right: 25px;
+
+  min-width: 100px;
 }
 
 .close-button {
@@ -105,10 +104,6 @@ button[mat-button] {
 .buttonCancel:hover {
   background-color: #acc8ff;
   color: white;
-  min-width: 100px;
-}
-
-.buttonCancel {
   min-width: 100px;
 }
 
@@ -174,9 +169,5 @@ button[mat-button] {
 .buttonCancel:hover {
   background-color: #acc8ff;
   color: white;
-  min-width: 100px;
-}
-
-.buttonCancel {
   min-width: 100px;
 }
