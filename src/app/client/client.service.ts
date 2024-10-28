@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 import { Client } from './client';
 import { environment } from '../../environments/environment';
 import { EmployeeListResponse } from './employee-list/employee-list';
+import { SnackbarService } from '../services/snackbar.service';
 
 export class DuplicateEmailError extends Error {
   constructor(message?: string) {
@@ -68,7 +69,10 @@ export class ClientService {
     invitationDate: '2024-10-12T16:32:48+00:00',
   };
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    private readonly snackbarService: SnackbarService,
+  ) {}
 
   register(clientData: { name: string; prefixEmailIncidents: string }) {
     const context = new HttpContext().set(ACCEPTED_ERRORS, [409]);
@@ -163,5 +167,36 @@ export class ClientService {
           return throwError(() => error);
         }),
       );
+  }
+
+  acceptInvitation(token: string): Observable<void> {
+    const body = { response: 'accepted' };
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.post<void>(`${this.apiUrl}/employees/invitation`, body, { headers }).pipe(
+      catchError(err => {
+        if (err.status === 409) {
+          this.snackbarService.showError('Ya estás vinculado a la organización');
+        } else {
+          this.snackbarService.showError('INVITATION_ACCEPT_FAILED');
+        }
+        return of(undefined); // Return an observable that emits undefined
+      }),
+    );
+  }
+
+  declineInvitation(token: string): Observable<void> {
+    const body = { response: 'decline' };
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<void>(`${this.apiUrl}/employees/invitation`, body, { headers }).pipe(
+      catchError(_err => {
+        this.snackbarService.showError('INVITATION_DECLINE_FAILED');
+        return of(undefined);
+      }),
+    );
   }
 }

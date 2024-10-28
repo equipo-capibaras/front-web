@@ -1,29 +1,15 @@
-// invitation-dialog.component.ts
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-invitation-dialog',
-  template: `
-    <h1 class="Texth2" i18n>Invitacion de la compañia {{ data.name }}</h1>
-    <p i18n>Role: {{ data.role }}</p>
-    <div class="invite-user-container">
-      <button class="Accept" mat-button data-testid="accept-button" (click)="onAccept()">
-        Accept
-      </button>
-      <button class="Decline" mat-button data-testid="decline-button" (click)="onDecline()">
-        Decline
-      </button>
-    </div>
-  `,
+  selector: 'app-confirmation-dialog',
+  templateUrl: './invite-message.component.html',
+  styleUrls: ['./invite-message.component.scss'],
 })
 export class InvitationDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<InvitationDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
-  ) {}
+  constructor(private dialogRef: MatDialogRef<InvitationDialogComponent>) {}
 
-  onAccept(): void {
+  onConfirm(): void {
     this.dialogRef.close('accepted');
   }
 

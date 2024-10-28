@@ -216,7 +216,6 @@ router-outlet + * {
     color: white;
   }
 }
-
 .mat-mdc-dialog-component-host h1,
 .mat-mdc-dialog-component-host P {
   font-size: 16px !important;
@@ -225,14 +224,10 @@ router-outlet + * {
   padding-left: 10px;
   padding-right: 10px;
 }
-.mat-mdc-dialog-component-host {
-  padding: 10px;
-}
 
 .mat-mdc-dialog-component-host .Accept {
   width: 100px;
   border: 1px solid #4267b2;
-  background: none;
   margin-right: 25px;
   border-radius: 20px;
   padding: 10px;
@@ -243,6 +238,7 @@ router-outlet + * {
 
 .mat-mdc-dialog-component-host .Accept:hover {
   background-color: #3b7bfc;
+  color: white;
 }
 .mat-mdc-dialog-component-host .Decline {
   width: 100px;

@@ -131,41 +131,4 @@ export class AuthService {
     this.setUserRole();
     this.router.navigate(['/']);
   }
-
-  checkPendingInvitation(token: string): Observable<Invitation | null> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.http
-      .get<Invitation | null>(`${this.apiUrl}/employees/me`, { headers })
-      .pipe(catchError(() => of(null)));
-  }
-
-  acceptInvitation(): Observable<void> {
-    const body = { response: 'accepted' };
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.getToken}`,
-    });
-
-    return this.http.post<void>(`${this.apiUrl}/employees/invitation`, body, { headers }).pipe(
-      catchError(_err => {
-        this.snackbarService.showError('INVITATION_ACCEPT_FAILED');
-        return of(undefined);
-      }),
-    );
-  }
-
-  declineInvitation(): Observable<void> {
-    const body = { response: 'decline' };
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${this.getToken}`,
-    });
-    return this.http.post<void>(`${this.apiUrl}/employees/invitation`, body, { headers }).pipe(
-      catchError(_err => {
-        this.snackbarService.showError('INVITATION_DECLINE_FAILED');
-        return of(undefined);
-      }),
-    );
-  }
 }

@@ -34,13 +34,6 @@ describe('InvitationDialogComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display company name and role', () => {
-    const title = fixture.debugElement.query(By.css('h1')).nativeElement;
-    const roleParagraph = fixture.debugElement.query(By.css('p')).nativeElement;
-    expect(title.textContent).toContain('Invitacion de la compañia Test Company');
-    expect(roleParagraph.textContent).toContain('Role: Admin');
-  });
-
   it('should close the dialog with "accepted" when accept button is clicked', () => {
     const acceptButton = fixture.debugElement.query(
       By.css('[data-testid="accept-button"]'),
@@ -55,5 +48,28 @@ describe('InvitationDialogComponent', () => {
     ).nativeElement;
     declineButton.click();
     expect(dialogRefSpy.close).toHaveBeenCalledWith('declined');
+  });
+
+  it('should render heading text', () => {
+    const heading = fixture.debugElement.query(By.css('h1')).nativeElement;
+    expect(heading.textContent).toContain(
+      'Desea aceptar la invitacion para asociarse a una compañia?',
+    );
+  });
+
+  it('should have the dialogRef injected', () => {
+    expect(component['dialogRef']).toBe(dialogRefSpy);
+  });
+
+  it('should have Accept and Decline buttons', () => {
+    const acceptButton = fixture.debugElement.query(By.css('[data-testid="accept-button"]'));
+    const declineButton = fixture.debugElement.query(By.css('[data-testid="decline-button"]'));
+
+    expect(acceptButton).toBeTruthy();
+    expect(declineButton).toBeTruthy();
+  });
+
+  it('should not call close before buttons are clicked', () => {
+    expect(dialogRefSpy.close).not.toHaveBeenCalled();
   });
 });
