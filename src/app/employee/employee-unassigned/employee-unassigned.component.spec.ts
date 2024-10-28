@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -11,7 +11,10 @@ import { DialogService } from 'src/app/client/invite-employee-dialog/dialog.serv
 import { InviteEmployeeDialogComponent } from 'src/app/client/invite-employee-dialog/invite-employee-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { Role } from 'src/app/auth/role';
+import { defaultRoutes } from 'src/app/auth/default.routes';
 
 describe('EmployeeUnassignedComponent', () => {
   let component: EmployeeUnassignedComponent;
@@ -25,8 +28,13 @@ describe('EmployeeUnassignedComponent', () => {
   let dialogService: jasmine.SpyObj<DialogService>;
 
   beforeEach(() => {
-    // Mocking services
-    clientService = jasmine.createSpyObj('ClientService', ['inviteUser', 'getRoleByEmail']);
+    clientService = jasmine.createSpyObj('ClientService', [
+      'inviteUser',
+      'getRoleByEmail',
+      'acceptInvitation',
+      'declineInvitation',
+    ]);
+
     snackbarService = jasmine.createSpyObj('SnackbarService', ['showSuccess', 'showError']);
     dialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);
     dialogService = jasmine.createSpyObj('DialogService', ['closeAllDialogs']);
@@ -36,13 +44,10 @@ describe('EmployeeUnassignedComponent', () => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
-      imports: [
-        InviteEmployeeDialogComponent, // Use imports for standalone component
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        HttpClientTestingModule,
-      ],
+      imports: [InviteEmployeeDialogComponent, ReactiveFormsModule, BrowserAnimationsModule],
       providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
         { provide: ClientService, useValue: clientService },
         { provide: MatDialogRef, useValue: dialogRef },
         { provide: SnackbarService, useValue: snackbarService },
@@ -55,11 +60,13 @@ describe('EmployeeUnassignedComponent', () => {
 
     fixture = TestBed.createComponent(EmployeeUnassignedComponent);
     component = fixture.componentInstance;
-    clientService = TestBed.inject(ClientService) as jasmine.SpyObj<ClientService>;
 
     fixture.detectChanges();
 
-    // Mock the getRoleByEmail return value
+    authServiceSpy.getToken.and.returnValue('sampleToken');
+    authServiceSpy.refreshToken.and.returnValue(of(true));
+    authServiceSpy.getRole.and.returnValue(Role.Admin);
+
     clientService.getRoleByEmail.and.returnValue(
       of({
         id: '1',
@@ -71,6 +78,9 @@ describe('EmployeeUnassignedComponent', () => {
         invitationDate: new Date().toISOString(),
       }),
     );
+
+    clientService.acceptInvitation.and.returnValue(of(undefined));
+    clientService.declineInvitation.and.returnValue(of(undefined));
   });
 
   it('should create the component', () => {
@@ -85,5 +95,73 @@ describe('EmployeeUnassignedComponent', () => {
     component.openPopup();
     expect(dialogSpy.open).toHaveBeenCalledWith(InvitationDialogComponent);
     expect(dialogRefSpy.afterClosed).toHaveBeenCalled();
+  });
+
+  it('should accept invitation and navigate based on role', () => {
+    const token = 'sampleToken';
+    const role = Role.Admin;
+
+    authServiceSpy.getToken.and.returnValue(token);
+    authServiceSpy.refreshToken.and.returnValue(of(true));
+    authServiceSpy.getRole.and.returnValue(role);
+
+    clientService.acceptInvitation.and.returnValue(of(undefined));
+
+    component.acceptInvitation();
+
+    expect(clientService.acceptInvitation).toHaveBeenCalledWith(token);
+    expect(authServiceSpy.refreshToken).toHaveBeenCalled();
+    expect(authServiceSpy.getRole).toHaveBeenCalled();
+    expect(routerSpy.navigate).toHaveBeenCalledWith([defaultRoutes[role]]);
+  });
+
+  it('should handle 409 error in acceptInvitation', () => {
+    const token = 'sampleToken';
+    authServiceSpy.getToken.and.returnValue(token);
+
+    clientService.acceptInvitation.and.returnValue(
+      throwError(() => ({ status: 409, message: 'Ya estás vinculado a la organización' })),
+    );
+
+    spyOn(console, 'error');
+
+    component.acceptInvitation();
+
+    expect(clientService.acceptInvitation).toHaveBeenCalledWith(token);
+    expect(console.error).toHaveBeenCalledWith(
+      'Ya estás vinculado a la organización:',
+      'Ya estás vinculado a la organización',
+    );
+  });
+
+  it('should decline invitation successfully', () => {
+    const token = 'sampleToken';
+    authServiceSpy.getToken.and.returnValue(token);
+
+    clientService.acceptInvitation.and.returnValue(of(undefined));
+
+    component.declineInvitation();
+
+    expect(clientService.declineInvitation).toHaveBeenCalledWith(token);
+    expect(component.invitation).toBeNull();
+  });
+
+  it('should handle error in declineInvitation', () => {
+    const token = 'sampleToken';
+    authServiceSpy.getToken.and.returnValue(token);
+
+    clientService.declineInvitation.and.returnValue(
+      throwError(() => new Error('Error al rechazar la invitación')),
+    );
+
+    spyOn(console, 'error');
+
+    component.declineInvitation();
+
+    expect(clientService.declineInvitation).toHaveBeenCalledWith(token);
+    expect(console.error).toHaveBeenCalledWith(
+      'Error al rechazar la invitación:',
+      jasmine.any(Error),
+    );
   });
 });
