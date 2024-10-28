@@ -42,6 +42,22 @@
         <source>Pendiente</source>
         <target>Pendiente</target>
       </trans-unit>
+      <trans-unit id="text" datatype="html">
+        <source>Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa</source>
+        <target>Ingresá el correo del usuario que querés invitar, para hacer parte de la empresa</target>
+      </trans-unit>
+      <trans-unit id="textConfirm" datatype="html">
+        <source>¿Deseas confirmar la invitación?</source>
+        <target>¿Deseás confirmar la invitación?</target>
+      </trans-unit>
+      <trans-unit id="textInvitation" datatype="html">
+        <source>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a tu empresa.</source>
+        <target state="new">El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a tu empresa.</target>
+      </trans-unit>
+      <trans-unit id="textInviteUser" datatype="html">
+        <source>Invitar usuario</source>
+        <target>Invitar usuario</target>
+      </trans-unit>
       <trans-unit id="unassignedInfo" datatype="html">
         <source>Aún no está vinculado a una empresa. Contacte con su administrador.</source>
         <target>Aún no estás vinculado a una empresa. Contactá con su administrador.</target>
@@ -102,9 +118,25 @@
         <source>Estado Invitación</source>
         <target>Estado Invitación</target>
       </trans-unit>
+      <trans-unit id="invite_title" datatype="html">
+        <source>Desea aceptar la invitación para asociarse a una compañía?</source>
+        <target>Deseá aceptar la invitación para asociarse a una compañía?</target>
+      </trans-unit>
+      <trans-unit id="inviteCancelButton" datatype="html">
+        <source>Cancelar</source>
+        <target>Cancelar</target>
+      </trans-unit>
+      <trans-unit id="inviteEmailPlaceholder" datatype="html">
+        <source>Correo</source>
+        <target>Correo</target>
+      </trans-unit>
       <trans-unit id="inviteEmployee" datatype="html">
         <source>Invitar empleado</source>
         <target>Invitar empleado</target>
+      </trans-unit>
+      <trans-unit id="inviteSubmitButton" datatype="html">
+        <source>Invitar</source>
+        <target>Invitar</target>
       </trans-unit>
       <trans-unit id="loginButtonSubmit" datatype="html">
         <source>Ingresar</source>
@@ -218,6 +250,10 @@
         <source>Seleccionar</source>
         <target>Seleccionar</target>
       </trans-unit>
+      <trans-unit id="onConfirmInvite" datatype="html">
+        <source>Confirmar</source>
+        <target>Confirmar</target>
+      </trans-unit>
       <trans-unit id="paginatorItemsPerPage" datatype="html">
         <source>Items por página:</source>
         <target>Items por página:</target>
@@ -237,6 +273,10 @@
       <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
         <target>Gestión empresa</target>
+      </trans-unit>
+      <trans-unit id="ConfirmarInvitación" datatype="html">
+        <source>Confirmar Invitación</source>
+        <target>Confirmar Invitación</target>
       </trans-unit>
       <trans-unit id="createIncident" datatype="html">
         <source>Crear incidente</source>
@@ -382,9 +422,17 @@
         <source>Ingresa los datos de la empresa</source>
         <target>Ingresá los datos de la empresa</target>
       </trans-unit>
+      <trans-unit id="accept_button" datatype="html">
+        <source>Aceptar</source>
+        <target>Aceptar</target>
+      </trans-unit>
       <trans-unit id="actions" datatype="html">
         <source>Acciones</source>
         <target>Acciones</target>
+      </trans-unit>
+      <trans-unit id="cancel_button" datatype="html">
+        <source>Cancelar</source>
+        <target>Cancelar</target>
       </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>

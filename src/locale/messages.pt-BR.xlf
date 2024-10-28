@@ -42,6 +42,22 @@
         <source>Pendiente</source>
         <target>Pendente</target>
       </trans-unit>
+      <trans-unit id="text" datatype="html">
+        <source>Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa</source>
+        <target>Introduza o correio do utilizador que pretende convidar a juntar-se à empresa.</target>
+      </trans-unit>
+      <trans-unit id="textConfirm" datatype="html">
+        <source>¿Deseas confirmar la invitación?</source>
+        <target>Deseja confirmar o convite?</target>
+      </trans-unit>
+      <trans-unit id="textInvitation" datatype="html">
+        <source>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a tu empresa.</source>
+        <target>O usuário <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tem a função: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> e será registado com esta função na sua empresa.</target>
+      </trans-unit>
+      <trans-unit id="textInviteUser" datatype="html">
+        <source>Invitar usuario</source>
+        <target>Convidar utilizador</target>
+      </trans-unit>
       <trans-unit id="unassignedInfo" datatype="html">
         <source>Aún no está vinculado a una empresa. Contacte con su administrador.</source>
         <target>Ainda não está vinculado a uma empresa. Entre em contato com seu administrador.</target>
@@ -102,9 +118,25 @@
         <source>Estado Invitación</source>
         <target>Status do Convite</target>
       </trans-unit>
+      <trans-unit id="invite_title" datatype="html">
+        <source>Desea aceptar la invitación para asociarse a una compañía?</source>
+        <target>Gostaria de aceitar o convite para se juntar a uma empresa?</target>
+      </trans-unit>
+      <trans-unit id="inviteCancelButton" datatype="html">
+        <source>Cancelar</source>
+        <target>Cancelar</target>
+      </trans-unit>
+      <trans-unit id="inviteEmailPlaceholder" datatype="html">
+        <source>Correo</source>
+        <target>Correio</target>
+      </trans-unit>
       <trans-unit id="inviteEmployee" datatype="html">
         <source>Invitar empleado</source>
         <target>Convidar funcionário</target>
+      </trans-unit>
+      <trans-unit id="inviteSubmitButton" datatype="html">
+        <source>Invitar</source>
+        <target>Convite</target>
       </trans-unit>
       <trans-unit id="loginButtonSubmit" datatype="html">
         <source>Ingresar</source>
@@ -218,6 +250,10 @@
         <source>Seleccionar</source>
         <target>Selecione</target>
       </trans-unit>
+      <trans-unit id="onConfirmInvite" datatype="html">
+        <source>Confirmar</source>
+        <target>Confirmar</target>
+      </trans-unit>
       <trans-unit id="paginatorItemsPerPage" datatype="html">
         <source>Items por página:</source>
         <target>Itens por página:</target>
@@ -237,6 +273,10 @@
       <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
         <target>Gestão da empresa</target>
+      </trans-unit>
+      <trans-unit id="ConfirmarInvitación" datatype="html">
+        <source>Confirmar Invitación</source>
+        <target>Confirmar convite</target>
       </trans-unit>
       <trans-unit id="createIncident" datatype="html">
         <source>Crear incidente</source>
@@ -390,9 +430,17 @@
         <source>Ya tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Ingresa<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>Já tem uma conta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Entre<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
       </trans-unit>
+      <trans-unit id="accept_button" datatype="html">
+        <source>Aceptar</source>
+        <target>Aceitar</target>
+      </trans-unit>
       <trans-unit id="actions" datatype="html">
         <source>Acciones</source>
         <target>Ações</target>
+      </trans-unit>
+      <trans-unit id="cancel_button" datatype="html">
+        <source>Cancelar</source>
+        <target>Cancelar</target>
       </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>
