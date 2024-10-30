@@ -9,6 +9,7 @@ import { authGuard } from './auth/auth.guard';
 import { SelectPlanComponent } from './client/select-plan/select-plan.component';
 import { ClientManagementComponent } from './client/client-management/client-management.component';
 import { EmployeeUnassignedComponent } from './employee/employee-unassigned/employee-unassigned.component';
+import { IncidentRegisterComponent } from './incident/incident-register/incident-register.component';
 
 export const routes: Routes = [
   {
@@ -72,6 +73,15 @@ export const routes: Routes = [
   {
     path: 'incidents',
     component: IncidentListComponent,
+    canActivate: [authGuard],
+    data: {
+      roles: [Role.Admin, Role.Agent],
+      showNavbar: true,
+    },
+  },
+  {
+    path: 'incident-register',
+    component: IncidentRegisterComponent,
     canActivate: [authGuard],
     data: {
       roles: [Role.Admin, Role.Agent],
