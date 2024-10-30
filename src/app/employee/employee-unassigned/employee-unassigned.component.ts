@@ -24,7 +24,9 @@ export class EmployeeUnassignedComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.openPopup();
+    if (!this.authService.isUnassigned()) {
+      this.openPopup();
+    }
   }
 
   openPopup(): void {
@@ -60,6 +62,9 @@ export class EmployeeUnassignedComponent implements OnInit {
                 this.router.navigate([defaultRoutes[role]]);
               }
             },
+            error: err => {
+              console.error('Error refreshing token:', err);
+            },
           });
         },
         error: err => {
@@ -73,6 +78,7 @@ export class EmployeeUnassignedComponent implements OnInit {
       });
     }
   }
+
   declineInvitation() {
     console.log('Declining invitation...');
     const token = this.authService.getToken();
