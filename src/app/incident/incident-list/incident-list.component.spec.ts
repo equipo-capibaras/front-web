@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { faker } from '@faker-js/faker';
 import { IncidentListComponent } from './incident-list.component';
 import { EmployeeService } from '../../employee/employee.service';
+import { fakeAsync, tick } from '@angular/core/testing';
 
 describe('IncidentListComponent', () => {
   let component: IncidentListComponent;
@@ -17,6 +18,11 @@ describe('IncidentListComponent', () => {
       imports: [IncidentListComponent, NoopAnimationsModule],
       providers: [{ provide: EmployeeService, useValue: employeeService }],
     }).compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(IncidentListComponent);
+    component = fixture.componentInstance;
   });
 
   function setupComponent() {
@@ -49,4 +55,42 @@ describe('IncidentListComponent', () => {
     setupComponent();
     expect(component).toBeTruthy();
   });
+
+  it('should handle empty incident list correctly', fakeAsync(() => {
+    employeeService.loadIncidents.and.returnValue(
+      of({
+        incidents: [],
+        totalPages: 1,
+        currentPage: 1,
+        totalIncidents: 0,
+      }),
+    );
+
+    component.loadIncidents(5, 1);
+    tick();
+
+    fixture.detectChanges();
+
+    // Expectations
+    expect(component.incidentsList.data.length).toBe(0);
+    expect(component.totalIncidents).toBe(0);
+  }));
+
+  it('should set isLoading correctly', fakeAsync(() => {
+    employeeService.loadIncidents.and.returnValue(
+      of({
+        incidents: [],
+        totalPages: 1,
+        currentPage: 1,
+        totalIncidents: 0,
+      }),
+    );
+
+    component.loadIncidents(5, 1);
+    expect(component.isLoading).toBeFalse();
+
+    tick();
+
+    expect(component.isLoading).toBeFalse();
+  }));
 });
