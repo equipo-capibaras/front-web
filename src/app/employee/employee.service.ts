@@ -78,4 +78,12 @@ export class EmployeeService {
         }),
       );
   }
+
+  validateStatusInvitation(): Observable<EmployeeResponse | null> {
+    return this.http.get<EmployeeResponse>(`${this.apiUrl}/employees/me`).pipe(
+      catchError(_ => {
+        return of(null);
+      }),
+    );
+  }
 }

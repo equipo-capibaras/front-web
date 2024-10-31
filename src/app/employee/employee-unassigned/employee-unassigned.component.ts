@@ -1,3 +1,4 @@
+import { EmployeeResponse, EmployeeService } from './../employee.service';
 import { ClientService } from './../../client/client.service';
 import { Component, OnInit } from '@angular/core';
 import { InvitationDialogComponent } from '../invite-message/invite-message.component';
@@ -11,7 +12,7 @@ import { defaultRoutes } from 'src/app/auth/default.routes';
   standalone: true,
   imports: [],
   templateUrl: './employee-unassigned.component.html',
-  styleUrl: './employee-unassigned.component.scss',
+  styleUrls: ['./employee-unassigned.component.scss'], // Corrige `styleUrl` a `styleUrls`
 })
 export class EmployeeUnassignedComponent implements OnInit {
   invitation: Invitation | null = null;
@@ -19,30 +20,30 @@ export class EmployeeUnassignedComponent implements OnInit {
   constructor(
     private readonly dialog: MatDialog,
     private readonly clientService: ClientService,
+    private readonly employeeService: EmployeeService,
+
     private readonly authService: AuthService,
     private readonly router: Router,
   ) {}
 
   ngOnInit(): void {
-    if (!this.authService.isUnassigned()) {
-      this.openPopup();
-    }
+    this.getStatusInvitation().then(status => {
+      if (status) {
+        this.openPopup();
+      }
+    });
   }
 
   openPopup(): void {
     const dialogRef = this.dialog.open(InvitationDialogComponent);
 
-    if (dialogRef) {
-      dialogRef.afterClosed().subscribe(result => {
-        if (result === 'accepted') {
-          this.acceptInvitation();
-        } else if (result === 'declined') {
-          this.declineInvitation();
-        }
-      });
-    } else {
-      console.error('Failed to open dialog: dialogRef is undefined');
-    }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'accepted') {
+        this.acceptInvitation();
+      } else if (result === 'declined') {
+        this.declineInvitation();
+      }
+    });
   }
 
   acceptInvitation() {
@@ -95,5 +96,15 @@ export class EmployeeUnassignedComponent implements OnInit {
     } else {
       console.error('Error: Token is null');
     }
+  }
+  async getStatusInvitation(): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      this.employeeService.validateStatusInvitation().subscribe({
+        next: (data: EmployeeResponse | null) => {
+          resolve(data ? data.invitationStatus === 'pending' : false);
+        },
+        error: () => resolve(false),
+      });
+    });
   }
 }
