@@ -11,6 +11,7 @@ import { CustomPaginatorIntl } from '../../pagination/pagination';
 import { CommonModule } from '@angular/common';
 import { ClientService } from '../client.service';
 import { Employee } from '../../employee/employee';
+import { chipInfo } from '../../shared/incident-chip';
 
 @Component({
   selector: 'app-employee-list',
@@ -24,23 +25,12 @@ export class EmployeeListComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['name', 'email', 'role', 'invitationStatus'];
   employeesList = new MatTableDataSource<Employee>();
   totalEmployees = 0;
+  chipInfo = chipInfo;
 
   employeeRole: Record<string, string> = {
     analyst: $localize`:@@employeeRegisterOptionRoleOAnalista:Analítica`,
     agent: $localize`:@@employeeRegisterOptionRoleAgente:Agente`,
     admin: $localize`:@@employeeRegisterOptionRoleAdmin:Administrador`,
-  };
-  chipInfo: Record<string, { icon: string; text: string; cssClass: string }> = {
-    accepted: {
-      icon: 'check',
-      text: $localize`:@@statusAccepted:Aceptada`,
-      cssClass: 'page__chip--success',
-    },
-    pending: {
-      icon: 'schedule',
-      text: $localize`:@@statusPending:Pendiente`,
-      cssClass: 'page__chip--warning',
-    },
   };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

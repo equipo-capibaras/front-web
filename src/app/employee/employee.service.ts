@@ -25,6 +25,7 @@ export interface EmployeeResponse {
 
 export interface IncidentListResponse {
   incidents: {
+    id: string;
     name: string;
     reportedBy: {
       id: string;

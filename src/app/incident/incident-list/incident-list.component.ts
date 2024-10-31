@@ -13,6 +13,8 @@ import {
 import { CustomPaginatorIntl } from '../../pagination/pagination';
 import { MatIconModule } from '@angular/material/icon';
 import { EmployeeService } from '../../employee/employee.service';
+import { Router } from '@angular/router';
+import { chipInfo } from '../../shared/incident-chip';
 
 interface IncidentListEntry {
   name: string;
@@ -41,28 +43,14 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   incidentsList = new MatTableDataSource<IncidentListEntry>();
   totalIncidents = 0;
   isLoading = true;
-
-  chipInfo: Record<string, { icon: string; text: string; cssClass: string }> = {
-    created: {
-      icon: 'schedule',
-      text: $localize`:@@incidentStatusOpen:Abierta`,
-      cssClass: 'page__chip--blue',
-    },
-    escalated: {
-      icon: 'warning',
-      text: $localize`:@@incidentStatusEscalated:Escalado`,
-      cssClass: 'page__chip--warning',
-    },
-    closed: {
-      icon: 'check',
-      text: $localize`:@@incidentStatusClosed:Cerrada`,
-      cssClass: 'page__chip--success',
-    },
-  };
+  chipInfo = chipInfo;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private readonly employeeService: EmployeeService) {}
+  constructor(
+    private readonly employeeService: EmployeeService,
+    private readonly router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.loadIncidents(5, 1);
@@ -84,11 +72,16 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
             user: incident.reportedBy.email,
             filingDate: incident.filingDate,
             status: incident.status,
+            id: incident.id,
           };
         });
         this.totalIncidents = data.totalIncidents;
         this.isLoading = false;
       }
     });
+  }
+
+  showDetail(incidentId: string) {
+    this.router.navigate([`/incidents/${incidentId}`]);
   }
 }

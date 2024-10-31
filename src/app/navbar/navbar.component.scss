@@ -2,6 +2,8 @@ mat-toolbar {
   background-color: #b0c4de;
   color: #2f4f4f;
   padding: 0 16px;
+  position: fixed;
+  z-index: 999;
 }
 
 .logo {
