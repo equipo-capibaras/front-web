@@ -36,7 +36,7 @@ export class NavbarComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.roleSubscription.unsubscribe(); // Clean up subscription
+    this.roleSubscription.unsubscribe();
   }
 
   logout() {

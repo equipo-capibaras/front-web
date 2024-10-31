@@ -15,6 +15,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { chipInfo } from '../../shared/incident-chip';
 import { IncidentService } from '../incident.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 interface IncidentListEntry {
   name: string;
@@ -42,7 +44,6 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['name', 'user', 'dateFiling', 'status', 'actions'];
   incidentsList = new MatTableDataSource<IncidentListEntry>();
   totalIncidents = 0;
-  isLoading = true;
   chipInfo = chipInfo;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -50,6 +51,8 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   constructor(
     private readonly incidentService: IncidentService,
     private readonly router: Router,
+    private readonly loadingService: LoadingService,
+    private readonly snackbarService: SnackbarService,
   ) {}
 
   ngOnInit(): void {
@@ -63,21 +66,28 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   }
 
   loadIncidents(pageSize: number, page: number) {
-    this.isLoading = true;
-    this.incidentService.loadIncidents(pageSize, page).subscribe(data => {
-      if (data?.incidents) {
-        this.incidentsList.data = data.incidents.map(incident => {
-          return {
-            name: incident.name,
-            user: incident.reportedBy.email,
-            filingDate: incident.filingDate,
-            status: incident.status,
-            id: incident.id,
-          };
-        });
-        this.totalIncidents = data.totalIncidents;
-        this.isLoading = false;
-      }
+    this.loadingService.setLoading(true);
+    this.incidentService.loadIncidents(pageSize, page).subscribe({
+      next: data => {
+        if (data?.incidents) {
+          this.incidentsList.data = data.incidents.map(incident => {
+            return {
+              name: incident.name,
+              user: incident.reportedBy.email,
+              filingDate: incident.filingDate,
+              status: incident.status,
+              id: incident.id,
+            };
+          });
+          this.totalIncidents = data.totalIncidents;
+        }
+      },
+      error: err => {
+        this.snackbarService.showError(err);
+      },
+      complete: () => {
+        this.loadingService.setLoading(false);
+      },
     });
   }
 

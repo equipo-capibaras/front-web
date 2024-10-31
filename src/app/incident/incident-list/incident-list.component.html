@@ -18,7 +18,7 @@
     </div>
 
     <div class="incident-list page__table">
-      @if (!isLoading && incidentsList.data.length > 0) {
+      @if (incidentsList.data.length > 0) {
         <table mat-table [dataSource]="incidentsList">
           <ng-container matColumnDef="name">
             <th *matHeaderCellDef mat-header-cell i18n="@@name">Nombre</th>
@@ -76,7 +76,7 @@
           <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
           <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
         </table>
-      } @else if (!isLoading && incidentsList.data.length === 0) {
+      } @else if (incidentsList.data.length === 0) {
         <div class="no-incidents-message" i18n="@@emptyIncidentList">
           No tienes incidentes asignados
         </div>
@@ -87,7 +87,7 @@
       <mat-paginator
         aria-label="Seleccionar página"
         i18n-aria-label="@@selectPage"
-        [style.display]="!isLoading && incidentsList.data.length > 0 ? null : 'none'"
+        [style.display]="incidentsList.data.length > 0 ? null : 'none'"
         [length]="totalIncidents"
         [pageSizeOptions]="[5, 10, 20]" />
     </div>

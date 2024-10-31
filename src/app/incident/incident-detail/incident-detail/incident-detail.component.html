@@ -1,74 +1,76 @@
 <div class="page">
-  <div class="incident-detail">
-    <div class="incident-detail__info">
-      <div class="content">
-        <h1 class="page__title">{{ incidentDetail?.name }}</h1>
-        <div class="chips">
-          <mat-chip [ngClass]="chipInfo[incidentStatus].cssClass">
-            <span class="material-symbols-outlined">
-              {{ chipInfo[incidentStatus].icon }}
-            </span>
-            {{ chipInfo[incidentStatus].text }}
-          </mat-chip>
-        </div>
-        <p>
-          {{ incidentDescription }}
-        </p>
-        <hr />
-        <div class="incident-history">
-          <h3 i18n="@@incidentHistory">RESPUESTAS</h3>
-          @if (incidentHistory.length > 0) {
-            @for (item of incidentHistory; track $index) {
-              <div class="incident-history__comment">
-                <p>{{ item.date | date: 'longDate' }}</p>
-                <p>{{ item.description }}</p>
-              </div>
+  @if (incidentDetail) {
+    <div class="incident-detail">
+      <div class="incident-detail__info">
+        <div class="content">
+          <h1 class="page__title">{{ incidentDetail.name }}</h1>
+          <div class="chips">
+            <mat-chip [ngClass]="chipInfo[incidentStatus].cssClass">
+              <span class="material-symbols-outlined">
+                {{ chipInfo[incidentStatus].icon }}
+              </span>
+              {{ chipInfo[incidentStatus].text }}
+            </mat-chip>
+          </div>
+          <p>
+            {{ incidentDescription }}
+          </p>
+          <hr />
+          <div class="incident-history">
+            <h3 i18n="@@incidentHistory">RESPUESTAS</h3>
+            @if (incidentHistory.length > 0) {
+              @for (item of incidentHistory; track $index) {
+                <div class="incident-history__comment">
+                  <p>{{ item.date | date: 'longDate' }}</p>
+                  <p>{{ item.description }}</p>
+                </div>
+              }
+            } @else {
+              <p i18n="@@incidentEmptyHistory">No se han generado respuestas</p>
             }
-          } @else {
-            <p i18n="@@incidentEmptyHistory">No se han generado respuestas</p>
-          }
+          </div>
         </div>
       </div>
-    </div>
-    <div class="incident-detail__general-info">
-      <h2 i18n="@@generalInformation">Información general</h2>
-      <div class="info-section">
-        <p i18n="@@incidentCreatedBy">Creado por</p>
-        <p>{{ incidentDetail?.createdBy?.name }}</p>
-        <p>{{ incidentDetail?.createdBy?.email }}</p>
-      </div>
-      <div class="info-section">
-        <p i18n="@@incidentReportedBy">Reportado por</p>
-        <p>{{ incidentDetail?.reportedBy?.name }}</p>
-        <p>{{ incidentDetail?.reportedBy?.email }}</p>
-      </div>
-      <div class="info-section">
-        <p i18n="@@incidentAssignedTo">Asignado a</p>
-        <p>{{ incidentDetail?.assignedTo?.name }}</p>
-        <p>{{ incidentDetail?.assignedTo?.email }}</p>
-      </div>
-      <div class="info-section">
-        <p i18n="@@incidentCreatedDate">Fecha radicado</p>
-        <p>{{ incidentCreatedDate | date: 'longDate' }}</p>
-      </div>
-      @if (incidentClosedDate) {
+      <div class="incident-detail__general-info">
+        <h2 i18n="@@generalInformation">Información general</h2>
         <div class="info-section">
-          <p i18n="@@incidentClosedDate">Fecha cerrado</p>
-          <p>{{ incidentClosedDate | date: 'longDate' }}</p>
+          <p i18n="@@incidentCreatedBy">Creado por</p>
+          <p>{{ incidentDetail.createdBy.name }}</p>
+          <p>{{ incidentDetail.createdBy.email }}</p>
         </div>
-      } @else if (incidentEscalatedDate) {
         <div class="info-section">
-          <p i18n="@@incidentEscalatedDate">Fecha escalado</p>
-          <p>{{ incidentEscalatedDate | date: 'longDate' }}</p>
+          <p i18n="@@incidentReportedBy">Reportado por</p>
+          <p>{{ incidentDetail.reportedBy.name }}</p>
+          <p>{{ incidentDetail.reportedBy.email }}</p>
         </div>
-      }
+        <div class="info-section">
+          <p i18n="@@incidentAssignedTo">Asignado a</p>
+          <p>{{ incidentDetail.assignedTo.name }}</p>
+          <p>{{ incidentDetail.assignedTo.email }}</p>
+        </div>
+        <div class="info-section">
+          <p i18n="@@incidentCreatedDate">Fecha radicado</p>
+          <p>{{ incidentCreatedDate | date: 'longDate' }}</p>
+        </div>
+        @if (incidentClosedDate) {
+          <div class="info-section">
+            <p i18n="@@incidentClosedDate">Fecha cerrado</p>
+            <p>{{ incidentClosedDate | date: 'longDate' }}</p>
+          </div>
+        } @else if (incidentEscalatedDate) {
+          <div class="info-section">
+            <p i18n="@@incidentEscalatedDate">Fecha escalado</p>
+            <p>{{ incidentEscalatedDate | date: 'longDate' }}</p>
+          </div>
+        }
 
-      @if (incidentChannel) {
-        <div class="info-section">
-          <p i18n="@@incidentChannel">Canal creación</p>
-          <p>{{ incidentChannelText[incidentChannel] }}</p>
-        </div>
-      }
+        @if (incidentChannel) {
+          <div class="info-section">
+            <p i18n="@@incidentChannel">Canal creación</p>
+            <p>{{ incidentChannelText[incidentChannel] }}</p>
+          </div>
+        }
+      </div>
     </div>
-  </div>
+  }
 </div>

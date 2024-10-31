@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 import { ClientService } from '../client.service';
 import { Employee } from '../../employee/employee';
 import { chipInfo } from '../../shared/incident-chip';
+import { LoadingService } from 'src/app/services/loading.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-employee-list',
@@ -35,7 +37,11 @@ export class EmployeeListComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private readonly clientService: ClientService) {}
+  constructor(
+    private readonly clientService: ClientService,
+    private readonly loadingService: LoadingService,
+    private readonly snackbarService: SnackbarService,
+  ) {}
 
   ngOnInit(): void {
     this.loadEmployees(5, 1);
@@ -48,11 +54,20 @@ export class EmployeeListComponent implements AfterViewInit, OnInit {
   }
 
   loadEmployees(pageSize: number, page: number) {
-    this.clientService.loadClientEmployees(pageSize, page).subscribe(data => {
-      if (data?.employees) {
-        this.employeesList.data = data.employees;
-        this.totalEmployees = data.totalEmployees;
-      }
+    this.loadingService.setLoading(true);
+    this.clientService.loadClientEmployees(pageSize, page).subscribe({
+      next: data => {
+        if (data?.employees) {
+          this.employeesList.data = data.employees;
+          this.totalEmployees = data.totalEmployees;
+        }
+      },
+      error: err => {
+        this.snackbarService.showError(err);
+      },
+      complete: () => {
+        this.loadingService.setLoading(false);
+      },
     });
   }
 }
