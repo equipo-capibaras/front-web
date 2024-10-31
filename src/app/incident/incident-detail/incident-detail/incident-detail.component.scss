@@ -30,6 +30,22 @@
       line-height: 24px;
       letter-spacing: 0.25px;
     }
+
+    .incident-history {
+      &__comment {
+        margin-top: 21px;
+
+        p:first-of-type {
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: 0.25px;
+        }
+
+        p:not(:first-of-type) {
+          line-height: 24px;
+        }
+      }
+    }
   }
 
   &__general-info {
@@ -60,7 +76,9 @@
         letter-spacing: 0.5px;
       }
       p:not(:first-child) {
+        font-size: 0.875rem;
         line-height: 21px;
+        word-break: break-word;
       }
     }
   }

@@ -12,9 +12,9 @@ import {
 
 import { CustomPaginatorIntl } from '../../pagination/pagination';
 import { MatIconModule } from '@angular/material/icon';
-import { EmployeeService } from '../../employee/employee.service';
 import { Router } from '@angular/router';
 import { chipInfo } from '../../shared/incident-chip';
+import { IncidentService } from '../incident.service';
 
 interface IncidentListEntry {
   name: string;
@@ -48,7 +48,7 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
-    private readonly employeeService: EmployeeService,
+    private readonly incidentService: IncidentService,
     private readonly router: Router,
   ) {}
 
@@ -64,7 +64,7 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
 
   loadIncidents(pageSize: number, page: number) {
     this.isLoading = true;
-    this.employeeService.loadIncidents(pageSize, page).subscribe(data => {
+    this.incidentService.loadIncidents(pageSize, page).subscribe(data => {
       if (data?.incidents) {
         this.incidentsList.data = data.incidents.map(incident => {
           return {
