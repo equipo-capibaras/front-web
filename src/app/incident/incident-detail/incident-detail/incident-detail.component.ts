@@ -7,6 +7,7 @@ import { LoadingService } from '../../../services/loading.service';
 import { ActivatedRoute } from '@angular/router';
 import { Incident, IncidentHistory } from '../../incident';
 import { SnackbarService } from 'src/app/services/snackbar.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-incident-detail',
@@ -57,26 +58,29 @@ export class IncidentDetailComponent implements OnInit {
   getIncidentDetail(incidentId: string | null) {
     if (incidentId) {
       this.loadingService.setLoading(true);
-      this.incidentService.incidentDetail(incidentId).subscribe({
-        next: data => {
-          if (data) {
-            this.incidentDetail = data;
-            this.incidentStatus = data.history[data.history.length - 1].action;
-            this.incidentDescription = data.history[0].description;
-            this.incidentCreatedDate = data.history[0].date;
-            this.incidentEscalatedDate = this.getEscalatedDate(data.history);
-            this.incidentClosedDate = this.getClosedDate(data.history);
-            this.incidentHistory = data.history.slice(1);
-            this.incidentChannel = data.channel;
-          }
-        },
-        error: err => {
-          this.snackbarService.showError(err);
-        },
-        complete: () => {
-          this.loadingService.setLoading(false);
-        },
-      });
+      this.incidentService
+        .incidentDetail(incidentId)
+        .pipe(finalize(() => this.loadingService.setLoading(false)))
+        .subscribe({
+          next: data => {
+            if (data) {
+              this.incidentDetail = data;
+              this.incidentStatus = data.history[data.history.length - 1].action;
+              this.incidentDescription = data.history[0].description;
+              this.incidentCreatedDate = data.history[0].date;
+              this.incidentEscalatedDate = this.getEscalatedDate(data.history);
+              this.incidentClosedDate = this.getClosedDate(data.history);
+              this.incidentHistory = data.history.slice(1);
+              this.incidentChannel = data.channel;
+            }
+          },
+          error: err => {
+            this.snackbarService.showError(err);
+          },
+          complete: () => {
+            this.loadingService.setLoading(false);
+          },
+        });
     }
   }
 }

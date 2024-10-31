@@ -17,6 +17,7 @@ import { chipInfo } from '../../shared/incident-chip';
 import { IncidentService } from '../incident.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
+import { finalize } from 'rxjs';
 
 interface IncidentListEntry {
   name: string;
@@ -67,28 +68,28 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
 
   loadIncidents(pageSize: number, page: number) {
     this.loadingService.setLoading(true);
-    this.incidentService.loadIncidents(pageSize, page).subscribe({
-      next: data => {
-        if (data?.incidents) {
-          this.incidentsList.data = data.incidents.map(incident => {
-            return {
-              name: incident.name,
-              user: incident.reportedBy.email,
-              filingDate: incident.filingDate,
-              status: incident.status,
-              id: incident.id,
-            };
-          });
-          this.totalIncidents = data.totalIncidents;
-        }
-      },
-      error: err => {
-        this.snackbarService.showError(err);
-      },
-      complete: () => {
-        this.loadingService.setLoading(false);
-      },
-    });
+    this.incidentService
+      .loadIncidents(pageSize, page)
+      .pipe(finalize(() => this.loadingService.setLoading(false)))
+      .subscribe({
+        next: data => {
+          if (data?.incidents) {
+            this.incidentsList.data = data.incidents.map(incident => {
+              return {
+                name: incident.name,
+                user: incident.reportedBy.email,
+                filingDate: incident.filingDate,
+                status: incident.status,
+                id: incident.id,
+              };
+            });
+            this.totalIncidents = data.totalIncidents;
+          }
+        },
+        error: err => {
+          this.snackbarService.showError(err);
+        },
+      });
   }
 
   showDetail(incidentId: string) {

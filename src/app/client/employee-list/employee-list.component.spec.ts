@@ -5,16 +5,20 @@ import { ClientService } from '../client.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatChipsModule } from '@angular/material/chips';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { EmployeeListResponse } from './employee-list';
 import { provideHttpClient } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { LoadingService } from 'src/app/services/loading.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 describe('EmployeeListComponent', () => {
   let component: EmployeeListComponent;
   let fixture: ComponentFixture<EmployeeListComponent>;
   let httpMock: HttpTestingController;
-  let clientService: ClientService;
+  let clientServiceSpy: jasmine.SpyObj<ClientService>;
+  let loadingServiceSpy: jasmine.SpyObj<LoadingService>;
+  let snackbarServiceSpy: jasmine.SpyObj<SnackbarService>;
 
   const mockEmployeesResponse: EmployeeListResponse = {
     employees: [
@@ -43,6 +47,10 @@ describe('EmployeeListComponent', () => {
   };
 
   beforeEach(waitForAsync(() => {
+    clientServiceSpy = jasmine.createSpyObj('ClientService', ['loadClientEmployees']);
+    loadingServiceSpy = jasmine.createSpyObj('LoadingService', ['setLoading']);
+    snackbarServiceSpy = jasmine.createSpyObj('SnackbarService', ['showError']);
+
     TestBed.configureTestingModule({
       imports: [
         EmployeeListComponent,
@@ -51,12 +59,17 @@ describe('EmployeeListComponent', () => {
         MatChipsModule,
         NoopAnimationsModule,
       ],
-      providers: [ClientService, provideHttpClient(), provideHttpClientTesting()],
+      providers: [
+        { provide: ClientService, useValue: clientServiceSpy },
+        { provide: LoadingService, useValue: loadingServiceSpy },
+        { provide: SnackbarService, useValue: snackbarServiceSpy },
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(EmployeeListComponent);
     component = fixture.componentInstance;
-    clientService = TestBed.inject(ClientService);
     httpMock = TestBed.inject(HttpTestingController);
   }));
 
@@ -69,17 +82,17 @@ describe('EmployeeListComponent', () => {
   });
 
   it('should load employees on init', fakeAsync(() => {
-    spyOn(clientService, 'loadClientEmployees').and.returnValue(of(mockEmployeesResponse));
+    clientServiceSpy.loadClientEmployees.and.returnValue(of(mockEmployeesResponse));
     component.ngOnInit();
     fixture.detectChanges();
 
-    expect(clientService.loadClientEmployees).toHaveBeenCalledWith(5, 1);
+    expect(clientServiceSpy.loadClientEmployees).toHaveBeenCalledWith(5, 1);
     expect(component.employeesList.data.length).toBe(2);
     expect(component.totalEmployees).toBe(10);
   }));
 
   it('should paginate correctly', fakeAsync(() => {
-    spyOn(clientService, 'loadClientEmployees').and.returnValue(of(mockEmployeesResponse));
+    clientServiceSpy.loadClientEmployees.and.returnValue(of(mockEmployeesResponse));
 
     component.ngOnInit();
     fixture.detectChanges();
@@ -88,6 +101,15 @@ describe('EmployeeListComponent', () => {
     fixture.detectChanges();
     tick();
 
-    expect(clientService.loadClientEmployees).toHaveBeenCalledWith(5, 2);
+    expect(clientServiceSpy.loadClientEmployees).toHaveBeenCalledWith(5, 2);
   }));
+
+  it('should show error when loadClientEmployees fails', () => {
+    const error = new Error('Loading employees details');
+    clientServiceSpy.loadClientEmployees.and.returnValue(throwError(() => error));
+
+    fixture.detectChanges();
+    expect(loadingServiceSpy.setLoading).toHaveBeenCalledWith(true);
+    expect(snackbarServiceSpy.showError).toHaveBeenCalled();
+  });
 });

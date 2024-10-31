@@ -11,20 +11,10 @@ import { LoadingService } from 'src/app/services/loading.service';
   standalone: true,
   imports: [MatProgressSpinnerModule, AsyncPipe, NgIf],
 })
-export class LoadingComponent implements OnInit {
+export class LoadingComponent {
   loading$: Observable<boolean>;
 
   constructor(private readonly loadingService: LoadingService) {
     this.loading$ = this.loadingService.loading$;
-  }
-
-  ngOnInit() {
-    // this.loadingService.loading$.subscribe(isLoading => {
-    //   console.log('Loading state changed:', isLoading);
-    // });
-
-    this.loading$.subscribe(isLoading => {
-      console.log('Loading state changed:', isLoading);
-    });
   }
 }

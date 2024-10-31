@@ -59,16 +59,6 @@ export class ClientService {
   private readonly clientDataSubject = new BehaviorSubject<Client | null>(null);
   public clientData$ = this.clientDataSubject.asObservable();
 
-  private readonly mockEmployee: Employee = {
-    id: '1dabcf78-e62a-41fd-b69c-fd7c775b04d4',
-    clientId: '22128c04-0c2c-4633-8317-0fffd552f7a6',
-    name: 'Mariana Sanchez Torres',
-    email: 'agente@gmail.com',
-    role: 'analyst',
-    invitationStatus: 'accepted',
-    invitationDate: '2024-10-12T16:32:48+00:00',
-  };
-
   constructor(
     private readonly http: HttpClient,
     private readonly snackbarService: SnackbarService,
@@ -126,8 +116,8 @@ export class ClientService {
         `${this.apiUrl}/employees?page_size=${pageSize}&page_number=${page}`,
       )
       .pipe(
-        catchError(_ => {
-          return of(null);
+        catchError(err => {
+          return throwError(() => err);
         }),
       );
   }
@@ -135,8 +125,6 @@ export class ClientService {
   inviteUser(email: string) {
     const emailSend = { email };
     const context = new HttpContext().set(ACCEPTED_ERRORS, [409]);
-
-    //return of(this.mockEmployee);
     return this.http
       .post<ClientResponse>(`${this.apiUrl}/employees/invite`, emailSend, { context: context })
       .pipe(

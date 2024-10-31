@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Incident } from './incident';
 
@@ -34,16 +34,16 @@ export class IncidentService {
         `${this.apiUrl}/employees/me/incidents?page_size=${pageSize}&page_number=${page}`,
       )
       .pipe(
-        catchError(_ => {
-          return of(null);
+        catchError((error: HttpErrorResponse) => {
+          return throwError(() => error);
         }),
       );
   }
 
   incidentDetail(incidentId: string): Observable<Incident | null> {
     return this.http.get<Incident>(`${this.apiUrl}/incidents/${incidentId}`).pipe(
-      catchError(_ => {
-        return of(null);
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error);
       }),
     );
   }

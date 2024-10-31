@@ -44,15 +44,12 @@ export class EmployeeUnassignedComponent implements OnInit {
   }
 
   acceptInvitation() {
-    console.log('Accepting invitation...');
     const token = this.authService.getToken();
 
     if (token) {
       this.clientService.acceptInvitation(token).subscribe({
         next: () => {
           this.invitation = null;
-          console.log('Invitation accepted.');
-
           this.authService.refreshToken().subscribe({
             next: () => {
               const role = this.authService.getRole();
@@ -63,7 +60,6 @@ export class EmployeeUnassignedComponent implements OnInit {
           });
         },
         error: err => {
-          console.log(err.status);
           if (err.status === 409) {
             console.error('Ya estás vinculado a la organización:', err.message);
           } else {
@@ -74,13 +70,11 @@ export class EmployeeUnassignedComponent implements OnInit {
     }
   }
   declineInvitation() {
-    console.log('Declining invitation...');
     const token = this.authService.getToken();
     if (token) {
       this.clientService.declineInvitation(token).subscribe({
         next: () => {
           this.invitation = null;
-          console.log('Invitation declined.');
         },
         error: err => {
           console.error('Error al rechazar la invitación:', err);
