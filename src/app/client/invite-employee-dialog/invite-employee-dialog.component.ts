@@ -82,8 +82,6 @@ export class InviteEmployeeDialogComponent implements OnInit {
   }
 
   openConfirmationDialog(email: string, role: string): void {
-    console.log(role);
-    console.log(email);
     this.dialog
       .open(this.confirmationDialog, {
         data: { email, role },

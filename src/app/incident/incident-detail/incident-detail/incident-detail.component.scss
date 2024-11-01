@@ -1,0 +1,85 @@
+@import '../../../../colors';
+
+.incident-detail {
+  width: 100%;
+  display: flex;
+
+  &__info {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    .content {
+      padding: 55px 24px;
+      max-width: 1013px;
+    }
+
+    .chips {
+      display: flex;
+      gap: 20px;
+      margin-top: 32px;
+      margin-bottom: 30px;
+    }
+
+    hr {
+      margin: 21px 0px;
+    }
+
+    h3 {
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.25px;
+    }
+
+    .incident-history {
+      &__comment {
+        margin-top: 21px;
+
+        p:first-of-type {
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: 0.25px;
+        }
+
+        p:not(:first-of-type) {
+          line-height: 24px;
+        }
+      }
+    }
+  }
+
+  &__general-info {
+    width: 305px;
+    height: calc(100vh - 64px);
+    position: sticky;
+    top: 64px;
+    background-color: $blue-100;
+    padding: 32px 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    h2 {
+      font-size: 20px;
+      line-height: 32px;
+      margin: 0px;
+    }
+
+    .info-section {
+      p {
+        margin: 0px;
+      }
+      p:first-of-type {
+        line-height: 28px;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+      }
+      p:not(:first-child) {
+        font-size: 0.875rem;
+        line-height: 21px;
+        word-break: break-word;
+      }
+    }
+  }
+}

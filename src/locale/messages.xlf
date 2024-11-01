@@ -11,6 +11,9 @@
       <trans-unit id="error-jwt-missing" datatype="html">
         <source>Falta el token de autenticación.</source>
       </trans-unit>
+      <trans-unit id="generalInformation" datatype="html">
+        <source>Información general</source>
+      </trans-unit>
       <trans-unit id="error-403" datatype="html">
         <source>No tienes permiso para acceder a este recurso.</source>
       </trans-unit>
@@ -68,11 +71,44 @@
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
       </trans-unit>
+      <trans-unit id="incidentAssignedTo" datatype="html">
+        <source>Asignado a</source>
+      </trans-unit>
+      <trans-unit id="incidentChannel" datatype="html">
+        <source>Canal creación</source>
+      </trans-unit>
+      <trans-unit id="incidentClosedDate" datatype="html">
+        <source>Fecha cerrado</source>
+      </trans-unit>
+      <trans-unit id="incidentCreatedBy" datatype="html">
+        <source>Creado por</source>
+      </trans-unit>
+      <trans-unit id="incidentCreatedDate" datatype="html">
+        <source>Fecha radicado</source>
+      </trans-unit>
+      <trans-unit id="incidentEmailChannel" datatype="html">
+        <source>Correo electrónico</source>
+      </trans-unit>
+      <trans-unit id="incidentEmptyHistory" datatype="html">
+        <source>No se han generado respuestas</source>
+      </trans-unit>
+      <trans-unit id="incidentEscalatedDate" datatype="html">
+        <source>Fecha escalado</source>
+      </trans-unit>
+      <trans-unit id="incidentHistory" datatype="html">
+        <source>RESPUESTAS</source>
+      </trans-unit>
       <trans-unit id="incidentManagement" datatype="html">
         <source>Gestión incidentes</source>
       </trans-unit>
       <trans-unit id="incidentManagementPageDescription" datatype="html">
         <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver y seguir fácilmente el estado de todas las incidencias asignadas a tu nombre.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Además, tendrás la opción de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>crear nuevas incidencias<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de manera rápida y eficiente.</source>
+      </trans-unit>
+      <trans-unit id="incidentMobileChannel" datatype="html">
+        <source>Aplicación móvil</source>
+      </trans-unit>
+      <trans-unit id="incidentReportedBy" datatype="html">
+        <source>Reportado por</source>
       </trans-unit>
       <trans-unit id="incidentStatus" datatype="html">
         <source>Estado</source>
@@ -86,11 +122,14 @@
       <trans-unit id="incidentStatusOpen" datatype="html">
         <source>Abierta</source>
       </trans-unit>
+      <trans-unit id="incidentWebChannel" datatype="html">
+        <source>Aplicación web</source>
+      </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
       </trans-unit>
       <trans-unit id="invite_title" datatype="html">
-        <source>Desea aceptar la invitación para asociarse a una compañía?</source>
+        <source>¿Desea aceptar la invitación para asociarse a una compañía?</source>
       </trans-unit>
       <trans-unit id="inviteCancelButton" datatype="html">
         <source>Cancelar</source>
