@@ -143,7 +143,7 @@ describe('EmployeeUnassignedComponent', () => {
       name: 'John Doe',
       email: 'john@example.com',
       role: 'admin',
-      invitationStatus: 'uninvited',
+      invitationStatus: 'pending',
       clientId: '123',
       invitationDate: new Date('2024-01-01T00:00:00Z'),
     };
