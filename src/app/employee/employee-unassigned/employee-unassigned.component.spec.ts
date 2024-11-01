@@ -49,9 +49,11 @@ describe('EmployeeUnassignedComponent', () => {
     }).compileComponents();
 
     employeeService = TestBed.inject(EmployeeService) as jasmine.SpyObj<EmployeeService>;
+    dialogSpy = TestBed.inject(MatDialog) as jasmine.SpyObj<MatDialog>;
 
     fixture = TestBed.createComponent(EmployeeUnassignedComponent);
     component = fixture.componentInstance;
+    spyOn(component, 'openPopup').and.callThrough();
   });
 
   afterEach(() => {
@@ -60,6 +62,30 @@ describe('EmployeeUnassignedComponent', () => {
 
   it('should create the component', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call openPopup when getStatusInvitation resolves to true', async () => {
+    const mockResponse: EmployeeResponse = {
+      id: '1',
+      name: 'John Doe',
+      email: 'john@example.com',
+      role: 'admin',
+      invitationStatus: 'pending',
+      clientId: '123',
+      invitationDate: new Date('2024-01-01T00:00:00Z'),
+    };
+    employeeService.validateStatusInvitation.and.returnValue(of(mockResponse));
+
+    await component.ngOnInit();
+    expect(component.openPopup).toHaveBeenCalled();
+  });
+
+  it('should not call openPopup when getStatusInvitation resolves to false', async () => {
+    employeeService.validateStatusInvitation.and.returnValue(of(null));
+
+    await component.ngOnInit();
+
+    expect(component.openPopup).not.toHaveBeenCalled();
   });
 
   it('should open the dialog when openPopup is called', () => {
