@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 import { NO_TOKEN } from '../interceptors/token.interceptor';
@@ -49,5 +49,9 @@ export class EmployeeService {
           return throwError(() => error);
         }),
       );
+  }
+
+  loadEmployeeData(): Observable<EmployeeResponse> {
+    return this.http.get<EmployeeResponse>(`${this.apiUrl}/employees/me`);
   }
 }
