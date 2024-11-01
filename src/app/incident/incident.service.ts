@@ -1,8 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Incident } from './incident';
+import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 
 export interface IncidentListResponse {
   incidents: {
@@ -21,6 +22,21 @@ export interface IncidentListResponse {
   totalIncidents: number;
 }
 
+export interface IncidentResponse {
+  client_id: string;
+  name: string;
+  channel: string;
+  reported_by: string;
+  created_by: string;
+  description: string;
+}
+
+export class ErrorIncidentError extends Error {
+  constructor(message?: string) {
+    super(message ?? 'Error Create.');
+    this.name = 'ErrorIncidentError';
+  }
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -46,5 +62,25 @@ export class IncidentService {
         return throwError(() => error);
       }),
     );
+  }
+
+  incidentRegister(incidentData: { name: string; email: string; description: string }) {
+    const context = new HttpContext();
+    context.set(ACCEPTED_ERRORS, [409]);
+
+    return this.http
+      .post<IncidentResponse>(`${this.apiUrl}/incidents/web`, incidentData, { context: context })
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            return throwError(() => new ErrorIncidentError());
+          }
+
+          return throwError(() => error);
+        }),
+      );
   }
 }

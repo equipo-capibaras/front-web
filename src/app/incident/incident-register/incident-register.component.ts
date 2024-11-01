@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { AuthService } from '../../auth/auth.service';
 import { SnackbarService } from '../../services/snackbar.service';
+import { ErrorIncidentError, IncidentService } from '../incident.service';
 
 @Component({
   selector: 'app-incident-register',
@@ -34,12 +35,14 @@ export class IncidentRegisterComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly authService: AuthService,
     private readonly snackbarService: SnackbarService,
+    private readonly incidentService: IncidentService,
   ) {}
 
   ngOnInit(): void {
     this.incidenteForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(60)]],
       email: ['', [Validators.required, Validators.maxLength(60)]],
+      description: ['', Validators.required, Validators.maxLength(1000)],
     });
   }
 
@@ -51,16 +54,21 @@ export class IncidentRegisterComponent implements OnInit {
     return this.incidenteForm.get('email')!;
   }
 
+  get description() {
+    return this.incidenteForm.get('description')!;
+  }
+
   onSubmit() {
     if (this.incidenteForm.invalid) {
       this.incidenteForm.markAllAsTouched();
       return;
     }
-    /*
-    const name = this.name.value;
-    const prefixEmailIncidents = this.email.value;
 
-   this.clientService.register({ name, prefixEmailIncidents }).subscribe({
+    const name = this.name.value;
+    const email = this.email.value;
+    const description = this.description.value;
+
+    this.incidentService.incidentRegister({ name, email, description }).subscribe({
       next: _response => {
         this.snackbarService.showSuccess(
           $localize`:@@clientRegisterSuccess:Incidente creado exitosamente`,
@@ -72,10 +80,10 @@ export class IncidentRegisterComponent implements OnInit {
         });
       },
       error: error => {
-        if (error instanceof DuplicateEmailError) {
-          this.snackbarService.showError($localize`:@@clientRegisterErrorEmailRegistered:Error`);
+        if (error instanceof ErrorIncidentError) {
+          this.snackbarService.showError($localize`:@@ErrorIncidentError:Error`);
         }
       },
-    });*/
+    });
   }
 }

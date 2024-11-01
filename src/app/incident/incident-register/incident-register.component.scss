@@ -1,33 +1,89 @@
 @import 'src/colors.scss';
 
-.container {
+.incident-list {
+  &__header {
+    display: flex;
+    justify-content: end;
+    padding: 1.5rem 0;
+  }
+
+  .no-incidents-message {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.mat-mdc-icon-button {
+  color: $blue-500;
+}
+
+.horizontal-spacer {
+  padding: 0 0.5rem;
+}
+
+.incident-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.incident-card {
+  position: relative;
+  background-color: white;
+  padding: 24px 2rem 2rem 2rem;
+  border-radius: 20px;
   text-align: center;
-  padding: 20px;
-}
-
-h1 {
-  font-weight: bold;
-}
-
-hr {
-  margin: 20px 0;
-  border: 1px solid #ccc;
-}
-
-.form-container {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 2rem;
+  text-align: left;
 }
 
 mat-form-field {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
-button {
+.incident-button {
   width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+}
+
+#incidenteForm {
+  padding-top: 1.5rem;
+}
+
+.mat-divider {
+  display: flex;
+  align-items: baseline;
+}
+
+.mdc-text-field__input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  padding: 0;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  height: 28px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+textarea {
+  padding: 10px; /* Espaciado interno del textarea */
+  font-size: 16px; /* Tamaño de fuente */
+  width: 300px; /* Ancho del textarea, ajusta según sea necesario */
+  height: 100px; /* Altura del textarea, ajusta según sea necesario */
+  resize: none; /* Evita que el usuario cambie el tamaño del textarea */
 }
