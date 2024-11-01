@@ -127,4 +127,13 @@ describe('EmployeeService', () => {
     expect(req.request.method).toBe('GET');
     req.flush(employeeData);
   });
+
+  it('should return null when the request fails', () => {
+    service.validateStatusInvitation().subscribe(result => {
+      expect(result).toBeNull();
+    });
+
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/employees/me`);
+    req.error(new ErrorEvent('Network error'));
+  });
 });
