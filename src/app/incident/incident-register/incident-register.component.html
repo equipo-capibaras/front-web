@@ -1,31 +1,31 @@
 <div class="container">
-  <h1>Crear incidente</h1>
+  <h1 i18n>Crear incidente</h1>
   <hr />
   <div class="form-container">
     <form [formGroup]="incidenteForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="fill">
-        <mat-label>Correo del cliente que reporta el incidente</mat-label>
-        <input matInput formControlName="correo" type="email" placeholder="ejemplo@correo.com" />
-        <mat-error>Introduce un correo válido y obligatorio</mat-error>
+        <mat-label i18n>Correo del cliente que reporta el incidente</mat-label>
+        <input matInput formControlName="correo" type="email" placeholder="ejemplo@correo.com" i18n-placeholder />
+        <mat-error i18n>Introduce un correo válido y obligatorio</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Nombre incidente</mat-label>
+        <mat-label i18n>Nombre incidente</mat-label>
         <input
           matInput
           formControlName="nombreIncidente"
           type="text"
-          placeholder="Nombre del incidente" />
-        <mat-error>El nombre del incidente es obligatorio</mat-error>
+          placeholder="Nombre del incidente" i18n-placeholder />
+        <mat-error i18n>El nombre del incidente es obligatorio</mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Descripción</mat-label>
+        <mat-label i18n>Descripción</mat-label>
         <textarea
           matInput
           formControlName="descripcion"
-          placeholder="Proporciona una descripción clara"></textarea>
-        <mat-error>La descripción es obligatoria</mat-error>
+          placeholder="Proporciona una descripción clara" i18n-placeholder></textarea>
+        <mat-error i18n>La descripción es obligatoria</mat-error>
       </mat-form-field>
 
       <button
