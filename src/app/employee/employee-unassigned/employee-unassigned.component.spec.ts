@@ -43,7 +43,7 @@ describe('EmployeeUnassignedComponent', () => {
         { provide: AuthService, useValue: authServiceSpy },
         { provide: ClientService, useValue: clientServiceSpy },
         { provide: MatDialog, useValue: dialogSpy },
-        { provide: Router, useValue: routerSpy }, // Add Router spy
+        { provide: Router, useValue: routerSpy },
         { provide: EmployeeService, useValue: employeeServiceSpy },
       ],
     }).compileComponents();
@@ -52,6 +52,10 @@ describe('EmployeeUnassignedComponent', () => {
 
     fixture = TestBed.createComponent(EmployeeUnassignedComponent);
     component = fixture.componentInstance;
+  });
+
+  afterEach(() => {
+    authServiceSpy.refreshToken.and.callThrough();
   });
 
   it('should create the component', () => {
@@ -182,5 +186,46 @@ describe('EmployeeUnassignedComponent', () => {
     );
     const result = await component.getStatusInvitation();
     expect(result).toBeFalse();
+  });
+
+  it('should handle error when accepting invitation fails', () => {
+    const consoleLogSpy = spyOn(console, 'log').and.callThrough();
+    const consoleErrorSpy = spyOn(console, 'error').and.callThrough();
+
+    authServiceSpy.getToken.and.returnValue('valid-token');
+
+    const errorResponse = { status: 500, message: 'Internal Server Error' };
+    clientServiceSpy.acceptInvitation.and.returnValue(throwError(() => errorResponse));
+
+    component.acceptInvitation();
+
+    expect(consoleLogSpy).toHaveBeenCalledWith('Accepting invitation...');
+    expect(consoleErrorSpy).toHaveBeenCalledWith('Error al aceptar la invitación:', errorResponse);
+  });
+
+  it('should handle error when refreshing token fails', () => {
+    const consoleErrorSpy = spyOn(console, 'error').and.callThrough();
+
+    authServiceSpy.getToken.and.returnValue('fake-token');
+
+    clientServiceSpy.acceptInvitation.and.returnValue(of(undefined));
+
+    authServiceSpy.refreshToken.and.returnValue(
+      throwError(() => new Error('Token refresh failed')),
+    );
+
+    component.acceptInvitation();
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith('Error refreshing token:', jasmine.any(Error));
+  });
+
+  it('should log error if token is null', () => {
+    const consoleErrorSpy = spyOn(console, 'error').and.callThrough();
+
+    authServiceSpy.getToken.and.returnValue(null);
+
+    component.declineInvitation();
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith('Error: Token is null');
   });
 });
