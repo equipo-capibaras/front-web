@@ -3,7 +3,7 @@ export interface Employee {
   clientId: string;
   name: string;
   email: string;
-  role: 'analyst' | 'agent' | 'admin';
-  invitationStatus: 'accepted' | 'pending';
-  invitationDate: string;
+  role?: 'analyst' | 'agent' | 'admin';
+  invitationStatus?: 'accepted' | 'pending';
+  invitationDate?: string;
 }

@@ -14,6 +14,10 @@
         <source>Falta el token de autenticación.</source>
         <target>Falta o token de autenticação.</target>
       </trans-unit>
+      <trans-unit id="generalInformation" datatype="html">
+        <source>Información general</source>
+        <target>Informações gerais</target>
+      </trans-unit>
       <trans-unit id="error-403" datatype="html">
         <source>No tienes permiso para acceder a este recurso.</source>
         <target>Você não tem permissão para acessar este recurso.</target>
@@ -90,6 +94,42 @@
         <source>Ingresa tu contraseña</source>
         <target>Insira sua senha</target>
       </trans-unit>
+      <trans-unit id="incidentAssignedTo" datatype="html">
+        <source>Asignado a</source>
+        <target>Atribuído a</target>
+      </trans-unit>
+      <trans-unit id="incidentChannel" datatype="html">
+        <source>Canal creación</source>
+        <target>Canal de criação</target>
+      </trans-unit>
+      <trans-unit id="incidentClosedDate" datatype="html">
+        <source>Fecha cerrado</source>
+        <target>Data de fechamento</target>
+      </trans-unit>
+      <trans-unit id="incidentCreatedBy" datatype="html">
+        <source>Creado por</source>
+        <target>Criado por</target>
+      </trans-unit>
+      <trans-unit id="incidentCreatedDate" datatype="html">
+        <source>Fecha radicado</source>
+        <target>Data de registro</target>
+      </trans-unit>
+      <trans-unit id="incidentEmailChannel" datatype="html">
+        <source>Correo electrónico</source>
+        <target>E-mail</target>
+      </trans-unit>
+      <trans-unit id="incidentEmptyHistory" datatype="html">
+        <source>No se han generado respuestas</source>
+        <target>Nenhuma resposta foi gerada</target>
+      </trans-unit>
+      <trans-unit id="incidentEscalatedDate" datatype="html">
+        <source>Fecha escalado</source>
+        <target>Data de escalonamento</target>
+      </trans-unit>
+      <trans-unit id="incidentHistory" datatype="html">
+        <source>RESPUESTAS</source>
+        <target>RESPOSTAS</target>
+      </trans-unit>
       <trans-unit id="incidentManagement" datatype="html">
         <source>Gestión incidentes</source>
         <target>Gestão de incidentes</target>
@@ -97,6 +137,14 @@
       <trans-unit id="incidentManagementPageDescription" datatype="html">
         <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver y seguir fácilmente el estado de todas las incidencias asignadas a tu nombre.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Además, tendrás la opción de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>crear nuevas incidencias<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de manera rápida y eficiente.</source>
         <target>Em <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestão de incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, pode <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e seguir facilmente o estado de todos os incidentes atribuídos ao seu nome.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>Também, terá a opção de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>criar novos incidentes<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de forma rápida e eficiente.</target>
+      </trans-unit>
+      <trans-unit id="incidentMobileChannel" datatype="html">
+        <source>Aplicación móvil</source>
+        <target>Aplicativo móvel</target>
+      </trans-unit>
+      <trans-unit id="incidentReportedBy" datatype="html">
+        <source>Reportado por</source>
+        <target>Reportado por</target>
       </trans-unit>
       <trans-unit id="incidentStatus" datatype="html">
         <source>Estado</source>
@@ -114,12 +162,16 @@
         <source>Abierta</source>
         <target>Aberto</target>
       </trans-unit>
+      <trans-unit id="incidentWebChannel" datatype="html">
+        <source>Aplicación web</source>
+        <target>Aplicativo web</target>
+      </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
         <target>Status do Convite</target>
       </trans-unit>
       <trans-unit id="invite_title" datatype="html">
-        <source>Desea aceptar la invitación para asociarse a una compañía?</source>
+        <source>¿Desea aceptar la invitación para asociarse a una compañía?</source>
         <target>Gostaria de aceitar o convite para se juntar a uma empresa?</target>
       </trans-unit>
       <trans-unit id="inviteCancelButton" datatype="html">

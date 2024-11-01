@@ -1,5 +1,5 @@
 import { fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { faker } from '@faker-js/faker';
 import {
@@ -217,11 +217,16 @@ describe('ClientService', () => {
     }
   }));
 
-  it('should handle HTTP error in loadClientEmployees and return null', fakeAsync(() => {
-    let result: EmployeeListResponse | null = null;
+  it('should handle HTTP error in loadClientEmployees and return an error', fakeAsync(() => {
+    let errorResponse: HttpErrorResponse | undefined;
 
-    service.loadClientEmployees(5, 1).subscribe((response: EmployeeListResponse | null) => {
-      result = response;
+    service.loadClientEmployees(5, 1).subscribe({
+      next: () => {
+        fail('Expected an error, but got a successful response');
+      },
+      error: error => {
+        errorResponse = error;
+      },
     });
 
     const req = httpTestingController.expectOne(
@@ -232,7 +237,9 @@ describe('ClientService', () => {
 
     tick();
 
-    expect(result).toBeNull();
+    expect(errorResponse).toBeDefined();
+    expect(errorResponse?.status).toBe(500);
+    expect(errorResponse?.statusText).toBe('Server Error');
   }));
 
   it('should send an invitation successfully', waitForAsync(() => {
