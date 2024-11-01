@@ -97,7 +97,8 @@ export class EmployeeUnassignedComponent implements OnInit {
       console.error('Error: Token is null');
     }
   }
-  async getStatusInvitation(): Promise<boolean> {
+
+  getStatusInvitation(): Promise<boolean> {
     return new Promise<boolean>(resolve => {
       this.employeeService.validateStatusInvitation().subscribe({
         next: (data: EmployeeResponse | null) => {

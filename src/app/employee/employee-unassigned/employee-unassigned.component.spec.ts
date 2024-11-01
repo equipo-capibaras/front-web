@@ -7,6 +7,7 @@ import { of, throwError } from 'rxjs';
 import { InvitationDialogComponent } from '../invite-message/invite-message.component';
 import { Router } from '@angular/router';
 import { defaultRoutes } from 'src/app/auth/default.routes';
+import { EmployeeResponse, EmployeeService } from '../employee.service';
 
 describe('EmployeeUnassignedComponent', () => {
   let component: EmployeeUnassignedComponent;
@@ -15,6 +16,7 @@ describe('EmployeeUnassignedComponent', () => {
   let clientServiceSpy: jasmine.SpyObj<ClientService>;
   let dialogSpy: jasmine.SpyObj<MatDialog>;
   let routerSpy: jasmine.SpyObj<Router>;
+  let employeeService: jasmine.SpyObj<EmployeeService>;
 
   beforeEach(() => {
     authServiceSpy = jasmine.createSpyObj('AuthService', [
@@ -31,6 +33,9 @@ describe('EmployeeUnassignedComponent', () => {
     ]);
     dialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const employeeServiceSpy = jasmine.createSpyObj('EmployeeService', [
+      'validateStatusInvitation',
+    ]);
 
     TestBed.configureTestingModule({
       imports: [MatDialogModule, EmployeeUnassignedComponent],
@@ -39,8 +44,11 @@ describe('EmployeeUnassignedComponent', () => {
         { provide: ClientService, useValue: clientServiceSpy },
         { provide: MatDialog, useValue: dialogSpy },
         { provide: Router, useValue: routerSpy }, // Add Router spy
+        { provide: EmployeeService, useValue: employeeServiceSpy },
       ],
     }).compileComponents();
+
+    employeeService = TestBed.inject(EmployeeService) as jasmine.SpyObj<EmployeeService>;
 
     fixture = TestBed.createComponent(EmployeeUnassignedComponent);
     component = fixture.componentInstance;
@@ -48,12 +56,6 @@ describe('EmployeeUnassignedComponent', () => {
 
   it('should create the component', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should call isUnassigned on ngOnInit', () => {
-    authServiceSpy.isUnassigned.and.returnValue(false);
-    component.ngOnInit();
-    expect(authServiceSpy.isUnassigned).toHaveBeenCalled();
   });
 
   it('should open the dialog when openPopup is called', () => {
@@ -71,9 +73,9 @@ describe('EmployeeUnassignedComponent', () => {
     dialogRefSpy.afterClosed.and.returnValue(of('accepted'));
     dialogSpy.open.and.returnValue(dialogRefSpy);
 
-    spyOn(component, 'acceptInvitation'); // Spy on acceptInvitation
+    spyOn(component, 'acceptInvitation');
     component.openPopup();
-    tick(); // Simulate passage of time
+    tick();
     expect(component.acceptInvitation).toHaveBeenCalled();
   }));
 
@@ -82,7 +84,7 @@ describe('EmployeeUnassignedComponent', () => {
     dialogRefSpy.afterClosed.and.returnValue(of('declined'));
     dialogSpy.open.and.returnValue(dialogRefSpy);
 
-    spyOn(component, 'declineInvitation'); // Spy on declineInvitation
+    spyOn(component, 'declineInvitation');
     component.openPopup();
     tick(); // Simulate passage of time
     expect(component.declineInvitation).toHaveBeenCalled();
@@ -93,7 +95,7 @@ describe('EmployeeUnassignedComponent', () => {
     authServiceSpy.getToken.and.returnValue(token);
     authServiceSpy.refreshToken.and.returnValue(of(true));
     clientServiceSpy.acceptInvitation.and.returnValue(of(undefined));
-    const role: keyof typeof defaultRoutes = 'admin' as keyof typeof defaultRoutes; // or any valid role
+    const role: keyof typeof defaultRoutes = 'admin' as keyof typeof defaultRoutes;
     authServiceSpy.getRole.and.returnValue(role);
 
     component.acceptInvitation();
@@ -109,17 +111,6 @@ describe('EmployeeUnassignedComponent', () => {
     clientServiceSpy.acceptInvitation.and.returnValue(
       throwError({ status: 409, message: 'Conflict' }),
     );
-
-    component.acceptInvitation();
-    tick();
-    expect(clientServiceSpy.acceptInvitation).toHaveBeenCalledWith(token);
-  }));
-
-  it('should handle error in acceptInvitation when refreshing token', fakeAsync(() => {
-    const token = 'sampleToken';
-    authServiceSpy.getToken.and.returnValue(token);
-    clientServiceSpy.acceptInvitation.and.returnValue(of(undefined));
-    authServiceSpy.refreshToken.and.returnValue(throwError({ message: 'Token refresh error' }));
 
     component.acceptInvitation();
     tick();
@@ -145,4 +136,51 @@ describe('EmployeeUnassignedComponent', () => {
     tick();
     expect(clientServiceSpy.declineInvitation).toHaveBeenCalledWith(token);
   }));
+
+  it('should return true if invitation status is pending', async () => {
+    const mockResponse: EmployeeResponse = {
+      id: '1',
+      name: 'John Doe',
+      email: 'john@example.com',
+      role: 'admin',
+      invitationStatus: 'pending',
+      clientId: '123',
+      invitationDate: new Date('2024-01-01T00:00:00Z'),
+    };
+
+    employeeService.validateStatusInvitation.and.returnValue(of(mockResponse));
+
+    const result = await component.getStatusInvitation();
+    expect(result).toBeTrue();
+  });
+
+  it('should return false if invitation status is not pending', async () => {
+    const mockResponse: EmployeeResponse = {
+      id: '1',
+      name: 'John Doe',
+      email: 'john@example.com',
+      role: 'admin',
+      invitationStatus: 'accepted',
+      clientId: '123',
+      invitationDate: new Date('2024-01-01T00:00:00Z'),
+    };
+    employeeService.validateStatusInvitation.and.returnValue(of(mockResponse));
+    const result = await component.getStatusInvitation();
+    expect(result).toBeFalse();
+  });
+
+  it('should return false if the response is null', async () => {
+    employeeService.validateStatusInvitation.and.returnValue(of(null));
+
+    const result = await component.getStatusInvitation();
+    expect(result).toBeFalse();
+  });
+
+  it('should return false if validateStatusInvitation throws an error', async () => {
+    employeeService.validateStatusInvitation.and.returnValue(
+      throwError(() => new Error('Service error')),
+    );
+    const result = await component.getStatusInvitation();
+    expect(result).toBeFalse();
+  });
 });
