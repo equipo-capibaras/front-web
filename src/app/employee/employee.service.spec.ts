@@ -92,4 +92,26 @@ describe('EmployeeService', () => {
     expect(req.request.context.get(ACCEPTED_ERRORS)).toEqual([409]);
     req.flush({}, { status: 500, statusText: 'Internal Server Error' });
   }));
+
+  it('should load employee data successfully', waitForAsync(() => {
+    const mockResponse: EmployeeResponse = {
+      id: faker.string.uuid(),
+      clientId: null,
+      name: faker.person.fullName(),
+      email: faker.internet.email(),
+      role: faker.helpers.arrayElement(Object.values(Role)),
+      invitationStatus: 'pending',
+      invitationDate: faker.date.past(),
+    };
+
+    service.loadEmployeeData().subscribe({
+      next: response => {
+        expect(response).toEqual(mockResponse);
+      },
+    });
+
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/employees/me`);
+    expect(req.request.method).toBe('GET');
+    req.flush(mockResponse);
+  }));
 });
