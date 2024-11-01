@@ -125,6 +125,18 @@
       <trans-unit id="incidentWebChannel" datatype="html">
         <source>Aplicación web</source>
       </trans-unit>
+      <trans-unit id="invitationAccepted" datatype="html">
+        <source>Invitación aceptada.</source>
+      </trans-unit>
+      <trans-unit id="invitationAlreadyAccepted" datatype="html">
+        <source>Invitación ya aceptada.</source>
+      </trans-unit>
+      <trans-unit id="invitationDeclined" datatype="html">
+        <source>Invitación rechazada.</source>
+      </trans-unit>
+      <trans-unit id="invitationNotFound" datatype="html">
+        <source>Invitación no encontrada.</source>
+      </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
       </trans-unit>

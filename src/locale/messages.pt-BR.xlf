@@ -166,6 +166,22 @@
         <source>Aplicación web</source>
         <target>Aplicativo web</target>
       </trans-unit>
+      <trans-unit id="invitationAccepted" datatype="html">
+        <source>Invitación aceptada.</source>
+        <target>Convite aceite.</target>
+      </trans-unit>
+      <trans-unit id="invitationAlreadyAccepted" datatype="html">
+        <source>Invitación ya aceptada.</source>
+        <target>Convite já aceite</target>
+      </trans-unit>
+      <trans-unit id="invitationDeclined" datatype="html">
+        <source>Invitación rechazada.</source>
+        <target>Convite declinado.</target>
+      </trans-unit>
+      <trans-unit id="invitationNotFound" datatype="html">
+        <source>Invitación no encontrada.</source>
+        <target>Convite não encontrado.</target>
+      </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
         <target>Status do Convite</target>
