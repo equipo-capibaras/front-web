@@ -31,6 +31,16 @@ describe('EmployeeService', () => {
     role: faker.helpers.arrayElement(Object.values(Role)),
   });
 
+  const mockResponse = () => ({
+    id: '1',
+    name: faker.person.fullName(),
+    email: faker.internet.email(),
+    role: 'admin',
+    invitationStatus: 'pending',
+    clientId: '123',
+    invitationDate: new Date('2024-01-01T00:00:00Z'),
+  });
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
@@ -105,4 +115,16 @@ describe('EmployeeService', () => {
     expect(req.request.method).toBe('GET');
     req.flush(null, { status: 500, statusText: 'Server Error' });
   }));
+
+  it('should return employee response on valid request', () => {
+    const employeeData = mockResponse();
+
+    service.validateStatusInvitation().subscribe(response => {
+      expect(response).toEqual(employeeData);
+    });
+
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/employees/me`);
+    expect(req.request.method).toBe('GET');
+    req.flush(employeeData);
+  });
 });
