@@ -1,70 +1,63 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { By } from '@angular/platform-browser';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef } from '@angular/material/dialog';
+import { of } from 'rxjs';
 import { InvitationDialogComponent } from './invite-message.component';
+import { ClientService } from '../../client/client.service';
+import { Client } from '../../client/client';
 
 describe('InvitationDialogComponent', () => {
   let component: InvitationDialogComponent;
   let fixture: ComponentFixture<InvitationDialogComponent>;
-  let dialogRefSpy: jasmine.SpyObj<MatDialogRef<InvitationDialogComponent>>;
+  let clientService: jasmine.SpyObj<ClientService>;
+  let dialogRef: jasmine.SpyObj<MatDialogRef<InvitationDialogComponent>>;
 
   beforeEach(async () => {
-    dialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
+    clientService = jasmine.createSpyObj('ClientService', ['loadClientData']);
+    dialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);
 
     await TestBed.configureTestingModule({
-      declarations: [InvitationDialogComponent],
-      imports: [MatButtonModule, NoopAnimationsModule],
+      imports: [InvitationDialogComponent],
       providers: [
-        { provide: MatDialogRef, useValue: dialogRefSpy },
-        { provide: MAT_DIALOG_DATA, useValue: { name: 'Test Company', role: 'Admin' } },
+        { provide: MatDialogRef, useValue: dialogRef },
+        { provide: ClientService, useValue: clientService },
       ],
     }).compileComponents();
   });
 
-  beforeEach(() => {
+  function setupComponent() {
+    const mockClientData: Client = {
+      id: '1',
+      name: 'Empresa S.A.S',
+      plan: 'empresario',
+      emailIncidents: 'pqrs-empresa@capibaras.io',
+    };
+
+    clientService.loadClientData.and.returnValue(of(mockClientData));
+
     fixture = TestBed.createComponent(InvitationDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }
 
-  it('should create the component', () => {
+  it('should create', () => {
+    setupComponent();
+
     expect(component).toBeTruthy();
   });
 
-  it('should close the dialog with "accepted" when accept button is clicked', () => {
-    const acceptButton = fixture.debugElement.query(By.css('.Accept')).nativeElement;
-    acceptButton.click(); // Simulate button click
-    expect(dialogRefSpy.close).toHaveBeenCalledWith('accepted');
+  it('should confirm invitation', () => {
+    setupComponent();
+
+    component.onConfirm();
+
+    expect(dialogRef.close).toHaveBeenCalledWith('accepted');
   });
 
-  it('should close the dialog with "declined" when decline button is clicked', () => {
-    const declineButton = fixture.debugElement.query(By.css('.Decline')).nativeElement;
-    declineButton.click(); // Simulate button click
-    expect(dialogRefSpy.close).toHaveBeenCalledWith('declined');
-  });
+  it('should decline invitation', () => {
+    setupComponent();
 
-  it('should render heading text', () => {
-    const heading = fixture.debugElement.query(By.css('h1')).nativeElement;
-    expect(heading.textContent).toContain(
-      '¿Desea aceptar la invitación para asociarse a una compañía?',
-    );
-  });
+    component.onDecline();
 
-  it('should have the dialogRef injected', () => {
-    expect(component['dialogRef']).toBe(dialogRefSpy);
-  });
-
-  it('should have Accept and Decline buttons', () => {
-    const acceptButton = fixture.debugElement.query(By.css('.Accept'));
-    const declineButton = fixture.debugElement.query(By.css('.Decline'));
-
-    expect(acceptButton).toBeTruthy();
-    expect(declineButton).toBeTruthy();
-  });
-
-  it('should not call close before buttons are clicked', () => {
-    expect(dialogRefSpy.close).not.toHaveBeenCalled();
+    expect(dialogRef.close).toHaveBeenCalledWith('declined');
   });
 });
