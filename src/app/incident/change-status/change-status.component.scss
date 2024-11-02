@@ -56,3 +56,12 @@ h2 {
   margin-top: 20px;
   float: right;
 }
+
+.Container_popup {
+  padding: 20px;
+}
+
+.button_change {
+  color: var(--mdc-filled-button-label-text-color, var(--mat-app-on-primary));
+  background-color: var(--mdc-filled-button-container-color, var(--mat-app-primary));
+}

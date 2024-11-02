@@ -56,12 +56,17 @@ export class IncidentService {
   changeStatusIncident(IncidentStatusData: {
     status: string;
     comment: string;
+    incident_id: string;
   }): Observable<IncidentResponse> {
     const context = new HttpContext().set(ACCEPTED_ERRORS, [409]);
     return this.http
-      .post<IncidentResponse>(`${this.apiUrl}/incident/changestatus`, IncidentStatusData, {
-        context: context,
-      })
+      .post<IncidentResponse>(
+        `${this.apiUrl}/incidents/${IncidentStatusData.incident_id}/update`,
+        IncidentStatusData,
+        {
+          context: context,
+        },
+      )
       .pipe(
         map(response => {
           return response;

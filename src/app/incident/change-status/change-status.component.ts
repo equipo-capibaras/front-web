@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common'; // Reemplaza BrowserModule con CommonModule
@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { IncidentService } from '../incident.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-change-status',
@@ -26,7 +27,7 @@ import { SnackbarService } from 'src/app/services/snackbar.service';
   templateUrl: './change-status.component.html',
   styleUrls: ['./change-status.component.scss'],
 })
-export class ChangeStatusComponent {
+export class ChangeStatusComponent implements OnInit {
   statusForm: FormGroup;
   statuses = ['Escalado', 'Cerrado'];
 
@@ -36,11 +37,21 @@ export class ChangeStatusComponent {
     @Inject(MAT_DIALOG_DATA) public data: { status: string; comment: string },
     private readonly incidentService: IncidentService,
     private snackbarService: SnackbarService,
+    private readonly route: ActivatedRoute,
   ) {
     this.statusForm = this.fb.group({
       status: ['', Validators.required],
       comment: ['', Validators.required],
+      incident_id: [this.route.snapshot.paramMap.get('id')],
     });
+  }
+  ngOnInit(): void {
+    if (this.data) {
+      this.statusForm.patchValue({
+        status: this.data.status,
+        comment: this.data.comment,
+      });
+    }
   }
 
   get status() {
@@ -50,13 +61,17 @@ export class ChangeStatusComponent {
   get comment() {
     return this.statusForm.get('comment')!;
   }
+  get incident_id() {
+    return this.statusForm.get('incident_id')!;
+  }
 
   onSubmit(): void {
     if (this.statusForm.valid) {
       const status = this.status.value;
       const comment = this.comment.value;
+      const incident_id = this.incident_id.value;
 
-      this.incidentService.changeStatusIncident({ status, comment }).subscribe({
+      this.incidentService.changeStatusIncident({ status, comment, incident_id }).subscribe({
         next: success => {
           if (!success) {
             return;

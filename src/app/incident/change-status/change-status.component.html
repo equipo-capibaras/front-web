@@ -1,29 +1,36 @@
-<h2 i18n="@@ChangeStatus">Cambiar estado</h2>
+<div class="Container_popup">
+  <h2 i18n="@@ChangeStatus">Cambiar estado</h2>
 
-<form [formGroup]="statusForm" (ngSubmit)="onSubmit()">
-  <mat-form-field appearance="fill" class="full-width">
-    <mat-label i18n="@@NewStatus">Selecciona el nuevo estado</mat-label>
-    <mat-select formControlName="status">
-      <mat-option value="Escalado" i18n="@@Escalado">Escalado</mat-option>
-      <mat-option value="Cerrado" i18n="@@Cerrado">Cerrado</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <form [formGroup]="statusForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label i18n="@@NewStatus">Selecciona el nuevo estado</mat-label>
+      <mat-select formControlName="status">
+        <mat-option value="Escalado" i18n="@@Escalado">Escalado</mat-option>
+        <mat-option value="Cerrado" i18n="@@Cerrado">Cerrado</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field appearance="fill" class="full-width">
-    <mat-label i18n="@@comment">Comentario</mat-label>
-    <textarea
-      matInput
-      formControlName="comment"
-      placeholder="Explica el cambio de estado"
-      i18n-placeholder="@@CommentPlaceholder"></textarea>
-  </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label i18n="@@comment">Comentario</mat-label>
+      <textarea
+        matInput
+        formControlName="comment"
+        placeholder="Explica el cambio de estado"
+        i18n-placeholder="@@CommentPlaceholder"></textarea>
+    </mat-form-field>
 
-  <div class="button-group-status">
-    <button mat-button type="button" (click)="onCancel()" i18n="@@CancelButtonStatus">
-      Cancelar
-    </button>
-    <button mat-raised-button color="primary" type="submit" i18n="@@ChangeButtonStatus">
-      Cambiar
-    </button>
-  </div>
-</form>
+    <div class="button-group-status">
+      <button mat-button type="button" (click)="onCancel()" i18n="@@CancelButtonStatus">
+        Cancelar
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        class="button_change"
+        i18n="@@ChangeButtonStatus">
+        Cambiar
+      </button>
+    </div>
+  </form>
+</div>

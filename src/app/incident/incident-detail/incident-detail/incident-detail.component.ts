@@ -88,6 +88,7 @@ export class IncidentDetailComponent implements OnInit {
   }
 
   openChangeStatusDialog(incidentId: string): void {
+    console.log('incidentId: ' + incidentId);
     const dialogRef = this.dialog.open(ChangeStatusComponent, {
       width: '600px',
       data: { incidentId },
