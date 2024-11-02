@@ -1,8 +1,9 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Incident } from './incident';
+import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 
 export interface IncidentListResponse {
   incidents: {
@@ -19,6 +20,10 @@ export interface IncidentListResponse {
   totalPages: number;
   currentPage: number;
   totalIncidents: number;
+}
+
+export interface IncidentResponse {
+  id: string;
 }
 
 @Injectable({
@@ -46,5 +51,28 @@ export class IncidentService {
         return throwError(() => error);
       }),
     );
+  }
+
+  changeStatusIncident(IncidentStatusData: {
+    status: string;
+    comment: string;
+  }): Observable<IncidentResponse> {
+    const context = new HttpContext().set(ACCEPTED_ERRORS, [409]);
+    return this.http
+      .post<IncidentResponse>(`${this.apiUrl}/incident/changestatus`, IncidentStatusData, {
+        context: context,
+      })
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 409) {
+            return throwError(() => new Error());
+          }
+
+          return throwError(() => error);
+        }),
+      );
   }
 }

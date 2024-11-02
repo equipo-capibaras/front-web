@@ -8,6 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Incident, IncidentHistory } from '../../incident';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { finalize } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangeStatusComponent } from '../../change-status/change-status.component';
 
 @Component({
   selector: 'app-incident-detail',
@@ -37,6 +39,7 @@ export class IncidentDetailComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly loadingService: LoadingService,
     private readonly snackbarService: SnackbarService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -82,5 +85,18 @@ export class IncidentDetailComponent implements OnInit {
           },
         });
     }
+  }
+
+  openChangeStatusDialog(incidentId: string): void {
+    const dialogRef = this.dialog.open(ChangeStatusComponent, {
+      width: '600px',
+      data: { incidentId },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Cambio de estado:', result);
+      }
+    });
   }
 }

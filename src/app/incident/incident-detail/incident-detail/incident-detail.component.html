@@ -4,6 +4,13 @@
       <div class="incident-detail__info">
         <div class="content">
           <h1 class="page__title">{{ incidentDetail.name }}</h1>
+
+          <mat-chip
+            [ngClass]="chipInfo[incidentStatus].cssClass"
+            (click)="openChangeStatusDialog(incidentDetail.id)">
+            <span i18n="@@ChangeStatus">Cambiar Estado</span>
+          </mat-chip>
+
           <div class="chips">
             <mat-chip [ngClass]="chipInfo[incidentStatus].cssClass">
               <span class="material-symbols-outlined">

@@ -1,0 +1,58 @@
+@import './src/colors.scss';
+
+h2 {
+  font-size: 16px;
+  line-height: 32px;
+  margin: 0px;
+}
+
+.incident-list {
+  &__header {
+    display: flex;
+    justify-content: end;
+    padding: 1.5rem 0;
+  }
+
+  .no-incidents-message {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.mat-mdc-icon-button {
+  color: $blue-500;
+}
+
+.horizontal-spacer {
+  padding: 0 0.5rem;
+}
+
+.mdc-button {
+  -webkit-user-select: none;
+  user-select: none;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-width: 64px;
+  border: none;
+  outline: none;
+  line-height: inherit;
+  -webkit-appearance: none;
+  overflow: visible;
+  vertical-align: middle;
+  background: rgba(0, 0, 0, 0);
+  padding: 0 8px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.button-group-status {
+  display: flex;
+  margin-top: 20px;
+  float: right;
+}
