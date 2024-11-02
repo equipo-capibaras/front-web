@@ -163,7 +163,7 @@ describe('AuthService', () => {
 
     initComponent();
 
-    service.refreshToken().subscribe(result => {
+    service.refreshToken(true).subscribe(result => {
       expect(result).toBe(true);
       expect(localStorage.getItem('token')).toBe(mockToken);
     });

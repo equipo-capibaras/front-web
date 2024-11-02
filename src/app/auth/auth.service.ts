@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { SnackbarService } from '../services/snackbar.service';
 import { ERROR_MESSAGES } from '../shared/error-messages';
 import { HttpClient, HttpContext } from '@angular/common/http';
+import { defaultRoutes } from './default.routes';
 
 interface DecodedToken {
   aud: string;
@@ -108,11 +109,18 @@ export class AuthService {
     this.setUserRole();
   }
 
-  refreshToken() {
+  refreshToken(redirectToDefaultPage?: boolean) {
     return this.http.post<TokenResponse>(`${this.apiUrl}/auth/employee/refresh`, {}).pipe(
       map(response => {
         localStorage.setItem('token', response.token);
         this.setUserRole();
+
+        const role = this.getRole();
+
+        if (redirectToDefaultPage && role) {
+          this.router.navigate([defaultRoutes[role]]);
+        }
+
         return true;
       }),
       catchError(() => {
