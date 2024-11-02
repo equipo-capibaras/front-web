@@ -1,4 +1,5 @@
 import axe from 'axe-core';
+import IncidentList from 'cypress/pageobjects/incidentList';
 import Login from 'cypress/pageobjects/login';
 
 function terminalLog(violations: axe.Result[]) {
@@ -79,6 +80,28 @@ describe('Accessibility Tests', () => {
     });
 
     cy.location('pathname').should('eq', '/incidents');
+
+    cy.wait(2000);
+
+    cy.injectAxe();
+    cy.checkA11y(undefined, undefined, terminalLog);
+  });
+
+  it('`/incidents/:id` page has no detectable a11y violations on load', () => {
+    cy.visit('/');
+
+    cy.fixture('login.agent.json').then(loginData => {
+      const login = new Login();
+      login.login(loginData.email, loginData.password);
+    });
+
+    cy.location('pathname').should('eq', '/incidents');
+
+    cy.wait(2000);
+
+    const incidentList = new IncidentList();
+
+    incidentList.getIncidentButton(0).click();
 
     cy.wait(2000);
 
