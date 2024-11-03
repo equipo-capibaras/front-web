@@ -55,6 +55,24 @@ describe('Accessibility Tests', () => {
     cy.checkA11y(undefined, undefined, terminalLog);
   });
 
+  it('`/admin/change-plan` page has no detectable a11y violations on load', () => {
+    cy.visit('/');
+
+    cy.fixture('login.admin.json').then(loginData => {
+      const login = new Login();
+      login.login(loginData.email, loginData.password);
+    });
+
+    cy.location('pathname').should('eq', '/admin');
+
+    cy.visit('admin/change-plan');
+
+    cy.wait(2000);
+
+    cy.injectAxe();
+    cy.checkA11y(undefined, undefined, terminalLog);
+  });
+
   it('`/dashboards` page has no detectable a11y violations on load', () => {
     cy.visit('/');
 
@@ -80,6 +98,25 @@ describe('Accessibility Tests', () => {
     });
 
     cy.location('pathname').should('eq', '/incidents');
+
+    cy.wait(2000);
+
+    cy.injectAxe();
+    cy.checkA11y(undefined, undefined, terminalLog);
+  });
+
+  it('`/incidents/new` page has no detectable a11y violations on load', () => {
+    cy.visit('/');
+
+    cy.fixture('login.agent.json').then(loginData => {
+      const login = new Login();
+      login.login(loginData.email, loginData.password);
+    });
+
+    const incidentList = new IncidentList();
+    incidentList.createIncidentButton.click();
+
+    cy.location('pathname').should('eq', '/incidents/new');
 
     cy.wait(2000);
 

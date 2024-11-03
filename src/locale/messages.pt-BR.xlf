@@ -370,6 +370,10 @@
         <source>Seleccionar</source>
         <target>Selecione</target>
       </trans-unit>
+      <trans-unit id="planTitle" datatype="html">
+        <source>Seleccionar plan</source>
+        <target>Selecionar plano</target>
+      </trans-unit>
       <trans-unit id="invitationStep2Confirm" datatype="html">
         <source>Confirmar</source>
         <target>Confirmar</target>

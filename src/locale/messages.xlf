@@ -275,6 +275,9 @@
       <trans-unit id="planSelectButton" datatype="html">
         <source>Seleccionar</source>
       </trans-unit>
+      <trans-unit id="planTitle" datatype="html">
+        <source>Seleccionar plan</source>
+      </trans-unit>
       <trans-unit id="invitationStep2Confirm" datatype="html">
         <source>Confirmar</source>
       </trans-unit>
