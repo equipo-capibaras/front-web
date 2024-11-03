@@ -340,7 +340,7 @@
       </trans-unit>
       <trans-unit id="invitationStep2Text" datatype="html">
         <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> El usuario <x id="INTERPOLATION" equiv-text="{{ data.username }}"/> tiene el rol de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ employeeRole[data.role] }}"/><x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> y será registrado con este rol en tu empresa. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>¿Deseas confirmar la invitación?<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></source>
-        <target><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> El usuario <x id="INTERPOLATION" equiv-text="{{ data.username }}"/> tiene el rol de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ employeeRole[data.role] }}"/><x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> y será registrado con este rol en vos empresa. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>¿Deseás confirmar la invitación?<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></target>
+        <target><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> El usuario <x id="INTERPOLATION" equiv-text="{{ data.username }}"/> tiene el rol de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ employeeRole[data.role] }}"/><x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> y será registrado con este rol en tu empresa. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>¿Deseás confirmar la invitación?<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></target>
       </trans-unit>
       <trans-unit id="invitationStep2Title" datatype="html">
         <source>Confirmar invitación</source>
@@ -516,7 +516,7 @@
       </trans-unit>
       <trans-unit id="invitationEmployeeDuplicate" datatype="html">
         <source>Empleado ya vinculado a tu empresa.</source>
-        <target>Empleado ya vinculado a vos empresa.</target>
+        <target>Empleado ya vinculado a tu empresa.</target>
       </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>
