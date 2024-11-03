@@ -39,7 +39,11 @@ export class EmployeeUnassignedComponent implements OnInit {
   }
 
   openPopup(): void {
-    const dialogRef = this.dialog.open(InvitationDialogComponent);
+    const dialogRef = this.dialog.open(InvitationDialogComponent, {
+      autoFocus: false,
+      restoreFocus: false,
+      disableClose: true,
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       let response: InvitationResponse;
