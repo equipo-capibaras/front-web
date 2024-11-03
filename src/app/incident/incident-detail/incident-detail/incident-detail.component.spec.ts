@@ -7,7 +7,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { IncidentService } from '../../incident.service';
 import { Incident, IncidentHistory } from '../../incident';
 import { IncidentDetailComponent } from './incident-detail.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ChangeStatusComponent } from '../../change-status/change-status.component';
 
 describe('IncidentDetailComponent', () => {
@@ -134,7 +134,7 @@ describe('IncidentDetailComponent', () => {
       afterClosed: () => of(mockResult),
     };
 
-    dialogSpy.open.and.returnValue(dialogRefMock as any);
+    dialogSpy.open.and.returnValue(dialogRefMock as MatDialogRef<ChangeStatusComponent>);
 
     component.openChangeStatusDialog(incidentId);
 
