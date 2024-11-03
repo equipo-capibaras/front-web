@@ -129,7 +129,6 @@ describe('IncidentDetailComponent', () => {
   it('should open ChangeStatus dialog with correct incidentId', () => {
     const incidentId = '1';
     const mockResult = { status: 'Escalado', comment: 'Updated status' };
-
     const dialogRefMock = {
       afterClosed: () => of(mockResult),
     };
@@ -143,9 +142,26 @@ describe('IncidentDetailComponent', () => {
       data: { incidentId },
     });
 
+    // Verify component updates after dialog closes
     dialogRefMock.afterClosed().subscribe(result => {
       expect(result).toEqual(mockResult);
-      console.log('Cambio de estado:', result);
+      // Add expectations for component state updates
+    });
+  });
+
+  it('should handle dialog cancellation', () => {
+    const incidentId = '1';
+    const dialogRefMock = {
+      afterClosed: () => of(null),
+    };
+
+    dialogSpy.open.and.returnValue(dialogRefMock as MatDialogRef<ChangeStatusComponent>);
+
+    component.openChangeStatusDialog(incidentId);
+
+    dialogRefMock.afterClosed().subscribe(result => {
+      expect(result).toBeNull();
+      // Add expectations for component state when dialog is cancelled
     });
   });
 });

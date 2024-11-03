@@ -1,14 +1,19 @@
 <div class="Container_popup">
   <h2 i18n="@@ChangeStatus">Cambiar estado</h2>
-
+  <div class="custom-line"></div>
   <form [formGroup]="statusForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill" class="full-width">
+    <mat-form-field appearance="fill" class="full-width listStatus">
       <mat-label i18n="@@NewStatus">Selecciona el nuevo estado</mat-label>
       <mat-select formControlName="status">
         <mat-option value="escalated" i18n="@@Escalado">Escalado</mat-option>
         <mat-option value="closed" i18n="@@Cerrado">Cerrado</mat-option>
       </mat-select>
     </mat-form-field>
+
+    <p i18n="@@messageAnswer" class="messageAnswer">
+      Ingresa un comentario explicando el cambio de estado. Este aparecerá en la sección de
+      RESPUESTAS del incidente y será visible para el cliente que haya reportado el incidente.
+    </p>
 
     <mat-form-field appearance="fill" class="full-width">
       <mat-label i18n="@@comment">Comentario</mat-label>
