@@ -38,17 +38,14 @@
       <trans-unit id="statusPending" datatype="html">
         <source>Pendiente</source>
       </trans-unit>
-      <trans-unit id="text" datatype="html">
-        <source>Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa</source>
+      <trans-unit id="invitationEmployeeSuccess" datatype="html">
+        <source>Empleado invitado exitosamente.</source>
       </trans-unit>
-      <trans-unit id="textConfirm" datatype="html">
-        <source>¿Deseas confirmar la invitación?</source>
+      <trans-unit id="invitationEmployeeText" datatype="html">
+        <source>Ingresa el correo del empleado que quieres invitar, para hacer parte de la empresa</source>
       </trans-unit>
-      <trans-unit id="textInvitation" datatype="html">
-        <source>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a tu empresa.</source>
-      </trans-unit>
-      <trans-unit id="textInviteUser" datatype="html">
-        <source>Invitar usuario</source>
+      <trans-unit id="invitationEmployeeTitle" datatype="html">
+        <source>Invitar empleado</source>
       </trans-unit>
       <trans-unit id="unassignedInfo" datatype="html">
         <source>Aún no está vinculado a una empresa. Contacte con su administrador.</source>
@@ -143,7 +140,7 @@
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
       </trans-unit>
-      <trans-unit id="inviteCancelButton" datatype="html">
+      <trans-unit id="invitationStep2Cancel" datatype="html">
         <source>Cancelar</source>
       </trans-unit>
       <trans-unit id="inviteEmailPlaceholder" datatype="html">
@@ -152,8 +149,11 @@
       <trans-unit id="inviteEmployee" datatype="html">
         <source>Invitar empleado</source>
       </trans-unit>
-      <trans-unit id="inviteSubmitButton" datatype="html">
+      <trans-unit id="invitationEmployeeInvitar" datatype="html">
         <source>Invitar</source>
+      </trans-unit>
+      <trans-unit id="invitationEmployeeNotFound" datatype="html">
+        <source>No se encontró el empleado.</source>
       </trans-unit>
       <trans-unit id="loginButtonSubmit" datatype="html">
         <source>Ingresar</source>
@@ -236,7 +236,7 @@
       <trans-unit id="planSelectButton" datatype="html">
         <source>Seleccionar</source>
       </trans-unit>
-      <trans-unit id="onConfirmInvite" datatype="html">
+      <trans-unit id="invitationStep2Confirm" datatype="html">
         <source>Confirmar</source>
       </trans-unit>
       <trans-unit id="paginatorItemsPerPage" datatype="html">
@@ -266,8 +266,11 @@
       <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
       </trans-unit>
-      <trans-unit id="ConfirmarInvitación" datatype="html">
-        <source>Confirmar Invitación</source>
+      <trans-unit id="invitationStep2Text" datatype="html">
+        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> El usuario <x id="INTERPOLATION" equiv-text="{{ data.username }}"/> tiene el rol de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ employeeRole[data.role] }}"/><x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> y será registrado con este rol en tu empresa. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>¿Deseas confirmar la invitación?<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="invitationStep2Title" datatype="html">
+        <source>Confirmar invitación</source>
       </trans-unit>
       <trans-unit id="createIncident" datatype="html">
         <source>Crear incidente</source>
@@ -401,8 +404,11 @@
       <trans-unit id="actions" datatype="html">
         <source>Acciones</source>
       </trans-unit>
-      <trans-unit id="cancel_button" datatype="html">
+      <trans-unit id="invitationEmployeeCancel" datatype="html">
         <source>Cancelar</source>
+      </trans-unit>
+      <trans-unit id="invitationEmployeeDuplicate" datatype="html">
+        <source>Empleado ya vinculado a tu empresa.</source>
       </trans-unit>
       <trans-unit id="CancelButtonStatus" datatype="html">
         <source>Cancelar</source>

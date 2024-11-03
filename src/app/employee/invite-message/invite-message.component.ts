@@ -7,7 +7,6 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-
 import { MatDivider } from '@angular/material/divider';
 import { ClientService } from '../../client/client.service';
 

@@ -1,15 +1,17 @@
-<div class="invite-user-container">
-  <div>
-    <h2 i18n="@@textInviteUser">Invitar usuario</h2>
+<div class="dialog-header">
+  <h2 mat-dialog-title i18n="@@invitationEmployeeTitle">Invitar empleado</h2>
+  <button type="button" mat-icon-button class="close-button" (click)="close()">
     <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
-    <a class="close-button" tabindex="0" (click)="onCancel()" (keydown.enter)="onCancel()">X</a>
-  </div>
-  <div class="custom-line"></div>
-  <p i18n="@@text">
-    Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa
-  </p>
-  <form [formGroup]="inviteForm" (ngSubmit)="inviteUser()">
-    <mat-form-field appearance="outline" class="full-width">
+    <span class="material-symbols-outlined">close</span>
+  </button>
+</div>
+<mat-divider />
+<form [formGroup]="inviteForm" (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <p i18n="@@invitationEmployeeText">
+      Ingresa el correo del empleado que quieres invitar, para hacer parte de la empresa
+    </p>
+    <mat-form-field appearance="outline">
       <input
         id="email"
         matInput
@@ -35,64 +37,11 @@
         </mat-error>
       }
     </mat-form-field>
-    <div class="invite-actions">
-      <button
-        mat-button
-        class="buttonCancel"
-        type="button"
-        (click)="onCancel()"
-        i18n="@@inviteCancelButton">
-        Cancelar
-      </button>
-      <button
-        type="submit"
-        mat-flat-button
-        class="register-button mat-body-large"
-        i18n="@@inviteSubmitButton">
-        Invitar
-      </button>
-    </div>
-  </form>
-
-  <!-- Diálogo de confirmación -->
-  <ng-template #confirmationDialog let-data>
-    <div class="invite-user-container-confirm">
-      <div>
-        <h2 i18n="@@ConfirmarInvitación">Confirmar Invitación</h2>
-        <a
-          class="close-button"
-          href="#"
-          tabindex="0"
-          (click)="onCancelThis()"
-          (keydown.enter)="onCancelThis()">
-          <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
-          X
-        </a>
-      </div>
-      <div class="custom-line"></div>
-      <p i18n="@@textInvitation">
-        El usuario {{ data?.email }} tiene el Rol: {{ data?.role }} y será registrado con este rol a
-        tu empresa.
-      </p>
-      <p i18n="@@textConfirm">¿Deseas confirmar la invitación?</p>
-      <div class="invite-user-container">
-        <a
-          i18n="@@cancel_button"
-          class="close-button buttonCancel mdc-button mat-mdc-button mat-unthemed mat-mdc-button-base"
-          href="#"
-          tabindex="0"
-          (click)="onCancelThis()"
-          (keydown.enter)="onCancelThis()">
-          Cancelar
-        </a>
-        <button
-          i18n="@@onConfirmInvite"
-          mat-raised-button
-          type="button"
-          (click)="onConfirmInvite(data?.email)">
-          Confirmar
-        </button>
-      </div>
-    </div>
-  </ng-template>
-</div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-stroked-button type="button" (click)="close()" i18n="@@invitationEmployeeCancel">
+      Cancelar
+    </button>
+    <button mat-flat-button type="submit" i18n="@@invitationEmployeeInvitar">Invitar</button>
+  </mat-dialog-actions>
+</form>

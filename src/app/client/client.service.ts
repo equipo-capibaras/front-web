@@ -21,10 +21,10 @@ export class DuplicateEmployeeExistError extends Error {
   }
 }
 
-export class EmployeeNoFoundError extends Error {
+export class EmployeeNotFoundError extends Error {
   constructor(message?: string) {
     super(message ?? 'Employee not found');
-    this.name = 'EmployeeNoFoundError';
+    this.name = 'EmployeeNotFoundError';
   }
 }
 
@@ -137,7 +137,7 @@ export class ClientService {
       );
   }
 
-  getRoleByEmail(email: string): Observable<Employee> {
+  getEmployeeByEmail(email: string): Observable<Employee> {
     const context = new HttpContext().set(ACCEPTED_ERRORS, [404]);
 
     return this.http
@@ -146,7 +146,7 @@ export class ClientService {
         map(employeeData => employeeData),
         catchError((error: HttpErrorResponse) => {
           if (error.status === 404) {
-            return throwError(() => new EmployeeNoFoundError());
+            return throwError(() => new EmployeeNotFoundError());
           }
           return throwError(() => error);
         }),
@@ -159,9 +159,6 @@ export class ClientService {
     return this.http
       .post<ClientResponse>(`${this.apiUrl}/employees/invite`, { email }, { context: context })
       .pipe(
-        map(response => {
-          return response;
-        }),
         catchError((error: HttpErrorResponse) => {
           if (error.status === 409) {
             return throwError(() => new DuplicateEmployeeExistError());
