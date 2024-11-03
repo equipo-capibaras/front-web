@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { IncidentService, IncidentListResponse } from './incident.service';
+import { IncidentService, IncidentListResponse, IncidentResponse } from './incident.service';
 import { Incident, IncidentHistory } from './incident';
 import { Employee } from '../employee/employee';
 import { environment } from 'src/environments/environment';
@@ -129,5 +129,51 @@ describe('IncidentService', () => {
       expect(req.request.method).toBe('GET');
       req.flush(errorMessage, { status, statusText: 'Not Found' });
     });
+  });
+  it('should change incident status successfully', () => {
+    const mockResponse: IncidentResponse = { id: '1' };
+    const status = 'Escalated';
+    const description = 'Updated status';
+
+    service.changeStatusIncident(status, description, '1').subscribe(response => {
+      expect(response).toEqual(mockResponse);
+    });
+
+    const req = httpMock.expectOne(`${environment.apiUrl}/incidents/1/update`);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toEqual({
+      action: status,
+      description: description,
+    });
+    req.flush(mockResponse);
+  });
+  it('should handle 409 error when changing incident status', () => {
+    const status = 'Escalated';
+    const description = 'Updated status';
+
+    service.changeStatusIncident(status, description, '1').subscribe({
+      next: () => fail('should have failed with 409 error'),
+      error: error => {
+        expect(error).toBeInstanceOf(Error);
+      },
+    });
+
+    const req = httpMock.expectOne(`${environment.apiUrl}/incidents/1/update`);
+    req.flush('Conflict', { status: 409, statusText: 'Conflict' });
+  });
+
+  it('should handle other errors when changing incident status', () => {
+    const status = 'Escalated';
+    const description = 'Updated status';
+
+    service.changeStatusIncident(status, description, '1').subscribe({
+      next: () => fail('should have failed with 500 error'),
+      error: (error: HttpErrorResponse) => {
+        expect(error.status).toBe(500);
+      },
+    });
+
+    const req = httpMock.expectOne(`${environment.apiUrl}/incidents/1/update`);
+    req.flush('Server error', { status: 500, statusText: 'Server error' });
   });
 });
