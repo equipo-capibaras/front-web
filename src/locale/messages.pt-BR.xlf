@@ -70,6 +70,10 @@
         <source>Usuario</source>
         <target>Usuário</target>
       </trans-unit>
+      <trans-unit id="UserNotFoundError" datatype="html">
+        <source>Usuario no encontrado.</source>
+        <target>Usuário não encontrado.</target>
+      </trans-unit>
       <trans-unit id="viewIncident" datatype="html">
         <source>Ver incidente</source>
         <target>Ver incidente</target>
@@ -133,6 +137,30 @@
       <trans-unit id="incidentCreatedDate" datatype="html">
         <source>Fecha radicado</source>
         <target>Data de registro</target>
+      </trans-unit>
+      <trans-unit id="incidentCreateEmail" datatype="html">
+        <source>Correo del cliente que reporta el incidente</source>
+        <target>Correio do cliente relatando o incidente</target>
+      </trans-unit>
+      <trans-unit id="incidentCreateInstruction" datatype="html">
+        <source>Proporciona una descipción clara del problema</source>
+        <target>Fornece uma descrição clara do problema</target>
+      </trans-unit>
+      <trans-unit id="incidentCreatePlaceholderEmail" datatype="html">
+        <source>Ingresa el correo del cliente</source>
+        <target>Insira o endereço de e-mail do cliente</target>
+      </trans-unit>
+      <trans-unit id="incidentCreateTitel" datatype="html">
+        <source>Crear incidente</source>
+        <target>Criar incidente</target>
+      </trans-unit>
+      <trans-unit id="incidentDescription" datatype="html">
+        <source>Descripción</source>
+        <target>Descrição</target>
+      </trans-unit>
+      <trans-unit id="incidentDescriptionPlaceholder" datatype="html">
+        <source>Ingresa la descripción del incidente</source>
+        <target>Insira a descrição do incidente</target>
       </trans-unit>
       <trans-unit id="incidentEmailChannel" datatype="html">
         <source>Correo electrónico</source>
@@ -390,6 +418,14 @@
         <source>Crear incidente</source>
         <target>Criar incidente</target>
       </trans-unit>
+      <trans-unit id="createIncidentButtonSubmit" datatype="html">
+        <source>Crear Incidente</source>
+        <target>Criar incidente</target>
+      </trans-unit>
+      <trans-unit id="createIncidentSuccess" datatype="html">
+        <source>Incidente creado exitosamente</source>
+        <target>Incidente criado com êxito</target>
+      </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
         <target>Data de apresentação</target>
@@ -429,6 +465,14 @@
       <trans-unit id="name" datatype="html">
         <source>Nombre</source>
         <target>Nome</target>
+      </trans-unit>
+      <trans-unit id="nameIncident" datatype="html">
+        <source>Nombre del incidente</source>
+        <target>Nome do incidente</target>
+      </trans-unit>
+      <trans-unit id="nameIncidentPlaceholder" datatype="html">
+        <source>Ingresa el nombre del incidente</source>
+        <target>Insira o nome do incidente</target>
       </trans-unit>
       <trans-unit id="employeeRegisterPlaceholderName" datatype="html">
         <source>Ingresa el nombre</source>

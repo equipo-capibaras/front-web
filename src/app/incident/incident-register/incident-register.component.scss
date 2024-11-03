@@ -62,28 +62,8 @@ mat-form-field {
   align-items: baseline;
 }
 
-.mdc-text-field__input {
-  width: 100%;
-  min-width: 0;
-  border: none;
-  border-radius: 0;
-  background: none;
-  padding: 0;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  height: 28px;
-}
-
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-textarea {
-  padding: 10px; /* Espaciado interno del textarea */
-  font-size: 16px; /* Tamaño de fuente */
-  width: 300px; /* Ancho del textarea, ajusta según sea necesario */
-  height: 100px; /* Altura del textarea, ajusta según sea necesario */
-  resize: none; /* Evita que el usuario cambie el tamaño del textarea */
 }

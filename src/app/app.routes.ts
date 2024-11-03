@@ -81,17 +81,17 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'incidents/:id',
-    component: IncidentDetailComponent,
+    path: 'incidents/new',
+    component: IncidentRegisterComponent,
     canActivate: [authGuard],
     data: {
-      roles: [Role.Admin, Role.Agent],
+      roles: [Role.Agent],
       showNavbar: true,
     },
   },
   {
-    path: 'incident-register',
-    component: IncidentRegisterComponent,
+    path: 'incidents/:id',
+    component: IncidentDetailComponent,
     canActivate: [authGuard],
     data: {
       roles: [Role.Admin, Role.Agent],

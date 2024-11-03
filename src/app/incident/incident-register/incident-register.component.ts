@@ -7,9 +7,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
-import { AuthService } from '../../auth/auth.service';
 import { SnackbarService } from '../../services/snackbar.service';
-import { ErrorIncidentError, IncidentService } from '../incident.service';
+import { IncidentService, UserNotFoundError } from '../incident.service';
 
 @Component({
   selector: 'app-incident-register',
@@ -33,7 +32,6 @@ export class IncidentRegisterComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService,
     private readonly snackbarService: SnackbarService,
     private readonly incidentService: IncidentService,
   ) {}
@@ -41,8 +39,8 @@ export class IncidentRegisterComponent implements OnInit {
   ngOnInit(): void {
     this.incidenteForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(60)]],
-      email: ['', [Validators.required, Validators.maxLength(60)]],
-      description: ['', Validators.required, Validators.maxLength(1000)],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(60)]],
+      description: ['', [Validators.required, Validators.maxLength(1000)]],
     });
   }
 
@@ -68,20 +66,16 @@ export class IncidentRegisterComponent implements OnInit {
     const email = this.email.value;
     const description = this.description.value;
 
-    this.incidentService.incidentRegister({ name, email, description }).subscribe({
+    this.incidentService.registerIncident({ name, email, description }).subscribe({
       next: _response => {
         this.snackbarService.showSuccess(
-          $localize`:@@clientRegisterSuccess:Incidente creado exitosamente`,
+          $localize`:@@createIncidentSuccess:Incidente creado exitosamente`,
         );
-        this.authService.refreshToken().subscribe({
-          next: () => {
-            this.router.navigate(['/']);
-          },
-        });
+        this.router.navigate(['/incidents']);
       },
       error: error => {
-        if (error instanceof ErrorIncidentError) {
-          this.snackbarService.showError($localize`:@@ErrorIncidentError:Error`);
+        if (error instanceof UserNotFoundError) {
+          this.snackbarService.showError($localize`:@@UserNotFoundError:Usuario no encontrado.`);
         }
       },
     });

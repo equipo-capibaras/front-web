@@ -53,6 +53,9 @@
       <trans-unit id="user" datatype="html">
         <source>Usuario</source>
       </trans-unit>
+      <trans-unit id="UserNotFoundError" datatype="html">
+        <source>Usuario no encontrado.</source>
+      </trans-unit>
       <trans-unit id="viewIncident" datatype="html">
         <source>Ver incidente</source>
       </trans-unit>
@@ -100,6 +103,24 @@
       </trans-unit>
       <trans-unit id="incidentCreatedDate" datatype="html">
         <source>Fecha radicado</source>
+      </trans-unit>
+      <trans-unit id="incidentCreateEmail" datatype="html">
+        <source>Correo del cliente que reporta el incidente</source>
+      </trans-unit>
+      <trans-unit id="incidentCreateInstruction" datatype="html">
+        <source>Proporciona una descipción clara del problema</source>
+      </trans-unit>
+      <trans-unit id="incidentCreatePlaceholderEmail" datatype="html">
+        <source>Ingresa el correo del cliente</source>
+      </trans-unit>
+      <trans-unit id="incidentCreateTitel" datatype="html">
+        <source>Crear incidente</source>
+      </trans-unit>
+      <trans-unit id="incidentDescription" datatype="html">
+        <source>Descripción</source>
+      </trans-unit>
+      <trans-unit id="incidentDescriptionPlaceholder" datatype="html">
+        <source>Ingresa la descripción del incidente</source>
       </trans-unit>
       <trans-unit id="incidentEmailChannel" datatype="html">
         <source>Correo electrónico</source>
@@ -296,6 +317,12 @@
       <trans-unit id="createIncident" datatype="html">
         <source>Crear incidente</source>
       </trans-unit>
+      <trans-unit id="createIncidentButtonSubmit" datatype="html">
+        <source>Crear Incidente</source>
+      </trans-unit>
+      <trans-unit id="createIncidentSuccess" datatype="html">
+        <source>Incidente creado exitosamente</source>
+      </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
       </trans-unit>
@@ -361,6 +388,12 @@
       </trans-unit>
       <trans-unit id="name" datatype="html">
         <source>Nombre</source>
+      </trans-unit>
+      <trans-unit id="nameIncident" datatype="html">
+        <source>Nombre del incidente</source>
+      </trans-unit>
+      <trans-unit id="nameIncidentPlaceholder" datatype="html">
+        <source>Ingresa el nombre del incidente</source>
       </trans-unit>
       <trans-unit id="employeeRegisterLabelPassword" datatype="html">
         <source>Contraseña</source>

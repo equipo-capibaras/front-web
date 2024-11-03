@@ -22,11 +22,27 @@ export interface IncidentListResponse {
   totalIncidents: number;
 }
 
+export interface IncidentResponse {
+  client_id: string;
+  name: string;
+  channel: string;
+  reported_by: string;
+  created_by: string;
+  description: string;
+}
+
 export interface HistoryResponse {
   seq: number;
   date: string;
   action: string;
   description: string;
+}
+
+export class UserNotFoundError extends Error {
+  constructor(message?: string) {
+    super(message ?? 'User not found.');
+    this.name = 'UserNotFoundError';
+  }
 }
 
 export class IncidentClosedError extends Error {
@@ -88,6 +104,23 @@ export class IncidentService {
             return throwError(() => new IncidentClosedError());
           } else if (error.status === 404) {
             return throwError(() => new IncidentNotFoundError());
+          }
+
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  registerIncident(incidentData: { name: string; email: string; description: string }) {
+    const context = new HttpContext();
+    context.set(ACCEPTED_ERRORS, [404]);
+
+    return this.http
+      .post<IncidentResponse>(`${this.apiUrl}/incidents/web`, incidentData, { context: context })
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 404) {
+            return throwError(() => new UserNotFoundError());
           }
 
           return throwError(() => error);

@@ -12,7 +12,7 @@ import {
 
 import { CustomPaginatorIntl } from '../../pagination/pagination';
 import { MatIconModule } from '@angular/material/icon';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { chipInfo } from '../../shared/incident-chip';
 import { IncidentService } from '../incident.service';
 import { LoadingService } from 'src/app/services/loading.service';
@@ -38,6 +38,7 @@ interface IncidentListEntry {
     MatPaginatorModule,
     MatChipsModule,
     MatIconModule,
+    RouterLink,
   ],
   templateUrl: './incident-list.component.html',
   styleUrl: './incident-list.component.scss',
