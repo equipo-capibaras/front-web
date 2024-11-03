@@ -1,41 +1,63 @@
-<div class="Container_popup">
-  <h2 i18n="@@ChangeStatus">Cambiar estado</h2>
-  <div class="custom-line"></div>
-  <form [formGroup]="statusForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill" class="full-width listStatus">
-      <mat-label i18n="@@NewStatus">Selecciona el nuevo estado</mat-label>
-      <mat-select formControlName="status">
-        <mat-option value="escalated" i18n="@@Escalado">Escalado</mat-option>
-        <mat-option value="closed" i18n="@@Cerrado">Cerrado</mat-option>
+<div class="dialog-header">
+  <h2 mat-dialog-title i18n="@@incidentChangeStatusTitel">Cambiar estado</h2>
+  <button type="button" mat-icon-button class="close-button" (click)="close()">
+    <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
+    <span class="material-symbols-outlined">close</span>
+  </button>
+</div>
+<mat-divider />
+<form [formGroup]="statusForm" (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label i18n="@@incidentChangeStatusInstruction">Selecciona el nuevo estado</mat-label>
+      <mat-select formControlName="status" required>
+        <mat-option value="escalated" i18n="@@incidentStatusEscalated">Escalado</mat-option>
+        <mat-option value="closed" i18n="@@incidentStatusClosed">Cerrado</mat-option>
       </mat-select>
+
+      @if (status.invalid && (status.dirty || status.touched)) {
+        <mat-error>
+          @if (status.errors?.['required']) {
+            <span i18n="@@employeeRegisterErrorRequired">Este campo es obligatorio.</span>
+          }
+        </mat-error>
+      }
     </mat-form-field>
-
-    <p i18n="@@messageAnswer" class="messageAnswer">
+    <p i18n="@@incidentChangeStatusText">
       Ingresa un comentario explicando el cambio de estado. Este aparecerá en la sección de
-      RESPUESTAS del incidente y será visible para el cliente que haya reportado el incidente.
+      <b>RESPUESTAS</b> del incidente y será visible para el cliente que haya reportado el
+      incidente.
     </p>
-
-    <mat-form-field appearance="fill" class="full-width">
+    <mat-form-field appearance="outline" class="full-width">
       <mat-label i18n="@@comment">Comentario</mat-label>
       <textarea
         matInput
         formControlName="comment"
+        required
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="8"
+        cdkAutosizeMaxRows="8"
         placeholder="Explica el cambio de estado"
         i18n-placeholder="@@CommentPlaceholder"></textarea>
-    </mat-form-field>
 
-    <div class="button-group-status">
-      <button mat-button type="button" (click)="onCancel()" i18n="@@CancelButtonStatus">
-        Cancelar
-      </button>
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        class="button_change"
-        i18n="@@ChangeButtonStatus">
-        Cambiar
-      </button>
-    </div>
-  </form>
-</div>
+      @if (comment.invalid && (comment.dirty || comment.touched)) {
+        <mat-error>
+          @if (comment.errors?.['required']) {
+            <span i18n="@@employeeRegisterErrorRequired">Este campo es obligatorio.</span>
+          }
+          @if (comment.errors?.['maxlength']) {
+            <span i18n="@@commentTooLong1000"
+              >Este campo no puede superar los 1000 caracteres.</span
+            >
+          }
+        </mat-error>
+      }
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-stroked-button type="button" (click)="close()" i18n="@@changePlanCancel">
+      Cancelar
+    </button>
+    <button mat-flat-button type="submit" i18n="@@change">Cambiar</button>
+  </mat-dialog-actions>
+</form>

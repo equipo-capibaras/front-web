@@ -12,6 +12,7 @@
     .content {
       padding: 55px 24px;
       max-width: 1013px;
+      width: 100%;
     }
 
     .chips {
@@ -82,4 +83,11 @@
       }
     }
   }
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -228,6 +228,7 @@ router-outlet + * {
 
 .mat-mdc-dialog-container .mat-divider-horizontal {
   border-color: $blue-200;
+  margin: 0 1.5rem;
 }
 
 .mat-mdc-dialog-container .mat-mdc-dialog-actions .mat-mdc-button-base + .mat-mdc-button-base {

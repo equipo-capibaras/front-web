@@ -3,13 +3,17 @@
     <div class="incident-detail">
       <div class="incident-detail__info">
         <div class="content">
-          <h1 class="page__title">{{ incidentDetail.name }}</h1>
-          <mat-chip
-            [ngClass]="chipInfo[incidentStatus].cssClass"
-            (click)="openChangeStatusDialog(incidentDetail.id)"
-            (keydown)="handleKeydown($event, incidentDetail.id)">
-            <span i18n="@@ChangeStatus">Cambiar Estado</span>
-          </mat-chip>
+          <div class="header">
+            <h1 class="page__title">{{ incidentDetail.name }}</h1>
+            <button
+              mat-flat-button
+              type="button"
+              i18n="@@updateIncidentStatus"
+              [disabled]="incidentStatus === 'closed'"
+              (click)="openChangeStatusDialog(incidentDetail.id)">
+              Cambiar estado
+            </button>
+          </div>
 
           <div class="chips">
             <mat-chip [ngClass]="chipInfo[incidentStatus].cssClass">

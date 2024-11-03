@@ -1,107 +1,80 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ChangeStatusComponent } from './change-status.component';
-import { IncidentResponse, IncidentService } from '../incident.service';
-import { SnackbarService } from 'src/app/services/snackbar.service';
-import { ActivatedRoute } from '@angular/router';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { faker } from '@faker-js/faker';
 import { of, throwError } from 'rxjs';
-import { convertToParamMap } from '@angular/router';
+import { ChangeStatusComponent } from './change-status.component';
+import {
+  HistoryResponse,
+  IncidentClosedError,
+  IncidentNotFoundError,
+  IncidentService,
+} from '../incident.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 describe('ChangeStatusComponent', () => {
   let component: ChangeStatusComponent;
   let fixture: ComponentFixture<ChangeStatusComponent>;
+  let dialogRef: jasmine.SpyObj<MatDialogRef<ChangeStatusComponent>>;
   let incidentService: jasmine.SpyObj<IncidentService>;
   let snackbarService: jasmine.SpyObj<SnackbarService>;
-  let dialogRef: jasmine.SpyObj<MatDialogRef<ChangeStatusComponent>>;
 
   beforeEach(async () => {
-    const incidentServiceSpy = jasmine.createSpyObj('IncidentService', ['changeStatusIncident']);
-    const snackbarServiceSpy = jasmine.createSpyObj('SnackbarService', [
-      'showSuccess',
-      'showError',
-    ]);
-    const dialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
-    const activatedRouteSpy = {
-      snapshot: {
-        paramMap: convertToParamMap({ id: '1' }), // Mocking the paramMap with an id
-      },
-    };
+    dialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);
+    incidentService = jasmine.createSpyObj('IncidentService', ['changeStatusIncident']);
+    snackbarService = jasmine.createSpyObj('SnackbarService', ['showSuccess', 'showError']);
 
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, ChangeStatusComponent],
+      imports: [ChangeStatusComponent, NoopAnimationsModule],
       providers: [
-        { provide: IncidentService, useValue: incidentServiceSpy },
-        { provide: SnackbarService, useValue: snackbarServiceSpy },
-        { provide: MAT_DIALOG_DATA, useValue: { status: '', comment: '', incident_id: '1' } }, // Ensure incident_id is set
-        { provide: MatDialogRef, useValue: dialogRefSpy },
-        { provide: ActivatedRoute, useValue: activatedRouteSpy },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: dialogRef },
+        { provide: IncidentService, useValue: incidentService },
+        { provide: SnackbarService, useValue: snackbarService },
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ChangeStatusComponent);
     component = fixture.componentInstance;
-    incidentService = TestBed.inject(IncidentService) as jasmine.SpyObj<IncidentService>;
-    snackbarService = TestBed.inject(SnackbarService) as jasmine.SpyObj<SnackbarService>;
-    dialogRef = TestBed.inject(MatDialogRef) as jasmine.SpyObj<MatDialogRef<ChangeStatusComponent>>;
+    fixture.detectChanges();
   });
 
-  it('should create the component', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize the form with default values', () => {
-    component.ngOnInit();
-    expect(component.statusForm.value).toEqual({
-      status: '',
-      comment: '',
-      incident_id: '1',
-    });
-  });
+  it('should close', () => {
+    component.close();
 
-  it('should patch form values when data is provided', () => {
-    component.data = { status: 'escalated', comment: 'Test comment', incident_id: '1' };
-    component.ngOnInit();
-    expect(component.statusForm.value).toEqual({
-      status: 'escalated',
-      comment: 'Test comment',
-      incident_id: '1',
-    });
-  });
-
-  it('should call changeStatusIncident and show success message on valid form submission', () => {
-    component.statusForm.setValue({
-      status: 'escalated',
-      comment: 'Test comment',
-      incident_id: '1',
-    });
-    incidentService.changeStatusIncident.and.returnValue(of({} as IncidentResponse));
-
-    component.onSubmit();
-
-    expect(snackbarService.showSuccess).toHaveBeenCalledWith(
-      'Se ha cambiado el estado exitosamente.',
-    );
-    expect(dialogRef.close).toHaveBeenCalledWith(component.statusForm.value);
-  });
-
-  it('should show error message when changeStatusIncident fails', () => {
-    component.statusForm.setValue({
-      status: 'escalated',
-      comment: 'Test comment',
-      incident_id: '1',
-    });
-    incidentService.changeStatusIncident.and.returnValue(throwError(() => new Error('Error')));
-
-    component.onSubmit();
-
-    expect(snackbarService.showError).toHaveBeenCalledWith(
-      'Ocurrió un error al cambiar el estado.',
-    );
-  });
-
-  it('should close the dialog on cancel', () => {
-    component.onCancel();
     expect(dialogRef.close).toHaveBeenCalled();
+  });
+
+  it('should mark all fields as touched on invalid submit', () => {
+    component.submit();
+    expect(component.statusForm.touched).toBeTruthy();
+  });
+
+  it('should submit', () => {
+    const comment = faker.lorem.sentence();
+    component.statusForm.setValue({ status: 'escalated', comment });
+
+    incidentService.changeStatusIncident.and.returnValue(of({} as HistoryResponse));
+
+    component.submit();
+
+    expect(snackbarService.showSuccess).toHaveBeenCalled();
+  });
+
+  [new IncidentClosedError(), new IncidentNotFoundError()].forEach(error => {
+    it('should show error', () => {
+      const comment = faker.lorem.sentence();
+      component.statusForm.setValue({ status: 'escalated', comment });
+
+      incidentService.changeStatusIncident.and.returnValue(throwError(() => error));
+
+      component.submit();
+
+      expect(snackbarService.showError).toHaveBeenCalled();
+    });
   });
 });

@@ -48,6 +48,8 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   incidentsList = new MatTableDataSource<IncidentListEntry>();
   totalIncidents = 0;
   chipInfo = chipInfo;
+  pageSize = 5;
+  currentPage = 1;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -60,12 +62,14 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadIncidents(5, 1);
+    this.loadIncidents(this.pageSize, this.currentPage);
   }
 
   ngAfterViewInit() {
     this.paginator.page.subscribe((event: PageEvent) => {
-      this.loadIncidents(event.pageSize, event.pageIndex + 1);
+      this.pageSize = event.pageSize;
+      this.currentPage = event.pageIndex + 1;
+      this.loadIncidents(this.pageSize, this.currentPage);
     });
   }
 
@@ -100,12 +104,16 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   }
 
   openChangeStatusDialog(incidentId: string) {
-    this.dialog.open(ChangeStatusComponent, {
+    const dialogRef = this.dialog.open(ChangeStatusComponent, {
+      autoFocus: false,
+      restoreFocus: false,
       data: {
-        status: 'Escalado',
-        comment: '',
-        incident_id: incidentId,
+        incidentId,
       },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadIncidents(this.pageSize, this.currentPage);
     });
   }
 }

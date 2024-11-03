@@ -1,6 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { IncidentService, IncidentListResponse, IncidentResponse } from './incident.service';
+import {
+  IncidentService,
+  IncidentListResponse,
+  HistoryResponse,
+  IncidentClosedError,
+  IncidentNotFoundError,
+} from './incident.service';
 import { Incident, IncidentHistory } from './incident';
 import { Employee } from '../employee/employee';
 import { environment } from 'src/environments/environment';
@@ -130,10 +136,17 @@ describe('IncidentService', () => {
       req.flush(errorMessage, { status, statusText: 'Not Found' });
     });
   });
+
   it('should change incident status successfully', () => {
-    const mockResponse: IncidentResponse = { id: '1' };
-    const status = 'Escalated';
+    const status = 'escalated';
     const description = 'Updated status';
+
+    const mockResponse: HistoryResponse = {
+      seq: 1,
+      date: '2024-11-02T15:06:13Z',
+      action: status,
+      description,
+    };
 
     service.changeStatusIncident(status, description, '1').subscribe(response => {
       expect(response).toEqual(mockResponse);
@@ -147,6 +160,7 @@ describe('IncidentService', () => {
     });
     req.flush(mockResponse);
   });
+
   it('should handle 409 error when changing incident status', () => {
     const status = 'Escalated';
     const description = 'Updated status';
@@ -154,12 +168,27 @@ describe('IncidentService', () => {
     service.changeStatusIncident(status, description, '1').subscribe({
       next: () => fail('should have failed with 409 error'),
       error: error => {
-        expect(error).toBeInstanceOf(Error);
+        expect(error).toBeInstanceOf(IncidentClosedError);
       },
     });
 
     const req = httpMock.expectOne(`${environment.apiUrl}/incidents/1/update`);
     req.flush('Conflict', { status: 409, statusText: 'Conflict' });
+  });
+
+  it('should handle 404 error when changing incident status', () => {
+    const status = 'Escalated';
+    const description = 'Updated status';
+
+    service.changeStatusIncident(status, description, '1').subscribe({
+      next: () => fail('should have failed with 404 error'),
+      error: error => {
+        expect(error).toBeInstanceOf(IncidentNotFoundError);
+      },
+    });
+
+    const req = httpMock.expectOne(`${environment.apiUrl}/incidents/1/update`);
+    req.flush('Conflict', { status: 404, statusText: 'Not found' });
   });
 
   it('should handle other errors when changing incident status', () => {
