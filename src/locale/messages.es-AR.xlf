@@ -496,7 +496,7 @@
       </trans-unit>
       <trans-unit id="invitationConfirmText" datatype="html">
         <source>¿Desea aceptar la invitación para asociarse a la empresa <x id="INTERPOLATION" equiv-text="{{ companyName }}"/>?</source>
-        <target>¿Deseá aceptar la invitación para asociarse a la empresa <x id="INTERPOLATION" equiv-text="{{ companyName }}"/>?</target>
+        <target>¿Deseás aceptar la invitación para asociarse a la empresa <x id="INTERPOLATION" equiv-text="{{ companyName }}"/>?</target>
       </trans-unit>
       <trans-unit id="invitationConfirmTitle" datatype="html">
         <source>Aceptar invitación</source>
