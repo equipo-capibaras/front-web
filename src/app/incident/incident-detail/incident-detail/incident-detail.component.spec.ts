@@ -7,6 +7,8 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { IncidentService } from '../../incident.service';
 import { Incident, IncidentHistory } from '../../incident';
 import { IncidentDetailComponent } from './incident-detail.component';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangeStatusComponent } from '../../change-status/change-status.component';
 
 describe('IncidentDetailComponent', () => {
   let component: IncidentDetailComponent;
@@ -14,11 +16,13 @@ describe('IncidentDetailComponent', () => {
   let incidentServiceSpy: jasmine.SpyObj<IncidentService>;
   let loadingServiceSpy: jasmine.SpyObj<LoadingService>;
   let snackbarServiceSpy: jasmine.SpyObj<SnackbarService>;
+  let dialogSpy: jasmine.SpyObj<MatDialog>;
 
   beforeEach(async () => {
     incidentServiceSpy = jasmine.createSpyObj('IncidentService', ['incidentDetail']);
     loadingServiceSpy = jasmine.createSpyObj('LoadingService', ['setLoading']);
     snackbarServiceSpy = jasmine.createSpyObj('SnackbarService', ['showError']);
+    dialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
 
     await TestBed.configureTestingModule({
       imports: [IncidentDetailComponent],
@@ -30,6 +34,7 @@ describe('IncidentDetailComponent', () => {
           provide: ActivatedRoute,
           useValue: { snapshot: { paramMap: { get: () => '1' } } },
         },
+        { provide: MatDialog, useValue: dialogSpy },
       ],
     }).compileComponents();
 
@@ -119,5 +124,28 @@ describe('IncidentDetailComponent', () => {
 
     const closedDate = component.getClosedDate(history);
     expect(closedDate).toBe('2023-01-03');
+  });
+
+  it('should open ChangeStatus dialog with correct incidentId', () => {
+    const incidentId = '1';
+    const mockResult = { status: 'Escalado', comment: 'Updated status' };
+
+    const dialogRefMock = {
+      afterClosed: () => of(mockResult),
+    };
+
+    dialogSpy.open.and.returnValue(dialogRefMock as any);
+
+    component.openChangeStatusDialog(incidentId);
+
+    expect(dialogSpy.open).toHaveBeenCalledWith(ChangeStatusComponent, {
+      width: '600px',
+      data: { incidentId },
+    });
+
+    dialogRefMock.afterClosed().subscribe(result => {
+      expect(result).toEqual(mockResult);
+      console.log('Cambio de estado:', result);
+    });
   });
 });
