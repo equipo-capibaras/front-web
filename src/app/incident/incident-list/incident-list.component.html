@@ -68,7 +68,9 @@
                 mat-icon-button
                 type="button"
                 aria-label="Cambiar estado de incidente"
-                i18n-aria-label="@@changeStateIncident">
+                i18n-aria-label="@@changeStateIncident"
+                [disabled]="incident.status === 'closed'"
+                (click)="openChangeStatusDialog(incident.id)">
                 <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
                 <span class="material-symbols-outlined">cached</span>
               </button>

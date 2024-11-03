@@ -18,6 +18,8 @@ import { IncidentService } from '../incident.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { finalize } from 'rxjs';
+import { ChangeStatusComponent } from '../change-status/change-status.component';
+import { MatDialog } from '@angular/material/dialog';
 
 interface IncidentListEntry {
   name: string;
@@ -46,6 +48,8 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   incidentsList = new MatTableDataSource<IncidentListEntry>();
   totalIncidents = 0;
   chipInfo = chipInfo;
+  pageSize = 5;
+  currentPage = 1;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -54,15 +58,18 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
     private readonly router: Router,
     private readonly loadingService: LoadingService,
     private readonly snackbarService: SnackbarService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
-    this.loadIncidents(5, 1);
+    this.loadIncidents(this.pageSize, this.currentPage);
   }
 
   ngAfterViewInit() {
     this.paginator.page.subscribe((event: PageEvent) => {
-      this.loadIncidents(event.pageSize, event.pageIndex + 1);
+      this.pageSize = event.pageSize;
+      this.currentPage = event.pageIndex + 1;
+      this.loadIncidents(this.pageSize, this.currentPage);
     });
   }
 
@@ -94,5 +101,19 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
 
   showDetail(incidentId: string) {
     this.router.navigate([`/incidents/${incidentId}`]);
+  }
+
+  openChangeStatusDialog(incidentId: string) {
+    const dialogRef = this.dialog.open(ChangeStatusComponent, {
+      autoFocus: false,
+      restoreFocus: false,
+      data: {
+        incidentId,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadIncidents(this.pageSize, this.currentPage);
+    });
   }
 }

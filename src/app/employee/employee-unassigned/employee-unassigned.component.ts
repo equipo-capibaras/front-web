@@ -30,7 +30,6 @@ export class EmployeeUnassignedComponent implements OnInit {
   ngOnInit(): void {
     this.employeeService.loadEmployeeData().subscribe({
       next: data => {
-        console.log(data);
         if (data.invitationStatus == 'pending') {
           this.openPopup();
         }

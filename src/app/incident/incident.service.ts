@@ -1,6 +1,6 @@
 import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Incident } from './incident';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
@@ -22,21 +22,27 @@ export interface IncidentListResponse {
   totalIncidents: number;
 }
 
-export interface IncidentResponse {
-  client_id: string;
-  name: string;
-  channel: string;
-  reported_by: string;
-  created_by: string;
+export interface HistoryResponse {
+  seq: number;
+  date: string;
+  action: string;
   description: string;
 }
 
-export class ErrorIncidentError extends Error {
+export class IncidentClosedError extends Error {
   constructor(message?: string) {
-    super(message ?? 'Error Create.');
-    this.name = 'ErrorIncidentError';
+    super(message ?? 'Incident already closed.');
+    this.name = 'IncidentClosedError';
   }
 }
+
+export class IncidentNotFoundError extends Error {
+  constructor(message?: string) {
+    super(message ?? 'Incident not found.');
+    this.name = 'IncidentNotFoundError';
+  }
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -64,19 +70,24 @@ export class IncidentService {
     );
   }
 
-  incidentRegister(incidentData: { name: string; email: string; description: string }) {
-    const context = new HttpContext();
-    context.set(ACCEPTED_ERRORS, [409]);
+  changeStatusIncident(status: string, description: string, incident_id: string) {
+    const context = new HttpContext().set(ACCEPTED_ERRORS, [404, 409]);
+
+    const incidentStatusData = {
+      action: status,
+      description: description,
+    };
 
     return this.http
-      .post<IncidentResponse>(`${this.apiUrl}/incidents/web`, incidentData, { context: context })
+      .post<HistoryResponse>(`${this.apiUrl}/incidents/${incident_id}/update`, incidentStatusData, {
+        context: context,
+      })
       .pipe(
-        map(response => {
-          return response;
-        }),
         catchError((error: HttpErrorResponse) => {
           if (error.status === 409) {
-            return throwError(() => new ErrorIncidentError());
+            return throwError(() => new IncidentClosedError());
+          } else if (error.status === 404) {
+            return throwError(() => new IncidentNotFoundError());
           }
 
           return throwError(() => error);
