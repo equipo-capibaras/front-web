@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { chipInfo } from '../../../shared/incident-chip';
-import { CommonModule } from '@angular/common';
 import { IncidentService } from '../../incident.service';
 import { LoadingService } from '../../../services/loading.service';
 import { ActivatedRoute } from '@angular/router';
 import { Incident, IncidentHistory } from '../../incident';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { finalize } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangeStatusComponent } from '../../change-status/change-status.component';
+import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-incident-detail',
   templateUrl: './incident-detail.component.html',
   styleUrls: ['./incident-detail.component.scss'],
-  imports: [MatChipsModule, CommonModule],
+  imports: [CommonModule, MatChipsModule, MatButtonModule],
   standalone: true,
 })
 export class IncidentDetailComponent implements OnInit {
@@ -37,6 +40,7 @@ export class IncidentDetailComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly loadingService: LoadingService,
     private readonly snackbarService: SnackbarService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {
@@ -82,5 +86,19 @@ export class IncidentDetailComponent implements OnInit {
           },
         });
     }
+  }
+
+  openChangeStatusDialog(incidentId: string): void {
+    const dialogRef = this.dialog.open(ChangeStatusComponent, {
+      autoFocus: false,
+      restoreFocus: false,
+      data: {
+        incidentId,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getIncidentDetail(incidentId);
+    });
   }
 }

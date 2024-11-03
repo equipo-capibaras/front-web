@@ -62,6 +62,10 @@
         <source>Aún no está vinculado a una empresa. Contacte con su administrador.</source>
         <target>Ainda não está vinculado a uma empresa. Entre em contato com seu administrador.</target>
       </trans-unit>
+      <trans-unit id="updateIncidentStatus" datatype="html">
+        <source>Cambiar estado</source>
+        <target>Alterar status</target>
+      </trans-unit>
       <trans-unit id="user" datatype="html">
         <source>Usuario</source>
         <target>Usuário</target>
@@ -90,9 +94,29 @@
         <source>Ingresa tu contraseña</source>
         <target>Insira sua senha</target>
       </trans-unit>
+      <trans-unit id="incidentAlreadyClosed" datatype="html">
+        <source>El incidente ya está cerrado.</source>
+        <target>O incidente já foi encerrado.</target>
+      </trans-unit>
       <trans-unit id="incidentAssignedTo" datatype="html">
         <source>Asignado a</source>
         <target>Atribuído a</target>
+      </trans-unit>
+      <trans-unit id="incidentChangeStatusInstruction" datatype="html">
+        <source>Selecciona el nuevo estado</source>
+        <target>Selecione o novo status</target>
+      </trans-unit>
+      <trans-unit id="incidentChangeStatusSuccess" datatype="html">
+        <source>Se ha cambiado el estado exitosamente.</source>
+        <target>O status foi alterado com sucesso.</target>
+      </trans-unit>
+      <trans-unit id="incidentChangeStatusText" datatype="html">
+        <source>Ingresa un comentario explicando el cambio de estado. Este aparecerá en la sección de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>RESPUESTAS<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> del incidente y será visible para el cliente que haya reportado el incidente.</source>
+        <target>Digite um comentário explicando a mudança de status. Isso aparecerá na seção <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>RESPONSAS<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> do incidente e ficará visível para o cliente que relatou o incidente.</target>
+      </trans-unit>
+      <trans-unit id="incidentChangeStatusTitel" datatype="html">
+        <source>Cambiar estado</source>
+        <target>Alterar status</target>
       </trans-unit>
       <trans-unit id="incidentChannel" datatype="html">
         <source>Canal creación</source>
@@ -138,6 +162,10 @@
         <source>Aplicación móvil</source>
         <target>Aplicativo móvel</target>
       </trans-unit>
+      <trans-unit id="incidentNotFound" datatype="html">
+        <source>No se encontró el incidente.</source>
+        <target>O incidente não foi encontrado.</target>
+      </trans-unit>
       <trans-unit id="incidentReportedBy" datatype="html">
         <source>Reportado por</source>
         <target>Reportado por</target>
@@ -147,7 +175,7 @@
         <target>Estado</target>
       </trans-unit>
       <trans-unit id="incidentStatusClosed" datatype="html">
-        <source>Cerrada</source>
+        <source>Cerrado</source>
         <target>Fechado</target>
       </trans-unit>
       <trans-unit id="incidentStatusEscalated" datatype="html">
@@ -333,6 +361,18 @@
       <trans-unit id="plan" datatype="html">
         <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
         <target>Plano <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></target>
+      </trans-unit>
+      <trans-unit id="comment" datatype="html">
+        <source>Comentario</source>
+        <target>Comentário</target>
+      </trans-unit>
+      <trans-unit id="CommentPlaceholder" datatype="html">
+        <source>Explica el cambio de estado</source>
+        <target>Explica a alteração de estado</target>
+      </trans-unit>
+      <trans-unit id="commentTooLong1000" datatype="html">
+        <source>Este campo no puede superar los 1000 caracteres.</source>
+        <target>Esse campo não pode exceder 1.000 caracteres.</target>
       </trans-unit>
       <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>

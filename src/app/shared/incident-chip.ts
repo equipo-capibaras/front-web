@@ -11,7 +11,7 @@ export const chipInfo: Record<string, { icon: string; text: string; cssClass: st
   },
   closed: {
     icon: 'check',
-    text: $localize`:@@incidentStatusClosed:Cerrada`,
+    text: $localize`:@@incidentStatusClosed:Cerrado`,
     cssClass: 'page__chip--success',
   },
   accepted: {
