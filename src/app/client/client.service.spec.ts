@@ -7,7 +7,7 @@ import {
   ClientResponse,
   DuplicateEmailError,
   DuplicateEmployeeExistError,
-  EmployeeNoFoundError,
+  EmployeeNotFoundError,
   Employee,
   InvitationResponse,
   InvitationNotFoundError,
@@ -309,7 +309,7 @@ describe('ClientService', () => {
       invitationDate: '2024-01-01T00:00:00Z',
     };
 
-    service.getRoleByEmail(email).subscribe(response => {
+    service.getEmployeeByEmail(email).subscribe(response => {
       expect(response).toEqual(mockEmployee);
     });
 
@@ -319,12 +319,12 @@ describe('ClientService', () => {
     req.flush(mockEmployee);
   }));
 
-  it('should throw EmployeeNoFoundError when employee not found', waitForAsync(() => {
+  it('should throw EmployeeNotFoundError when employee not found', waitForAsync(() => {
     const email = 'notfound@example.com';
 
-    service.getRoleByEmail(email).subscribe({
+    service.getEmployeeByEmail(email).subscribe({
       error: error => {
-        expect(error).toBeInstanceOf(EmployeeNoFoundError);
+        expect(error).toBeInstanceOf(EmployeeNotFoundError);
       },
     });
 
@@ -333,10 +333,10 @@ describe('ClientService', () => {
     req.flush({}, { status: 404, statusText: 'Not Found' });
   }));
 
-  it('should rethrow other errors in getRoleByEmail', waitForAsync(() => {
+  it('should rethrow other errors in getEmployeeByEmail', waitForAsync(() => {
     const email = 'error@example.com';
 
-    service.getRoleByEmail(email).subscribe({
+    service.getEmployeeByEmail(email).subscribe({
       error: error => {
         expect(error).not.toBeNull();
         expect(error.status).toBe(500);

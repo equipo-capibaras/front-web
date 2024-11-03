@@ -233,3 +233,14 @@ router-outlet + * {
 .mat-mdc-dialog-container .mat-mdc-dialog-actions .mat-mdc-button-base + .mat-mdc-button-base {
   margin-left: 1rem;
 }
+
+.mat-mdc-dialog-container .dialog-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  & .close-button {
+    margin: 0 1rem;
+  }
+}
