@@ -1,13 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common'; // Reemplaza BrowserModule con CommonModule
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 import { IncidentService } from '../incident.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { ActivatedRoute } from '@angular/router';
@@ -32,11 +30,11 @@ export class ChangeStatusComponent implements OnInit {
   statuses = ['Escalado', 'Cerrado'];
 
   constructor(
-    private fb: FormBuilder,
+    private readonly fb: FormBuilder,
     public dialogRef: MatDialogRef<ChangeStatusComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { status: string; comment: string; incident_id: string },
     private readonly incidentService: IncidentService,
-    private snackbarService: SnackbarService,
+    private readonly snackbarService: SnackbarService,
     private readonly route: ActivatedRoute,
   ) {
     this.statusForm = this.fb.group({
