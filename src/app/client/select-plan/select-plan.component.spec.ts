@@ -110,4 +110,21 @@ describe('SelectPlanComponent', () => {
 
     expect(snackbarService.showError).toHaveBeenCalledWith(errorResponse.message);
   });
+
+  it('should set currentPlan to null if no matching plan is found', () => {
+    const mockClientData = {
+      id: '1',
+      name: 'Empresa S.A.S',
+      plan: 'inexistente', // Plan que no coincide con ningún plan en `this.plans`
+      emailIncidents: 'pqrs-empresa@capibaras.io',
+    };
+    clientService.loadClientData.and.returnValue(of(mockClientData));
+
+    fixture = TestBed.createComponent(SelectPlanComponent);
+    component = fixture.componentInstance;
+
+    fixture.detectChanges();
+
+    expect(component.currentPlan).toBeNull();
+  });
 });

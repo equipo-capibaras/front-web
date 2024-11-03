@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpContext, HttpErrorResponse } from '@angular/common/http';
-import { throwError, of, Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 import { NO_TOKEN } from '../interceptors/token.interceptor';
@@ -21,22 +21,6 @@ export interface EmployeeResponse {
   role: string;
   invitationStatus: string;
   invitationDate: Date;
-}
-
-export interface IncidentListResponse {
-  incidents: {
-    name: string;
-    reportedBy: {
-      id: string;
-      name: string;
-      email: string;
-    };
-    filingDate: Date;
-    status: string;
-  }[];
-  totalPages: number;
-  currentPage: number;
-  totalIncidents: number;
 }
 
 @Injectable({
@@ -67,15 +51,7 @@ export class EmployeeService {
       );
   }
 
-  loadIncidents(pageSize: number, page: number): Observable<IncidentListResponse | null> {
-    return this.http
-      .get<IncidentListResponse>(
-        `${this.apiUrl}/employees/me/incidents?page_size=${pageSize}&page_number=${page}`,
-      )
-      .pipe(
-        catchError(_ => {
-          return of(null);
-        }),
-      );
+  loadEmployeeData(): Observable<EmployeeResponse> {
+    return this.http.get<EmployeeResponse>(`${this.apiUrl}/employees/me`);
   }
 }

@@ -1,5 +1,5 @@
 import { fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpErrorResponse, provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { faker } from '@faker-js/faker';
 import {
@@ -7,8 +7,11 @@ import {
   ClientResponse,
   DuplicateEmailError,
   DuplicateEmployeeExistError,
-  EmployeeNoFoundError,
+  EmployeeNotFoundError,
   Employee,
+  InvitationResponse,
+  InvitationNotFoundError,
+  InvitationAlreadyAcceptedError,
 } from './client.service';
 import { environment } from '../../environments/environment';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
@@ -217,11 +220,16 @@ describe('ClientService', () => {
     }
   }));
 
-  it('should handle HTTP error in loadClientEmployees and return null', fakeAsync(() => {
-    let result: EmployeeListResponse | null = null;
+  it('should handle HTTP error in loadClientEmployees and return an error', fakeAsync(() => {
+    let errorResponse: HttpErrorResponse | undefined;
 
-    service.loadClientEmployees(5, 1).subscribe((response: EmployeeListResponse | null) => {
-      result = response;
+    service.loadClientEmployees(5, 1).subscribe({
+      next: () => {
+        fail('Expected an error, but got a successful response');
+      },
+      error: error => {
+        errorResponse = error;
+      },
     });
 
     const req = httpTestingController.expectOne(
@@ -232,7 +240,9 @@ describe('ClientService', () => {
 
     tick();
 
-    expect(result).toBeNull();
+    expect(errorResponse).toBeDefined();
+    expect(errorResponse?.status).toBe(500);
+    expect(errorResponse?.statusText).toBe('Server Error');
   }));
 
   it('should send an invitation successfully', waitForAsync(() => {
@@ -299,7 +309,7 @@ describe('ClientService', () => {
       invitationDate: '2024-01-01T00:00:00Z',
     };
 
-    service.getRoleByEmail(email).subscribe(response => {
+    service.getEmployeeByEmail(email).subscribe(response => {
       expect(response).toEqual(mockEmployee);
     });
 
@@ -309,12 +319,12 @@ describe('ClientService', () => {
     req.flush(mockEmployee);
   }));
 
-  it('should throw EmployeeNoFoundError when employee not found', waitForAsync(() => {
+  it('should throw EmployeeNotFoundError when employee not found', waitForAsync(() => {
     const email = 'notfound@example.com';
 
-    service.getRoleByEmail(email).subscribe({
+    service.getEmployeeByEmail(email).subscribe({
       error: error => {
-        expect(error).toBeInstanceOf(EmployeeNoFoundError);
+        expect(error).toBeInstanceOf(EmployeeNotFoundError);
       },
     });
 
@@ -323,10 +333,10 @@ describe('ClientService', () => {
     req.flush({}, { status: 404, statusText: 'Not Found' });
   }));
 
-  it('should rethrow other errors in getRoleByEmail', waitForAsync(() => {
+  it('should rethrow other errors in getEmployeeByEmail', waitForAsync(() => {
     const email = 'error@example.com';
 
-    service.getRoleByEmail(email).subscribe({
+    service.getEmployeeByEmail(email).subscribe({
       error: error => {
         expect(error).not.toBeNull();
         expect(error.status).toBe(500);
@@ -338,80 +348,46 @@ describe('ClientService', () => {
     req.flush({}, { status: 500, statusText: 'Internal Server Error' });
   }));
 
-  it('should accept invitation successfully', waitForAsync(() => {
-    const token = 'valid_token';
+  it('should throw InvitationNotFoundError when invitation is not found', waitForAsync(() => {
+    const response = InvitationResponse.Accept;
 
-    service.acceptInvitation(token).subscribe(response => {
-      expect(response).not.toBeUndefined();
-    });
-
-    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invitation`);
-    expect(req.request.method).toBe('POST');
-    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${token}`);
-    req.flush({});
-  }));
-
-  it('should show snackbar error for duplicate link when accepting invitation', waitForAsync(() => {
-    const token = 'duplicate_token';
-    const snackbarSpy = spyOn(service['snackbarService'], 'showError');
-
-    service.acceptInvitation(token).subscribe({
+    service.respondInvitation(response).subscribe({
       error: error => {
-        expect(error).toBeUndefined();
+        expect(error).toBeInstanceOf(InvitationNotFoundError);
       },
     });
 
-    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invitation`);
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/employees/invitation`);
+    expect(req.request.method).toBe('POST');
+    req.flush({}, { status: 404, statusText: 'Not Found' });
+  }));
+
+  it('should throw InvitationAlreadyAcceptedError when invitation is not found', waitForAsync(() => {
+    const response = InvitationResponse.Accept;
+
+    service.respondInvitation(response).subscribe({
+      error: error => {
+        expect(error).toBeInstanceOf(InvitationAlreadyAcceptedError);
+      },
+    });
+
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/employees/invitation`);
     expect(req.request.method).toBe('POST');
     req.flush({}, { status: 409, statusText: 'Conflict' });
-
-    expect(snackbarSpy).toHaveBeenCalledWith('Ya estás vinculado a la organización');
   }));
 
-  it('should show snackbar error for generic error in acceptInvitation', waitForAsync(() => {
-    const token = 'error_token';
-    const snackbarSpy = spyOn(service['snackbarService'], 'showError');
+  it('should rethrow other errors in respondInvitation', waitForAsync(() => {
+    const response = InvitationResponse.Accept;
 
-    service.acceptInvitation(token).subscribe({
+    service.respondInvitation(response).subscribe({
       error: error => {
-        expect(error).toBeUndefined();
+        expect(error).not.toBeNull();
+        expect(error.status).toBe(500);
       },
     });
 
-    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invitation`);
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/employees/invitation`);
     expect(req.request.method).toBe('POST');
     req.flush({}, { status: 500, statusText: 'Internal Server Error' });
-
-    expect(snackbarSpy).toHaveBeenCalledWith('INVITATION_ACCEPT_FAILED');
-  }));
-
-  it('should decline invitation successfully', waitForAsync(() => {
-    const token = 'valid_token';
-
-    service.declineInvitation(token).subscribe(response => {
-      expect(response).not.toBeUndefined();
-    });
-
-    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invitation`);
-    expect(req.request.method).toBe('POST');
-    expect(req.request.headers.get('Authorization')).toBe(`Bearer ${token}`);
-    req.flush({});
-  }));
-
-  it('should show snackbar error for generic error in declineInvitation', waitForAsync(() => {
-    const token = 'error_token';
-    const snackbarSpy = spyOn(service['snackbarService'], 'showError');
-
-    service.declineInvitation(token).subscribe({
-      error: error => {
-        expect(error).toBeUndefined();
-      },
-    });
-
-    const req = httpTestingController.expectOne(`${service['apiUrl']}/employees/invitation`);
-    expect(req.request.method).toBe('POST');
-    req.flush({}, { status: 500, statusText: 'Internal Server Error' });
-
-    expect(snackbarSpy).toHaveBeenCalledWith('INVITATION_DECLINE_FAILED');
   }));
 });

@@ -1,0 +1,68 @@
+@import 'src/colors.scss';
+
+.incident-list {
+  &__header {
+    display: flex;
+    justify-content: end;
+    padding: 1.5rem 0;
+  }
+
+  .no-incidents-message {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.mat-mdc-icon-button {
+  color: $blue-500;
+}
+
+.horizontal-spacer {
+  padding: 0 0.5rem;
+}
+
+.incident-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.incident-card {
+  position: relative;
+  background-color: white;
+  padding: 24px 2rem 2rem 2rem;
+  border-radius: 20px;
+  max-width: 600px;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.incident-button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+}
+
+#incidenteForm {
+  padding-top: 1.5rem;
+}
+
+.mat-divider {
+  display: flex;
+  align-items: baseline;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

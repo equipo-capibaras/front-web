@@ -1,0 +1,111 @@
+<div class="page">
+  <div class="page__container">
+    <div class="page__header">
+      <h1 class="page__title" i18n="@@incidentCreateTitel">Crear incidente</h1>
+    </div>
+
+    <div class="incident-container">
+      <div class="incident-card">
+        <form id="form-client-register" [formGroup]="incidenteForm" (ngSubmit)="onSubmit()">
+          <span i18n="@@incidentCreateInstruction"
+            >Proporciona una descripción clara del problema</span
+          >
+          <br /><br />
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label i18n="@@incidentCreateEmail"
+              >Correo del cliente que reporta el incidente</mat-label
+            >
+            <input
+              id="email"
+              matInput
+              formControlName="email"
+              type="email"
+              placeholder="Ingresa el correo del cliente"
+              i18n-placeholder="@@incidentCreatePlaceholderEmail" />
+
+            @if (email.invalid && (email.dirty || email.touched)) {
+              <mat-error>
+                @if (email.errors?.['required']) {
+                  <span i18n="@@employeeRegisterErrorRequired">Este campo es obligatorio.</span>
+                }
+                @if (email.errors?.['email']) {
+                  <span i18n="@@employeeRegisterErrorInvalidEmail"
+                    >Debe ser un correo electrónico válido</span
+                  >
+                }
+                @if (email.errors?.['maxlength']) {
+                  <span i18n="@@employeeRegisterErrorTooLong60"
+                    >Este campo no puede superar los 60 caracteres.</span
+                  >
+                }
+              </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label i18n="@@nameIncident">Nombre del incidente</mat-label>
+            <input
+              id="name"
+              matInput
+              formControlName="name"
+              type="text"
+              required
+              placeholder="Ingresa el nombre del incidente"
+              i18n-placeholder="@@nameIncidentPlaceholder" />
+
+            @if (name.invalid && (name.dirty || name.touched)) {
+              <mat-error>
+                @if (name.errors?.['required']) {
+                  <span i18n="@@employeeRegisterErrorRequired">Este campo es obligatorio.</span>
+                }
+                @if (name.errors?.['maxlength']) {
+                  <span i18n="@@employeeRegisterErrorTooLong60"
+                    >Este campo no puede superar los 60 caracteres.</span
+                  >
+                }
+              </mat-error>
+            }
+          </mat-form-field>
+
+          <div class="mat-divider">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label i18n="@@incidentDescription">Descripción</mat-label>
+              <textarea
+                id="description"
+                matInput
+                formControlName="description"
+                required
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="8"
+                cdkAutosizeMaxRows="8"
+                placeholder="Ingresa la descripción del incidente"
+                i18n-placeholder="@@incidentDescriptionPlaceholder"></textarea>
+
+              @if (description.invalid && (description.dirty || description.touched)) {
+                <mat-error>
+                  @if (description.errors?.['required']) {
+                    <span i18n="@@employeeRegisterErrorRequired">Este campo es obligatorio.</span>
+                  }
+                  @if (description.errors?.['maxlength']) {
+                    <span i18n="@@commentTooLong1000"
+                      >Este campo no puede superar los 1000 caracteres.</span
+                    >
+                  }
+                </mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <div class="container">
+            <button
+              type="submit"
+              mat-flat-button
+              class="register-button mat-body-large"
+              i18n="@@createIncidentButtonSubmit">
+              Crear Incidente
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

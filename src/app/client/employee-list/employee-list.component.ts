@@ -11,6 +11,10 @@ import { CustomPaginatorIntl } from '../../pagination/pagination';
 import { CommonModule } from '@angular/common';
 import { ClientService } from '../client.service';
 import { Employee } from '../../employee/employee';
+import { chipInfo } from '../../shared/incident-chip';
+import { LoadingService } from 'src/app/services/loading.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-employee-list',
@@ -24,28 +28,21 @@ export class EmployeeListComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['name', 'email', 'role', 'invitationStatus'];
   employeesList = new MatTableDataSource<Employee>();
   totalEmployees = 0;
+  chipInfo = chipInfo;
 
   employeeRole: Record<string, string> = {
     analyst: $localize`:@@employeeRegisterOptionRoleOAnalista:Analítica`,
     agent: $localize`:@@employeeRegisterOptionRoleAgente:Agente`,
     admin: $localize`:@@employeeRegisterOptionRoleAdmin:Administrador`,
   };
-  chipInfo: Record<string, { icon: string; text: string; cssClass: string }> = {
-    accepted: {
-      icon: 'check',
-      text: $localize`:@@statusAccepted:Aceptada`,
-      cssClass: 'page__chip--success',
-    },
-    pending: {
-      icon: 'schedule',
-      text: $localize`:@@statusPending:Pendiente`,
-      cssClass: 'page__chip--warning',
-    },
-  };
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private readonly clientService: ClientService) {}
+  constructor(
+    private readonly clientService: ClientService,
+    private readonly loadingService: LoadingService,
+    private readonly snackbarService: SnackbarService,
+  ) {}
 
   ngOnInit(): void {
     this.loadEmployees(5, 1);
@@ -58,11 +55,20 @@ export class EmployeeListComponent implements AfterViewInit, OnInit {
   }
 
   loadEmployees(pageSize: number, page: number) {
-    this.clientService.loadClientEmployees(pageSize, page).subscribe(data => {
-      if (data?.employees) {
-        this.employeesList.data = data.employees;
-        this.totalEmployees = data.totalEmployees;
-      }
-    });
+    this.loadingService.setLoading(true);
+    this.clientService
+      .loadClientEmployees(pageSize, page)
+      .pipe(finalize(() => this.loadingService.setLoading(false)))
+      .subscribe({
+        next: data => {
+          if (data?.employees) {
+            this.employeesList.data = data.employees;
+            this.totalEmployees = data.totalEmployees;
+          }
+        },
+        error: err => {
+          this.snackbarService.showError(err);
+        },
+      });
   }
 }

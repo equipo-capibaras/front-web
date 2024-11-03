@@ -14,6 +14,10 @@
         <source>Falta el token de autenticación.</source>
         <target>Falta el token de autenticación.</target>
       </trans-unit>
+      <trans-unit id="generalInformation" datatype="html">
+        <source>Información general</source>
+        <target>Información general</target>
+      </trans-unit>
       <trans-unit id="error-403" datatype="html">
         <source>No tienes permiso para acceder a este recurso.</source>
         <target>No tenés permiso para acceder a este recurso.</target>
@@ -42,29 +46,33 @@
         <source>Pendiente</source>
         <target>Pendiente</target>
       </trans-unit>
-      <trans-unit id="text" datatype="html">
-        <source>Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa</source>
-        <target>Ingresá el correo del usuario que querés invitar, para hacer parte de la empresa</target>
+      <trans-unit id="invitationEmployeeSuccess" datatype="html">
+        <source>Empleado invitado exitosamente.</source>
+        <target>Empleado invitado exitosamente.</target>
       </trans-unit>
-      <trans-unit id="textConfirm" datatype="html">
-        <source>¿Deseas confirmar la invitación?</source>
-        <target>¿Deseás confirmar la invitación?</target>
+      <trans-unit id="invitationEmployeeText" datatype="html">
+        <source>Ingresa el correo del empleado que quieres invitar, para hacer parte de la empresa</source>
+        <target>Ingresá el correo del empleado que querés invitar, para hacer parte de la empresa</target>
       </trans-unit>
-      <trans-unit id="textInvitation" datatype="html">
-        <source>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a tu empresa.</source>
-        <target>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a vos empresa.</target>
-      </trans-unit>
-      <trans-unit id="textInviteUser" datatype="html">
-        <source>Invitar usuario</source>
-        <target>Invitar usuario</target>
+      <trans-unit id="invitationEmployeeTitle" datatype="html">
+        <source>Invitar empleado</source>
+        <target>Invitar empleado</target>
       </trans-unit>
       <trans-unit id="unassignedInfo" datatype="html">
         <source>Aún no está vinculado a una empresa. Contacte con su administrador.</source>
         <target>Aún no estás vinculado a una empresa. Contactá con su administrador.</target>
       </trans-unit>
+      <trans-unit id="updateIncidentStatus" datatype="html">
+        <source>Cambiar estado</source>
+        <target>Cambiar estado</target>
+      </trans-unit>
       <trans-unit id="user" datatype="html">
         <source>Usuario</source>
         <target>Usuario</target>
+      </trans-unit>
+      <trans-unit id="UserNotFoundError" datatype="html">
+        <source>Usuario no encontrado.</source>
+        <target>Usuario no encontrado.</target>
       </trans-unit>
       <trans-unit id="viewIncident" datatype="html">
         <source>Ver incidente</source>
@@ -90,6 +98,86 @@
         <source>Ingresa tu contraseña</source>
         <target>Ingresá tu contraseña</target>
       </trans-unit>
+      <trans-unit id="incidentAlreadyClosed" datatype="html">
+        <source>El incidente ya está cerrado.</source>
+        <target>El incidente ya está cerrado.</target>
+      </trans-unit>
+      <trans-unit id="incidentAssignedTo" datatype="html">
+        <source>Asignado a</source>
+        <target>Asignado a</target>
+      </trans-unit>
+      <trans-unit id="incidentChangeStatusInstruction" datatype="html">
+        <source>Selecciona el nuevo estado</source>
+        <target>Seleccioná el nuevo estado</target>
+      </trans-unit>
+      <trans-unit id="incidentChangeStatusSuccess" datatype="html">
+        <source>Se ha cambiado el estado exitosamente.</source>
+        <target>Se ha cambiado el estado exitosamente.</target>
+      </trans-unit>
+      <trans-unit id="incidentChangeStatusText" datatype="html">
+        <source>Ingresa un comentario explicando el cambio de estado. Este aparecerá en la sección de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>RESPUESTAS<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> del incidente y será visible para el cliente que haya reportado el incidente.</source>
+        <target>Ingresá un comentario explicando el cambio de estado. Este aparecerá en la sección de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>RESPUESTAS<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> del incidente y será visible para el cliente que haya reportado el incidente.</target>
+      </trans-unit>
+      <trans-unit id="incidentChangeStatusTitel" datatype="html">
+        <source>Cambiar estado</source>
+        <target>Cambiar estado</target>
+      </trans-unit>
+      <trans-unit id="incidentChannel" datatype="html">
+        <source>Canal creación</source>
+        <target>Canal creación</target>
+      </trans-unit>
+      <trans-unit id="incidentClosedDate" datatype="html">
+        <source>Fecha cerrado</source>
+        <target>Fecha cerrado</target>
+      </trans-unit>
+      <trans-unit id="incidentCreatedBy" datatype="html">
+        <source>Creado por</source>
+        <target>Creado por</target>
+      </trans-unit>
+      <trans-unit id="incidentCreatedDate" datatype="html">
+        <source>Fecha radicado</source>
+        <target>Fecha radicado</target>
+      </trans-unit>
+      <trans-unit id="incidentCreateEmail" datatype="html">
+        <source>Correo del cliente que reporta el incidente</source>
+        <target>Correo del cliente que reporta el incidente</target>
+      </trans-unit>
+      <trans-unit id="incidentCreateInstruction" datatype="html">
+        <source>Proporciona una descripción clara del problema</source>
+        <target>Proporcioná una descripción clara del problema</target>
+      </trans-unit>
+      <trans-unit id="incidentCreatePlaceholderEmail" datatype="html">
+        <source>Ingresa el correo del cliente</source>
+        <target>Ingresá el correo del cliente</target>
+      </trans-unit>
+      <trans-unit id="incidentCreateTitel" datatype="html">
+        <source>Crear incidente</source>
+        <target>Crear incidente</target>
+      </trans-unit>
+      <trans-unit id="incidentDescription" datatype="html">
+        <source>Descripción</source>
+        <target>Descripción</target>
+      </trans-unit>
+      <trans-unit id="incidentDescriptionPlaceholder" datatype="html">
+        <source>Ingresa la descripción del incidente</source>
+        <target>Ingresá la descripción del incidente</target>
+      </trans-unit>
+      <trans-unit id="incidentEmailChannel" datatype="html">
+        <source>Correo electrónico</source>
+        <target>Correo electrónico</target>
+      </trans-unit>
+      <trans-unit id="incidentEmptyHistory" datatype="html">
+        <source>No se han generado respuestas</source>
+        <target>No se han generado respuestas</target>
+      </trans-unit>
+      <trans-unit id="incidentEscalatedDate" datatype="html">
+        <source>Fecha escalado</source>
+        <target>Fecha escalado</target>
+      </trans-unit>
+      <trans-unit id="incidentHistory" datatype="html">
+        <source>RESPUESTAS</source>
+        <target>RESPUESTAS</target>
+      </trans-unit>
       <trans-unit id="incidentManagement" datatype="html">
         <source>Gestión incidentes</source>
         <target>Gestión incidentes</target>
@@ -98,13 +186,25 @@
         <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver y seguir fácilmente el estado de todas las incidencias asignadas a tu nombre.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Además, tendrás la opción de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>crear nuevas incidencias<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de manera rápida y eficiente.</source>
         <target>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar incidentes<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver y seguir fácilmente el estado de todas las incidencias asignadas a tu nombre.<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Además, tendrás la opción de <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>crear nuevas incidencias<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> de manera rápida y eficiente.</target>
       </trans-unit>
+      <trans-unit id="incidentMobileChannel" datatype="html">
+        <source>Aplicación móvil</source>
+        <target>Aplicación móvil</target>
+      </trans-unit>
+      <trans-unit id="incidentNotFound" datatype="html">
+        <source>No se encontró el incidente.</source>
+        <target>No se encontró el incidente.</target>
+      </trans-unit>
+      <trans-unit id="incidentReportedBy" datatype="html">
+        <source>Reportado por</source>
+        <target>Reportado por</target>
+      </trans-unit>
       <trans-unit id="incidentStatus" datatype="html">
         <source>Estado</source>
         <target>Estado</target>
       </trans-unit>
       <trans-unit id="incidentStatusClosed" datatype="html">
-        <source>Cerrada</source>
-        <target>Cerrada</target>
+        <source>Cerrado</source>
+        <target>Cerrado</target>
       </trans-unit>
       <trans-unit id="incidentStatusEscalated" datatype="html">
         <source>Escalado</source>
@@ -114,15 +214,31 @@
         <source>Abierta</source>
         <target>Abierta</target>
       </trans-unit>
+      <trans-unit id="incidentWebChannel" datatype="html">
+        <source>Aplicación web</source>
+        <target>Aplicación web</target>
+      </trans-unit>
+      <trans-unit id="invitationAccepted" datatype="html">
+        <source>Invitación aceptada.</source>
+        <target>Invitación aceptada.</target>
+      </trans-unit>
+      <trans-unit id="invitationAlreadyAccepted" datatype="html">
+        <source>Invitación ya aceptada.</source>
+        <target>Invitación ya aceptada.</target>
+      </trans-unit>
+      <trans-unit id="invitationDeclined" datatype="html">
+        <source>Invitación rechazada.</source>
+        <target>Invitación rechazada.</target>
+      </trans-unit>
+      <trans-unit id="invitationNotFound" datatype="html">
+        <source>Invitación no encontrada.</source>
+        <target>Invitación no encontrada.</target>
+      </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
         <target>Estado Invitación</target>
       </trans-unit>
-      <trans-unit id="invite_title" datatype="html">
-        <source>Desea aceptar la invitación para asociarse a una compañía?</source>
-        <target>Deseá aceptar la invitación para asociarse a una compañía?</target>
-      </trans-unit>
-      <trans-unit id="inviteCancelButton" datatype="html">
+      <trans-unit id="invitationStep2Cancel" datatype="html">
         <source>Cancelar</source>
         <target>Cancelar</target>
       </trans-unit>
@@ -134,9 +250,13 @@
         <source>Invitar empleado</source>
         <target>Invitar empleado</target>
       </trans-unit>
-      <trans-unit id="inviteSubmitButton" datatype="html">
+      <trans-unit id="invitationEmployeeInvitar" datatype="html">
         <source>Invitar</source>
         <target>Invitar</target>
+      </trans-unit>
+      <trans-unit id="invitationEmployeeNotFound" datatype="html">
+        <source>No se encontró el empleado.</source>
+        <target>No se encontró el empleado.</target>
       </trans-unit>
       <trans-unit id="loginButtonSubmit" datatype="html">
         <source>Ingresar</source>
@@ -250,7 +370,11 @@
         <source>Seleccionar</source>
         <target>Seleccionar</target>
       </trans-unit>
-      <trans-unit id="onConfirmInvite" datatype="html">
+      <trans-unit id="planTitle" datatype="html">
+        <source>Seleccionar plan</source>
+        <target>Seleccionar plan</target>
+      </trans-unit>
+      <trans-unit id="invitationStep2Confirm" datatype="html">
         <source>Confirmar</source>
         <target>Confirmar</target>
       </trans-unit>
@@ -270,17 +394,41 @@
         <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
         <target>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></target>
       </trans-unit>
+      <trans-unit id="comment" datatype="html">
+        <source>Comentario</source>
+        <target>Comentario</target>
+      </trans-unit>
+      <trans-unit id="CommentPlaceholder" datatype="html">
+        <source>Explica el cambio de estado</source>
+        <target>Explicá el cambio de estado</target>
+      </trans-unit>
+      <trans-unit id="commentTooLong1000" datatype="html">
+        <source>Este campo no puede superar los 1000 caracteres.</source>
+        <target>Este campo no puede superar los 1000 caracteres.</target>
+      </trans-unit>
       <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
         <target>Gestión empresa</target>
       </trans-unit>
-      <trans-unit id="ConfirmarInvitación" datatype="html">
-        <source>Confirmar Invitación</source>
-        <target>Confirmar Invitación</target>
+      <trans-unit id="invitationStep2Text" datatype="html">
+        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> El usuario <x id="INTERPOLATION" equiv-text="{{ data.username }}"/> tiene el rol de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ employeeRole[data.role] }}"/><x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> y será registrado con este rol en tu empresa. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>¿Deseas confirmar la invitación?<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></source>
+        <target><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> El usuario <x id="INTERPOLATION" equiv-text="{{ data.username }}"/> tiene el rol de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ employeeRole[data.role] }}"/><x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> y será registrado con este rol en tu empresa. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>¿Deseás confirmar la invitación?<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="invitationStep2Title" datatype="html">
+        <source>Confirmar invitación</source>
+        <target>Confirmar invitación</target>
       </trans-unit>
       <trans-unit id="createIncident" datatype="html">
         <source>Crear incidente</source>
         <target>Crear incidente</target>
+      </trans-unit>
+      <trans-unit id="createIncidentButtonSubmit" datatype="html">
+        <source>Crear Incidente</source>
+        <target>Crear Incidente</target>
+      </trans-unit>
+      <trans-unit id="createIncidentSuccess" datatype="html">
+        <source>Incidente creado exitosamente</source>
+        <target>Incidente creado exitosamente</target>
       </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
@@ -321,6 +469,14 @@
       <trans-unit id="name" datatype="html">
         <source>Nombre</source>
         <target>Nombre</target>
+      </trans-unit>
+      <trans-unit id="nameIncident" datatype="html">
+        <source>Nombre del incidente</source>
+        <target>Nombre del incidente</target>
+      </trans-unit>
+      <trans-unit id="nameIncidentPlaceholder" datatype="html">
+        <source>Ingresa el nombre del incidente</source>
+        <target>Ingresá el nombre del incidente</target>
       </trans-unit>
       <trans-unit id="employeeRegisterPlaceholderName" datatype="html">
         <source>Ingresa el nombre</source>
@@ -422,17 +578,33 @@
         <source>Ingresa los datos de la empresa</source>
         <target>Ingresá los datos de la empresa</target>
       </trans-unit>
-      <trans-unit id="accept_button" datatype="html">
+      <trans-unit id="invitationConfirmAccept" datatype="html">
         <source>Aceptar</source>
         <target>Aceptar</target>
+      </trans-unit>
+      <trans-unit id="invitationConfirmReject" datatype="html">
+        <source>Rechazar</source>
+        <target>Rechazar</target>
+      </trans-unit>
+      <trans-unit id="invitationConfirmText" datatype="html">
+        <source>¿Desea aceptar la invitación para asociarse a la empresa <x id="INTERPOLATION" equiv-text="{{ companyName }}"/>?</source>
+        <target>¿Deseás aceptar la invitación para asociarse a la empresa <x id="INTERPOLATION" equiv-text="{{ companyName }}"/>?</target>
+      </trans-unit>
+      <trans-unit id="invitationConfirmTitle" datatype="html">
+        <source>Aceptar invitación</source>
+        <target>Aceptar invitación</target>
       </trans-unit>
       <trans-unit id="actions" datatype="html">
         <source>Acciones</source>
         <target>Acciones</target>
       </trans-unit>
-      <trans-unit id="cancel_button" datatype="html">
+      <trans-unit id="invitationEmployeeCancel" datatype="html">
         <source>Cancelar</source>
         <target>Cancelar</target>
+      </trans-unit>
+      <trans-unit id="invitationEmployeeDuplicate" datatype="html">
+        <source>Empleado ya vinculado a tu empresa.</source>
+        <target>Empleado ya vinculado a tu empresa.</target>
       </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>

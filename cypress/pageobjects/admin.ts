@@ -11,6 +11,10 @@ export default class Admin {
     return cy.get('table');
   }
 
+  get changePlanButton() {
+    return cy.get('a[href="/admin/change-plan"]');
+  }
+
   verifyPageContent() {
     this.pageTitle.should('contain', 'Gestión empresa');
     this.pageDescription.should('contain', 'ver e invitar fácilmente a tus empleados');

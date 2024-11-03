@@ -12,7 +12,14 @@ import {
 
 import { CustomPaginatorIntl } from '../../pagination/pagination';
 import { MatIconModule } from '@angular/material/icon';
-import { EmployeeService } from '../../employee/employee.service';
+import { Router, RouterLink } from '@angular/router';
+import { chipInfo } from '../../shared/incident-chip';
+import { IncidentService } from '../incident.service';
+import { LoadingService } from 'src/app/services/loading.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
+import { finalize } from 'rxjs';
+import { ChangeStatusComponent } from '../change-status/change-status.component';
+import { MatDialog } from '@angular/material/dialog';
 
 interface IncidentListEntry {
   name: string;
@@ -31,6 +38,7 @@ interface IncidentListEntry {
     MatPaginatorModule,
     MatChipsModule,
     MatIconModule,
+    RouterLink,
   ],
   templateUrl: './incident-list.component.html',
   styleUrl: './incident-list.component.scss',
@@ -40,55 +48,73 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['name', 'user', 'dateFiling', 'status', 'actions'];
   incidentsList = new MatTableDataSource<IncidentListEntry>();
   totalIncidents = 0;
-  isLoading = true;
-
-  chipInfo: Record<string, { icon: string; text: string; cssClass: string }> = {
-    created: {
-      icon: 'schedule',
-      text: $localize`:@@incidentStatusOpen:Abierta`,
-      cssClass: 'page__chip--blue',
-    },
-    escalated: {
-      icon: 'warning',
-      text: $localize`:@@incidentStatusEscalated:Escalado`,
-      cssClass: 'page__chip--warning',
-    },
-    closed: {
-      icon: 'check',
-      text: $localize`:@@incidentStatusClosed:Cerrada`,
-      cssClass: 'page__chip--success',
-    },
-  };
+  chipInfo = chipInfo;
+  pageSize = 5;
+  currentPage = 1;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private readonly employeeService: EmployeeService) {}
+  constructor(
+    private readonly incidentService: IncidentService,
+    private readonly router: Router,
+    private readonly loadingService: LoadingService,
+    private readonly snackbarService: SnackbarService,
+    public dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
-    this.loadIncidents(5, 1);
+    this.loadIncidents(this.pageSize, this.currentPage);
   }
 
   ngAfterViewInit() {
     this.paginator.page.subscribe((event: PageEvent) => {
-      this.loadIncidents(event.pageSize, event.pageIndex + 1);
+      this.pageSize = event.pageSize;
+      this.currentPage = event.pageIndex + 1;
+      this.loadIncidents(this.pageSize, this.currentPage);
     });
   }
 
   loadIncidents(pageSize: number, page: number) {
-    this.isLoading = true;
-    this.employeeService.loadIncidents(pageSize, page).subscribe(data => {
-      if (data?.incidents) {
-        this.incidentsList.data = data.incidents.map(incident => {
-          return {
-            name: incident.name,
-            user: incident.reportedBy.email,
-            filingDate: incident.filingDate,
-            status: incident.status,
-          };
-        });
-        this.totalIncidents = data.totalIncidents;
-        this.isLoading = false;
-      }
+    this.loadingService.setLoading(true);
+    this.incidentService
+      .loadIncidents(pageSize, page)
+      .pipe(finalize(() => this.loadingService.setLoading(false)))
+      .subscribe({
+        next: data => {
+          if (data?.incidents) {
+            this.incidentsList.data = data.incidents.map(incident => {
+              return {
+                name: incident.name,
+                user: incident.reportedBy.email,
+                filingDate: incident.filingDate,
+                status: incident.status,
+                id: incident.id,
+              };
+            });
+            this.totalIncidents = data.totalIncidents;
+          }
+        },
+        error: err => {
+          this.snackbarService.showError(err);
+        },
+      });
+  }
+
+  showDetail(incidentId: string) {
+    this.router.navigate([`/incidents/${incidentId}`]);
+  }
+
+  openChangeStatusDialog(incidentId: string) {
+    const dialogRef = this.dialog.open(ChangeStatusComponent, {
+      autoFocus: false,
+      restoreFocus: false,
+      data: {
+        incidentId,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.loadIncidents(this.pageSize, this.currentPage);
     });
   }
 }

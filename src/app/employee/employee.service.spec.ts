@@ -2,12 +2,7 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { faker } from '@faker-js/faker';
-import {
-  EmployeeService,
-  EmployeeResponse,
-  DuplicateEmailError,
-  IncidentListResponse,
-} from './employee.service';
+import { EmployeeService, EmployeeResponse, DuplicateEmailError } from './employee.service';
 import { environment } from '../../environments/environment';
 import { ACCEPTED_ERRORS } from '../interceptors/error.interceptor';
 import { Role } from '../auth/role';
@@ -22,6 +17,10 @@ describe('EmployeeService', () => {
     });
     service = TestBed.inject(EmployeeService);
     httpTestingController = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
   });
 
   const generateEmployeeData = () => ({
@@ -94,15 +93,25 @@ describe('EmployeeService', () => {
     req.flush({}, { status: 500, statusText: 'Internal Server Error' });
   }));
 
-  it('should handle HTTP error in loadIncidents and return null', waitForAsync(() => {
-    service.loadIncidents(5, 1).subscribe((response: IncidentListResponse | null) => {
-      expect(response).toBeNull();
+  it('should load employee data successfully', waitForAsync(() => {
+    const mockResponse: EmployeeResponse = {
+      id: faker.string.uuid(),
+      clientId: null,
+      name: faker.person.fullName(),
+      email: faker.internet.email(),
+      role: faker.helpers.arrayElement(Object.values(Role)),
+      invitationStatus: 'pending',
+      invitationDate: faker.date.past(),
+    };
+
+    service.loadEmployeeData().subscribe({
+      next: response => {
+        expect(response).toEqual(mockResponse);
+      },
     });
 
-    const req = httpTestingController.expectOne(
-      `${environment.apiUrl}/employees/me/incidents?page_size=5&page_number=1`,
-    );
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/employees/me`);
     expect(req.request.method).toBe('GET');
-    req.flush(null, { status: 500, statusText: 'Server Error' });
+    req.flush(mockResponse);
   }));
 });

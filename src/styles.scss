@@ -89,10 +89,22 @@ router-outlet + * {
   flex-direction: column;
 }
 
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  overflow: hidden;
+  height: 1px;
+
+  width: 1px;
+  white-space: nowrap; /* added line */
+}
+
 .page {
   display: flex;
   justify-content: center;
   width: 100%;
+  margin-top: 64px;
   &__container {
     max-width: 1280px;
     width: 100%;
@@ -176,15 +188,6 @@ router-outlet + * {
         color: $blue-800;
       }
     }
-
-    .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      .material-symbols-outlined {
-        font-size: 1.125rem;
-      }
-    }
   }
 
   .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled)
@@ -194,6 +197,17 @@ router-outlet + * {
 
   button {
     font-weight: 400;
+  }
+
+  .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-weight: 400;
+    .material-symbols-outlined {
+      font-size: 1.125rem;
+    }
   }
 }
 
@@ -216,49 +230,29 @@ router-outlet + * {
     color: white;
   }
 }
-.mat-mdc-dialog-component-host h1,
-.mat-mdc-dialog-component-host P {
-  font-size: 16px !important;
-  color: $blue-800 !important;
-  float: left;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.mat-mdc-dialog-component-host {
-  padding: 10px;
+
+.mat-mdc-dialog-container h2.mat-mdc-dialog-title {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 0;
 }
 
-.mat-mdc-dialog-component-host .Accept {
-  width: 100px;
-  border: 1px solid #4267b2;
-  margin-right: 25px;
-  border-radius: 20px;
-  padding: 10px;
-  background-color: #4267b2;
-  color: white;
-  cursor: pointer;
+.mat-mdc-dialog-container .mat-divider-horizontal {
+  border-color: $blue-200;
+  margin: 0 1.5rem;
 }
 
-.mat-mdc-dialog-component-host .Accept:hover {
-  background-color: #3b7bfc;
-  color: white;
-}
-.mat-mdc-dialog-component-host .Decline {
-  width: 100px;
-  border: 1px solid #4267b2;
-  background: none;
-  margin-right: 25px;
-  border-radius: 20px;
-  padding: 10px;
-  cursor: pointer;
-}
-.mat-mdc-dialog-component-host .Decline:hover {
-  background-color: #d2def7;
+.mat-mdc-dialog-container .mat-mdc-dialog-actions .mat-mdc-button-base + .mat-mdc-button-base {
+  margin-left: 1rem;
 }
 
-.invite-user-container {
-  flex-direction: column;
+.mat-mdc-dialog-container .dialog-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
+
+  & .close-button {
+    margin: 0 1rem;
+  }
 }

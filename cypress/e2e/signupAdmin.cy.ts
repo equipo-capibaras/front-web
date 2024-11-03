@@ -41,7 +41,12 @@ describe('Signup Admin', () => {
     adminPage.verifyPageContent();
     adminPage.verifyEmployeeExists(randomName, randomEmail);
 
-    cy.log('Step 5: Logout');
+    cy.log('Step 7: Change plan to Empresario');
+    adminPage.changePlanButton.click();
+    selectPlan.selectPlan('Empresario');
+    selectPlan.confirmPlan();
+
+    cy.log('Step 8: Logout');
     const navbar = new Navbar();
     navbar.logout.click();
   });

@@ -37,7 +37,6 @@ describe('Login', () => {
       cy.log('I see the navbar options');
       const navbar = new Navbar();
 
-      // Check navbar options exist
       navbar.myaccount.should('exist');
       navbar.logout.should('exist');
 
