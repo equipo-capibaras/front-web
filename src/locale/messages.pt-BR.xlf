@@ -14,6 +14,10 @@
         <source>Falta el token de autenticación.</source>
         <target>Falta o token de autenticação.</target>
       </trans-unit>
+      <trans-unit id="Escalado" datatype="html">
+        <source>Escalado</source>
+        <target >Escalado</target>
+      </trans-unit>
       <trans-unit id="generalInformation" datatype="html">
         <source>Información general</source>
         <target>Informações gerais</target>
@@ -334,6 +338,14 @@
         <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
         <target>Plano <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></target>
       </trans-unit>
+      <trans-unit id="comment" datatype="html">
+        <source>Comentario</source>
+        <target >Comentario</target>
+      </trans-unit>
+      <trans-unit id="CommentPlaceholder" datatype="html">
+        <source>Explica el cambio de estado</source>
+        <target >Explica el cambio de estado</target>
+      </trans-unit>
       <trans-unit id="companyManagement" datatype="html">
         <source>Gestión empresa</source>
         <target>Gestão da empresa</target>
@@ -370,6 +382,10 @@
         <source>Cerrar sesión</source>
         <target>Terminar sessão</target>
       </trans-unit>
+      <trans-unit id="messageAnswer" datatype="html">
+        <source>Ingresa un comentario explicando el cambio de estado. Este aparecerá en la sección de RESPUESTAS del incidente y será visible para el cliente que haya reportado el incidente.</source>
+        <target >Ingresa un comentario explicando el cambio de estado. Este aparecerá en la sección de RESPUESTAS del incidente y será visible para el cliente que haya reportado el incidente.</target>
+      </trans-unit>
       <trans-unit id="employeeRegisterSuccess" datatype="html">
         <source>Cuenta creada exitosamente</source>
         <target>Conta criada com êxito</target>
@@ -385,6 +401,10 @@
       <trans-unit id="name" datatype="html">
         <source>Nombre</source>
         <target>Nome</target>
+      </trans-unit>
+      <trans-unit id="NewStatus" datatype="html">
+        <source>Selecciona el nuevo estado</source>
+        <target >Selecciona el nuevo estado</target>
       </trans-unit>
       <trans-unit id="employeeRegisterPlaceholderName" datatype="html">
         <source>Ingresa el nombre</source>
@@ -518,9 +538,21 @@
         <source>Cancelar</source>
         <target>Cancelar</target>
       </trans-unit>
+      <trans-unit id="CancelButtonStatus" datatype="html">
+        <source>Cancelar</source>
+        <target >Cancelar</target>
+      </trans-unit>
+      <trans-unit id="Cerrado" datatype="html">
+        <source>Cerrado</source>
+        <target >Cerrado</target>
+      </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>
         <target>Alterar</target>
+      </trans-unit>
+      <trans-unit id="ChangeButtonStatus" datatype="html">
+        <source>Cambiar</source>
+        <target >Cambiar</target>
       </trans-unit>
       <trans-unit id="changePlanCancel" datatype="html">
         <source>Cancelar</source>
@@ -553,6 +585,10 @@
       <trans-unit id="changeStateIncident" datatype="html">
         <source>Cambiar estado de incidente</source>
         <target>Alterar o estado do incidente</target>
+      </trans-unit>
+      <trans-unit id="ChangeStatus" datatype="html">
+        <source>Cambiar estado</source>
+        <target >Cambiar estado</target>
       </trans-unit>
       <trans-unit id="clientManagementPageDescription" datatype="html">
         <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Gestionar Empresa<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>ver e invitar fácilmente a tus empleados<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> para que se unan a la empresa, permitiéndoles acceder a las herramientas y funcionalidades disponibles en la plataforma. También podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot;&gt;"/>actualizar el plan<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> actual de tu empresa.</source>
