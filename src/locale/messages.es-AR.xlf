@@ -46,21 +46,17 @@
         <source>Pendiente</source>
         <target>Pendiente</target>
       </trans-unit>
-      <trans-unit id="text" datatype="html">
-        <source>Ingresa el correo del usuario que quieres invitar, para hacer parte de la empresa</source>
-        <target>Ingresá el correo del usuario que querés invitar, para hacer parte de la empresa</target>
+      <trans-unit id="invitationEmployeeSuccess" datatype="html">
+        <source>Empleado invitado exitosamente.</source>
+        <target>Empleado invitado exitosamente.</target>
       </trans-unit>
-      <trans-unit id="textConfirm" datatype="html">
-        <source>¿Deseas confirmar la invitación?</source>
-        <target>¿Deseás confirmar la invitación?</target>
+      <trans-unit id="invitationEmployeeText" datatype="html">
+        <source>Ingresa el correo del empleado que quieres invitar, para hacer parte de la empresa</source>
+        <target>Ingresá el correo del empleado que querés invitar, para hacer parte de la empresa</target>
       </trans-unit>
-      <trans-unit id="textInvitation" datatype="html">
-        <source>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a tu empresa.</source>
-        <target>El usuario <x id="INTERPOLATION" equiv-text="{{ data?.email }}"/> tiene el Rol: <x id="INTERPOLATION_1" equiv-text="{{ data?.role }}"/> y será registrado con este rol a vos empresa.</target>
-      </trans-unit>
-      <trans-unit id="textInviteUser" datatype="html">
-        <source>Invitar usuario</source>
-        <target>Invitar usuario</target>
+      <trans-unit id="invitationEmployeeTitle" datatype="html">
+        <source>Invitar empleado</source>
+        <target>Invitar empleado</target>
       </trans-unit>
       <trans-unit id="unassignedInfo" datatype="html">
         <source>Aún no está vinculado a una empresa. Contacte con su administrador.</source>
@@ -186,7 +182,7 @@
         <source>Estado Invitación</source>
         <target>Estado Invitación</target>
       </trans-unit>
-      <trans-unit id="inviteCancelButton" datatype="html">
+      <trans-unit id="invitationStep2Cancel" datatype="html">
         <source>Cancelar</source>
         <target>Cancelar</target>
       </trans-unit>
@@ -198,9 +194,13 @@
         <source>Invitar empleado</source>
         <target>Invitar empleado</target>
       </trans-unit>
-      <trans-unit id="inviteSubmitButton" datatype="html">
+      <trans-unit id="invitationEmployeeInvitar" datatype="html">
         <source>Invitar</source>
         <target>Invitar</target>
+      </trans-unit>
+      <trans-unit id="invitationEmployeeNotFound" datatype="html">
+        <source>No se encontró el empleado.</source>
+        <target>No se encontró el empleado.</target>
       </trans-unit>
       <trans-unit id="loginButtonSubmit" datatype="html">
         <source>Ingresar</source>
@@ -314,7 +314,7 @@
         <source>Seleccionar</source>
         <target>Seleccionar</target>
       </trans-unit>
-      <trans-unit id="onConfirmInvite" datatype="html">
+      <trans-unit id="invitationStep2Confirm" datatype="html">
         <source>Confirmar</source>
         <target>Confirmar</target>
       </trans-unit>
@@ -338,9 +338,13 @@
         <source>Gestión empresa</source>
         <target>Gestión empresa</target>
       </trans-unit>
-      <trans-unit id="ConfirmarInvitación" datatype="html">
-        <source>Confirmar Invitación</source>
-        <target>Confirmar Invitación</target>
+      <trans-unit id="invitationStep2Text" datatype="html">
+        <source><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> El usuario <x id="INTERPOLATION" equiv-text="{{ data.username }}"/> tiene el rol de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ employeeRole[data.role] }}"/><x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> y será registrado con este rol en tu empresa. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>¿Deseas confirmar la invitación?<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></source>
+        <target><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/> El usuario <x id="INTERPOLATION" equiv-text="{{ data.username }}"/> tiene el rol de <x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ employeeRole[data.role] }}"/><x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/> y será registrado con este rol en tu empresa. <x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/><x id="START_PARAGRAPH" ctype="x-p" equiv-text="&lt;p&gt;"/>¿Deseás confirmar la invitación?<x id="CLOSE_PARAGRAPH" ctype="x-p" equiv-text="&lt;/p&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="invitationStep2Title" datatype="html">
+        <source>Confirmar invitación</source>
+        <target>Confirmar invitación</target>
       </trans-unit>
       <trans-unit id="createIncident" datatype="html">
         <source>Crear incidente</source>
@@ -506,9 +510,13 @@
         <source>Acciones</source>
         <target>Acciones</target>
       </trans-unit>
-      <trans-unit id="cancel_button" datatype="html">
+      <trans-unit id="invitationEmployeeCancel" datatype="html">
         <source>Cancelar</source>
         <target>Cancelar</target>
+      </trans-unit>
+      <trans-unit id="invitationEmployeeDuplicate" datatype="html">
+        <source>Empleado ya vinculado a tu empresa.</source>
+        <target>Empleado ya vinculado a tu empresa.</target>
       </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>

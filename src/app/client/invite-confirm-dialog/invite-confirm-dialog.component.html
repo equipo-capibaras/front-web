@@ -1,0 +1,23 @@
+<div class="dialog-header">
+  <h2 mat-dialog-title i18n="@@invitationStep2Title">Confirmar invitación</h2>
+  <button type="button" mat-icon-button class="close-button" (click)="onCancel()">
+    <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
+    <span class="material-symbols-outlined">close</span>
+  </button>
+</div>
+<mat-divider />
+<mat-dialog-content i18n="@@invitationStep2Text">
+  <p>
+    El usuario {{ data.username }} tiene el rol de <b>{{ employeeRole[data.role] }}</b> y será
+    registrado con este rol en tu empresa.
+  </p>
+  <p>¿Deseas confirmar la invitación?</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-stroked-button type="button" (click)="onCancel()" i18n="@@invitationStep2Cancel">
+    Cancelar
+  </button>
+  <button mat-flat-button type="button" (click)="onConfirm()" i18n="@@invitationStep2Confirm">
+    Confirmar
+  </button>
+</mat-dialog-actions>
