@@ -1,11 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { faker } from '@faker-js/faker';
 import {
   IncidentService,
   IncidentListResponse,
   HistoryResponse,
   IncidentClosedError,
   IncidentNotFoundError,
+  UserNotFoundError,
 } from './incident.service';
 import { Incident, IncidentHistory } from './incident';
 import { Employee } from '../employee/employee';
@@ -28,6 +30,14 @@ describe('IncidentService', () => {
   afterEach(() => {
     httpMock.verify();
   });
+
+  function randomIncident() {
+    return {
+      name: faker.lorem.words(3),
+      email: faker.internet.email(),
+      description: faker.lorem.words(10),
+    };
+  }
 
   it('should be created', () => {
     expect(service).toBeTruthy();
@@ -188,7 +198,7 @@ describe('IncidentService', () => {
     });
 
     const req = httpMock.expectOne(`${environment.apiUrl}/incidents/1/update`);
-    req.flush('Conflict', { status: 404, statusText: 'Not found' });
+    req.flush('Not Found', { status: 404, statusText: 'Not Found' });
   });
 
   it('should handle other errors when changing incident status', () => {
@@ -203,6 +213,34 @@ describe('IncidentService', () => {
     });
 
     const req = httpMock.expectOne(`${environment.apiUrl}/incidents/1/update`);
+    req.flush('Server error', { status: 500, statusText: 'Server error' });
+  });
+
+  it('should handle 404 error when creating incident', () => {
+    const incidentData = randomIncident();
+
+    service.registerIncident(incidentData).subscribe({
+      next: () => fail('should have failed with 404 error'),
+      error: error => {
+        expect(error).toBeInstanceOf(UserNotFoundError);
+      },
+    });
+
+    const req = httpMock.expectOne(`${environment.apiUrl}/incidents/web`);
+    req.flush('Not Found', { status: 404, statusText: 'Not Found' });
+  });
+
+  it('should handle other errors when creating incident', () => {
+    const incidentData = randomIncident();
+
+    service.registerIncident(incidentData).subscribe({
+      next: () => fail('should have failed with 500 error'),
+      error: (error: HttpErrorResponse) => {
+        expect(error.status).toBe(500);
+      },
+    });
+
+    const req = httpMock.expectOne(`${environment.apiUrl}/incidents/web`);
     req.flush('Server error', { status: 500, statusText: 'Server error' });
   });
 });

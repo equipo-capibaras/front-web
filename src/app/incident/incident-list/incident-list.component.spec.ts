@@ -6,7 +6,7 @@ import { IncidentListComponent } from './incident-list.component';
 import { IncidentService } from '../incident.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ChangeStatusComponent } from '../change-status/change-status.component';
@@ -41,6 +41,7 @@ describe('IncidentListComponent', () => {
         { provide: LoadingService, useValue: loadingService },
         { provide: SnackbarService, useValue: snackbarService },
         { provide: Router, useValue: router },
+        { provide: ActivatedRoute, useValue: {} },
       ],
     }).compileComponents();
   }));

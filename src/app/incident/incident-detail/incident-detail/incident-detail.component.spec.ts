@@ -89,8 +89,6 @@ describe('IncidentDetailComponent', () => {
         mockIncident.history = mockIncident.history.slice(0, seq);
       }
 
-      console.log(mockIncident.history);
-
       incidentServiceSpy.incidentDetail.and.returnValue(of(mockIncident));
 
       fixture.detectChanges();
