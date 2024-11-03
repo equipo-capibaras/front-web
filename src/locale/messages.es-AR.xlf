@@ -143,8 +143,8 @@
         <target>Correo del cliente que reporta el incidente</target>
       </trans-unit>
       <trans-unit id="incidentCreateInstruction" datatype="html">
-        <source>Proporciona una descipción clara del problema</source>
-        <target>Proporcioná una descipción clara del problema</target>
+        <source>Proporciona una descripción clara del problema</source>
+        <target>Proporcioná una descripción clara del problema</target>
       </trans-unit>
       <trans-unit id="incidentCreatePlaceholderEmail" datatype="html">
         <source>Ingresa el correo del cliente</source>

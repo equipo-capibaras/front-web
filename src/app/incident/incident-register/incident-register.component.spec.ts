@@ -2,20 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IncidentRegisterComponent } from './incident-register.component';
 import { SnackbarService } from '../../services/snackbar.service';
-import { IncidentService, UserNotFoundError } from '../incident.service';
+import { IncidentResponse, IncidentService, UserNotFoundError } from '../incident.service';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { faker } from '@faker-js/faker';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations'; // Import this module
-
-export interface IncidentResponse {
-  client_id: string;
-  name: string;
-  channel: string;
-  reported_by: string;
-  created_by: string;
-  description: string;
-}
 
 describe('IncidentRegisterComponent', () => {
   let component: IncidentRegisterComponent;
