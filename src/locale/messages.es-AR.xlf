@@ -166,13 +166,25 @@
         <source>Aplicación web</source>
         <target>Aplicación web</target>
       </trans-unit>
+      <trans-unit id="invitationAccepted" datatype="html">
+        <source>Invitación aceptada.</source>
+        <target>Invitación aceptada.</target>
+      </trans-unit>
+      <trans-unit id="invitationAlreadyAccepted" datatype="html">
+        <source>Invitación ya aceptada.</source>
+        <target>Invitación ya aceptada.</target>
+      </trans-unit>
+      <trans-unit id="invitationDeclined" datatype="html">
+        <source>Invitación rechazada.</source>
+        <target>Invitación rechazada.</target>
+      </trans-unit>
+      <trans-unit id="invitationNotFound" datatype="html">
+        <source>Invitación no encontrada.</source>
+        <target>Invitación no encontrada.</target>
+      </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
         <target>Estado Invitación</target>
-      </trans-unit>
-      <trans-unit id="invite_title" datatype="html">
-        <source>¿Desea aceptar la invitación para asociarse a una compañía?</source>
-        <target>¿Desea aceptar la invitación para asociarse a una compañía?</target>
       </trans-unit>
       <trans-unit id="inviteCancelButton" datatype="html">
         <source>Cancelar</source>
@@ -474,9 +486,21 @@
         <source>Ingresa los datos de la empresa</source>
         <target>Ingresá los datos de la empresa</target>
       </trans-unit>
-      <trans-unit id="accept_button" datatype="html">
+      <trans-unit id="invitationConfirmAccept" datatype="html">
         <source>Aceptar</source>
         <target>Aceptar</target>
+      </trans-unit>
+      <trans-unit id="invitationConfirmReject" datatype="html">
+        <source>Rechazar</source>
+        <target>Rechazar</target>
+      </trans-unit>
+      <trans-unit id="invitationConfirmText" datatype="html">
+        <source>¿Desea aceptar la invitación para asociarse a la empresa <x id="INTERPOLATION" equiv-text="{{ companyName }}"/>?</source>
+        <target>¿Deseás aceptar la invitación para asociarse a la empresa <x id="INTERPOLATION" equiv-text="{{ companyName }}"/>?</target>
+      </trans-unit>
+      <trans-unit id="invitationConfirmTitle" datatype="html">
+        <source>Aceptar invitación</source>
+        <target>Aceptar invitación</target>
       </trans-unit>
       <trans-unit id="actions" datatype="html">
         <source>Acciones</source>

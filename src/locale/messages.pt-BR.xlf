@@ -166,13 +166,25 @@
         <source>Aplicación web</source>
         <target>Aplicativo web</target>
       </trans-unit>
+      <trans-unit id="invitationAccepted" datatype="html">
+        <source>Invitación aceptada.</source>
+        <target>Convite aceite.</target>
+      </trans-unit>
+      <trans-unit id="invitationAlreadyAccepted" datatype="html">
+        <source>Invitación ya aceptada.</source>
+        <target>Convite já aceite</target>
+      </trans-unit>
+      <trans-unit id="invitationDeclined" datatype="html">
+        <source>Invitación rechazada.</source>
+        <target>Convite declinado.</target>
+      </trans-unit>
+      <trans-unit id="invitationNotFound" datatype="html">
+        <source>Invitación no encontrada.</source>
+        <target>Convite não encontrado.</target>
+      </trans-unit>
       <trans-unit id="invitationStatus" datatype="html">
         <source>Estado Invitación</source>
         <target>Status do Convite</target>
-      </trans-unit>
-      <trans-unit id="invite_title" datatype="html">
-        <source>¿Desea aceptar la invitación para asociarse a una compañía?</source>
-        <target>Gostaria de aceitar o convite para se juntar a uma empresa?</target>
       </trans-unit>
       <trans-unit id="inviteCancelButton" datatype="html">
         <source>Cancelar</source>
@@ -482,9 +494,21 @@
         <source>Ya tienes cuenta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Ingresa<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target>Já tem uma conta? <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Entre<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
       </trans-unit>
-      <trans-unit id="accept_button" datatype="html">
+      <trans-unit id="invitationConfirmAccept" datatype="html">
         <source>Aceptar</source>
         <target>Aceitar</target>
+      </trans-unit>
+      <trans-unit id="invitationConfirmReject" datatype="html">
+        <source>Rechazar</source>
+        <target>Rejeitar</target>
+      </trans-unit>
+      <trans-unit id="invitationConfirmText" datatype="html">
+        <source>¿Desea aceptar la invitación para asociarse a la empresa <x id="INTERPOLATION" equiv-text="{{ companyName }}"/>?</source>
+        <target>Gostaria de aceitar o convite para participar da <x id="INTERPOLATION" equiv-text="{{ companyName }}"/>?</target>
+      </trans-unit>
+      <trans-unit id="invitationConfirmTitle" datatype="html">
+        <source>Aceptar invitación</source>
+        <target>Aceitar convite</target>
       </trans-unit>
       <trans-unit id="actions" datatype="html">
         <source>Acciones</source>

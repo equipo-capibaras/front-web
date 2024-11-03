@@ -1,13 +1,18 @@
-<div class="invite-user-container">
-  <h1 class="Texth2" i18n="@@invite_title">
-    ¿Desea aceptar la invitación para asociarse a una compañía?
-  </h1>
-  <div class="invite-user-container">
-    <button type="button" class="Accept" mat-button (click)="onConfirm()" i18n="@@accept_button">
-      Aceptar
-    </button>
-    <button type="button" class="Decline" mat-button (click)="onDecline()" i18n="@@cancel_button">
-      Cancelar
-    </button>
-  </div>
-</div>
+<h2 mat-dialog-title i18n="@@invitationConfirmTitle">Aceptar invitación</h2>
+<mat-divider />
+<mat-dialog-content i18n="@@invitationConfirmText">
+  ¿Desea aceptar la invitación para asociarse a la empresa {{ companyName }}?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    mat-stroked-button
+    type="button"
+    class="Decline"
+    (click)="onDecline()"
+    i18n="@@invitationConfirmReject">
+    Rechazar
+  </button>
+  <button mat-flat-button type="button" (click)="onConfirm()" i18n="@@invitationConfirmAccept">
+    Aceptar
+  </button>
+</mat-dialog-actions>
