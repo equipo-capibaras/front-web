@@ -6,7 +6,7 @@ import CreateIncident from 'cypress/pageobjects/createIncident';
 import IncidentDetail from 'cypress/pageobjects/incidentDetail';
 import ChangeStatus from 'cypress/pageobjects/changeStatus';
 
-describe('Signup Admin', () => {
+describe('Incident Management', () => {
   it('Scenario: Create incident', () => {
     cy.log('Step 1: Visit the home page');
     cy.visit('/');
