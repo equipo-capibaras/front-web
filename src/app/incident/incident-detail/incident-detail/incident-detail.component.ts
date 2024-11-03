@@ -47,6 +47,12 @@ export class IncidentDetailComponent implements OnInit {
     this.getIncidentDetail(incidentId);
   }
 
+  handleKeydown(event: KeyboardEvent, incidentId: string) {
+    if (event.key === 'Enter') {
+      this.openChangeStatusDialog(incidentId);
+    }
+  }
+
   getEscalatedDate(incidentHistory: IncidentHistory[]) {
     if (incidentHistory.length < 2) return '';
     const escalatedComments = incidentHistory.filter(comment => comment.action === 'escalated');
