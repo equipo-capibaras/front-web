@@ -99,17 +99,13 @@ export class IncidentListComponent implements AfterViewInit, OnInit {
     this.router.navigate([`/incidents/${incidentId}`]);
   }
 
-  openChangeStatusDialog(incidentId: string): void {
-    console.log('incidentId: ' + incidentId);
-    const dialogRef = this.dialog.open(ChangeStatusComponent, {
-      width: '600px',
-      data: { incidentId },
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        console.log('Cambio de estado:', result);
-      }
+  openChangeStatusDialog(incidentId: string) {
+    this.dialog.open(ChangeStatusComponent, {
+      data: {
+        status: 'Escalado',
+        comment: '',
+        incident_id: incidentId,
+      },
     });
   }
 }

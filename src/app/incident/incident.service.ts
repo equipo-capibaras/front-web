@@ -53,16 +53,22 @@ export class IncidentService {
     );
   }
 
-  changeStatusIncident(IncidentStatusData: {
-    status: string;
-    comment: string;
-    incident_id: string;
-  }): Observable<IncidentResponse> {
+  changeStatusIncident(
+    status: string,
+    description: string,
+    incident_id: string,
+  ): Observable<IncidentResponse> {
     const context = new HttpContext().set(ACCEPTED_ERRORS, [409]);
+
+    const incidentStatusData = {
+      action: status,
+      description: description,
+    };
+
     return this.http
       .post<IncidentResponse>(
-        `${this.apiUrl}/incidents/${IncidentStatusData.incident_id}/update`,
-        IncidentStatusData,
+        `${this.apiUrl}/incidents/${incident_id}/update`,
+        incidentStatusData,
         {
           context: context,
         },

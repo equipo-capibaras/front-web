@@ -34,7 +34,7 @@ export class ChangeStatusComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<ChangeStatusComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { status: string; comment: string },
+    @Inject(MAT_DIALOG_DATA) public data: { status: string; comment: string; incident_id: string },
     private readonly incidentService: IncidentService,
     private snackbarService: SnackbarService,
     private readonly route: ActivatedRoute,
@@ -42,7 +42,8 @@ export class ChangeStatusComponent implements OnInit {
     this.statusForm = this.fb.group({
       status: ['', Validators.required],
       comment: ['', Validators.required],
-      incident_id: [this.route.snapshot.paramMap.get('id')],
+      //incident_id: [this.route.snapshot.paramMap.get('id')],
+      incident_id: [this.data.incident_id, Validators.required],
     });
   }
   ngOnInit(): void {
@@ -71,7 +72,7 @@ export class ChangeStatusComponent implements OnInit {
       const comment = this.comment.value;
       const incident_id = this.incident_id.value;
 
-      this.incidentService.changeStatusIncident({ status, comment, incident_id }).subscribe({
+      this.incidentService.changeStatusIncident(status, comment, incident_id).subscribe({
         next: success => {
           if (!success) {
             return;
@@ -80,8 +81,6 @@ export class ChangeStatusComponent implements OnInit {
           this.snackbarService.showSuccess('Se ha cambiado el estado exitosamente.');
 
           this.dialogRef.close(this.statusForm.value);
-
-          //this.reloadPage();
         },
         error: _error => {
           this.snackbarService.showError('Ocurrió un error al cambiar el estado.');
