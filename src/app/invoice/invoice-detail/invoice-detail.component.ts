@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Invoice } from './invoice';
 import { CommonModule, DatePipe } from '@angular/common';
+import { InoviceService } from '../invoice.service';
+import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -30,4 +32,25 @@ export class InvoiceDetailComponent {
       monthCostPlan: $localize`:@@MonthlyCost:$27.25`,
     },
   ];
+
+  constructor(
+    private readonly invoiceService: InoviceService,
+    private readonly snackbarService: SnackbarService,
+  ) {}
+
+  getInvoiceDetail() {
+    this.invoiceService
+      .invoiceDetail()
+      .pipe()
+      .subscribe({
+        next: data => {
+          if (data) {
+            this.invoices = Array.isArray(data) ? data : [data];
+          }
+        },
+        error: err => {
+          this.snackbarService.showError(err);
+        },
+      });
+  }
 }
