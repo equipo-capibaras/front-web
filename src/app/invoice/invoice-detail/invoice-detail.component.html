@@ -1,0 +1,100 @@
+<div class="page">
+  <div class="page__container">
+    <div class="page__header">
+      <h1 class="page__title" i18n="@@InvoiceDetailTitle">Consultar factura</h1>
+    </div>
+    <p i18n="@@InvoiceDescriptionTitle">
+      En consular factura, podras ver el resumen detallado de tu factura actual, incluyendo el costo
+      base de tu plan seleccionado y los cargos adicionales por incidentes registrados.
+    </p>
+
+    <div class="container">
+      <div class="card">
+        <div class="price">
+          @for (invoice of invoices; track invoice.id) {
+            <span class="price-value">{{ invoice.price }}</span>
+            <span class="price-detail" i18n="@@totalMonthAccumulated">
+              Total acumulado (hasta el día de hoy)
+            </span>
+            <div class="custom-line"></div>
+
+            <div class="section">
+              <div class="text-section-date">
+                <span class="text-detail" i18n="@@timeMonthAccumulated">
+                  Periodo de facturación:
+                </span>
+                <span class="price-detail" i18n="@@DateStart">
+                  del {{ invoice.startDate | date: 'dd/MM/yyyy' }} al
+                  {{ invoice.endDate | date: 'dd/MM/yyyy' }}
+                </span>
+              </div>
+
+              <div class="text-section-date">
+                <span class="text-detail" i18n="@@totalMonthAccumulated">
+                  Fecha limite de pago:
+                </span>
+
+                <span class="price-detail" i18n="@@DateStart">
+                  {{ invoice.LimitPaidDate | date: 'dd/MM/yyyy' }}
+                </span>
+              </div>
+
+              <div class="text-section">
+                <span class="text-detail" i18n="@@totalMonthAccumulated">
+                  Costo Base del plan:
+                </span>
+                <ul class="price-detail">
+                  <li>
+                    {{ invoice.planName }} :
+                    <span class="color-price"> {{ invoice.monthCostPlan }}</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="text-section">
+                <span class="text-detail" i18n="@@totalMonthAccumulated">
+                  Acumulado por incidentes registrados:
+                </span>
+
+                <ul class="price-detail">
+                  <li>
+                    <div class="text-section-date">
+                      <span class="list-detail" i18n="@@totalMonthAccumulated">
+                        Incidentes registrados por aplicación web: 20 x $0.50 =
+                      </span>
+                      <span class="color-price">{{ invoice.TotalIncidentsWeb }}</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="text-section-date">
+                      <span class="list-detail" i18n="@@totalMonthAccumulated">
+                        Incidentes registrados por aplicación móvil: 15 x $0.75 =
+                      </span>
+                      <span class="color-price">{{ invoice.TotalIncidentsMobile }}</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="text-section-date">
+                      <span class="list-detail" i18n="@@totalMonthAccumulated">
+                        Incidentes registrados por correo: 10 x $0.60 =
+                      </span>
+                      <span class="color-price">{{ invoice.TotalIncidentsEmail }}</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="text-section-date">
+                      <span class="list-detail" i18n="@@totalMonthAccumulated">
+                        Subtotal de Incidentes:
+                      </span>
+                      <span class="color-price">{{ invoice.TotalIncidents }}</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
