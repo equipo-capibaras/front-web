@@ -1,9 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
 import { InoviceService } from '../invoice.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { CurrencyService } from 'src/app/services/currency.service';
 import { Invoice } from './invoice';
+import currency from 'currency.js';
+import { CommonModule, DatePipe } from '@angular/common';
+
+export interface InvoiceFrontend {
+  billing_month: string;
+  billing_year: number;
+  client_id: string;
+  client_name: string;
+  due_date: string;
+  client_plan: string;
+  total_cost: string;
+  fixed_cost: string;
+  total_incidents: { web: number; mobile: number; email: number };
+  unit_cost_per_incident: { web: string; mobile: string; email: string };
+  total_cost_per_incident: { web: string; mobile: string; email: string };
+  subtotal: string;
+}
 
 @Component({
   selector: 'app-invoice-detail',
@@ -13,20 +29,22 @@ import { Invoice } from './invoice';
   styleUrls: ['./invoice-detail.component.scss'],
 })
 export class InvoiceDetailComponent implements OnInit {
-  invoice: Invoice = {
+  invoice: InvoiceFrontend = {
     billing_month: '',
     billing_year: 0,
     client_id: '',
     client_name: '',
     due_date: '',
     client_plan: '',
-    total_cost: 0,
-    fixed_cost: 0,
+    total_cost: '',
+    subtotal: '',
+    fixed_cost: '',
     total_incidents: { web: 0, mobile: 0, email: 0 },
-    unit_cost_per_incident: { web: 0, mobile: 0, email: 0 },
-    total_cost_per_incident: { web: 0, mobile: 0, email: 0 },
+    unit_cost_per_incident: { web: '', mobile: '', email: '' },
+    total_cost_per_incident: { web: '', mobile: '', email: '' },
   };
   localCurrency: string;
+  exchangeRates: { rates: Record<string, string>; base: string; result: string } | null = null;
   exchangeRate = 1;
 
   constructor(
@@ -38,21 +56,34 @@ export class InvoiceDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadExchangeRate();
-    this.getInvoiceDetail();
+    this.loadExchangeRate(); // Load exchange rates when component initializes
   }
-
   loadExchangeRate() {
-    if (this.localCurrency !== 'USD') {
-      this.currencyService
-        .getExchangeRates()
-        .subscribe((data: { rates: Record<string, number> }) => {
-          this.exchangeRate = data.rates[this.localCurrency] || 1;
-        });
-    }
+    this.currencyService.getExchangeRates(this.localCurrency).subscribe(
+      data => {
+        this.exchangeRates = data;
+
+        if (this.exchangeRates && this.exchangeRates.rates) {
+          const rate = this.exchangeRates.rates[this.localCurrency];
+          if (rate) {
+            this.exchangeRate = parseFloat(rate);
+            this.getInvoiceDetail();
+          } else {
+            console.error('No exchange rate found for', this.localCurrency);
+          }
+        } else {
+          console.error('Exchange rate data structure is invalid');
+        }
+      },
+      error => {
+        console.error('Error fetching exchange rates:', error);
+        this.snackbarService.showError('Failed to fetch exchange rates');
+      },
+    );
   }
 
   getInvoiceDetail() {
+    console.log('Getting invoice detail with exchange rate:', this.exchangeRate);
     this.invoiceService.invoiceDetail().subscribe({
       next: data => {
         if (data) {
@@ -67,22 +98,62 @@ export class InvoiceDetailComponent implements OnInit {
     });
   }
 
-  convertInvoiceCosts(invoice: Invoice): Invoice {
-    // Convert cost-related fields using the exchange rate
-    return {
+  convertInvoiceCosts(invoice: Invoice): InvoiceFrontend {
+    const totalCost = invoice.total_cost;
+    const fixedCost = invoice.fixed_cost;
+
+    if (this.exchangeRate === 0) {
+      console.error('Invalid exchange rate, cannot convert invoice costs');
+      return {
+        ...invoice,
+        subtotal: this.formatCurrency(invoice.total_cost - invoice.fixed_cost),
+        total_cost: this.formatCurrency(invoice.total_cost),
+        fixed_cost: this.formatCurrency(invoice.fixed_cost),
+        total_cost_per_incident: {
+          web: this.formatCurrency(invoice.total_cost_per_incident.web),
+          mobile: this.formatCurrency(invoice.total_cost_per_incident.mobile),
+          email: this.formatCurrency(invoice.total_cost_per_incident.email),
+        },
+        unit_cost_per_incident: {
+          web: this.formatCurrency(invoice.unit_cost_per_incident.web),
+          mobile: this.formatCurrency(invoice.unit_cost_per_incident.mobile),
+          email: this.formatCurrency(invoice.unit_cost_per_incident.email),
+        },
+      };
+    }
+
+    const Invoices = {
       ...invoice,
-      total_cost: invoice.total_cost * this.exchangeRate,
-      fixed_cost: invoice.fixed_cost * this.exchangeRate,
+      subtotal: this.formatCurrency(totalCost - fixedCost),
+      total_cost: this.formatCurrency(totalCost),
+      fixed_cost: this.formatCurrency(fixedCost),
       total_cost_per_incident: {
-        web: invoice.total_cost_per_incident.web * this.exchangeRate,
-        mobile: invoice.total_cost_per_incident.mobile * this.exchangeRate,
-        email: invoice.total_cost_per_incident.email * this.exchangeRate,
+        web: this.formatCurrency(invoice.total_cost_per_incident.web),
+        mobile: this.formatCurrency(invoice.total_cost_per_incident.mobile),
+        email: this.formatCurrency(invoice.total_cost_per_incident.email),
       },
       unit_cost_per_incident: {
-        web: invoice.unit_cost_per_incident.web * this.exchangeRate,
-        mobile: invoice.unit_cost_per_incident.mobile * this.exchangeRate,
-        email: invoice.unit_cost_per_incident.email * this.exchangeRate,
+        web: this.formatCurrency(invoice.unit_cost_per_incident.web),
+        mobile: this.formatCurrency(invoice.unit_cost_per_incident.mobile),
+        email: this.formatCurrency(invoice.unit_cost_per_incident.email),
       },
     };
+
+    return Invoices;
+  }
+
+  formatCurrency(amount: number): string {
+    if (this.exchangeRate === 0) {
+      return 'Invalid rate';
+    }
+    let formattedCurrency = '';
+
+    formattedCurrency = currency(amount * this.exchangeRate, {
+      symbol: this.localCurrency + ' ',
+      separator: ',',
+      decimal: '.',
+    }).format();
+
+    return formattedCurrency;
   }
 }

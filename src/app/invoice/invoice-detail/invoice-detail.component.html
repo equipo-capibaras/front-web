@@ -11,7 +11,7 @@
     <div class="container">
       <div class="card">
         <div class="price">
-          <span class="price-value">{{ invoice.total_cost | number: '1.2-2' }}</span>
+          <span class="price-value">{{ invoice.total_cost }}</span>
           <span class="price-detail" i18n="@@totalMonthAccumulated">
             Total acumulado (hasta el día de hoy)
           </span>
@@ -35,7 +35,7 @@
               <ul class="price-detail">
                 <li>
                   {{ invoice.client_plan }} :
-                  <span class="color-price">{{ invoice.fixed_cost | number: '1.2-2' }}</span>
+                  <span class="color-price">{{ invoice.fixed_cost }}</span>
                 </li>
               </ul>
             </div>
@@ -50,11 +50,9 @@
                   <div class="text-section-date">
                     <span class="list-detail" i18n="@@webIncidents">
                       Incidentes registrados por aplicación web: {{ invoice.total_incidents.web }} x
-                      {{ invoice.unit_cost_per_incident.web | currency }} =
+                      {{ invoice.unit_cost_per_incident.web }} =
                     </span>
-                    <span class="color-price">{{
-                      invoice.total_cost_per_incident.web | number: '1.2-2'
-                    }}</span>
+                    <span class="color-price">{{ invoice.total_cost_per_incident.web }}</span>
                   </div>
                 </li>
                 <li>
@@ -62,22 +60,18 @@
                     <span class="list-detail" i18n="@@mobileIncidents">
                       Incidentes registrados por aplicación móvil:
                       {{ invoice.total_incidents.mobile }} x
-                      {{ invoice.unit_cost_per_incident.mobile | currency }} =
+                      {{ invoice.unit_cost_per_incident.mobile }} =
                     </span>
-                    <span class="color-price">{{
-                      invoice.total_cost_per_incident.mobile | number: '1.2-2'
-                    }}</span>
+                    <span class="color-price">{{ invoice.total_cost_per_incident.mobile }}</span>
                   </div>
                 </li>
                 <li>
                   <div class="text-section-date">
                     <span class="list-detail" i18n="@@emailIncidents">
                       Incidentes registrados por correo: {{ invoice.total_incidents.email }} x
-                      {{ invoice.unit_cost_per_incident.email | currency }} =
+                      {{ invoice.unit_cost_per_incident.email }} =
                     </span>
-                    <span class="color-price">{{
-                      invoice.total_cost_per_incident.email | number: '1.2-2'
-                    }}</span>
+                    <span class="color-price">{{ invoice.total_cost_per_incident.email }}</span>
                   </div>
                 </li>
                 <li>
@@ -85,9 +79,7 @@
                     <span class="list-detail" i18n="@@totalIncidents">
                       Subtotal de Incidentes:
                     </span>
-                    <span class="color-price">{{
-                      invoice.total_cost - invoice.fixed_cost | number: '1.2-2'
-                    }}</span>
+                    <span class="color-price">{{ invoice.subtotal }}</span>
                   </div>
                 </li>
               </ul>

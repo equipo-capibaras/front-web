@@ -26,7 +26,9 @@ describe('InvoiceDetailComponent', () => {
 
     // Set up mocks
     currencyService.detectUserCurrency.and.returnValue('USD');
-    currencyService.getExchangeRates.and.returnValue(of({ rates: { USD: 1, EUR: 0.85 } }));
+    currencyService.getExchangeRates.and.returnValue(
+      of({ rates: { USD: '1', EUR: '0.8' }, base: 'USD', result: 'success' }),
+    );
 
     invoiceService.invoiceDetail.and.returnValue(
       of({
@@ -66,7 +68,7 @@ describe('InvoiceDetailComponent', () => {
     setupComponent();
     expect(component).toBeTruthy();
     expect(component.invoice.client_name).toBe('Client A');
-    expect(component.invoice.total_cost).toBe(1000);
+    expect(component.invoice.total_cost).toBe('USD 1,000.00');
   });
 
   it('should load invoice details with exchange rate', () => {
@@ -87,9 +89,9 @@ describe('InvoiceDetailComponent', () => {
     invoiceService.invoiceDetail.and.returnValue(of(mockInvoice));
     setupComponent();
 
-    expect(component.invoice.total_cost).toBe(1000);
-    expect(component.invoice.fixed_cost).toBe(500);
-    expect(component.invoice.total_cost_per_incident.web).toBe(500);
+    expect(component.invoice.total_cost).toBe('USD 1,000.00');
+    expect(component.invoice.fixed_cost).toBe('USD 500.00');
+    expect(component.invoice.total_cost_per_incident.web).toBe('USD 500.00');
   });
 
   it('should handle null invoice data', () => {
