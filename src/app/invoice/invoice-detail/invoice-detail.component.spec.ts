@@ -149,4 +149,16 @@ describe('InvoiceDetailComponent', () => {
 
     expect(snackbarService.showError).toHaveBeenCalledWith('Invoice data is null');
   });
+
+  it('should log an error when no exchange rate is found for the local currency', () => {
+    spyOn(console, 'error');
+
+    currencyService.getExchangeRates.and.returnValue(
+      of({ rates: {}, base: 'USD', result: 'success' }),
+    );
+
+    setupComponent();
+
+    expect(console.error).toHaveBeenCalledWith('No exchange rate found for', 'USD');
+  });
 });
