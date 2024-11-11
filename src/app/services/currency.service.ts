@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, LOCALE_ID, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -11,7 +11,11 @@ export class CurrencyService {
     'https://v6.exchangerate-api.com/v6/a5c24ce9701ee48bccb7288c/latest/USD'; // Base URL for the API
   private Rates: { rates: Record<string, string>; base: string; result: string } | null = null;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(
+    private readonly http: HttpClient,
+    @Inject(LOCALE_ID)
+    public locale: string,
+  ) {}
 
   getExchangeRates(
     baseCurrency: string,
@@ -39,13 +43,12 @@ export class CurrencyService {
   }
 
   detectUserCurrency(): string {
-    const locale = navigator.language;
     const currencyMap: Record<string, string> = {
       'es-CO': 'COP', // Colombia -> COP
       'pt-BR': 'BRL', // Brazil -> BRL
       'es-AR': 'ARS', // Argentina -> ARS
     };
 
-    return currencyMap[locale] || 'USD';
+    return currencyMap[this.locale] || 'USD';
   }
 }

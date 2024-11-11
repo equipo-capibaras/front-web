@@ -47,13 +47,13 @@
         <target>Pendiente</target>
       </trans-unit>
       <trans-unit id="totalIncidents" datatype="html">
-        <source>Subtotal de Incidentes:</source>
-        <target state="new">Subtotal de Incidentes:</target>
-      </trans-unit>
+    <source>Subtotal de Incidentes:</source>
+    <target state="new">Subtotal de Incidentes:</target>
+</trans-unit>
       <trans-unit id="totalMonthAccumulated" datatype="html">
         <source>Total acumulado (hasta el día de hoy)</source>
-        <target state="new">Total acumulado (hasta el día de hoy)</target>
-      </trans-unit>
+        <target state="new">Total acumulado (al día de hoy)</target>
+    </trans-unit>
       <trans-unit id="invitationEmployeeSuccess" datatype="html">
         <source>Empleado invitado exitosamente.</source>
         <target>Empleado invitado exitosamente.</target>
@@ -87,9 +87,9 @@
         <target>Ver incidente</target>
       </trans-unit>
       <trans-unit id="webIncidents" datatype="html">
-        <source>Incidentes registrados por aplicación web: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.web }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.web | currency }}"/> =</source>
-        <target state="new">Incidentes registrados por aplicación web: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.web }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.web | currency }}"/> =</target>
-      </trans-unit>
+    <source>Incidentes registrados por aplicación web: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.web }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.web | currency }}"/> =</source>
+    <target state="new">Incidentes registrados por aplicación web: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.web }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.web | currency }}"/> =</target>
+</trans-unit>
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
         <target>Ingresá a tu cuenta</target>
@@ -143,9 +143,9 @@
         <target>Fecha cerrado</target>
       </trans-unit>
       <trans-unit id="incidentCosts" datatype="html">
-        <source>Acumulado por incidentes registrados:</source>
-        <target state="new">Acumulado por incidentes registrados:</target>
-      </trans-unit>
+    <source>Acumulado por incidentes registrados:</source>
+    <target state="new">Acumulado por incidentes registrados:</target>
+</trans-unit>
       <trans-unit id="incidentCreatedBy" datatype="html">
         <source>Creado por</source>
         <target>Creado por</target>
@@ -268,11 +268,11 @@
       </trans-unit>
       <trans-unit id="InvoiceDescriptionTitle" datatype="html">
         <source>En consultar factura, podrás ver el resumen detallado de tu factura actual, incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.</source>
-        <target state="new">En consultar factura, podrás ver el resumen detallado de tu factura actual, incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.</target>
-      </trans-unit>
+        <target state="new">En la sección de consulta de factura, vas a poder ver el resumen detallado de tu factura actual, que incluye el costo base de tu plan elegido y los cargos extra por incidentes registrados.</target>
+    </trans-unit>
       <trans-unit id="InvoiceDetailTitle" datatype="html">
-        <source>Consultar factura</source>
-        <target state="new">Consultar factura</target>
+          <source>Consultar factura</source>
+          <target state="new">Ver factura</target>
       </trans-unit>
       <trans-unit id="invitationEmployeeInvitar" datatype="html">
         <source>Invitar</source>
@@ -458,10 +458,10 @@
         <source>Fecha radicación</source>
         <target>Fecha radicación</target>
       </trans-unit>
-      <trans-unit id="dueDate" datatype="html">
-        <source>Fecha límite de pago:</source>
-        <target state="new">Fecha límite de pago:</target>
-      </trans-unit>
+     <trans-unit id="dueDate" datatype="html">
+    <source>Fecha límite de pago:</source>
+    <target state="new">Fecha límite de pago:</target>
+</trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
         <source>Tableros de control</source>
         <target>Tableros de control</target>
@@ -483,9 +483,9 @@
         <target>Cerrar sesión</target>
       </trans-unit>
       <trans-unit id="mobileIncidents" datatype="html">
-        <source>Incidentes registrados por aplicación móvil: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.mobile }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.mobile | currency }}"/> =</source>
-        <target state="new">Incidentes registrados por aplicación móvil: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.mobile }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.mobile | currency }}"/> =</target>
-      </trans-unit>
+    <source>Incidentes registrados por aplicación móvil: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.mobile }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.mobile | currency }}"/> =</source>
+    <target state="new">Incidentes registrados por aplicación móvil: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.mobile }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.mobile | currency }}"/> =</target>
+</trans-unit>
       <trans-unit id="employeeRegisterSuccess" datatype="html">
         <source>Cuenta creada exitosamente</source>
         <target>Cuenta creada exitosamente</target>
@@ -527,9 +527,9 @@
         <target>Correo</target>
       </trans-unit>
       <trans-unit id="emailIncidents" datatype="html">
-        <source>Incidentes registrados por correo: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.email }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.email | currency }}"/> =</source>
-        <target state="new">Incidentes registrados por correo: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.email }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.email | currency }}"/> =</target>
-      </trans-unit>
+    <source>Incidentes registrados por correo: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.email }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.email | currency }}"/> =</source>
+    <target state="new">Incidentes registrados por correo: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.email }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.email | currency }}"/> =</target>
+</trans-unit>
       <trans-unit id="employeeRegisterPlaceholderEmail" datatype="html">
         <source>Ingresa tu correo</source>
         <target>Ingresá tu correo</target>
@@ -634,14 +634,14 @@
         <source>Acciones</source>
         <target>Acciones</target>
       </trans-unit>
-      <trans-unit id="baseCost" datatype="html">
-        <source>Costo Base del plan:</source>
-        <target state="new">Costo Base del plan:</target>
-      </trans-unit>
+     <trans-unit id="baseCost" datatype="html">
+    <source>Costo Base del plan:</source>
+    <target state="new">Costo base del plan:</target>
+</trans-unit>
       <trans-unit id="billingPeriod" datatype="html">
-        <source>Periodo de facturación:</source>
-        <target state="new">Periodo de facturación:</target>
-      </trans-unit>
+    <source>Periodo de facturación:</source>
+    <target state="new">Período de facturación:</target>
+</trans-unit>
       <trans-unit id="invitationEmployeeCancel" datatype="html">
         <source>Cancelar</source>
         <target>Cancelar</target>
