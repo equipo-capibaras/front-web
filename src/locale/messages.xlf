@@ -35,6 +35,12 @@
       <trans-unit id="statusPending" datatype="html">
         <source>Pendiente</source>
       </trans-unit>
+      <trans-unit id="totalIncidents" datatype="html">
+        <source>Subtotal de Incidentes:</source>
+      </trans-unit>
+      <trans-unit id="totalMonthAccumulated" datatype="html">
+        <source>Total acumulado (hasta el día de hoy)</source>
+      </trans-unit>
       <trans-unit id="invitationEmployeeSuccess" datatype="html">
         <source>Empleado invitado exitosamente.</source>
       </trans-unit>
@@ -58,6 +64,9 @@
       </trans-unit>
       <trans-unit id="viewIncident" datatype="html">
         <source>Ver incidente</source>
+      </trans-unit>
+      <trans-unit id="webIncidents" datatype="html">
+        <source>Incidentes registrados por aplicación web: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.web }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.web | currency }}"/> =</source>
       </trans-unit>
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
@@ -97,6 +106,9 @@
       </trans-unit>
       <trans-unit id="incidentClosedDate" datatype="html">
         <source>Fecha cerrado</source>
+      </trans-unit>
+      <trans-unit id="incidentCosts" datatype="html">
+        <source>Acumulado por incidentes registrados:</source>
       </trans-unit>
       <trans-unit id="incidentCreatedBy" datatype="html">
         <source>Creado por</source>
@@ -187,6 +199,12 @@
       </trans-unit>
       <trans-unit id="inviteEmployee" datatype="html">
         <source>Invitar empleado</source>
+      </trans-unit>
+      <trans-unit id="InvoiceDescriptionTitle" datatype="html">
+        <source>En consultar factura, podrás ver el resumen detallado de tu factura actual, incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.</source>
+      </trans-unit>
+      <trans-unit id="InvoiceDetailTitle" datatype="html">
+        <source>Consultar factura</source>
       </trans-unit>
       <trans-unit id="invitationEmployeeInvitar" datatype="html">
         <source>Invitar</source>
@@ -329,6 +347,9 @@
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
       </trans-unit>
+      <trans-unit id="dueDate" datatype="html">
+        <source>Fecha límite de pago:</source>
+      </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
         <source>Tableros de control</source>
       </trans-unit>
@@ -340,6 +361,9 @@
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Cerrar sesión</source>
+      </trans-unit>
+      <trans-unit id="mobileIncidents" datatype="html">
+        <source>Incidentes registrados por aplicación móvil: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.mobile }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.mobile | currency }}"/> =</source>
       </trans-unit>
       <trans-unit id="clientRegisterButtonSubmit" datatype="html">
         <source>Crear Cuenta</source>
@@ -388,6 +412,9 @@
       </trans-unit>
       <trans-unit id="email" datatype="html">
         <source>Correo</source>
+      </trans-unit>
+      <trans-unit id="emailIncidents" datatype="html">
+        <source>Incidentes registrados por correo: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.email }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.email | currency }}"/> =</source>
       </trans-unit>
       <trans-unit id="name" datatype="html">
         <source>Nombre</source>
@@ -454,6 +481,12 @@
       </trans-unit>
       <trans-unit id="actions" datatype="html">
         <source>Acciones</source>
+      </trans-unit>
+      <trans-unit id="baseCost" datatype="html">
+        <source>Costo Base del plan:</source>
+      </trans-unit>
+      <trans-unit id="billingPeriod" datatype="html">
+        <source>Periodo de facturación:</source>
       </trans-unit>
       <trans-unit id="invitationEmployeeCancel" datatype="html">
         <source>Cancelar</source>

@@ -4,95 +4,95 @@
       <h1 class="page__title" i18n="@@InvoiceDetailTitle">Consultar factura</h1>
     </div>
     <p i18n="@@InvoiceDescriptionTitle">
-      En consular factura, podras ver el resumen detallado de tu factura actual, incluyendo el costo
-      base de tu plan seleccionado y los cargos adicionales por incidentes registrados.
+      En consultar factura, podrás ver el resumen detallado de tu factura actual, incluyendo el
+      costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.
     </p>
 
     <div class="container">
       <div class="card">
         <div class="price">
-          @for (invoice of invoices; track invoice.id) {
-            <span class="price-value">{{ invoice.price }}</span>
-            <span class="price-detail" i18n="@@totalMonthAccumulated">
-              Total acumulado (hasta el día de hoy)
-            </span>
-            <div class="custom-line"></div>
+          <span class="price-value">{{ invoice.total_cost | number: '1.2-2' }}</span>
+          <span class="price-detail" i18n="@@totalMonthAccumulated">
+            Total acumulado (hasta el día de hoy)
+          </span>
+          <div class="custom-line"></div>
 
-            <div class="section">
-              <div class="text-section-date">
-                <span class="text-detail" i18n="@@timeMonthAccumulated">
-                  Periodo de facturación:
-                </span>
-                <span class="price-detail" i18n="@@DateStart">
-                  del {{ invoice.startDate | date: 'dd/MM/yyyy' }} al
-                  {{ invoice.endDate | date: 'dd/MM/yyyy' }}
-                </span>
-              </div>
-
-              <div class="text-section-date">
-                <span class="text-detail" i18n="@@totalMonthAccumulated">
-                  Fecha limite de pago:
-                </span>
-
-                <span class="price-detail" i18n="@@DateStart">
-                  {{ invoice.LimitPaidDate | date: 'dd/MM/yyyy' }}
-                </span>
-              </div>
-
-              <div class="text-section">
-                <span class="text-detail" i18n="@@totalMonthAccumulated">
-                  Costo Base del plan:
-                </span>
-                <ul class="price-detail">
-                  <li>
-                    {{ invoice.planName }} :
-                    <span class="color-price"> {{ invoice.monthCostPlan }}</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="text-section">
-                <span class="text-detail" i18n="@@totalMonthAccumulated">
-                  Acumulado por incidentes registrados:
-                </span>
-
-                <ul class="price-detail">
-                  <li>
-                    <div class="text-section-date">
-                      <span class="list-detail" i18n="@@totalMonthAccumulated">
-                        Incidentes registrados por aplicación web: 20 x $0.50 =
-                      </span>
-                      <span class="color-price">{{ invoice.TotalIncidentsWeb }}</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="text-section-date">
-                      <span class="list-detail" i18n="@@totalMonthAccumulated">
-                        Incidentes registrados por aplicación móvil: 15 x $0.75 =
-                      </span>
-                      <span class="color-price">{{ invoice.TotalIncidentsMobile }}</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="text-section-date">
-                      <span class="list-detail" i18n="@@totalMonthAccumulated">
-                        Incidentes registrados por correo: 10 x $0.60 =
-                      </span>
-                      <span class="color-price">{{ invoice.TotalIncidentsEmail }}</span>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="text-section-date">
-                      <span class="list-detail" i18n="@@totalMonthAccumulated">
-                        Subtotal de Incidentes:
-                      </span>
-                      <span class="color-price">{{ invoice.TotalIncidents }}</span>
-                    </div>
-                  </li>
-                </ul>
-              </div>
+          <div class="section">
+            <div class="text-section-date">
+              <span class="text-detail" i18n="@@billingPeriod"> Periodo de facturación: </span>
+              <span class="price-detail">
+                {{ invoice.billing_month }} {{ invoice.billing_year }}
+              </span>
             </div>
-          }
+
+            <div class="text-section-date">
+              <span class="text-detail" i18n="@@dueDate"> Fecha límite de pago: </span>
+              <span class="price-detail">{{ invoice.due_date | date: 'dd/MM/yyyy' }}</span>
+            </div>
+
+            <div class="text-section">
+              <span class="text-detail" i18n="@@baseCost"> Costo Base del plan: </span>
+              <ul class="price-detail">
+                <li>
+                  {{ invoice.client_plan }} :
+                  <span class="color-price">{{ invoice.fixed_cost | number: '1.2-2' }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-section">
+              <span class="text-detail" i18n="@@incidentCosts">
+                Acumulado por incidentes registrados:
+              </span>
+
+              <ul class="price-detail">
+                <li>
+                  <div class="text-section-date">
+                    <span class="list-detail" i18n="@@webIncidents">
+                      Incidentes registrados por aplicación web: {{ invoice.total_incidents.web }} x
+                      {{ invoice.unit_cost_per_incident.web | currency }} =
+                    </span>
+                    <span class="color-price">{{
+                      invoice.total_cost_per_incident.web | number: '1.2-2'
+                    }}</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="text-section-date">
+                    <span class="list-detail" i18n="@@mobileIncidents">
+                      Incidentes registrados por aplicación móvil:
+                      {{ invoice.total_incidents.mobile }} x
+                      {{ invoice.unit_cost_per_incident.mobile | currency }} =
+                    </span>
+                    <span class="color-price">{{
+                      invoice.total_cost_per_incident.mobile | number: '1.2-2'
+                    }}</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="text-section-date">
+                    <span class="list-detail" i18n="@@emailIncidents">
+                      Incidentes registrados por correo: {{ invoice.total_incidents.email }} x
+                      {{ invoice.unit_cost_per_incident.email | currency }} =
+                    </span>
+                    <span class="color-price">{{
+                      invoice.total_cost_per_incident.email | number: '1.2-2'
+                    }}</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="text-section-date">
+                    <span class="list-detail" i18n="@@totalIncidents">
+                      Subtotal de Incidentes:
+                    </span>
+                    <span class="color-price">{{
+                      invoice.total_cost - invoice.fixed_cost | number: '1.2-2'
+                    }}</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
