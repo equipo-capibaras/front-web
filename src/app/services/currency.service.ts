@@ -7,10 +7,11 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CurrencyService {
-  private apiURL = 'https://v6.exchangerate-api.com/v6/a5c24ce9701ee48bccb7288c/latest/USD'; // Base URL for the API
+  private readonly apiURL =
+    'https://v6.exchangerate-api.com/v6/a5c24ce9701ee48bccb7288c/latest/USD'; // Base URL for the API
   private Rates: { rates: Record<string, string>; base: string; result: string } | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   getExchangeRates(
     baseCurrency: string,
