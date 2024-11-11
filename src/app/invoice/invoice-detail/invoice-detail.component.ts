@@ -44,9 +44,11 @@ export class InvoiceDetailComponent implements OnInit {
 
   loadExchangeRate() {
     if (this.localCurrency !== 'USD') {
-      this.currencyService.getExchangeRates().subscribe((data: any) => {
-        this.exchangeRate = data.rates[this.localCurrency] || 1;
-      });
+      this.currencyService
+        .getExchangeRates()
+        .subscribe((data: { rates: Record<string, number> }) => {
+          this.exchangeRate = data.rates[this.localCurrency] || 1;
+        });
     }
   }
 

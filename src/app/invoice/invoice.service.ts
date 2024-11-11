@@ -14,7 +14,7 @@ export class InoviceService {
 
   invoiceDetail(): Observable<Invoice | null> {
     return this.http.get<Invoice>(`${this.apiUrl}/invoice`).pipe(
-      catchError((error: HttpErrorResponse) => {
+      catchError((_error: HttpErrorResponse) => {
         return throwError(() => new Error('Error loading invoice details'));
       }),
     );

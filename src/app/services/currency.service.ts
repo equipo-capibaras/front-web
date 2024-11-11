@@ -1,4 +1,3 @@
-// currency.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -7,13 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CurrencyService {
-  private exchangeRateApiUrl = 'https://open.er-api.com/v6/latest/USD';
-
   constructor(private http: HttpClient) {}
 
-  getExchangeRates(): Observable<any> {
-    // Implement the API call here
-    return this.http.get<any>('https://open.er-api.com/v6/latest/USD');
+  getExchangeRates(): Observable<{ rates: Record<string, number>; base: string; date: string }> {
+    return this.http.get<{ rates: Record<string, number>; base: string; date: string }>(
+      'https://open.er-api.com/v6/latest/USD',
+    );
   }
 
   detectUserCurrency(): string {
