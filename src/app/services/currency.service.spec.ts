@@ -62,7 +62,6 @@ describe('CurrencyService', () => {
     });
 
     it('should return an empty rates object on error', () => {
-      // Call the method and simulate an error response
       service.getExchangeRates('USD').subscribe(result => {
         expect(result.rates).toEqual({});
         expect(result.base).toBe('USD');
