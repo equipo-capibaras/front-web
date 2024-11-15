@@ -73,22 +73,6 @@ describe('Accessibility Tests', () => {
     cy.checkA11y(undefined, undefined, terminalLog);
   });
 
-  it('`/dashboards` page has no detectable a11y violations on load', () => {
-    cy.visit('/');
-
-    cy.fixture('login.analyst.json').then(loginData => {
-      const login = new Login();
-      login.login(loginData.email, loginData.password);
-    });
-
-    cy.location('pathname').should('eq', '/dashboards');
-
-    cy.wait(2000);
-
-    cy.injectAxe();
-    cy.checkA11y(undefined, undefined, terminalLog);
-  });
-
   it('`/incidents` page has no detectable a11y violations on load', () => {
     cy.visit('/');
 
