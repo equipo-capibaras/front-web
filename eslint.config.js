@@ -54,7 +54,11 @@ module.exports = tseslint.config(
           checkId: true,
           checkDuplicateId: true,
           checkText: true,
-          ignoreAttributes: ['mat-form-field[appearance]', 'ng-container[matColumnDef]'],
+          ignoreAttributes: [
+            'mat-form-field[appearance]',
+            'ng-container[matColumnDef]',
+            'iframe[sandbox]',
+          ],
         },
       ],
     },
