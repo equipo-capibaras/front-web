@@ -298,10 +298,6 @@
         <source>Debe ser un correo electrónico válido</source>
         <target>Debe ser un correo electrónico válido</target>
       </trans-unit>
-      <trans-unit id="prontoTableros" datatype="html">
-        <source>Aquí pronto hay los tableros de control.</source>
-        <target>Aquí pronto hay los tableros de control.</target>
-      </trans-unit>
       <trans-unit id="planEmprendedorPrice" datatype="html">
         <source>$21,000</source>
         <target>5.00$</target>
@@ -453,6 +449,10 @@
       <trans-unit id="createIncidentSuccess" datatype="html">
         <source>Incidente creado exitosamente</source>
         <target>Incidente creado exitosamente</target>
+      </trans-unit>
+      <trans-unit id="dashboardIncidents" datatype="html">
+        <source>Tablero de control de incidentes</source>
+        <target>Tablero de control de incidentes</target>
       </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>

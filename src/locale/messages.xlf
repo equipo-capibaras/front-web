@@ -311,9 +311,6 @@
       <trans-unit id="plan" datatype="html">
         <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
       </trans-unit>
-      <trans-unit id="prontoTableros" datatype="html">
-        <source>Aquí pronto hay los tableros de control.</source>
-      </trans-unit>
       <trans-unit id="menuAccount" datatype="html">
         <source>Mi cuenta</source>
       </trans-unit>
@@ -343,6 +340,9 @@
       </trans-unit>
       <trans-unit id="createIncidentSuccess" datatype="html">
         <source>Incidente creado exitosamente</source>
+      </trans-unit>
+      <trans-unit id="dashboardIncidents" datatype="html">
+        <source>Tablero de control de incidentes</source>
       </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
