@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.11",
-    "@angular/cli": "^18.2.11",
+    "@angular/cli": "^18.2.12",
     "@angular/compiler-cli": "^18.2.11",
     "@angular/localize": "^18.2.11",
     "@cypress/schematic": "^2.5.2",
