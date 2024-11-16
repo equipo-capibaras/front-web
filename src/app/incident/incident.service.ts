@@ -38,6 +38,15 @@ export interface HistoryResponse {
   description: string;
 }
 
+export interface Suggestion {
+  text: string;
+  detail: string;
+}
+
+export interface SuggestionsAI {
+  steps: Suggestion[];
+}
+
 export class UserNotFoundError extends Error {
   constructor(message?: string) {
     super(message ?? 'User not found.');
@@ -123,6 +132,18 @@ export class IncidentService {
             return throwError(() => new UserNotFoundError());
           }
 
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  AISuggestions(incidentId: string, locale: string): Observable<SuggestionsAI | null> {
+    return this.http
+      .get<SuggestionsAI>(
+        `${this.apiUrl}/incidents/${incidentId}/generativeai/suggestions?locale=${locale}`,
+      )
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
           return throwError(() => error);
         }),
       );

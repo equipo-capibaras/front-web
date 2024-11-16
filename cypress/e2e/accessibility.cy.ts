@@ -1,4 +1,5 @@
 import axe from 'axe-core';
+import IncidentDetail from 'cypress/pageobjects/incidentDetail';
 import IncidentList from 'cypress/pageobjects/incidentList';
 import Login from 'cypress/pageobjects/login';
 
