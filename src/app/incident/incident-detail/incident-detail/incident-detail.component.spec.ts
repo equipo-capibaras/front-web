@@ -178,7 +178,7 @@ describe('IncidentDetailComponent', () => {
 
     incidentServiceSpy.AISuggestions.and.returnValue(of(mockData));
 
-    component.openAIAsistenceDialog(incidentId);
+    component.openAIAssistenceDialog(incidentId);
 
     expect(incidentServiceSpy.AISuggestions).toHaveBeenCalledWith(incidentId, locale);
     expect(dialogSpy.open).toHaveBeenCalledWith(AIAssistenceDialogComponent, {

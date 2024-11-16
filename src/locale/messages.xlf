@@ -83,7 +83,7 @@
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
       </trans-unit>
-      <trans-unit id="iaAsistence" datatype="html">
+      <trans-unit id="iaAssistence" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="&lt;span&gt;"/>Asistencia IA<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
       </trans-unit>
       <trans-unit id="IACancel" datatype="html">

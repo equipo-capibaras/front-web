@@ -54,7 +54,7 @@ export class IncidentDetailComponent implements OnInit {
     this.getIncidentDetail(incidentId);
   }
 
-  openAIAsistenceDialog(incidentId: string): void {
+  openAIAssistenceDialog(incidentId: string): void {
     this.incidentService.AISuggestions(incidentId, this.locale).subscribe({
       next: data => {
         if (data) {

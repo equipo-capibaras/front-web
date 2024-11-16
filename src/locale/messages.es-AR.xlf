@@ -110,7 +110,7 @@
         <source>Ingresa tu contraseña</source>
         <target>Ingresá tu contraseña</target>
       </trans-unit>
-      <trans-unit id="iaAsistence" datatype="html">
+      <trans-unit id="iaAssistence" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="&lt;span&gt;"/>Asistencia IA<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
         <target><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="&lt;span&gt;"/>Asistencia IA<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
       </trans-unit>
