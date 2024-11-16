@@ -66,6 +66,9 @@ export class IncidentDetailComponent implements OnInit {
           });
         }
       },
+      error: err => {
+        this.snackbarService.showError(err);
+      },
     });
   }
 
@@ -87,6 +90,9 @@ export class IncidentDetailComponent implements OnInit {
           this.clientPlan = data.plan ?? null;
         }
       },
+      error: err => {
+        this.snackbarService.showError(err);
+      },
     });
   }
 
@@ -99,12 +105,13 @@ export class IncidentDetailComponent implements OnInit {
         .subscribe({
           next: data => {
             if (data) {
-              const last_action = data.history[data.history.length - 1].action;
               this.incidentDetail = data;
-              this.incidentStatus =
-                last_action === 'AI_response'
-                  ? data.history[data.history.length - 2].action
-                  : last_action;
+              const last_action = data.history[data.history.length - 1].action;
+              if (last_action === 'AI_response' && data.history.length >= 2) {
+                this.incidentStatus = data.history[data.history.length - 2].action;
+              } else {
+                this.incidentStatus = last_action;
+              }
               this.incidentDescription = data.history[0].description;
               this.incidentCreatedDate = data.history[0].date;
               this.incidentEscalatedDate = this.getEscalatedDate(data.history);
