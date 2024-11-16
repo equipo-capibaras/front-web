@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core';
 import { MatChipsModule } from '@angular/material/chips';
 import { chipInfo } from '../../../shared/incident-chip';
 import { IncidentService } from '../../incident.service';
@@ -6,11 +6,13 @@ import { LoadingService } from '../../../services/loading.service';
 import { ActivatedRoute } from '@angular/router';
 import { Incident, IncidentHistory } from '../../incident';
 import { SnackbarService } from 'src/app/services/snackbar.service';
-import { finalize } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangeStatusComponent } from '../../change-status/change-status.component';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { ClientService } from 'src/app/client/client.service';
+import { finalize } from 'rxjs';
+import { AIAsistenceDialogComponent } from '../ai-asistence-dialog/ai-asistence-dialog.component';
 
 @Component({
   selector: 'app-incident-detail',
@@ -34,18 +36,37 @@ export class IncidentDetailComponent implements OnInit {
     mobile: $localize`:@@incidentMobileChannel:Aplicación móvil`,
     email: $localize`:@@incidentEmailChannel:Correo electrónico`,
   };
+  clientPlan: string | null = null;
 
   constructor(
     private readonly incidentService: IncidentService,
+    private readonly clientService: ClientService,
     private readonly route: ActivatedRoute,
     private readonly loadingService: LoadingService,
     private readonly snackbarService: SnackbarService,
     public dialog: MatDialog,
+    @Inject(LOCALE_ID) public locale: string,
   ) {}
 
   ngOnInit() {
     const incidentId = this.route.snapshot.paramMap.get('id');
+    this.getClientInfo();
     this.getIncidentDetail(incidentId);
+  }
+
+  openAIAsistenceDialog(incidentId: string): void {
+    this.incidentService.AISuggestions(incidentId, this.locale).subscribe({
+      next: data => {
+        if (data) {
+          this.dialog.open(AIAsistenceDialogComponent, {
+            autoFocus: false,
+            restoreFocus: false,
+            width: '800px',
+            data: data,
+          });
+        }
+      },
+    });
   }
 
   getEscalatedDate(incidentHistory: IncidentHistory[]) {
@@ -59,6 +80,16 @@ export class IncidentDetailComponent implements OnInit {
     return closedComment ? closedComment.date : '';
   }
 
+  getClientInfo() {
+    this.clientService.loadClientData(true).subscribe({
+      next: data => {
+        if (data) {
+          this.clientPlan = data.plan ?? null;
+        }
+      },
+    });
+  }
+
   getIncidentDetail(incidentId: string | null) {
     if (incidentId) {
       this.loadingService.setLoading(true);
@@ -68,8 +99,12 @@ export class IncidentDetailComponent implements OnInit {
         .subscribe({
           next: data => {
             if (data) {
+              const last_action = data.history[data.history.length - 1].action;
               this.incidentDetail = data;
-              this.incidentStatus = data.history[data.history.length - 1].action;
+              this.incidentStatus =
+                last_action === 'AI_response'
+                  ? data.history[data.history.length - 2].action
+                  : last_action;
               this.incidentDescription = data.history[0].description;
               this.incidentCreatedDate = data.history[0].date;
               this.incidentEscalatedDate = this.getEscalatedDate(data.history);
@@ -80,9 +115,6 @@ export class IncidentDetailComponent implements OnInit {
           },
           error: err => {
             this.snackbarService.showError(err);
-          },
-          complete: () => {
-            this.loadingService.setLoading(false);
           },
         });
     }

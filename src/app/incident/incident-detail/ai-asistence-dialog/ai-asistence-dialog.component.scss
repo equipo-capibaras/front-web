@@ -1,0 +1,13 @@
+.ai-dialog {
+  &__title {
+    font-weight: 500 !important;
+    font-size: 24px !important;
+    display: flex;
+    align-items: center;
+    padding-top: 15px;
+    gap: 10px;
+  }
+  &__item-title {
+    font-weight: 500;
+  }
+}

@@ -5,14 +5,27 @@
         <div class="content">
           <div class="header">
             <h1 class="page__title">{{ incidentDetail.name }}</h1>
-            <button
-              mat-flat-button
-              type="button"
-              i18n="@@updateIncidentStatus"
-              [disabled]="incidentStatus === 'closed'"
-              (click)="openChangeStatusDialog(incidentDetail.id)">
-              Cambiar estado
-            </button>
+            <div class="header__buttons">
+              <button
+                mat-flat-button
+                type="button"
+                i18n="@@updateIncidentStatus"
+                [disabled]="incidentStatus === 'closed'"
+                (click)="openChangeStatusDialog(incidentDetail.id)">
+                Cambiar estado
+              </button>
+              @if (clientPlan === 'empresario_plus') {
+                <button
+                  mat-flat-button
+                  type="button"
+                  i18n="@@iaAsistence"
+                  [disabled]="incidentStatus === 'closed'"
+                  (click)="openAIAsistenceDialog(incidentDetail.id)">
+                  <span class="material-symbols-outlined">smart_toy</span>
+                  <span>Asistencia IA</span>
+                </button>
+              }
+            </div>
           </div>
 
           <div class="chips">
@@ -33,6 +46,11 @@
               @for (item of incidentHistory; track $index) {
                 <div class="incident-history__comment">
                   <p>{{ item.date | date: 'longDate' }}</p>
+                  @if (item.action === 'AI_response') {
+                    <p class="incident-history__ia">
+                      <span class="material-symbols-outlined">smart_toy</span><i>Generado por IA</i>
+                    </p>
+                  }
                   <p>{{ item.description }}</p>
                 </div>
               }

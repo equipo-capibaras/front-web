@@ -13,6 +13,6 @@ export interface Incident {
 export interface IncidentHistory {
   seq: number;
   date: string;
-  action: 'created' | 'escalated' | 'closed';
+  action: 'created' | 'escalated' | 'closed' | 'AI_response';
   description: string;
 }
