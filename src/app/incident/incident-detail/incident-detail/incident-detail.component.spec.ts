@@ -9,7 +9,7 @@ import { Incident, IncidentHistory } from '../../incident';
 import { IncidentDetailComponent } from './incident-detail.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ChangeStatusComponent } from '../../change-status/change-status.component';
-import { AIAsistenceDialogComponent } from '../ai-asistence-dialog/ai-asistence-dialog.component';
+import { AIAssistenceDialogComponent } from '../ai-assistence-dialog/ai-assistence-dialog.component';
 import { LOCALE_ID } from '@angular/core';
 import { ClientService } from 'src/app/client/client.service';
 import { registerLocaleData } from '@angular/common';
@@ -181,7 +181,7 @@ describe('IncidentDetailComponent', () => {
     component.openAIAsistenceDialog(incidentId);
 
     expect(incidentServiceSpy.AISuggestions).toHaveBeenCalledWith(incidentId, locale);
-    expect(dialogSpy.open).toHaveBeenCalledWith(AIAsistenceDialogComponent, {
+    expect(dialogSpy.open).toHaveBeenCalledWith(AIAssistenceDialogComponent, {
       autoFocus: false,
       restoreFocus: false,
       width: '800px',

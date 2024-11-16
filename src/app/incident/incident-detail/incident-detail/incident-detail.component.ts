@@ -12,7 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { ClientService } from 'src/app/client/client.service';
 import { finalize } from 'rxjs';
-import { AIAsistenceDialogComponent } from '../ai-asistence-dialog/ai-asistence-dialog.component';
+import { AIAssistenceDialogComponent } from '../ai-assistence-dialog/ai-assistence-dialog.component';
 
 @Component({
   selector: 'app-incident-detail',
@@ -58,7 +58,7 @@ export class IncidentDetailComponent implements OnInit {
     this.incidentService.AISuggestions(incidentId, this.locale).subscribe({
       next: data => {
         if (data) {
-          this.dialog.open(AIAsistenceDialogComponent, {
+          this.dialog.open(AIAssistenceDialogComponent, {
             autoFocus: false,
             restoreFocus: false,
             width: '800px',
