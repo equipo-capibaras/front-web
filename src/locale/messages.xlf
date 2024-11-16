@@ -66,7 +66,7 @@
         <source>Ver incidente</source>
       </trans-unit>
       <trans-unit id="webIncidents" datatype="html">
-        <source>Incidentes registrados por aplicación web: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.web }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.web | currency }}"/> =</source>
+        <source>Incidentes registrados por aplicación web: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.web }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.web }}"/> =</source>
       </trans-unit>
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
@@ -82,6 +82,21 @@
       </trans-unit>
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="iaAsistence" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="&lt;span&gt;"/>Asistencia IA<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="IACancel" datatype="html">
+        <source>Cancelar</source>
+      </trans-unit>
+      <trans-unit id="IADialogDescription" datatype="html">
+        <source>¡Hola! Para este tipo de casos, te sugiero seguir estos pasos:</source>
+      </trans-unit>
+      <trans-unit id="IADialogTitle" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>Asistencia</source>
+      </trans-unit>
+      <trans-unit id="IAGenerated" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Generado por IA<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
       </trans-unit>
       <trans-unit id="incidentAlreadyClosed" datatype="html">
         <source>El incidente ya está cerrado.</source>
@@ -363,7 +378,7 @@
         <source>Cerrar sesión</source>
       </trans-unit>
       <trans-unit id="mobileIncidents" datatype="html">
-        <source>Incidentes registrados por aplicación móvil: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.mobile }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.mobile | currency }}"/> =</source>
+        <source>Incidentes registrados por aplicación móvil: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.mobile }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.mobile }}"/> =</source>
       </trans-unit>
       <trans-unit id="clientRegisterButtonSubmit" datatype="html">
         <source>Crear Cuenta</source>
@@ -414,7 +429,7 @@
         <source>Correo</source>
       </trans-unit>
       <trans-unit id="emailIncidents" datatype="html">
-        <source>Incidentes registrados por correo: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.email }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.email | currency }}"/> =</source>
+        <source>Incidentes registrados por correo: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.email }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.email }}"/> =</source>
       </trans-unit>
       <trans-unit id="name" datatype="html">
         <source>Nombre</source>

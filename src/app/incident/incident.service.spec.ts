@@ -243,4 +243,46 @@ describe('IncidentService', () => {
     const req = httpMock.expectOne(`${environment.apiUrl}/incidents/web`);
     req.flush('Server error', { status: 500, statusText: 'Server error' });
   });
+
+  it('should return AI suggestions on success', () => {
+    const incidentId = '1';
+    const locale = 'es-CO';
+    const mockSuggestionsAI = {
+      steps: [
+        { text: 'Step 1', detail: 'Detail 1' },
+        { text: 'Step 2', detail: 'Detail 2' },
+      ],
+    };
+
+    service.AISuggestions(incidentId, locale).subscribe(suggestions => {
+      expect(suggestions).toEqual(mockSuggestionsAI);
+    });
+
+    const req = httpMock.expectOne(
+      `${environment.apiUrl}/incidents/${incidentId}/generativeai/suggestions?locale=${locale}`,
+    );
+    expect(req.request.method).toBe('GET');
+    req.flush(mockSuggestionsAI);
+  });
+  it('should throw an error when AISuggestions fails', () => {
+    const incidentId = '1';
+    const locale = 'es-CO';
+    const errorMessage = 'Internal Server Error';
+    const status = 500;
+
+    service.AISuggestions(incidentId, locale).subscribe({
+      next: () => fail('Expected an error, but got a success response'),
+      error: (error: HttpErrorResponse) => {
+        expect(error).toBeTruthy();
+        expect(error.status).toBe(status);
+        expect(error.message).toContain(errorMessage);
+      },
+    });
+
+    const req = httpMock.expectOne(
+      `${environment.apiUrl}/incidents/${incidentId}/generativeai/suggestions?locale=${locale}`,
+    );
+    expect(req.request.method).toBe('GET');
+    req.flush(errorMessage, { status, statusText: 'Internal Server Error' });
+  });
 });

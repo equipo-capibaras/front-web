@@ -47,7 +47,7 @@
                 <div class="incident-history__comment">
                   <p>{{ item.date | date: 'longDate' }}</p>
                   @if (item.action === 'AI_response') {
-                    <p class="incident-history__ia">
+                    <p class="incident-history__ia" i18n="@@IAGenerated">
                       <span class="material-symbols-outlined">smart_toy</span><i>Generado por IA</i>
                     </p>
                   }

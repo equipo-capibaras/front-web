@@ -1,75 +1,40 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { ConfirmPlanComponent } from './ai-asistence-dialog.component';
+import { AIAsistenceDialogComponent } from './ai-asistence-dialog.component';
 
-describe('ConfirmPlanComponent', () => {
-  let component: ConfirmPlanComponent;
-  let fixture: ComponentFixture<ConfirmPlanComponent>;
-  let dialogRefSpy: jasmine.SpyObj<MatDialogRef<ConfirmPlanComponent>>;
+describe('AIAsistenceDialogComponent', () => {
+  let component: AIAsistenceDialogComponent;
+  let fixture: ComponentFixture<AIAsistenceDialogComponent>;
+  let dialogRef: jasmine.SpyObj<MatDialogRef<AIAsistenceDialogComponent>>;
 
-  beforeEach(() => {
-    dialogRefSpy = jasmine.createSpyObj('MatDialogRef', ['close']);
+  const testData = { message: 'Test data' };
 
-    TestBed.configureTestingModule({
-      imports: [MatButtonModule, ConfirmPlanComponent],
+  beforeEach(async () => {
+    dialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);
+
+    await TestBed.configureTestingModule({
+      imports: [AIAsistenceDialogComponent],
       providers: [
-        { provide: MatDialogRef, useValue: dialogRefSpy },
-        {
-          provide: MAT_DIALOG_DATA,
-          useValue: { currentPlan: 'Emprendedor', newPlan: 'Empresario', newPrice: '$27,000' },
-        },
+        { provide: MAT_DIALOG_DATA, useValue: testData },
+        { provide: MatDialogRef, useValue: dialogRef },
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ConfirmPlanComponent);
+    fixture = TestBed.createComponent(AIAsistenceDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create the component', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should close the dialog with true when onConfirm is called', () => {
-    component.onConfirm();
-    expect(dialogRefSpy.close).toHaveBeenCalledWith(true);
+  it('should inject data correctly', () => {
+    expect(component.data).toEqual(testData);
   });
 
-  it('should close the dialog with false when onCancel is called', () => {
+  it('should close the dialog with false on cancel', () => {
     component.onCancel();
-    expect(dialogRefSpy.close).toHaveBeenCalledWith(false);
-  });
-
-  it('should show advance payment period message if within first 5 days of the month', () => {
-    jasmine.clock().install();
-    const mockDate = new Date(2024, 9, 2);
-    jasmine.clock().mockDate(mockDate);
-
-    fixture = TestBed.createComponent(ConfirmPlanComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-
-    expect(component.isWithinAdvancePaymentPeriod).toBeTrue();
-    expect(component.billingMessage).toContain('Estás dentro de los 5 primeros días del mes.');
-
-    jasmine.clock().uninstall();
-  });
-
-  it('should show regular billing message if after first 5 days of the month', () => {
-    jasmine.clock().install();
-    const mockDate = new Date(2024, 9, 10);
-    jasmine.clock().mockDate(mockDate);
-
-    fixture = TestBed.createComponent(ConfirmPlanComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-
-    expect(component.isWithinAdvancePaymentPeriod).toBeFalse();
-    expect(component.billingMessage).toContain(
-      'El cambio de plan se aplicará a partir del próximo mes.',
-    );
-
-    jasmine.clock().uninstall();
+    expect(dialogRef.close).toHaveBeenCalledWith(false);
   });
 });

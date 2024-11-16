@@ -3,7 +3,6 @@ import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
-  MatDialogClose,
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle,
@@ -14,14 +13,7 @@ import { MatDividerModule } from '@angular/material/divider';
   selector: 'app-ai-asistence-dialog',
   templateUrl: './ai-asistence-dialog.component.html',
   standalone: true,
-  imports: [
-    MatDividerModule,
-    MatButtonModule,
-    MatDialogActions,
-    MatDialogClose,
-    MatDialogTitle,
-    MatDialogContent,
-  ],
+  imports: [MatDividerModule, MatButtonModule, MatDialogActions, MatDialogTitle, MatDialogContent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./ai-asistence-dialog.component.scss'],
 })
