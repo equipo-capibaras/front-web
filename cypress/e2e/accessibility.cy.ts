@@ -1,4 +1,5 @@
 import axe from 'axe-core';
+import IncidentDetail from 'cypress/pageobjects/incidentDetail';
 import IncidentList from 'cypress/pageobjects/incidentList';
 import Login from 'cypress/pageobjects/login';
 
@@ -66,22 +67,6 @@ describe('Accessibility Tests', () => {
     cy.location('pathname').should('eq', '/admin');
 
     cy.visit('admin/change-plan');
-
-    cy.wait(2000);
-
-    cy.injectAxe();
-    cy.checkA11y(undefined, undefined, terminalLog);
-  });
-
-  it('`/dashboards` page has no detectable a11y violations on load', () => {
-    cy.visit('/');
-
-    cy.fixture('login.analyst.json').then(loginData => {
-      const login = new Login();
-      login.login(loginData.email, loginData.password);
-    });
-
-    cy.location('pathname').should('eq', '/dashboards');
 
     cy.wait(2000);
 

@@ -104,6 +104,7 @@ jobs:
           name: Organize outputs for GCP
           command: |
             cp public/favicon.ico dist/abcall/browser
+            cp public/images/logo40.png dist/abcall/browser
             cp src/redirect-i18n.html dist/abcall/browser/index.html
             for lang in es-AR es-CO pt-BR; do
               mkdir "dist/abcall/browser/$lang/static"

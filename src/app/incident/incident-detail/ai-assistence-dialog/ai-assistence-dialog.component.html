@@ -1,0 +1,24 @@
+<div class="dialog-header">
+  <h2 mat-dialog-title class="ai-dialog__title" i18n="@@IADialogTitle">
+    <span class="material-symbols-outlined">smart_toy</span>Asistencia
+  </h2>
+  <button type="button" mat-icon-button class="close-button" (click)="onCancel()">
+    <!-- eslint-disable-next-line @angular-eslint/template/i18n -->
+    <span class="material-symbols-outlined">close</span>
+  </button>
+</div>
+<mat-divider />
+<mat-dialog-content>
+  <p i18n="@@IADialogDescription">¡Hola! Para este tipo de casos, te sugiero seguir estos pasos:</p>
+  <ol start="1">
+    @for (step of data.steps; track $index) {
+      <li>
+        <span class="ai-dialog__item-title">{{ step.text }}</span
+        >: {{ step.detail }}
+      </li>
+    }
+  </ol>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" mat-button (click)="onCancel()" i18n="@@IACancel">Cancelar</button>
+</mat-dialog-actions>

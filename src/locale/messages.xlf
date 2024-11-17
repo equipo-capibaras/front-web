@@ -35,6 +35,12 @@
       <trans-unit id="statusPending" datatype="html">
         <source>Pendiente</source>
       </trans-unit>
+      <trans-unit id="totalIncidents" datatype="html">
+        <source>Subtotal de Incidentes:</source>
+      </trans-unit>
+      <trans-unit id="totalMonthAccumulated" datatype="html">
+        <source>Total acumulado (hasta el día de hoy)</source>
+      </trans-unit>
       <trans-unit id="invitationEmployeeSuccess" datatype="html">
         <source>Empleado invitado exitosamente.</source>
       </trans-unit>
@@ -59,6 +65,9 @@
       <trans-unit id="viewIncident" datatype="html">
         <source>Ver incidente</source>
       </trans-unit>
+      <trans-unit id="webIncidents" datatype="html">
+        <source>Incidentes registrados por aplicación web: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.web }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.web }}"/> =</source>
+      </trans-unit>
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
       </trans-unit>
@@ -73,6 +82,21 @@
       </trans-unit>
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="iaAssistence" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="&lt;span&gt;"/>Asistencia IA<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="IACancel" datatype="html">
+        <source>Cancelar</source>
+      </trans-unit>
+      <trans-unit id="IADialogDescription" datatype="html">
+        <source>¡Hola! Para este tipo de casos, te sugiero seguir estos pasos:</source>
+      </trans-unit>
+      <trans-unit id="IADialogTitle" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/>Asistencia</source>
+      </trans-unit>
+      <trans-unit id="IAGenerated" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Generado por IA<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
       </trans-unit>
       <trans-unit id="incidentAlreadyClosed" datatype="html">
         <source>El incidente ya está cerrado.</source>
@@ -97,6 +121,9 @@
       </trans-unit>
       <trans-unit id="incidentClosedDate" datatype="html">
         <source>Fecha cerrado</source>
+      </trans-unit>
+      <trans-unit id="incidentCosts" datatype="html">
+        <source>Acumulado por incidentes registrados:</source>
       </trans-unit>
       <trans-unit id="incidentCreatedBy" datatype="html">
         <source>Creado por</source>
@@ -187,6 +214,12 @@
       </trans-unit>
       <trans-unit id="inviteEmployee" datatype="html">
         <source>Invitar empleado</source>
+      </trans-unit>
+      <trans-unit id="InvoiceDescriptionTitle" datatype="html">
+        <source>En consultar factura, podrás ver el resumen detallado de tu factura actual, incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.</source>
+      </trans-unit>
+      <trans-unit id="InvoiceDetailTitle" datatype="html">
+        <source>Consultar factura</source>
       </trans-unit>
       <trans-unit id="invitationEmployeeInvitar" datatype="html">
         <source>Invitar</source>
@@ -293,9 +326,6 @@
       <trans-unit id="plan" datatype="html">
         <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
       </trans-unit>
-      <trans-unit id="prontoTableros" datatype="html">
-        <source>Aquí pronto hay los tableros de control.</source>
-      </trans-unit>
       <trans-unit id="menuAccount" datatype="html">
         <source>Mi cuenta</source>
       </trans-unit>
@@ -326,8 +356,14 @@
       <trans-unit id="createIncidentSuccess" datatype="html">
         <source>Incidente creado exitosamente</source>
       </trans-unit>
+      <trans-unit id="dashboardIncidents" datatype="html">
+        <source>Tablero de control de incidentes</source>
+      </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
+      </trans-unit>
+      <trans-unit id="dueDate" datatype="html">
+        <source>Fecha límite de pago:</source>
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
         <source>Tableros de control</source>
@@ -340,6 +376,9 @@
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Cerrar sesión</source>
+      </trans-unit>
+      <trans-unit id="mobileIncidents" datatype="html">
+        <source>Incidentes registrados por aplicación móvil: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.mobile }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.mobile }}"/> =</source>
       </trans-unit>
       <trans-unit id="clientRegisterButtonSubmit" datatype="html">
         <source>Crear Cuenta</source>
@@ -388,6 +427,9 @@
       </trans-unit>
       <trans-unit id="email" datatype="html">
         <source>Correo</source>
+      </trans-unit>
+      <trans-unit id="emailIncidents" datatype="html">
+        <source>Incidentes registrados por correo: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.email }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.email }}"/> =</source>
       </trans-unit>
       <trans-unit id="name" datatype="html">
         <source>Nombre</source>
@@ -454,6 +496,12 @@
       </trans-unit>
       <trans-unit id="actions" datatype="html">
         <source>Acciones</source>
+      </trans-unit>
+      <trans-unit id="baseCost" datatype="html">
+        <source>Costo Base del plan:</source>
+      </trans-unit>
+      <trans-unit id="billingPeriod" datatype="html">
+        <source>Periodo de facturación:</source>
       </trans-unit>
       <trans-unit id="invitationEmployeeCancel" datatype="html">
         <source>Cancelar</source>
