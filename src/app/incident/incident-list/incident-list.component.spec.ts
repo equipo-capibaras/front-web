@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ChangeStatusComponent } from '../change-status/change-status.component';
+import { ClientService } from 'src/app/client/client.service';
 
 describe('IncidentListComponent', () => {
   let component: IncidentListComponent;
@@ -18,13 +19,23 @@ describe('IncidentListComponent', () => {
   let loadingService: jasmine.SpyObj<LoadingService>;
   let snackbarService: jasmine.SpyObj<SnackbarService>;
   let router: jasmine.SpyObj<Router>;
+  let clientServiceSpy: jasmine.SpyObj<ClientService>;
 
   beforeEach(waitForAsync(() => {
     incidentService = jasmine.createSpyObj('IncidentService', ['loadIncidents']);
     loadingService = jasmine.createSpyObj('LoadingService', ['setLoading']);
     snackbarService = jasmine.createSpyObj('SnackbarService', ['showError']);
     router = jasmine.createSpyObj('Router', ['navigate']);
+    clientServiceSpy = jasmine.createSpyObj('ClientService', ['loadClientData']);
 
+    clientServiceSpy.loadClientData.and.returnValue(
+      of({
+        id: '1',
+        name: 'Client Name',
+        emailIncidents: 'email@test.com',
+        plan: 'empresario_plus',
+      }),
+    );
     incidentService.loadIncidents.and.returnValue(
       of({
         incidents: [],
@@ -42,6 +53,7 @@ describe('IncidentListComponent', () => {
         { provide: SnackbarService, useValue: snackbarService },
         { provide: Router, useValue: router },
         { provide: ActivatedRoute, useValue: {} },
+        { provide: ClientService, useValue: clientServiceSpy },
       ],
     }).compileComponents();
   }));
@@ -66,6 +78,7 @@ describe('IncidentListComponent', () => {
             },
             filingDate: faker.date.past(),
             status: faker.helpers.arrayElement(['created', 'escalated', 'closed']),
+            risk: faker.helpers.arrayElement(['low', 'high', 'medium']),
           },
         ],
         totalPages: 1,
@@ -103,6 +116,7 @@ describe('IncidentListComponent', () => {
             },
             filingDate: faker.date.past(),
             status: faker.helpers.arrayElement(['created', 'escalated', 'closed']),
+            risk: faker.helpers.arrayElement(['low', 'high', 'medium']),
           },
         ],
         totalIncidents: 1,
@@ -152,5 +166,75 @@ describe('IncidentListComponent', () => {
       component.pageSize,
       component.currentPage,
     );
+  });
+
+  it('should load client info on init', () => {
+    const mockClientData = {
+      id: '123',
+      name: 'Test Client',
+      emailIncidents: 'test@example.com',
+      plan: 'empresario_plus',
+    };
+
+    clientServiceSpy.loadClientData.and.returnValue(of(mockClientData));
+
+    setupComponent();
+
+    expect(clientServiceSpy.loadClientData).toHaveBeenCalledWith(true);
+    expect(component.clientPlan).toBe('empresario_plus');
+  });
+
+  it('should exclude "risk" column from displayedColumns for non-empresario_plus plan', () => {
+    const mockClientData = {
+      id: '123',
+      name: 'Test Client',
+      emailIncidents: 'test@example.com',
+      plan: 'basic',
+    };
+
+    clientServiceSpy.loadClientData.and.returnValue(of(mockClientData));
+
+    setupComponent();
+
+    expect(clientServiceSpy.loadClientData).toHaveBeenCalledWith(true);
+    expect(component.clientPlan).toBe('basic');
+    expect(component.displayedColumns).toEqual(['name', 'user', 'dateFiling', 'status', 'actions']);
+  });
+
+  it('should show error when loadClientData fails', () => {
+    const error = new Error('Error loading client data');
+    clientServiceSpy.loadClientData.and.returnValue(throwError(() => error));
+
+    setupComponent();
+
+    expect(clientServiceSpy.loadClientData).toHaveBeenCalledWith(true);
+    expect(snackbarService.showError).toHaveBeenCalled();
+  });
+
+  it('should set risk to "none" when incident.risk is null or undefined', () => {
+    const mockIncident = {
+      id: faker.string.uuid(),
+      name: 'Test Incident',
+      reportedBy: {
+        id: faker.string.uuid(),
+        name: faker.person.fullName(),
+        email: faker.internet.email(),
+      },
+      filingDate: faker.date.past(),
+      status: 'created',
+    };
+
+    incidentService.loadIncidents.and.returnValue(
+      of({
+        incidents: [mockIncident],
+        totalIncidents: 1,
+        totalPages: 1,
+        currentPage: 1,
+      }),
+    );
+
+    setupComponent();
+
+    expect(component.incidentsList.data[0].risk).toBe('none');
   });
 });

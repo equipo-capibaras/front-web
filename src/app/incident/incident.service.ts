@@ -16,6 +16,7 @@ export interface IncidentListResponse {
     };
     filingDate: Date;
     status: string;
+    risk?: string;
   }[];
   totalPages: number;
   currentPage: number;

@@ -35,6 +35,14 @@
               </span>
               {{ chipInfo[incidentStatus].text }}
             </mat-chip>
+            @if (clientPlan === 'empresario_plus') {
+              <mat-chip [ngClass]="chipInfo[incidentRisk].cssClass">
+                <span class="material-symbols-outlined">
+                  {{ chipInfo[incidentRisk].icon }}
+                </span>
+                {{ chipInfo[incidentRisk].text }}
+              </mat-chip>
+            }
           </div>
           <p>
             {{ incidentDescription }}

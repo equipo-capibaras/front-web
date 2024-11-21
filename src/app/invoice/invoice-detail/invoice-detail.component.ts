@@ -83,7 +83,6 @@ export class InvoiceDetailComponent implements OnInit {
   }
 
   getInvoiceDetail() {
-    console.log('Getting invoice detail with exchange rate:', this.exchangeRate);
     this.invoiceService.invoiceDetail().subscribe({
       next: data => {
         if (data) {
