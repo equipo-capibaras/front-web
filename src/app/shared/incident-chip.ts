@@ -41,7 +41,7 @@ export const chipInfo: Record<string, { icon: string; text: string; cssClass: st
   },
   none: {
     icon: 'smart_toy',
-    text: $localize`:@@highRisk:Calculando`,
+    text: $localize`:@@calculatingRisk:Calculando`,
     cssClass: 'page__chip--neutral',
   },
 };

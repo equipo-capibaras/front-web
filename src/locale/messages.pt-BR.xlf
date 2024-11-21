@@ -94,6 +94,10 @@
         <source>Ingresa a tu cuenta</source>
         <target>Entre na sua conta</target>
       </trans-unit>
+      <trans-unit id="lowRisk" datatype="html">
+        <source>Bajo</source>
+        <target>Baixo</target>
+      </trans-unit>
       <trans-unit id="loginLabelEmail" datatype="html">
         <source>Correo</source>
         <target>Email</target>
@@ -109,6 +113,10 @@
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
         <target>Insira sua senha</target>
+      </trans-unit>
+      <trans-unit id="highRisk" datatype="html">
+        <source>Alto</source>
+        <target>Alto</target>
       </trans-unit>
       <trans-unit id="iaAssistence" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="&lt;span&gt;"/>Asistencia IA<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
@@ -233,6 +241,10 @@
       <trans-unit id="incidentReportedBy" datatype="html">
         <source>Reportado por</source>
         <target>Reportado por</target>
+      </trans-unit>
+      <trans-unit id="incidentRisk" datatype="html">
+        <source>Riesgo</source>
+        <target>Risco</target>
       </trans-unit>
       <trans-unit id="incidentStatus" datatype="html">
         <source>Estado</source>
@@ -494,6 +506,10 @@
         <source>Gestión de incidentes</source>
         <target>Gestão de incidentes</target>
       </trans-unit>
+      <trans-unit id="mediumRisk" datatype="html">
+        <source>Medio</source>
+        <target>Médio</target>
+      </trans-unit>
       <trans-unit id="menuAccount" datatype="html">
         <source>Mi cuenta</source>
         <target>Minha conta</target>
@@ -677,6 +693,10 @@
       <trans-unit id="invitationEmployeeDuplicate" datatype="html">
         <source>Empleado ya vinculado a tu empresa.</source>
         <target>Funcionário já vinculado à sua empresa.</target>
+      </trans-unit>
+      <trans-unit id="calculatingRisk" datatype="html">
+        <source>Calculando</source>
+        <target>Calculando</target>
       </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>
