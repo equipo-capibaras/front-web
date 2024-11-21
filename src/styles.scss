@@ -132,8 +132,6 @@ router-outlet + * {
   .mat-mdc-chip.page__chip {
     &--success {
       background-color: $success;
-      box-shadow: 1px red solid;
-      border: none;
     }
     &--warning {
       background-color: $warning;
@@ -141,10 +139,18 @@ router-outlet + * {
     &--blue {
       background-color: $chip-blue;
     }
+    &--error {
+      background-color: $red-warn;
+    }
+    &--neutral {
+      background-color: $neutral;
+    }
 
     &--success,
     &--warning,
-    &--blue {
+    &--blue,
+    &--error,
+    &--neutral {
       .mdc-evolution-chip__text-label {
         color: white;
         font-weight: 400;

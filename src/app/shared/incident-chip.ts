@@ -24,4 +24,24 @@ export const chipInfo: Record<string, { icon: string; text: string; cssClass: st
     text: $localize`:@@statusPending:Pendiente`,
     cssClass: 'page__chip--warning',
   },
+  low: {
+    icon: 'smart_toy',
+    text: $localize`:@@lowRisk:Bajo`,
+    cssClass: 'page__chip--success',
+  },
+  medium: {
+    icon: 'smart_toy',
+    text: $localize`:@@mediumRisk:Medio`,
+    cssClass: 'page__chip--warning',
+  },
+  high: {
+    icon: 'smart_toy',
+    text: $localize`:@@highRisk:Alto`,
+    cssClass: 'page__chip--error',
+  },
+  none: {
+    icon: 'smart_toy',
+    text: $localize`:@@highRisk:Calculando`,
+    cssClass: 'page__chip--neutral',
+  },
 };

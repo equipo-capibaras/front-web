@@ -51,6 +51,19 @@
             </td>
           </ng-container>
 
+          @if (clientPlan === 'empresario_plus') {
+            <ng-container matColumnDef="risk">
+              <th *matHeaderCellDef mat-header-cell i18n="@@incidentRisk">Riesgo</th>
+              <td *matCellDef="let incident" mat-cell>
+                <mat-chip [ngClass]="chipInfo[incident.risk].cssClass">
+                  <span class="material-symbols-outlined">
+                    {{ chipInfo[incident.risk].icon }}
+                  </span>
+                  {{ chipInfo[incident.risk].text }}
+                </mat-chip>
+              </td>
+            </ng-container>
+          }
           <ng-container matColumnDef="actions">
             <th *matHeaderCellDef mat-header-cell i18n="@@actions">Acciones</th>
             <td *matCellDef="let incident" mat-cell>

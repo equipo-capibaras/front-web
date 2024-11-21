@@ -36,6 +36,7 @@ export class IncidentDetailComponent implements OnInit {
     mobile: $localize`:@@incidentMobileChannel:Aplicación móvil`,
     email: $localize`:@@incidentEmailChannel:Correo electrónico`,
   };
+  incidentRisk = 'none';
   clientPlan: string | null = null;
 
   constructor(
@@ -118,6 +119,7 @@ export class IncidentDetailComponent implements OnInit {
               this.incidentClosedDate = this.getClosedDate(data.history);
               this.incidentHistory = data.history.slice(1);
               this.incidentChannel = data.channel;
+              this.incidentRisk = data.risk?.toLowerCase() ?? 'none';
             }
           },
           error: err => {
