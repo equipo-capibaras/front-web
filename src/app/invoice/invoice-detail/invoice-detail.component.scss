@@ -16,6 +16,7 @@ $highlight-blue: #4267b2;
   justify-content: center;
   align-items: center;
   background-color: $background-light;
+  padding-top: 3rem;
 }
 
 // Card styling
@@ -38,32 +39,35 @@ $highlight-blue: #4267b2;
 }
 
 .price-value {
-  font-size: 64px;
+  display: block;
+  font-size: 4rem;
   color: $highlight-blue;
   font-weight: 400;
+  padding-bottom: 2rem;
 }
 
 // Detailed price and description styling
 .price-detail {
   display: block;
   color: $grey-dark;
-  font-size: 14px;
-  font-weight: 100;
-  margin: 1rem 0 30px;
+  font-weight: 300;
+}
+
+ul.price-detail {
+  margin: 0.5rem 0;
 }
 
 .text-detail {
   display: block;
   color: $grey-dark;
-  font-size: 14px;
-  font-weight: 900;
-  margin: 1rem 0;
+  font-weight: 400;
+  padding-right: 0.5rem;
 }
 
 // Custom line styling
 .custom-line {
   border-top: 1px solid $primary-hover;
-  margin: 30px 0;
+  margin: 1rem 0;
   width: 100%;
 }
 
@@ -75,20 +79,19 @@ ul.incident-details {
   margin: 0;
 }
 
-li {
-  color: $grey-dark;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
 .section {
   text-align: left;
 }
 
 .text-section-date {
   display: flex;
-  height: 30px;
+  padding: 0.5rem 0;
 }
+
+.text-section {
+  padding: 0.5rem 0;
+}
+
 .color-price {
   color: $highlight-blue;
   font-weight: 500;
@@ -97,6 +100,10 @@ li {
 .list-detail {
   display: block;
   color: $grey-dark;
-  font-size: 14px;
-  font-weight: 100;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.plan-name {
+  font-weight: 400;
 }

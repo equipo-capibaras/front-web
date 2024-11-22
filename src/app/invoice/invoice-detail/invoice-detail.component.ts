@@ -7,7 +7,7 @@ import currency from 'currency.js';
 import { CommonModule, DatePipe } from '@angular/common';
 
 export interface InvoiceFrontend {
-  billing_month: string;
+  billing_month: Date | null;
   billing_year: number;
   client_id: string;
   client_name: string;
@@ -30,7 +30,7 @@ export interface InvoiceFrontend {
 })
 export class InvoiceDetailComponent implements OnInit {
   invoice: InvoiceFrontend = {
-    billing_month: '',
+    billing_month: null,
     billing_year: 0,
     client_id: '',
     client_name: '',
@@ -47,6 +47,12 @@ export class InvoiceDetailComponent implements OnInit {
   exchangeRates: { rates: Record<string, string>; base: string; result: string } | null = null;
   exchangeRate = 1;
 
+  clientPlan: Record<string, string> = {
+    emprendedor: $localize`:@@planEmprendedorTitle:Emprendedor`,
+    empresario: $localize`:@@planEmpresarioTitle:Empresario`,
+    empresario_plus: $localize`:@@planEmpresarioPlusTitle:Empresario +`,
+  };
+
   constructor(
     private readonly invoiceService: InoviceService,
     private readonly snackbarService: SnackbarService,
@@ -58,6 +64,7 @@ export class InvoiceDetailComponent implements OnInit {
   ngOnInit() {
     this.loadExchangeRate(); // Load exchange rates when component initializes
   }
+
   loadExchangeRate() {
     this.currencyService.getExchangeRates(this.localCurrency).subscribe(
       data => {
@@ -105,6 +112,8 @@ export class InvoiceDetailComponent implements OnInit {
       console.error('Invalid exchange rate, cannot convert invoice costs');
       return {
         ...invoice,
+        client_plan: this.clientPlan[invoice.client_plan],
+        billing_month: new Date(`${invoice.billing_month} 1, 2000`),
         subtotal: this.formatCurrency(invoice.total_cost - invoice.fixed_cost),
         total_cost: this.formatCurrency(invoice.total_cost),
         fixed_cost: this.formatCurrency(invoice.fixed_cost),
@@ -123,6 +132,8 @@ export class InvoiceDetailComponent implements OnInit {
 
     const Invoices = {
       ...invoice,
+      client_plan: this.clientPlan[invoice.client_plan],
+      billing_month: new Date(`${invoice.billing_month} 1, 2000`),
       subtotal: this.formatCurrency(totalCost - fixedCost),
       total_cost: this.formatCurrency(totalCost),
       fixed_cost: this.formatCurrency(fixedCost),

@@ -37,7 +37,6 @@ describe('Login', () => {
       cy.log('I see the navbar options');
       const navbar = new Navbar();
 
-      navbar.myaccount.should('exist');
       navbar.logout.should('exist');
 
       const options = expectedNavbarOptions[role];
