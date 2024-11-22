@@ -267,3 +267,16 @@ span.mdc-button__label {
   align-items: center;
   gap: 8px;
 }
+
+.mdc-tab {
+  padding: 0 3rem !important;
+}
+
+.mat-mdc-tab-header {
+  padding-bottom: 2rem;
+}
+
+.mat-mdc-tab-label-container {
+  border-bottom-width: 1px !important;
+  border-bottom-color: $blue-200 !important;
+}

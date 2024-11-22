@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { LOCALE_ID } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 import { DashboardComponent } from './dashboard.component';
 import { AuthService } from '../../auth/auth.service';
-import { of } from 'rxjs';
-import { LOCALE_ID } from '@angular/core';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -14,7 +15,7 @@ describe('DashboardComponent', () => {
     authService.getAnalyticsToken.and.returnValue(of('token'));
 
     await TestBed.configureTestingModule({
-      imports: [DashboardComponent],
+      imports: [DashboardComponent, NoopAnimationsModule],
       providers: [
         { provide: AuthService, useValue: authService },
         { provide: LOCALE_ID, useValue: 'es-CO' },

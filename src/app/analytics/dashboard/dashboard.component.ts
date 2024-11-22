@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../auth/auth.service';
+import { MatTabsModule } from '@angular/material/tabs';
 
 interface PluginConfig {
   language: string;
@@ -13,7 +14,7 @@ interface PluginConfig {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [MatTabsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   host: {
@@ -28,7 +29,8 @@ export class DashboardComponent implements OnInit {
     private readonly authService: AuthService,
   ) {}
 
-  public dashboardUrl: SafeUrl | null = null;
+  public dashboardIncidentsUrl: SafeUrl | null = null;
+  public dashboardUsersUrl: SafeUrl | null = null;
 
   ngOnInit() {
     this.authService.getAnalyticsToken().subscribe(token => {
@@ -48,8 +50,12 @@ export class DashboardComponent implements OnInit {
 
       const config_uri = encodeURIComponent(JSON.stringify(config));
 
-      this.dashboardUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-        environment.dashboardUrl[this.locale] + `&config=${config_uri}`,
+      this.dashboardIncidentsUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+        environment.dashboardIncidentsUrl[this.locale] + `&config=${config_uri}`,
+      );
+
+      this.dashboardUsersUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+        environment.dashboardUsersUrl[this.locale] + `&config=${config_uri}`,
       );
     });
   }
