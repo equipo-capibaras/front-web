@@ -484,7 +484,19 @@
       </trans-unit>
       <trans-unit id="dashboardIncidents" datatype="html">
         <source>Tablero de control de incidentes</source>
-        <target>Painel de incidentes</target>
+        <target>Painéis de controle de incidentes</target>
+      </trans-unit>
+      <trans-unit id="dashboardIncidentsLabel" datatype="html">
+        <source>Incidentes</source>
+        <target>Incidentes</target>
+      </trans-unit>
+      <trans-unit id="dashboardUsers" datatype="html">
+        <source>Tablero de control de usuarios</source>
+        <target>Painéis de controle do usuários</target>
+      </trans-unit>
+      <trans-unit id="dashboardUsersLabel" datatype="html">
+        <source>Usuarios</source>
+        <target>Usuários</target>
       </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
@@ -496,7 +508,7 @@
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
         <source>Tableros de control</source>
-        <target>Painéis de controlo</target>
+        <target>Painéis de controle</target>
       </trans-unit>
       <trans-unit id="menuInvoice" datatype="html">
         <source>Facturación</source>

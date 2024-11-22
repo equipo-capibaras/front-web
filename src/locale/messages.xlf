@@ -371,6 +371,15 @@
       <trans-unit id="dashboardIncidents" datatype="html">
         <source>Tablero de control de incidentes</source>
       </trans-unit>
+      <trans-unit id="dashboardIncidentsLabel" datatype="html">
+        <source>Incidentes</source>
+      </trans-unit>
+      <trans-unit id="dashboardUsers" datatype="html">
+        <source>Tablero de control de usuarios</source>
+      </trans-unit>
+      <trans-unit id="dashboardUsersLabel" datatype="html">
+        <source>Usuarios</source>
+      </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
       </trans-unit>

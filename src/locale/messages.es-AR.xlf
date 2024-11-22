@@ -486,6 +486,18 @@
         <source>Tablero de control de incidentes</source>
         <target>Tablero de control de incidentes</target>
       </trans-unit>
+      <trans-unit id="dashboardIncidentsLabel" datatype="html">
+        <source>Incidentes</source>
+        <target>Incidentes</target>
+      </trans-unit>
+      <trans-unit id="dashboardUsers" datatype="html">
+        <source>Tablero de control de usuarios</source>
+        <target>Tablero de control de usuarios</target>
+      </trans-unit>
+      <trans-unit id="dashboardUsersLabel" datatype="html">
+        <source>Usuarios</source>
+        <target>Usuarios</target>
+      </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
         <target>Fecha radicación</target>

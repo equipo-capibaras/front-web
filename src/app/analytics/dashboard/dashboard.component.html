@@ -1,10 +1,27 @@
 <div class="container">
-  @if (dashboardUrl !== null) {
-    <iframe
-      title="Tablero de control de incidentes"
-      i18n-title="@@dashboardIncidents"
-      allowfullscreen
-      sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-      [src]="dashboardUrl"></iframe>
-  }
+  <div class="title">
+    <h1 i18n="@@menuDashboard">Tableros de control</h1>
+  </div>
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+    <mat-tab i18n-label="@@dashboardIncidentsLabel" label="Incidentes">
+      @if (dashboardIncidentsUrl !== null) {
+        <iframe
+          title="Tablero de control de incidentes"
+          i18n-title="@@dashboardIncidents"
+          allowfullscreen
+          sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          [src]="dashboardIncidentsUrl"></iframe>
+      }
+    </mat-tab>
+    <mat-tab i18n-label="@@dashboardUsersLabel" label="Usuarios">
+      @if (dashboardUsersUrl !== null) {
+        <iframe
+          title="Tablero de control de usuarios"
+          i18n-title="@@dashboardUsers"
+          allowfullscreen
+          sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+          [src]="dashboardUsersUrl"></iframe>
+      }
+    </mat-tab>
+  </mat-tab-group>
 </div>

@@ -56,6 +56,7 @@ module.exports = tseslint.config(
           checkText: true,
           ignoreAttributes: [
             'mat-form-field[appearance]',
+            'mat-tab-group[mat-align-tabs]',
             'ng-container[matColumnDef]',
             'iframe[sandbox]',
           ],
