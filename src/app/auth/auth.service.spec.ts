@@ -213,4 +213,18 @@ describe('AuthService', () => {
 
     expect(service.isUnassigned()).toBe(true);
   });
+
+  it('getAnalyticsToken should return token', () => {
+    initComponent();
+
+    const mockToken = faker.string.alphanumeric(10);
+
+    service.getAnalyticsToken().subscribe(result => {
+      expect(result).toBe(mockToken);
+    });
+
+    const req = httpTestingController.expectOne(`${environment.apiUrl}/auth/employee/analytics`);
+    expect(req.request.method).toBe('POST');
+    req.flush({ token: mockToken });
+  });
 });

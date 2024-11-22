@@ -129,6 +129,14 @@ export class AuthService {
     );
   }
 
+  getAnalyticsToken(): Observable<string> {
+    return this.http.post<TokenResponse>(`${this.apiUrl}/auth/employee/analytics`, {}).pipe(
+      map(response => {
+        return response.token;
+      }),
+    );
+  }
+
   getToken(): string | null {
     return localStorage.getItem('token');
   }
