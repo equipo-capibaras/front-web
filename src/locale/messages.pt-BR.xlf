@@ -310,6 +310,10 @@
         <source>Plan</source>
         <target>Plano</target>
       </trans-unit>
+      <trans-unit id="invoiceSoon" datatype="html">
+        <source>Tu primera factura estará disponible a partir de <x id="INTERPOLATION" equiv-text="{{ firstInvoiceDate | date: &apos;MMMM YYYY&apos; }}"/>.</source>
+        <target>Sua primeira fatura estará disponível a partir de <x id="INTERPOLATION" equiv-text="{{ firstInvoiceDate | date: &apos;MMMM YYYY&apos; }}"/>.</target>
+      </trans-unit>
       <trans-unit id="invitationEmployeeInvitar" datatype="html">
         <source>Invitar</source>
         <target>Convite</target>
