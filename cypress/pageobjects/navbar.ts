@@ -17,10 +17,6 @@ export default class Navbar {
     return cy.get('nav button[id="btn-incidents"]');
   }
 
-  get myaccount() {
-    return cy.get('nav button[id="btn-myaccount"]');
-  }
-
   get logout() {
     return cy.get('nav button[id="btn-logout"]');
   }

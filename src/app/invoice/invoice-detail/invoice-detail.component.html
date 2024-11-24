@@ -2,91 +2,104 @@
   <div class="page__container">
     <div class="page__header">
       <h1 class="page__title" i18n="@@InvoiceDetailTitle">Consultar factura</h1>
+      <span class="page__description" i18n="@@InvoiceDescriptionTitle">
+        En <em>Consultar factura</em>, podrás
+        <strong class="page__description--strong"
+          >ver el resumen detallado de tu factura actual,</strong
+        >
+        incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes
+        registrados.
+      </span>
     </div>
-    <p i18n="@@InvoiceDescriptionTitle">
-      En consultar factura, podrás ver el resumen detallado de tu factura actual, incluyendo el
-      costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.
-    </p>
+    @if (firstInvoiceAvailable) {
+      <div class="container">
+        <div class="card">
+          <div class="price">
+            <span class="price-value">{{ invoice.total_cost }}</span>
+            <span class="price-detail" i18n="@@totalMonthAccumulated">
+              Total acumulado (hasta el día de hoy)
+            </span>
+            <div class="custom-line"></div>
 
-    <div class="container">
-      <div class="card">
-        <div class="price">
-          <span class="price-value">{{ invoice.total_cost }}</span>
-          <span class="price-detail" i18n="@@totalMonthAccumulated">
-            Total acumulado (hasta el día de hoy)
-          </span>
-          <div class="custom-line"></div>
+            <div class="section">
+              <div class="text-section-date">
+                <span class="text-detail" i18n="@@billingPeriod"> Periodo de facturación: </span>
+                <span class="price-detail">
+                  {{ invoice.billing_month | date: 'MMMM' | titlecase }} {{ invoice.billing_year }}
+                </span>
+              </div>
 
-          <div class="section">
-            <div class="text-section-date">
-              <span class="text-detail" i18n="@@billingPeriod"> Periodo de facturación: </span>
-              <span class="price-detail">
-                {{ invoice.billing_month }} {{ invoice.billing_year }}
-              </span>
-            </div>
+              <div class="text-section-date">
+                <span class="text-detail" i18n="@@dueDate"> Fecha límite de pago: </span>
+                <span class="price-detail">{{ invoice.due_date | date: 'longDate' }}</span>
+              </div>
 
-            <div class="text-section-date">
-              <span class="text-detail" i18n="@@dueDate"> Fecha límite de pago: </span>
-              <span class="price-detail">{{ invoice.due_date | date: 'dd/MM/yyyy' }}</span>
-            </div>
+              <div class="text-section">
+                <span class="text-detail" i18n="@@baseCost"> Costo Base del plan: </span>
+                <ul class="price-detail">
+                  <li>
+                    <span i18n="@@invoicePlan">Plan</span>
+                    <span class="plan-name"> {{ invoice.client_plan }}</span
+                    >:
+                    <span class="color-price">{{ invoice.fixed_cost }}</span>
+                  </li>
+                </ul>
+              </div>
 
-            <div class="text-section">
-              <span class="text-detail" i18n="@@baseCost"> Costo Base del plan: </span>
-              <ul class="price-detail">
-                <li>
-                  {{ invoice.client_plan }} :
-                  <span class="color-price">{{ invoice.fixed_cost }}</span>
-                </li>
-              </ul>
-            </div>
+              <div class="text-section">
+                <span class="text-detail" i18n="@@incidentCosts">
+                  Acumulado por incidentes registrados:
+                </span>
 
-            <div class="text-section">
-              <span class="text-detail" i18n="@@incidentCosts">
-                Acumulado por incidentes registrados:
-              </span>
-
-              <ul class="price-detail">
-                <li>
-                  <div class="text-section-date">
-                    <span class="list-detail" i18n="@@webIncidents">
-                      Incidentes registrados por aplicación web: {{ invoice.total_incidents.web }} x
-                      {{ invoice.unit_cost_per_incident.web }} =
-                    </span>
-                    <span class="color-price">{{ invoice.total_cost_per_incident.web }}</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="text-section-date">
-                    <span class="list-detail" i18n="@@mobileIncidents">
-                      Incidentes registrados por aplicación móvil:
-                      {{ invoice.total_incidents.mobile }} x
-                      {{ invoice.unit_cost_per_incident.mobile }} =
-                    </span>
-                    <span class="color-price">{{ invoice.total_cost_per_incident.mobile }}</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="text-section-date">
-                    <span class="list-detail" i18n="@@emailIncidents">
-                      Incidentes registrados por correo: {{ invoice.total_incidents.email }} x
-                      {{ invoice.unit_cost_per_incident.email }} =
-                    </span>
-                    <span class="color-price">{{ invoice.total_cost_per_incident.email }}</span>
-                  </div>
-                </li>
-                <li>
-                  <div class="text-section-date">
-                    <span class="list-detail" i18n="@@totalIncidents">
-                      Subtotal de Incidentes:
-                    </span>
-                    <span class="color-price">{{ invoice.subtotal }}</span>
-                  </div>
-                </li>
-              </ul>
+                <ul class="price-detail">
+                  <li>
+                    <div class="text-section-date list-detail">
+                      <span i18n="@@webIncidents">
+                        Incidentes registrados por aplicación web:
+                        {{ invoice.total_incidents.web }} x
+                        {{ invoice.unit_cost_per_incident.web }} =
+                      </span>
+                      <span class="color-price"> {{ invoice.total_cost_per_incident.web }}</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="text-section-date list-detail">
+                      <span i18n="@@mobileIncidents">
+                        Incidentes registrados por aplicación móvil:
+                        {{ invoice.total_incidents.mobile }} x
+                        {{ invoice.unit_cost_per_incident.mobile }} =
+                      </span>
+                      <span class="color-price"> {{ invoice.total_cost_per_incident.mobile }}</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="text-section-date list-detail">
+                      <span i18n="@@emailIncidents">
+                        Incidentes registrados por correo: {{ invoice.total_incidents.email }} x
+                        {{ invoice.unit_cost_per_incident.email }} =
+                      </span>
+                      <span class="color-price"> {{ invoice.total_cost_per_incident.email }}</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="text-section-date list-detail">
+                      <span i18n="@@totalIncidents"> Subtotal de Incidentes: </span>
+                      <span class="color-price"> {{ invoice.subtotal }}</span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    } @else if (firstInvoiceAvailable === false) {
+      <div class="container">
+        <h1 class="mat-title-large" i18n="@@invoiceSoon">
+          Tu primera factura estará disponible a partir de
+          {{ firstInvoiceDate | date: 'MMMM YYYY' }}.
+        </h1>
+      </div>
+    }
   </div>
 </div>

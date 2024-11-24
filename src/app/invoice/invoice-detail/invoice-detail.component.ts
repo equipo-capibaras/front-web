@@ -5,9 +5,10 @@ import { CurrencyService } from 'src/app/services/currency.service';
 import { Invoice } from './invoice';
 import currency from 'currency.js';
 import { CommonModule, DatePipe } from '@angular/common';
+import { EmployeeService } from '../../employee/employee.service';
 
 export interface InvoiceFrontend {
-  billing_month: string;
+  billing_month: Date | null;
   billing_year: number;
   client_id: string;
   client_name: string;
@@ -30,7 +31,7 @@ export interface InvoiceFrontend {
 })
 export class InvoiceDetailComponent implements OnInit {
   invoice: InvoiceFrontend = {
-    billing_month: '',
+    billing_month: null,
     billing_year: 0,
     client_id: '',
     client_name: '',
@@ -46,18 +47,41 @@ export class InvoiceDetailComponent implements OnInit {
   localCurrency: string;
   exchangeRates: { rates: Record<string, string>; base: string; result: string } | null = null;
   exchangeRate = 1;
+  firstInvoiceDate: Date | null = null;
+  firstInvoiceAvailable: boolean | null = null;
+
+  clientPlan: Record<string, string> = {
+    emprendedor: $localize`:@@planEmprendedorTitle:Emprendedor`,
+    empresario: $localize`:@@planEmpresarioTitle:Empresario`,
+    empresario_plus: $localize`:@@planEmpresarioPlusTitle:Empresario +`,
+  };
 
   constructor(
     private readonly invoiceService: InoviceService,
     private readonly snackbarService: SnackbarService,
     private readonly currencyService: CurrencyService,
+    private readonly employeeService: EmployeeService,
   ) {
     this.localCurrency = this.currencyService.detectUserCurrency();
   }
 
   ngOnInit() {
-    this.loadExchangeRate(); // Load exchange rates when component initializes
+    this.employeeService.loadEmployeeData().subscribe(data => {
+      const registrationDate = new Date(data.invitationDate);
+      this.firstInvoiceDate = new Date(
+        registrationDate.getFullYear(),
+        registrationDate.getMonth() + 1,
+        1,
+      );
+
+      this.firstInvoiceAvailable = new Date() > this.firstInvoiceDate;
+
+      if (this.firstInvoiceAvailable) {
+        this.loadExchangeRate();
+      }
+    });
   }
+
   loadExchangeRate() {
     this.currencyService.getExchangeRates(this.localCurrency).subscribe(
       data => {
@@ -83,7 +107,6 @@ export class InvoiceDetailComponent implements OnInit {
   }
 
   getInvoiceDetail() {
-    console.log('Getting invoice detail with exchange rate:', this.exchangeRate);
     this.invoiceService.invoiceDetail().subscribe({
       next: data => {
         if (data) {
@@ -106,6 +129,8 @@ export class InvoiceDetailComponent implements OnInit {
       console.error('Invalid exchange rate, cannot convert invoice costs');
       return {
         ...invoice,
+        client_plan: this.clientPlan[invoice.client_plan],
+        billing_month: new Date(`${invoice.billing_month} 1, 2000`),
         subtotal: this.formatCurrency(invoice.total_cost - invoice.fixed_cost),
         total_cost: this.formatCurrency(invoice.total_cost),
         fixed_cost: this.formatCurrency(invoice.fixed_cost),
@@ -124,6 +149,8 @@ export class InvoiceDetailComponent implements OnInit {
 
     const Invoices = {
       ...invoice,
+      client_plan: this.clientPlan[invoice.client_plan],
+      billing_month: new Date(`${invoice.billing_month} 1, 2000`),
       subtotal: this.formatCurrency(totalCost - fixedCost),
       total_cost: this.formatCurrency(totalCost),
       fixed_cost: this.formatCurrency(fixedCost),

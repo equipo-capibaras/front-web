@@ -6,6 +6,8 @@ import { InoviceService } from '../invoice.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { CurrencyService } from 'src/app/services/currency.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EmployeeService } from '../../employee/employee.service';
+import { faker } from '@faker-js/faker';
 
 describe('InvoiceDetailComponent', () => {
   let component: InvoiceDetailComponent;
@@ -13,6 +15,7 @@ describe('InvoiceDetailComponent', () => {
   let invoiceService: jasmine.SpyObj<InoviceService>;
   let snackbarService: jasmine.SpyObj<SnackbarService>;
   let currencyService: jasmine.SpyObj<CurrencyService>;
+  let employeeService: jasmine.SpyObj<EmployeeService>;
   let router: jasmine.SpyObj<Router>;
 
   beforeEach(waitForAsync(() => {
@@ -22,6 +25,7 @@ describe('InvoiceDetailComponent', () => {
       'detectUserCurrency',
       'getExchangeRates',
     ]);
+    employeeService = jasmine.createSpyObj('EmployeeService', ['loadEmployeeData']);
     router = jasmine.createSpyObj('Router', ['navigate']);
 
     // Set up mocks
@@ -46,12 +50,25 @@ describe('InvoiceDetailComponent', () => {
       }),
     );
 
+    employeeService.loadEmployeeData.and.returnValue(
+      of({
+        id: faker.string.uuid(),
+        clientId: faker.string.uuid(),
+        name: faker.person.fullName(),
+        email: faker.internet.email(),
+        role: 'admin',
+        invitationStatus: 'accepted',
+        invitationDate: faker.date.birthdate(),
+      }),
+    );
+
     TestBed.configureTestingModule({
       imports: [InvoiceDetailComponent, NoopAnimationsModule], // Import the standalone component here
       providers: [
         { provide: InoviceService, useValue: invoiceService },
         { provide: SnackbarService, useValue: snackbarService },
         { provide: CurrencyService, useValue: currencyService },
+        { provide: EmployeeService, useValue: employeeService },
         { provide: Router, useValue: router },
         { provide: ActivatedRoute, useValue: {} },
       ],

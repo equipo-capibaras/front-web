@@ -94,6 +94,10 @@
         <source>Ingresa a tu cuenta</source>
         <target>Ingresá a tu cuenta</target>
       </trans-unit>
+      <trans-unit id="lowRisk" datatype="html">
+        <source>Bajo</source>
+        <target>Bajo</target>
+      </trans-unit>
       <trans-unit id="loginLabelEmail" datatype="html">
         <source>Correo</source>
         <target>Correo</target>
@@ -109,6 +113,10 @@
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
         <target>Ingresá tu contraseña</target>
+      </trans-unit>
+      <trans-unit id="highRisk" datatype="html">
+        <source>Alto</source>
+        <target>Alto</target>
       </trans-unit>
       <trans-unit id="iaAssistence" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="&lt;span&gt;"/>Asistencia IA<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
@@ -234,6 +242,10 @@
         <source>Reportado por</source>
         <target>Reportado por</target>
       </trans-unit>
+      <trans-unit id="incidentRisk" datatype="html">
+        <source>Riesgo</source>
+        <target>Riesgo</target>
+      </trans-unit>
       <trans-unit id="incidentStatus" datatype="html">
         <source>Estado</source>
         <target>Estado</target>
@@ -287,12 +299,20 @@
         <target>Invitar empleado</target>
       </trans-unit>
       <trans-unit id="InvoiceDescriptionTitle" datatype="html">
-        <source>En consultar factura, podrás ver el resumen detallado de tu factura actual, incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.</source>
-        <target>En la sección de consulta de factura, vas a poder ver el resumen detallado de tu factura actual, que incluye el costo base de tu plan elegido y los cargos extra por incidentes registrados.</target>
+        <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Consultar factura<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot; &gt;"/>ver el resumen detallado de tu factura actual,<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.</source>
+        <target>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Consultar factura<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot; &gt;"/>ver el resumen detallado de tu factura actual,<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.</target>
       </trans-unit>
       <trans-unit id="InvoiceDetailTitle" datatype="html">
         <source>Consultar factura</source>
         <target>Consultar factura</target>
+      </trans-unit>
+      <trans-unit id="invoicePlan" datatype="html">
+        <source>Plan</source>
+        <target>Plan</target>
+      </trans-unit>
+      <trans-unit id="invoiceSoon" datatype="html">
+        <source>Tu primera factura estará disponible a partir de <x id="INTERPOLATION" equiv-text="{{ firstInvoiceDate | date: &apos;MMMM YYYY&apos; }}"/>.</source>
+        <target>Tu primera factura estará disponible a partir de <x id="INTERPOLATION" equiv-text="{{ firstInvoiceDate | date: &apos;MMMM YYYY&apos; }}"/>.</target>
       </trans-unit>
       <trans-unit id="invitationEmployeeInvitar" datatype="html">
         <source>Invitar</source>
@@ -474,6 +494,18 @@
         <source>Tablero de control de incidentes</source>
         <target>Tablero de control de incidentes</target>
       </trans-unit>
+      <trans-unit id="dashboardIncidentsLabel" datatype="html">
+        <source>Incidentes</source>
+        <target>Incidentes</target>
+      </trans-unit>
+      <trans-unit id="dashboardUsers" datatype="html">
+        <source>Tablero de control de usuarios</source>
+        <target>Tablero de control de usuarios</target>
+      </trans-unit>
+      <trans-unit id="dashboardUsersLabel" datatype="html">
+        <source>Usuarios</source>
+        <target>Usuarios</target>
+      </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
         <target>Fecha radicación</target>
@@ -494,9 +526,9 @@
         <source>Gestión de incidentes</source>
         <target>Gestión de incidentes</target>
       </trans-unit>
-      <trans-unit id="menuAccount" datatype="html">
-        <source>Mi cuenta</source>
-        <target>Mi cuenta</target>
+      <trans-unit id="mediumRisk" datatype="html">
+        <source>Medio</source>
+        <target>Medio</target>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Cerrar sesión</source>
@@ -669,6 +701,10 @@
       <trans-unit id="invitationEmployeeDuplicate" datatype="html">
         <source>Empleado ya vinculado a tu empresa.</source>
         <target>Empleado ya vinculado a tu empresa.</target>
+      </trans-unit>
+      <trans-unit id="calculatingRisk" datatype="html">
+        <source>Calculando</source>
+        <target>Calculando</target>
       </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>

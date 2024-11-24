@@ -88,11 +88,15 @@
       </trans-unit>
       <trans-unit id="webIncidents" datatype="html">
         <source>Incidentes registrados por aplicación web: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.web }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.web }}"/> =</source>
-        <target>Incidentes registrados por aplicação web: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.web }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.web | currency }}"/> =</target>
+        <target>Incidentes registrados por aplicativo web: <x id="INTERPOLATION" equiv-text="{{ invoice.total_incidents.web }}"/> x <x id="INTERPOLATION_1" equiv-text="{{ invoice.unit_cost_per_incident.web | currency }}"/> =</target>
       </trans-unit>
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
         <target>Entre na sua conta</target>
+      </trans-unit>
+      <trans-unit id="lowRisk" datatype="html">
+        <source>Bajo</source>
+        <target>Baixo</target>
       </trans-unit>
       <trans-unit id="loginLabelEmail" datatype="html">
         <source>Correo</source>
@@ -109,6 +113,10 @@
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
         <target>Insira sua senha</target>
+      </trans-unit>
+      <trans-unit id="highRisk" datatype="html">
+        <source>Alto</source>
+        <target>Alto</target>
       </trans-unit>
       <trans-unit id="iaAssistence" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="&lt;span&gt;"/>Asistencia IA<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
@@ -234,6 +242,10 @@
         <source>Reportado por</source>
         <target>Reportado por</target>
       </trans-unit>
+      <trans-unit id="incidentRisk" datatype="html">
+        <source>Riesgo</source>
+        <target>Risco</target>
+      </trans-unit>
       <trans-unit id="incidentStatus" datatype="html">
         <source>Estado</source>
         <target>Estado</target>
@@ -287,12 +299,20 @@
         <target>Convidar funcionário</target>
       </trans-unit>
       <trans-unit id="InvoiceDescriptionTitle" datatype="html">
-        <source>En consultar factura, podrás ver el resumen detallado de tu factura actual, incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.</source>
-        <target>Em consultar fatura, você poderá ver o resumo detalhado da sua fatura atual, incluindo o custo base do seu plano selecionado e os encargos adicionais por incidentes registrados.</target>
+        <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Consultar factura<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot; &gt;"/>ver el resumen detallado de tu factura actual,<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.</source>
+        <target>Em <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Consultar fatura<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, você poderá <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot; &gt;"/>ver o resumen detalhado da sua fatura atual,<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> incluindo o custo básico do plano selecionado e quaisquer cobranças adicionais por incidentes registrados.</target>
       </trans-unit>
       <trans-unit id="InvoiceDetailTitle" datatype="html">
         <source>Consultar factura</source>
         <target>Consultar fatura</target>
+      </trans-unit>
+      <trans-unit id="invoicePlan" datatype="html">
+        <source>Plan</source>
+        <target>Plano</target>
+      </trans-unit>
+      <trans-unit id="invoiceSoon" datatype="html">
+        <source>Tu primera factura estará disponible a partir de <x id="INTERPOLATION" equiv-text="{{ firstInvoiceDate | date: &apos;MMMM YYYY&apos; }}"/>.</source>
+        <target>Sua primeira fatura estará disponível a partir de <x id="INTERPOLATION" equiv-text="{{ firstInvoiceDate | date: &apos;MMMM YYYY&apos; }}"/>.</target>
       </trans-unit>
       <trans-unit id="invitationEmployeeInvitar" datatype="html">
         <source>Invitar</source>
@@ -472,7 +492,19 @@
       </trans-unit>
       <trans-unit id="dashboardIncidents" datatype="html">
         <source>Tablero de control de incidentes</source>
-        <target>Painel de incidentes</target>
+        <target>Painéis de controle de incidentes</target>
+      </trans-unit>
+      <trans-unit id="dashboardIncidentsLabel" datatype="html">
+        <source>Incidentes</source>
+        <target>Incidentes</target>
+      </trans-unit>
+      <trans-unit id="dashboardUsers" datatype="html">
+        <source>Tablero de control de usuarios</source>
+        <target>Painéis de controle do usuários</target>
+      </trans-unit>
+      <trans-unit id="dashboardUsersLabel" datatype="html">
+        <source>Usuarios</source>
+        <target>Usuários</target>
       </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
@@ -484,7 +516,7 @@
       </trans-unit>
       <trans-unit id="menuDashboard" datatype="html">
         <source>Tableros de control</source>
-        <target>Painéis de controlo</target>
+        <target>Painéis de controle</target>
       </trans-unit>
       <trans-unit id="menuInvoice" datatype="html">
         <source>Facturación</source>
@@ -494,9 +526,9 @@
         <source>Gestión de incidentes</source>
         <target>Gestão de incidentes</target>
       </trans-unit>
-      <trans-unit id="menuAccount" datatype="html">
-        <source>Mi cuenta</source>
-        <target>Minha conta</target>
+      <trans-unit id="mediumRisk" datatype="html">
+        <source>Medio</source>
+        <target>Médio</target>
       </trans-unit>
       <trans-unit id="menuLogout" datatype="html">
         <source>Cerrar sesión</source>
@@ -677,6 +709,10 @@
       <trans-unit id="invitationEmployeeDuplicate" datatype="html">
         <source>Empleado ya vinculado a tu empresa.</source>
         <target>Funcionário já vinculado à sua empresa.</target>
+      </trans-unit>
+      <trans-unit id="calculatingRisk" datatype="html">
+        <source>Calculando</source>
+        <target>Calculando</target>
       </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>

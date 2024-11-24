@@ -8,6 +8,7 @@ export interface Incident {
   createdBy: Employee;
   assignedTo: Employee;
   history: IncidentHistory[];
+  risk?: 'LOW' | 'HIGH' | 'MEDIUM' | null;
 }
 
 export interface IncidentHistory {

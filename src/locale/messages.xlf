@@ -71,6 +71,9 @@
       <trans-unit id="loginTitle" datatype="html">
         <source>Ingresa a tu cuenta</source>
       </trans-unit>
+      <trans-unit id="lowRisk" datatype="html">
+        <source>Bajo</source>
+      </trans-unit>
       <trans-unit id="loginLabelEmail" datatype="html">
         <source>Correo</source>
       </trans-unit>
@@ -82,6 +85,9 @@
       </trans-unit>
       <trans-unit id="loginPlaceholderPassword" datatype="html">
         <source>Ingresa tu contraseña</source>
+      </trans-unit>
+      <trans-unit id="highRisk" datatype="html">
+        <source>Alto</source>
       </trans-unit>
       <trans-unit id="iaAssistence" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;material-symbols-outlined&quot;&gt;"/>smart_toy<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/><x id="START_TAG_SPAN_1" ctype="x-span_1" equiv-text="&lt;span&gt;"/>Asistencia IA<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
@@ -176,6 +182,9 @@
       <trans-unit id="incidentReportedBy" datatype="html">
         <source>Reportado por</source>
       </trans-unit>
+      <trans-unit id="incidentRisk" datatype="html">
+        <source>Riesgo</source>
+      </trans-unit>
       <trans-unit id="incidentStatus" datatype="html">
         <source>Estado</source>
       </trans-unit>
@@ -216,10 +225,16 @@
         <source>Invitar empleado</source>
       </trans-unit>
       <trans-unit id="InvoiceDescriptionTitle" datatype="html">
-        <source>En consultar factura, podrás ver el resumen detallado de tu factura actual, incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.</source>
+        <source>En <x id="START_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;em&gt;"/>Consultar factura<x id="CLOSE_EMPHASISED_TEXT" ctype="x-em" equiv-text="&lt;/em&gt;"/>, podrás <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong class=&quot;page__description--strong&quot; &gt;"/>ver el resumen detallado de tu factura actual,<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> incluyendo el costo base de tu plan seleccionado y los cargos adicionales por incidentes registrados.</source>
       </trans-unit>
       <trans-unit id="InvoiceDetailTitle" datatype="html">
         <source>Consultar factura</source>
+      </trans-unit>
+      <trans-unit id="invoicePlan" datatype="html">
+        <source>Plan</source>
+      </trans-unit>
+      <trans-unit id="invoiceSoon" datatype="html">
+        <source>Tu primera factura estará disponible a partir de <x id="INTERPOLATION" equiv-text="{{ firstInvoiceDate | date: &apos;MMMM YYYY&apos; }}"/>.</source>
       </trans-unit>
       <trans-unit id="invitationEmployeeInvitar" datatype="html">
         <source>Invitar</source>
@@ -326,8 +341,8 @@
       <trans-unit id="plan" datatype="html">
         <source>Plan <x id="INTERPOLATION" equiv-text="{{ clientPlan[clientData?.plan || &apos;emprendedor&apos;] }}"/></source>
       </trans-unit>
-      <trans-unit id="menuAccount" datatype="html">
-        <source>Mi cuenta</source>
+      <trans-unit id="mediumRisk" datatype="html">
+        <source>Medio</source>
       </trans-unit>
       <trans-unit id="comment" datatype="html">
         <source>Comentario</source>
@@ -358,6 +373,15 @@
       </trans-unit>
       <trans-unit id="dashboardIncidents" datatype="html">
         <source>Tablero de control de incidentes</source>
+      </trans-unit>
+      <trans-unit id="dashboardIncidentsLabel" datatype="html">
+        <source>Incidentes</source>
+      </trans-unit>
+      <trans-unit id="dashboardUsers" datatype="html">
+        <source>Tablero de control de usuarios</source>
+      </trans-unit>
+      <trans-unit id="dashboardUsersLabel" datatype="html">
+        <source>Usuarios</source>
       </trans-unit>
       <trans-unit id="dateFiling" datatype="html">
         <source>Fecha radicación</source>
@@ -508,6 +532,9 @@
       </trans-unit>
       <trans-unit id="invitationEmployeeDuplicate" datatype="html">
         <source>Empleado ya vinculado a tu empresa.</source>
+      </trans-unit>
+      <trans-unit id="calculatingRisk" datatype="html">
+        <source>Calculando</source>
       </trans-unit>
       <trans-unit id="change" datatype="html">
         <source>Cambiar</source>

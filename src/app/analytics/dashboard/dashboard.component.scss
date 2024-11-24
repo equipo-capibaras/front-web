@@ -1,12 +1,25 @@
 .container {
   flex-grow: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
+  margin-top: 64px;
+  padding: 55px 24px;
 }
 
 iframe {
   width: 1200px;
   height: 900px;
   border: 0;
+}
+
+.title {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.title h1 {
+  font-size: 2rem;
+  line-height: 2rem;
+  margin-bottom: 12px;
 }

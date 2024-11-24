@@ -132,8 +132,6 @@ router-outlet + * {
   .mat-mdc-chip.page__chip {
     &--success {
       background-color: $success;
-      box-shadow: 1px red solid;
-      border: none;
     }
     &--warning {
       background-color: $warning;
@@ -141,10 +139,18 @@ router-outlet + * {
     &--blue {
       background-color: $chip-blue;
     }
+    &--error {
+      background-color: $red-warn;
+    }
+    &--neutral {
+      background-color: $neutral;
+    }
 
     &--success,
     &--warning,
-    &--blue {
+    &--blue,
+    &--error,
+    &--neutral {
       .mdc-evolution-chip__text-label {
         color: white;
         font-weight: 400;
@@ -260,4 +266,17 @@ span.mdc-button__label {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.mdc-tab {
+  padding: 0 3rem !important;
+}
+
+.mat-mdc-tab-header {
+  padding-bottom: 2rem;
+}
+
+.mat-mdc-tab-label-container {
+  border-bottom-width: 1px !important;
+  border-bottom-color: $blue-200 !important;
 }
